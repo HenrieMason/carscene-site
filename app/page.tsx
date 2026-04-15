@@ -27,30 +27,26 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_35%)]" />
 
         <div className="relative mx-auto flex max-w-6xl flex-col items-center">
-          {/* LOGO */}
+          {/* LOGO (only addition) */}
           <img
             src="/TransparentWhite.png"
             alt="CarScene Logo"
             className="w-[220px] md:w-[320px] mb-6"
           />
 
-          {/* TAG */}
           <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/70">
             An app for car spotting and building dream garages
           </div>
 
-          {/* TITLE */}
           <h1 className="mt-6 text-center text-4xl font-black tracking-tight md:text-6xl">
             CarScene: Dream Garage
           </h1>
 
-          {/* DESCRIPTION */}
           <p className="mt-6 max-w-2xl text-center text-lg leading-8 text-white/70">
             Discover cars, track what you see in real life, build your dream garage,
             and compete with friends over the best collection.
           </p>
 
-          {/* BUTTONS */}
           <div className="mt-8 flex w-full max-w-md flex-col gap-4 sm:flex-row">
             <a
               href="https://apps.apple.com/us/app/carscene-dream-garage/id6760978493"
@@ -73,7 +69,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FEATURES */}
       <section className="px-6 pb-8">
         <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
           {features.map((feature) => (
@@ -88,23 +83,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SCREENSHOTS */}
       <section className="px-6 py-12 md:py-16">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-center text-3xl font-black md:text-4xl">
             See the app in action
           </h2>
 
-          <div className="mt-10 grid gap-10 md:grid-cols-4 justify-items-center">
+          <div className="mt-10 grid gap-6 md:grid-cols-4">
             {screenshots.map((src, index) => (
               <div
                 key={index}
-                className="mx-auto max-w-[220px] border border-white/10 bg-black shadow-lg shadow-black/50"
+                className="mx-auto max-w-[220px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/5"
               >
                 <img
                   src={src}
                   alt={`CarScene screenshot ${index + 1}`}
-                  className="w-full"
+                  className="w-full object-cover"
                 />
               </div>
             ))}
