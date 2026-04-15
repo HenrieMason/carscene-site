@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -16,6 +17,9 @@ export const metadata: Metadata = {
   title: "CarScene",
   description:
     "Track rare cars, build dream garages, and compete with friends.",
+  icons: {
+    icon: "/icon.png?v=3",
+  },
 };
 
 export default function RootLayout({
