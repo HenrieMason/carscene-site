@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CarScene - Dream Garage Culture",
+  title: "CarScene",
   description:
     "Track rare cars, build dream garages, and compete with friends.",
 };
