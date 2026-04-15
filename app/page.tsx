@@ -27,7 +27,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_35%)]" />
         <div className="relative mx-auto flex max-w-6xl flex-col items-center">
           <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/70">
-            An app for car spotting and dream garages
+            An app for car spotting and building dream garages
           </div>
 
           <h1 className="mt-6 text-center text-4xl font-black tracking-tight md:text-6xl">
@@ -81,16 +81,16 @@ export default function Home() {
             See the app in action
           </h2>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <div className="mt-10 grid gap-6 md:grid-cols-4">
             {screenshots.map((src, index) => (
-              <div
-                key={index}
-                className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5"
-              >
+             <div
+              key={index}
+              className="mx-auto max-w-[220px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/5"
+            >
                 <img
                   src={src}
                   alt={`CarScene screenshot ${index + 1}`}
-                  className="h-auto w-full object-cover"
+                  className="w-full object-cover"
                 />
               </div>
             ))}
