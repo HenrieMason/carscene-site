@@ -85,12 +85,12 @@ export default function Home() {
             {screenshots.map((src, index) => (
              <div
               key={index}
-              className="mx-auto max-w-[220px] border border-white/10 bg-black"
+              className="mx-auto max-w-[220px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/5"
             >
                 <img
                   src={src}
                   alt={`CarScene screenshot ${index + 1}`}
-                  className="w-full"
+                  className="w-full object-cover"
                 />
               </div>
             ))}
