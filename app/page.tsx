@@ -2,6 +2,8 @@ export default function Home() {
   const screenshots = [
     "/screenshot1.png",
     "/screenshot2.png",
+    "/screenshot3.png",
+    "/screenshot4.png",
   ];
 
   const features = [
@@ -23,7 +25,7 @@ export default function Home() {
     <main className="min-h-screen bg-neutral-950 text-white">
       <section className="relative overflow-hidden px-6 py-16 md:py-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_35%)]" />
-        <div className="mx-auto flex max-w-6xl flex-col items-center relative">
+        <div className="relative mx-auto flex max-w-6xl flex-col items-center">
           <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/70">
             Car spotting, collections, and dream garages
           </div>
