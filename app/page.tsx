@@ -27,7 +27,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_35%)]" />
         <div className="relative mx-auto flex max-w-6xl flex-col items-center">
           <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/70">
-            Car spotting, collections, and dream garages
+            An app for car spotting and dream garages
           </div>
 
           <h1 className="mt-6 text-center text-4xl font-black tracking-tight md:text-6xl">
