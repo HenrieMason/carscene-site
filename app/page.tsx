@@ -34,17 +34,12 @@ export default function Home() {
             className="w-[220px] md:w-[320px] mb-6"
           />
 
-          <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/70">
-            An app for car spotting and building dream garages
-          </div>
-
           <h1 className="mt-6 text-center text-4xl font-black tracking-tight md:text-6xl">
             CarScene: Dream Garage
           </h1>
 
           <p className="mt-6 max-w-2xl text-center text-lg leading-8 text-white/70">
-            Discover cars, track what you see in real life, build your dream garage,
-            and compete with friends over the best collection.
+            An app for car spotting and building dream garages.
           </p>
 
           <div className="mt-8 flex w-full max-w-md flex-col gap-4 sm:flex-row">
