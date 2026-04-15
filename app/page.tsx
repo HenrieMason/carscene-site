@@ -34,9 +34,9 @@ export default function Home() {
             className="w-[220px] md:w-[320px] mb-6"
           />
 
-          <h1 className="mt-6 text-center text-4xl font-black tracking-tight md:text-6xl">
+          <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/70">
             CarScene: Dream Garage
-          </h1>
+          </div>
 
           <p className="mt-6 max-w-2xl text-center text-lg leading-8 text-white/70">
             An app for car spotting and building dream garages.
