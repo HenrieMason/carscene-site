@@ -8,8 +8,8 @@ export default function Home() {
 
   const features = [
     {
-      title: "Spot Cars You See in Real Life",
-      text: "Track the cars you find out in the wild and turn everyday spotting into a game.",
+      title: "Spot 1500 Cars",
+      text: "Track the cars you find in the wild and turn everyday spotting into a game.",
     },
     {
       title: "Build Dream Garages",
@@ -145,9 +145,6 @@ export default function Home() {
 
       <section className="px-6 py-12 md:py-16">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-center text-3xl font-black md:text-4xl">
-            See the app in action
-          </h2>
 
           <div className="mt-10 grid gap-6 md:grid-cols-4">
             {screenshots.map((src, index) => (
