@@ -21,17 +21,31 @@ export default function Home() {
     },
   ];
 
+  const products = [
+    {
+      name: "CarScene Heritage Tee",
+      description: "The first CarScene statement piece. Built everywhere, driven here.",
+      image: "/carscene-heritage-tee.png",
+      link: "https://shop.carsceneapp.com/products/carscene-heritage-tee",
+    },
+    {
+      name: "CarScene Cap",
+      description: "Clean everyday CarScene identity. Simple, sharp, and wearable.",
+      image: "/carscene-hat.png",
+      link: "https://shop.carsceneapp.com/products/carscene-cap",
+    },
+  ];
+
   return (
     <main className="min-h-screen bg-neutral-950 text-white">
       <section className="relative overflow-hidden px-6 py-16 md:py-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_35%)]" />
 
         <div className="relative mx-auto flex max-w-6xl flex-col items-center">
-          {/* LOGO (only addition) */}
           <img
             src="/TransparentWhite.png"
             alt="CarScene Logo"
-            className="w-[220px] md:w-[320px] mb-6"
+            className="mb-6 w-[220px] md:w-[320px]"
           />
 
           <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/70">
@@ -72,9 +86,60 @@ export default function Home() {
               className="rounded-[2rem] border border-white/10 bg-white/5 p-8 shadow-lg shadow-black/20"
             >
               <h2 className="text-2xl font-bold">{feature.title}</h2>
-              <p className="mt-4 text-base leading-7 text-white/65">{feature.text}</p>
+              <p className="mt-4 text-base leading-7 text-white/65">
+                {feature.text}
+              </p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="px-6 py-12 md:py-16">
+        <div className="mx-auto max-w-6xl rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-10">
+          <div className="flex flex-col items-center text-center">
+            <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/60">
+              First Drop
+            </div>
+
+            <h2 className="mt-5 text-3xl font-black md:text-5xl">
+              The CarScene Uniform
+            </h2>
+
+            <p className="mt-4 max-w-2xl text-base leading-7 text-white/65 md:text-lg">
+              Built for the people who spot, collect, and live car culture.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {products.map((product) => (
+              <a
+                key={product.name}
+                href={product.link}
+                target="_blank"
+                rel="noreferrer"
+                className="group overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 transition hover:-translate-y-1 hover:bg-white/10"
+              >
+                <div className="aspect-[4/3] bg-white">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+
+                <div className="p-6">
+                  <h3 className="text-2xl font-black">{product.name}</h3>
+                  <p className="mt-3 text-sm leading-6 text-white/60">
+                    {product.description}
+                  </p>
+
+                  <div className="mt-5 inline-flex rounded-2xl bg-white px-5 py-3 text-sm font-bold text-black transition group-hover:scale-[1.02]">
+                    Shop Now
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
