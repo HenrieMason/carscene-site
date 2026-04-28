@@ -145,6 +145,9 @@ export default function Home() {
 
       <section className="px-6 py-12 md:py-16">
         <div className="mx-auto max-w-6xl">
+          <h2 className="text-center text-2xl font-bold text-white/80">
+            In the app
+          </h2>
 
           <div className="mt-10 grid gap-6 md:grid-cols-4">
             {screenshots.map((src, index) => (
