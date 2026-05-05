@@ -23,6 +23,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-neutral-950 text-white">
+      {/* HERO */}
       <section className="relative overflow-hidden px-6 py-16 md:py-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_35%)]" />
 
@@ -63,7 +64,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-6 py-12 md:py-16">
+      {/* PRODUCTS */}
+      <section className="px-6 pt-4 pb-12 md:pt-6 md:pb-16">
         <div className="mx-auto max-w-6xl rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-10">
           <div className="flex flex-col items-center text-center">
             <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/60">
@@ -112,6 +114,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SCREENSHOTS */}
       <section className="px-6 py-12 md:py-16">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-center text-3xl font-black md:text-4xl">
