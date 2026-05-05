@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-neutral-950 text-white">
       {/* HERO */}
-      <section className="relative overflow-hidden px-6 py-16 md:py-24">
+      <section className="relative overflow-hidden px-6 pt-16 pb-10 md:pt-24 md:pb-12">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_35%)]" />
 
         <div className="relative mx-auto flex max-w-6xl flex-col items-center">
