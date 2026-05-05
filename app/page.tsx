@@ -6,21 +6,6 @@ export default function Home() {
     "/screenshot4.png",
   ];
 
-  const features = [
-    {
-      title: "Spot 1500 Cars",
-      text: "Track the cars you find in the wild and turn everyday spotting into a game.",
-    },
-    {
-      title: "Build Dream Garages",
-      text: "Create your ideal lineup, save your favorite builds, and show off your taste.",
-    },
-    {
-      title: "Compete With Friends",
-      text: "Compare collections, flex rare finds, and see who has the best garage.",
-    },
-  ];
-
   const products = [
     {
       name: "CarScene Heritage Tee",
@@ -75,22 +60,6 @@ export default function Home() {
               Download for Play Store
             </a>
           </div>
-        </div>
-      </section>
-
-      <section className="px-6 pb-8">
-        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="rounded-[2rem] border border-white/10 bg-white/5 p-8 shadow-lg shadow-black/20"
-            >
-              <h2 className="text-2xl font-bold">{feature.title}</h2>
-              <p className="mt-4 text-base leading-7 text-white/65">
-                {feature.text}
-              </p>
-            </div>
-          ))}
         </div>
       </section>
 
