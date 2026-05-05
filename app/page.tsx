@@ -107,7 +107,7 @@ export default function Home() {
       </section>
 
       {/* SCREENSHOTS */}
-      <section className="px-6 pt-6 pb-8 md:pt-8 md:pb-10">
+      <section className="px-6 pt-4 pb-8 md:pt-6 md:pb-10">
         <div className="mx-auto max-w-5xl">
           <h2 className="text-center text-3xl font-black md:text-4xl">
             Spot. Collect. Compete.
