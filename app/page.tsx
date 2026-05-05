@@ -67,7 +67,6 @@ export default function Home() {
       {/* PRODUCTS */}
       <section className="px-6 pt-4 pb-12 md:pt-6 md:pb-16">
         <div className="mx-auto max-w-6xl rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-10">
-          
           <div className="flex flex-col items-center text-center">
             <h2 className="text-3xl font-black md:text-5xl">
               Wear the Car Scene
@@ -108,17 +107,17 @@ export default function Home() {
       </section>
 
       {/* SCREENSHOTS */}
-      <section className="px-6 py-12 md:py-16">
-        <div className="mx-auto max-w-6xl">
+      <section className="px-6 py-8 md:py-10">
+        <div className="mx-auto max-w-5xl">
           <h2 className="text-center text-3xl font-black md:text-4xl">
             Spot. Collect. Compete.
           </h2>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-4">
+          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
             {screenshots.map((src, index) => (
               <div
                 key={index}
-                className="mx-auto max-w-[220px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/5"
+                className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5"
               >
                 <img
                   src={src}
