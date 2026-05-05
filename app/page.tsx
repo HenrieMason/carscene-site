@@ -67,21 +67,7 @@ export default function Home() {
       {/* PRODUCTS */}
       <section className="px-6 pt-4 pb-12 md:pt-6 md:pb-16">
         <div className="mx-auto max-w-6xl rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-10">
-          <div className="flex flex-col items-center text-center">
-            <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/60">
-              First Drop
-            </div>
-
-            <h2 className="mt-5 text-3xl font-black md:text-5xl">
-              The CarScene Uniform
-            </h2>
-
-            <p className="mt-4 max-w-2xl text-base leading-7 text-white/65 md:text-lg">
-              Built for the people who spot, collect, and live car culture.
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <div className="mt-2 grid gap-6 md:grid-cols-2">
             {products.map((product) => (
               <a
                 key={product.name}
