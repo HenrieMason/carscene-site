@@ -65,7 +65,7 @@ export default function Home() {
       </section>
 
       {/* PRODUCTS */}
-      <section className="px-6 pt-4 pb-12 md:pt-6 md:pb-16">
+      <section className="px-6 pt-4 pb-10 md:pt-6 md:pb-12">
         <div className="mx-auto max-w-6xl rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-10">
           <div className="flex flex-col items-center text-center">
             <h2 className="text-3xl font-black md:text-5xl">
@@ -107,7 +107,7 @@ export default function Home() {
       </section>
 
       {/* SCREENSHOTS */}
-      <section className="px-6 py-8 md:py-10">
+      <section className="px-6 pt-0 pb-8 md:pt-0 md:pb-10">
         <div className="mx-auto max-w-5xl">
           <h2 className="text-center text-3xl font-black md:text-4xl">
             Spot. Collect. Compete.
