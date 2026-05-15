@@ -33,11 +33,11 @@ export default function Home() {
     },
     {
       image: "/Red_Transparent.png",
-      link: "https://shop.carsceneapp.com/products/red-on-black-carscene-sticker?variant=53357946667315",
+      link: "https://shop.carsceneapp.com/products/red-carscene-sticker-7?variant=53358383038771",
     },
     {
       image: "/Black_Transparent.png",
-      link: "https://shop.carsceneapp.com/products/red-on-grey-carscene-sticker?variant=53357948862771",
+      link: "https://shop.carsceneapp.com/products/black-carscene-sticker-7?variant=53358382219571",
     },
   ];
 
