@@ -9,13 +9,15 @@ export default function Home() {
   const products = [
     {
       name: "CarScene Heritage Tee",
-      description: "The first CarScene statement piece. Built everywhere, driven here.",
+      description:
+        "The first CarScene statement piece. Built everywhere, driven here.",
       image: "/carscene-heritage-tee.png",
       link: "https://shop.carsceneapp.com/products/carscene-heritage-tee",
     },
     {
       name: "CarScene Cap",
-      description: "Clean everyday CarScene identity. Simple, sharp, and wearable.",
+      description:
+        "Clean everyday CarScene identity. Simple, sharp, and wearable.",
       image: "/carscene-hat.png",
       link: "https://shop.carsceneapp.com/products/carscene-cap",
     },
@@ -38,31 +40,40 @@ export default function Home() {
             Spot cars, build garages
           </div>
 
+          {/* DOWNLOAD BUTTONS */}
           <div className="mt-8 flex w-full max-w-md flex-col gap-4 sm:flex-row">
+            {/* IOS BUTTON */}
             <a
               href="https://apps.apple.com/us/app/carscene-dream-garage/id6760978493"
               target="_blank"
               rel="noreferrer"
-              className="relative flex-1 overflow-hidden rounded-2xl border border-white/20 bg-white px-6 py-4 text-center text-sm font-black text-black transition hover:scale-[1.02]"
+              className="relative flex-1 overflow-hidden rounded-[14px] border border-white bg-black py-4 text-center transition hover:scale-[1.02]"
             >
-              <span
-                className="absolute inset-0 bg-cover bg-center opacity-30"
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-[0.10]"
                 style={{ backgroundImage: "url('/Tracks.png')" }}
               />
-              <span className="relative z-10">Download for iOS</span>
+
+              <div className="relative z-10 text-[16px] font-black tracking-[1px] text-white">
+                Download for iOS
+              </div>
             </a>
 
+            {/* PLAYSTORE BUTTON */}
             <a
               href="https://play.google.com/store/apps/details?id=com.carscene.app"
               target="_blank"
               rel="noreferrer"
-              className="relative flex-1 overflow-hidden rounded-2xl border border-[#ff3131]/70 bg-black px-6 py-4 text-center text-sm font-black text-white transition hover:scale-[1.02]"
+              className="relative flex-1 overflow-hidden rounded-[14px] border border-[#ff3131] bg-black py-4 text-center transition hover:scale-[1.02]"
             >
-              <span
-                className="absolute inset-0 bg-cover bg-center opacity-35"
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-[0.16]"
                 style={{ backgroundImage: "url('/TracksRed.png')" }}
               />
-              <span className="relative z-10">Download for Play Store</span>
+
+              <div className="relative z-10 text-[16px] font-black tracking-[1px] text-[#ff3131]">
+                Download for Play Store
+              </div>
             </a>
           </div>
         </div>
@@ -96,6 +107,7 @@ export default function Home() {
 
                 <div className="p-6">
                   <h3 className="text-2xl font-black">{product.name}</h3>
+
                   <p className="mt-3 text-sm leading-6 text-white/60">
                     {product.description}
                   </p>
