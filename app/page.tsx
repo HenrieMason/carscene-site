@@ -16,20 +16,20 @@ export default function Home() {
       link: "https://shop.carsceneapp.com/products/carscene-heritage-tee?variant=53293917569331",
     },
     {
-      image: "/Cap, White.png",
-      link: "https://shop.carsceneapp.com/products/carscene-cap?variant=53295688876339",
-    },
-    {
-      image: "/Cap, Black.png",
-      link: "https://shop.carsceneapp.com/products/carscene-cap-black?variant=53356532138291",
-    },
-    {
       image: "/Hoodie, Grey.png",
       link: "https://shop.carsceneapp.com/products/carscene-heavy-hoodie-grey?variant=53356524929331",
     },
     {
       image: "/Hoodie, Black.png",
       link: "https://shop.carsceneapp.com/products/carscene-heavy-hoodie?variant=53356450709811",
+    },
+    {
+      image: "/Cap, White.png",
+      link: "https://shop.carsceneapp.com/products/carscene-cap?variant=53295688876339",
+    },
+    {
+      image: "/Cap, Black.png",
+      link: "https://shop.carsceneapp.com/products/carscene-cap-black?variant=53356532138291",
     },
     {
       image: "/Red_Transparent.png",
