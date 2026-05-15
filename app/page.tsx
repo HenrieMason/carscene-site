@@ -113,17 +113,9 @@ export default function Home() {
       </section>
 
       {/* PRODUCTS */}
-      <section className="bg-white px-5 py-10 text-black md:px-8 md:py-14">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-10 flex justify-center">
-            <img
-              src="/TransparentBlack.png"
-              alt="CarScene Logo"
-              className="w-[190px] md:w-[260px]"
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-x-5 gap-y-12 md:gap-x-8 md:gap-y-16">
+      <section className="bg-white px-5 py-10 md:px-8 md:py-14">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-2 gap-x-5 gap-y-12 md:grid-cols-4 md:gap-x-8 md:gap-y-16">
             {[
               {
                 image: "/Heritage, White.png",
@@ -168,7 +160,7 @@ export default function Home() {
                 <img
                   src={product.image}
                   alt=""
-                  className="w-full object-contain transition duration-300 group-hover:scale-[1.035]"
+                  className="w-full object-contain transition duration-300 group-hover:scale-[1.03]"
                 />
               </a>
             ))}
@@ -179,11 +171,8 @@ export default function Home() {
       {/* SCREENSHOTS */}
       <section className="px-6 pt-4 pb-8 md:pt-4 md:pb-10">
         <div className="mx-auto max-w-5xl">
-          <h2 className="text-center text-3xl font-black md:text-4xl">
-            Spot. Collect. Compete.
-          </h2>
 
-          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
             {screenshots.map((src, index) => (
               <div
                 key={index}
