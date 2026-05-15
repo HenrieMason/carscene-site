@@ -43,7 +43,7 @@ export default function Home() {
               href="https://apps.apple.com/us/app/carscene-dream-garage/id6760978493"
               target="_blank"
               rel="noreferrer"
-              className="relative flex-1 overflow-hidden rounded-2xl border border-white/20 bg-black px-6 py-4 text-center text-sm font-black text-white transition hover:scale-[1.02]"
+              className="relative flex-1 overflow-hidden rounded-2xl border border-white bg-black px-6 py-4 text-center text-sm font-black text-white transition hover:scale-[1.02]"
             >
               <span
                 className="absolute inset-0 bg-cover bg-center opacity-10"
