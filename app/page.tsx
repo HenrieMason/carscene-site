@@ -1,10 +1,4 @@
 export default function Home() {
-  const screenshots = [
-    "/screenshot1.png",
-    "/screenshot2.png",
-    "/screenshot3.png",
-    "/screenshot4.png",
-  ];
 
   const products = [
     {
@@ -105,12 +99,18 @@ export default function Home() {
 
       {/* SCREENSHOTS */}
       <section className="px-6 pt-4 pb-8 md:pt-4 md:pb-10">
-        <div className="mx-auto max-w-5xl">
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
-            {screenshots.map((src, index) => (
+        <div className="mx-auto max-w-6xl">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-5">
+            {[
+              "/screenshot1.png",
+              "/screenshot2.png",
+              "/screenshot5.png",
+              "/screenshot3.png",
+              "/screenshot4.png",
+            ].map((src, index) => (
               <div
                 key={index}
-                className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5"
+                className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5 shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
               >
                 <img
                   src={src}
