@@ -35,30 +35,34 @@ export default function Home() {
           />
 
           <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/70">
-            CarScene: Dream Garage
+            Spot cars, build garages
           </div>
-
-          <p className="mt-6 max-w-2xl text-center text-lg leading-8 text-white/70">
-            An app for car spotting and building dream garages.
-          </p>
 
           <div className="mt-8 flex w-full max-w-md flex-col gap-4 sm:flex-row">
             <a
               href="https://apps.apple.com/us/app/carscene-dream-garage/id6760978493"
               target="_blank"
               rel="noreferrer"
-              className="flex-1 rounded-2xl bg-white px-6 py-4 text-center text-sm font-semibold text-black transition hover:scale-[1.02]"
+              className="relative flex-1 overflow-hidden rounded-2xl border border-white/20 bg-white px-6 py-4 text-center text-sm font-black text-black transition hover:scale-[1.02]"
             >
-              Download for iOS
+              <span
+                className="absolute inset-0 bg-cover bg-center opacity-30"
+                style={{ backgroundImage: "url('/Tracks.png')" }}
+              />
+              <span className="relative z-10">Download for iOS</span>
             </a>
 
             <a
               href="https://play.google.com/store/apps/details?id=com.carscene.app"
               target="_blank"
               rel="noreferrer"
-              className="flex-1 rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-white transition hover:bg-white/10"
+              className="relative flex-1 overflow-hidden rounded-2xl border border-[#ff3131]/70 bg-black px-6 py-4 text-center text-sm font-black text-white transition hover:scale-[1.02]"
             >
-              Download for Play Store
+              <span
+                className="absolute inset-0 bg-cover bg-center opacity-35"
+                style={{ backgroundImage: "url('/TracksRed.png')" }}
+              />
+              <span className="relative z-10">Download for Play Store</span>
             </a>
           </div>
         </div>
