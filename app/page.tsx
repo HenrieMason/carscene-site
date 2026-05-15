@@ -122,6 +122,15 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-white/10 px-6 py-8">
+        <div className="mx-auto flex max-w-6xl items-center justify-center">
+          <p className="text-[11px] uppercase tracking-[0.2em] text-white/35">
+            © 2026 Henrie Studios
+          </p>
+        </div>
+      </footer>
     </main>
   );
 }
