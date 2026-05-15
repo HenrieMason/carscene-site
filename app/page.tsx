@@ -43,13 +43,13 @@ export default function Home() {
               href="https://apps.apple.com/us/app/carscene-dream-garage/id6760978493"
               target="_blank"
               rel="noreferrer"
-              className="relative flex-1 overflow-hidden rounded-2xl border border-white/20 bg-white px-6 py-4 text-center text-sm font-black text-black transition hover:scale-[1.02]"
+              className="relative flex-1 overflow-hidden rounded-2xl border border-white/20 bg-black px-6 py-4 text-center text-sm font-black text-white transition hover:scale-[1.02]"
             >
               <span
                 className="absolute inset-0 bg-cover bg-center opacity-10"
                 style={{ backgroundImage: "url('/Tracks.png')" }}
               />
-              <span className="relative z-10">Download for iOS</span>
+              <span className="relative z-10 text-white">Download for iOS</span>
             </a>
 
             <a
@@ -62,7 +62,7 @@ export default function Home() {
                 className="absolute inset-0 bg-cover bg-center opacity-10"
                 style={{ backgroundImage: "url('/TracksRed.png')" }}
               />
-              <span className="relative z-10">Download for Play Store</span>
+              <span className="relative z-10 text-[#ff3131]">Download for Play Store</span>
             </a>
           </div>
         </div>
