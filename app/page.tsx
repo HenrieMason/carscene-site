@@ -42,49 +42,41 @@ export default function Home() {
 
           {/* DOWNLOAD BUTTONS */}
           {/* DOWNLOAD BUTTONS */}
-          <div className="mt-8 flex items-center gap-4">
-            {/* APPLE */}
-            <a
-              href="https://apps.apple.com/us/app/carscene-dream-garage/id6760978493"
-              target="_blank"
-              rel="noreferrer"
-              className="relative flex h-[60px] w-[60px] items-center justify-center overflow-hidden rounded-[14px] border border-white bg-black transition hover:scale-[1.03]"
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center opacity-[0.10]"
-                style={{ backgroundImage: "url('/Tracks.png')" }}
-              />
+<div className="mt-8 flex w-full max-w-md flex-col gap-4 sm:flex-row">
+  {/* IOS BUTTON */}
+  <a
+    href="https://apps.apple.com/us/app/carscene-dream-garage/id6760978493"
+    target="_blank"
+    rel="noreferrer"
+    className="relative flex-1 overflow-hidden rounded-[14px] border border-white bg-black py-4 text-center transition hover:scale-[1.02]"
+  >
+    <div
+      className="absolute inset-0 bg-cover bg-center opacity-[0.10]"
+      style={{ backgroundImage: "url('/Tracks.png')" }}
+    />
 
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 384 512"
-                className="relative z-10 h-7 fill-white"
-              >
-                <path d="M318.7 268.1c-.2-36.7 16.4-64.5 49.8-84.7-18.7-26.8-46.9-41.6-84.1-44.5-35.2-2.8-73.7 20.7-87.8 20.7-14.9 0-49-19.7-75.8-19.7C58.6 140 0 193.4 0 303.4c0 32.5 5.9 66 17.7 100.4 15.7 45.2 72.2 156 131.1 154.2 30.8-.7 52.5-21.9 92.6-21.9 38.9 0 59 21.9 92.6 21.9 59.4-.9 110.5-101.6 126.2-146.9-80.2-37.8-76.2-137.6-76.5-142zM259.3 76.5C286.3 43.9 283 12 282.2 0c-23.8 1.4-51.4 16.2-67.1 34.5-17.3 19.7-27.4 44.1-25.2 74.4 25.9 2 51.4-11.2 69.4-32.4z" />
-              </svg>
-            </a>
+    <div className="relative z-10 text-[15px] font-extrabold uppercase tracking-[1.5px] text-white/95">
+      Download for iOS
+    </div>
+  </a>
 
-            {/* ANDROID */}
-            <a
-              href="https://play.google.com/store/apps/details?id=com.carscene.app"
-              target="_blank"
-              rel="noreferrer"
-              className="relative flex h-[60px] w-[60px] items-center justify-center overflow-hidden rounded-[14px] border border-[#ff3131] bg-black transition hover:scale-[1.03]"
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center opacity-[0.16]"
-                style={{ backgroundImage: "url('/TracksRed.png')" }}
-              />
+  {/* PLAYSTORE BUTTON */}
+  <a
+    href="https://play.google.com/store/apps/details?id=com.carscene.app"
+    target="_blank"
+    rel="noreferrer"
+    className="relative flex-1 overflow-hidden rounded-[14px] border border-[#ff3131] bg-black py-4 text-center transition hover:scale-[1.02]"
+  >
+    <div
+      className="absolute inset-0 bg-cover bg-center opacity-[0.16]"
+      style={{ backgroundImage: "url('/TracksRed.png')" }}
+    />
 
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 576 512"
-                className="relative z-10 h-7 fill-[#ff3131]"
-              >
-                <path d="M420.6 125.2l43.9-76c2.5-4.3 1-9.8-3.3-12.3s-9.8-1-12.3 3.3l-44.8 77.6c-34.5-15.9-73.1-24.8-114.1-24.8s-79.6 8.9-114.1 24.8L131.1 40.2c-2.5-4.3-8-5.8-12.3-3.3s-5.8 8-3.3 12.3l43.9 76C97.5 158.6 56 222.9 56 296h464c0-73.1-41.5-137.4-99.4-170.8zM208 224c-13.3 0-24-10.7-24-24s10.7-24 24-24 24 10.7 24 24-10.7 24-24 24zm160 0c-13.3 0-24-10.7-24-24s10.7-24 24-24 24 10.7 24 24-10.7 24-24 24z" />
-              </svg>
-            </a>
-          </div>
+    <div className="relative z-10 text-[15px] font-extrabold uppercase tracking-[1.5px] text-[#ff4d4d]">
+      Download for Play Store
+    </div>
+  </a>
+</div>
         </div>
       </section>
 
