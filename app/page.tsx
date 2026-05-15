@@ -59,7 +59,7 @@ export default function Home() {
               className="relative flex-1 overflow-hidden rounded-2xl border border-[#ff3131]/70 bg-black px-6 py-4 text-center text-sm font-black text-white transition hover:scale-[1.02]"
             >
               <span
-                className="absolute inset-0 bg-cover bg-center opacity-15"
+                className="absolute inset-0 bg-cover bg-center opacity-20"
                 style={{ backgroundImage: "url('/TracksRed.png')" }}
               />
               <span className="relative z-10 text-[#ff3131]">Download for Play Store</span>
