@@ -46,7 +46,7 @@ export default function Home() {
               className="relative flex-1 overflow-hidden rounded-2xl border border-white/20 bg-white px-6 py-4 text-center text-sm font-black text-black transition hover:scale-[1.02]"
             >
               <span
-                className="absolute inset-0 bg-cover bg-center opacity-30"
+                className="absolute inset-0 bg-cover bg-center opacity-10"
                 style={{ backgroundImage: "url('/Tracks.png')" }}
               />
               <span className="relative z-10">Download for iOS</span>
@@ -59,7 +59,7 @@ export default function Home() {
               className="relative flex-1 overflow-hidden rounded-2xl border border-[#ff3131]/70 bg-black px-6 py-4 text-center text-sm font-black text-white transition hover:scale-[1.02]"
             >
               <span
-                className="absolute inset-0 bg-cover bg-center opacity-35"
+                className="absolute inset-0 bg-cover bg-center opacity-10"
                 style={{ backgroundImage: "url('/TracksRed.png')" }}
               />
               <span className="relative z-10">Download for Play Store</span>
