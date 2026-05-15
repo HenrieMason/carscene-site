@@ -1,7 +1,3 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-
 export default function Home() {
   const screenshots = [
     "/screenshot1.png",
@@ -19,16 +15,6 @@ export default function Home() {
       image: "/Heritage, Black.png",
       link: "https://shop.carsceneapp.com/products/carscene-heritage-tee?variant=53293917569331",
     },
-    { spacer: true },
-    {
-      image: "/Red_Transparent.png",
-      link: "https://shop.carsceneapp.com/products/red-on-black-carscene-sticker?variant=53357946667315",
-    },
-    {
-      image: "/Black_Transparent.png",
-      link: "https://shop.carsceneapp.com/products/red-on-grey-carscene-sticker?variant=53357948862771",
-    },
-    { spacer: true },
     {
       image: "/Cap, White.png",
       link: "https://shop.carsceneapp.com/products/carscene-cap?variant=53295688876339",
@@ -37,7 +23,6 @@ export default function Home() {
       image: "/Cap, Black.png",
       link: "https://shop.carsceneapp.com/products/carscene-cap-black?variant=53356532138291",
     },
-    { spacer: true },
     {
       image: "/Hoodie, Grey.png",
       link: "https://shop.carsceneapp.com/products/carscene-heavy-hoodie-grey?variant=53356524929331",
@@ -46,32 +31,15 @@ export default function Home() {
       image: "/Hoodie, Black.png",
       link: "https://shop.carsceneapp.com/products/carscene-heavy-hoodie?variant=53356450709811",
     },
+    {
+      image: "/Red_Transparent.png",
+      link: "https://shop.carsceneapp.com/products/red-on-black-carscene-sticker?variant=53357946667315",
+    },
+    {
+      image: "/Black_Transparent.png",
+      link: "https://shop.carsceneapp.com/products/red-on-grey-carscene-sticker?variant=53357948862771",
+    },
   ];
-
-  const realProducts = products.filter((p) => !p.spacer);
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const update = () => {
-      if (!sectionRef.current) return;
-
-      const rect = sectionRef.current.getBoundingClientRect();
-      const scrollable = rect.height - window.innerHeight;
-      const raw = -rect.top / scrollable;
-
-      setProgress(Math.min(1, Math.max(0, raw)));
-    };
-
-    update();
-    window.addEventListener("scroll", update);
-    window.addEventListener("resize", update);
-
-    return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
 
   return (
     <main className="min-h-screen bg-neutral-950 text-white">
@@ -116,40 +84,7 @@ export default function Home() {
       <section className="bg-white px-5 py-10 md:px-8 md:py-14">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-2 gap-x-5 gap-y-12 md:grid-cols-4 md:gap-x-8 md:gap-y-16">
-            {[
-              {
-                image: "/Heritage, White.png",
-                link: "https://shop.carsceneapp.com/products/carscene-heritage-tee-white?variant=53356529484083",
-              },
-              {
-                image: "/Heritage, Black.png",
-                link: "https://shop.carsceneapp.com/products/carscene-heritage-tee?variant=53293917569331",
-              },
-              {
-                image: "/Red_Transparent.png",
-                link: "https://shop.carsceneapp.com/products/red-on-black-carscene-sticker?variant=53357946667315",
-              },
-              {
-                image: "/Black_Transparent.png",
-                link: "https://shop.carsceneapp.com/products/red-on-grey-carscene-sticker?variant=53357948862771",
-              },
-              {
-                image: "/Cap, White.png",
-                link: "https://shop.carsceneapp.com/products/carscene-cap?variant=53295688876339",
-              },
-              {
-                image: "/Cap, Black.png",
-                link: "https://shop.carsceneapp.com/products/carscene-cap-black?variant=53356532138291",
-              },
-              {
-                image: "/Hoodie, Grey.png",
-                link: "https://shop.carsceneapp.com/products/carscene-heavy-hoodie-grey?variant=53356524929331",
-              },
-              {
-                image: "/Hoodie, Black.png",
-                link: "https://shop.carsceneapp.com/products/carscene-heavy-hoodie?variant=53356450709811",
-              },
-            ].map((product) => (
+            {products.map((product) => (
               <a
                 key={product.image}
                 href={product.link}
@@ -171,7 +106,6 @@ export default function Home() {
       {/* SCREENSHOTS */}
       <section className="px-6 pt-4 pb-8 md:pt-4 md:pb-10">
         <div className="mx-auto max-w-5xl">
-
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
             {screenshots.map((src, index) => (
               <div
