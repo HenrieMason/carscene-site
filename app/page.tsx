@@ -113,50 +113,65 @@ export default function Home() {
       </section>
 
       {/* PRODUCTS */}
-      <section ref={sectionRef} className="relative h-[520vh] px-6">
-        <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
-          <div className="absolute top-10 z-20 text-center md:top-14">
-            <h2 className="text-3xl font-black md:text-5xl">
-              Wear the Car Scene
-            </h2>
-            <p className="mt-3 text-sm text-white/50">
-              Scroll to shop the drop
-            </p>
+      <section className="bg-white px-5 py-10 text-black md:px-8 md:py-14">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-10 flex justify-center">
+            <img
+              src="/TransparentBlack.png"
+              alt="CarScene Logo"
+              className="w-[190px] md:w-[260px]"
+            />
           </div>
 
-          <div className="relative h-[520px] w-full max-w-[760px] md:h-[620px]">
-            {realProducts.map((product, index) => {
-              const step = 1 / realProducts.length;
-              const local = (progress - index * step) / step;
-
-              const clamped = Math.min(1, Math.max(0, local));
-
-              const x = 90 - clamped * 90;
-              const y = index * 76;
-              const scale = 1 - index * 0.015;
-              const opacity = local < -0.25 ? 0 : 1;
-
-              return (
-                <a
-                  key={product.image}
-                  href={product.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="absolute left-1/2 top-1/2 block w-[78vw] max-w-[520px] -translate-x-1/2 -translate-y-1/2 transition-transform duration-75 hover:scale-[1.03]"
-                  style={{
-                    zIndex: index + 1,
-                    opacity,
-                    transform: `translate(calc(-50% + ${x}vw), calc(-50% + ${y}px)) scale(${scale})`,
-                  }}
-                >
-                  <img
-                    src={product.image}
-                    alt=""
-                    className="w-full object-contain drop-shadow-[0_30px_80px_rgba(0,0,0,0.65)]"
-                  />
-                </a>
-              );
-            })}
+          <div className="grid grid-cols-2 gap-x-5 gap-y-12 md:gap-x-8 md:gap-y-16">
+            {[
+              {
+                image: "/Heritage, White.png",
+                link: "https://shop.carsceneapp.com/products/carscene-heritage-tee-white?variant=53356529484083",
+              },
+              {
+                image: "/Heritage, Black.png",
+                link: "https://shop.carsceneapp.com/products/carscene-heritage-tee?variant=53293917569331",
+              },
+              {
+                image: "/Red_Transparent.png",
+                link: "https://shop.carsceneapp.com/products/red-on-black-carscene-sticker?variant=53357946667315",
+              },
+              {
+                image: "/Black_Transparent.png",
+                link: "https://shop.carsceneapp.com/products/red-on-grey-carscene-sticker?variant=53357948862771",
+              },
+              {
+                image: "/Cap, White.png",
+                link: "https://shop.carsceneapp.com/products/carscene-cap?variant=53295688876339",
+              },
+              {
+                image: "/Cap, Black.png",
+                link: "https://shop.carsceneapp.com/products/carscene-cap-black?variant=53356532138291",
+              },
+              {
+                image: "/Hoodie, Grey.png",
+                link: "https://shop.carsceneapp.com/products/carscene-heavy-hoodie-grey?variant=53356524929331",
+              },
+              {
+                image: "/Hoodie, Black.png",
+                link: "https://shop.carsceneapp.com/products/carscene-heavy-hoodie?variant=53356450709811",
+              },
+            ].map((product) => (
+              <a
+                key={product.image}
+                href={product.link}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-center justify-center"
+              >
+                <img
+                  src={product.image}
+                  alt=""
+                  className="w-full object-contain transition duration-300 group-hover:scale-[1.035]"
+                />
+              </a>
+            ))}
           </div>
         </div>
       </section>
