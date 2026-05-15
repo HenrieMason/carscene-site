@@ -74,7 +74,7 @@ export default function Home() {
               rel="noreferrer"
               className="flex-1 rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-white transition hover:bg-white/10"
             >
-              Download for Play Store
+              Download from Play Store
             </a>
           </div>
         </div>
