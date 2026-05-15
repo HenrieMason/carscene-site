@@ -1,4 +1,10 @@
 export default function Home() {
+  const screenshots = [
+    "/screenshot1.png",
+    "/screenshot2.png",
+    "/screenshot3.png",
+    "/screenshot4.png",
+  ];
 
   const products = [
     {
@@ -98,42 +104,24 @@ export default function Home() {
       </section>
 
       {/* SCREENSHOTS */}
-<section className="px-6 pt-4 pb-8 md:pt-4 md:pb-10">
-  <div className="mx-auto max-w-6xl">
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
-      {[
-        "/screenshot1.png",
-        "/screenshot2.png",
-        "/screenshot5.png",
-        "/screenshot3.png",
-        "/screenshot4.png",
-      ].map((src, index) => {
-        const isIpad = src === "/screenshot5.png";
-
-        return (
-          <div
-            key={index}
-            className={`
-              overflow-hidden
-              rounded-[1.5rem]
-              border
-              border-white/10
-              bg-white/5
-              shadow-[0_12px_40px_rgba(0,0,0,0.35)]
-              ${isIpad ? "md:col-span-2" : ""}
-            `}
-          >
-            <img
-              src={src}
-              alt={`CarScene screenshot ${index + 1}`}
-              className="w-full object-cover"
-            />
+      <section className="px-6 pt-4 pb-8 md:pt-4 md:pb-10">
+        <div className="mx-auto max-w-5xl">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
+            {screenshots.map((src, index) => (
+              <div
+                key={index}
+                className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5"
+              >
+                <img
+                  src={src}
+                  alt={`CarScene screenshot ${index + 1}`}
+                  className="w-full object-cover"
+                />
+              </div>
+            ))}
           </div>
-        );
-      })}
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
     </main>
   );
 }
