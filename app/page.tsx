@@ -72,7 +72,7 @@ export default function Home() {
               href="https://play.google.com/store/apps/details?id=com.carscene.app"
               target="_blank"
               rel="noreferrer"
-              className="flex-1 rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-white transition hover:bg-white/10"
+              className="flex-1 whitespace-nowrap rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-white transition hover:bg-white/10"
             >
               Download from Play Store
             </a>
