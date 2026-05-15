@@ -43,42 +43,22 @@ export default function Home() {
           </div>
 
           <div className="mt-8 flex w-full max-w-md flex-col gap-4 sm:flex-row">
-            {/* IOS BUTTON */}
             <a
               href="https://apps.apple.com/us/app/carscene-dream-garage/id6760978493"
               target="_blank"
               rel="noreferrer"
-              className="relative flex-1 overflow-hidden rounded-2xl border border-white bg-black px-6 py-4 text-center text-sm font-black text-white transition hover:scale-[1.02]"
+              className="flex-1 rounded-2xl bg-white px-6 py-4 text-center text-sm font-semibold text-black transition hover:scale-[1.02]"
             >
-              <span
-                className="absolute inset-0 bg-cover bg-center opacity-15"
-                style={{
-                  backgroundImage: "url('/Tracks.png')",
-                }}
-              />
-
-              <span className="relative z-10 text-white">
-                Download for iOS
-              </span>
+              Download for iOS
             </a>
 
-            {/* PLAYSTORE BUTTON */}
             <a
               href="https://play.google.com/store/apps/details?id=com.carscene.app"
               target="_blank"
               rel="noreferrer"
-              className="relative flex-1 overflow-hidden rounded-2xl border border-[#ff3131]/70 bg-black px-6 py-4 text-center text-sm font-black text-white transition hover:scale-[1.02]"
+              className="flex-1 rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-white transition hover:bg-white/10"
             >
-              <span
-                className="absolute inset-0 bg-cover bg-center opacity-15"
-                style={{
-                  backgroundImage: "url('/TracksRed.png')",
-                }}
-              />
-
-              <span className="relative z-10 text-[#ff3131]">
-                Download for Play Store
-              </span>
+              Download for Play Store
             </a>
           </div>
         </div>
