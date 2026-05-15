@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 export default function Home() {
   const screenshots = [
     "/screenshot1.png",
@@ -8,22 +12,66 @@ export default function Home() {
 
   const products = [
     {
-      name: "CarScene Heritage Tee",
-      description:
-        "The first CarScene statement piece. Built everywhere, driven here.",
-      image: "/carscene-heritage-tee.png",
-      link:
-        "https://shop.carsceneapp.com/products/carscene-heritage-tee",
+      image: "/Heritage, White.png",
+      link: "https://shop.carsceneapp.com/products/carscene-heritage-tee-white?variant=53356529484083",
     },
     {
-      name: "CarScene Cap",
-      description:
-        "Clean everyday CarScene identity. Simple, sharp, and wearable.",
-      image: "/carscene-hat.png",
-      link:
-        "https://shop.carsceneapp.com/products/carscene-cap",
+      image: "/Heritage, Black.png",
+      link: "https://shop.carsceneapp.com/products/carscene-heritage-tee?variant=53293917569331",
+    },
+    { spacer: true },
+    {
+      image: "/Red_Transparent.png",
+      link: "https://shop.carsceneapp.com/products/red-on-black-carscene-sticker?variant=53357946667315",
+    },
+    {
+      image: "/Black_Transparent.png",
+      link: "https://shop.carsceneapp.com/products/red-on-grey-carscene-sticker?variant=53357948862771",
+    },
+    { spacer: true },
+    {
+      image: "/Cap, White.png",
+      link: "https://shop.carsceneapp.com/products/carscene-cap?variant=53295688876339",
+    },
+    {
+      image: "/Cap, Black.png",
+      link: "https://shop.carsceneapp.com/products/carscene-cap-black?variant=53356532138291",
+    },
+    { spacer: true },
+    {
+      image: "/Hoodie, Grey.png",
+      link: "https://shop.carsceneapp.com/products/carscene-heavy-hoodie-grey?variant=53356524929331",
+    },
+    {
+      image: "/Hoodie, Black.png",
+      link: "https://shop.carsceneapp.com/products/carscene-heavy-hoodie?variant=53356450709811",
     },
   ];
+
+  const realProducts = products.filter((p) => !p.spacer);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      if (!sectionRef.current) return;
+
+      const rect = sectionRef.current.getBoundingClientRect();
+      const scrollable = rect.height - window.innerHeight;
+      const raw = -rect.top / scrollable;
+
+      setProgress(Math.min(1, Math.max(0, raw)));
+    };
+
+    update();
+    window.addEventListener("scroll", update);
+    window.addEventListener("resize", update);
+
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   return (
     <main className="min-h-screen bg-neutral-950 text-white">
@@ -65,46 +113,50 @@ export default function Home() {
       </section>
 
       {/* PRODUCTS */}
-      <section className="px-6 pt-4 pb-10 md:pt-6 md:pb-12">
-        <div className="mx-auto max-w-6xl rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-10">
-          <div className="flex flex-col items-center text-center">
+      <section ref={sectionRef} className="relative h-[520vh] px-6">
+        <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
+          <div className="absolute top-10 z-20 text-center md:top-14">
             <h2 className="text-3xl font-black md:text-5xl">
               Wear the Car Scene
             </h2>
+            <p className="mt-3 text-sm text-white/50">
+              Scroll to shop the drop
+            </p>
           </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {products.map((product) => (
-              <a
-                key={product.name}
-                href={product.link}
-                target="_blank"
-                rel="noreferrer"
-                className="group overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 transition hover:-translate-y-1 hover:bg-white/10"
-              >
-                <div className="aspect-[4/3] bg-white">
+          <div className="relative h-[520px] w-full max-w-[760px] md:h-[620px]">
+            {realProducts.map((product, index) => {
+              const step = 1 / realProducts.length;
+              const local = (progress - index * step) / step;
+
+              const clamped = Math.min(1, Math.max(0, local));
+
+              const x = 90 - clamped * 90;
+              const y = index * 76;
+              const scale = 1 - index * 0.015;
+              const opacity = local < -0.25 ? 0 : 1;
+
+              return (
+                <a
+                  key={product.image}
+                  href={product.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="absolute left-1/2 top-1/2 block w-[78vw] max-w-[520px] -translate-x-1/2 -translate-y-1/2 transition-transform duration-75 hover:scale-[1.03]"
+                  style={{
+                    zIndex: index + 1,
+                    opacity,
+                    transform: `translate(calc(-50% + ${x}vw), calc(-50% + ${y}px)) scale(${scale})`,
+                  }}
+                >
                   <img
                     src={product.image}
-                    alt={product.name}
-                    className="h-full w-full object-cover"
+                    alt=""
+                    className="w-full object-contain drop-shadow-[0_30px_80px_rgba(0,0,0,0.65)]"
                   />
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-2xl font-black">
-                    {product.name}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-6 text-white/60">
-                    {product.description}
-                  </p>
-
-                  <div className="mt-5 inline-flex rounded-2xl bg-white px-5 py-3 text-sm font-bold text-black transition group-hover:scale-[1.02]">
-                    Shop Now
-                  </div>
-                </div>
-              </a>
-            ))}
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>
