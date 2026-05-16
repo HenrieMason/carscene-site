@@ -45,10 +45,18 @@ export default function Home() {
     <main className="min-h-screen bg-neutral-950 text-white">
       {/* HERO */}
       <section className="relative overflow-hidden px-6 pt-16 pb-10 md:pt-24 md:pb-12">
+        {/* Desktop Background */}
         <img
           src="/Background.png"
           alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-70"
+          className="absolute inset-0 hidden h-full w-full object-cover opacity-70 md:block"
+        />
+
+        {/* Mobile Background */}
+        <img
+          src="/Background2.png"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover opacity-70 md:hidden"
         />
 
         <div className="absolute inset-0 bg-black/45" />
