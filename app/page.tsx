@@ -45,16 +45,23 @@ export default function Home() {
     <main className="min-h-screen bg-neutral-950 text-white">
       {/* HERO */}
       <section className="relative overflow-hidden px-6 pt-16 pb-10 md:pt-24 md:pb-12">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_35%)]" />
+        <img
+          src="/Background.png"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover opacity-70"
+        />
 
-        <div className="relative mx-auto flex max-w-6xl flex-col items-center">
+        <div className="absolute inset-0 bg-black/45" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),transparent_35%)]" />
+
+        <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center">
           <img
             src="/TransparentWhite.png"
             alt="CarScene Logo"
             className="mb-6 w-[220px] md:w-[320px]"
           />
 
-          <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/70">
+          <div className="rounded-full border border-white/10 bg-black/35 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/75 backdrop-blur-sm">
             Spot cars, build garages
           </div>
 
@@ -72,7 +79,7 @@ export default function Home() {
               href="https://play.google.com/store/apps/details?id=com.carscene.app"
               target="_blank"
               rel="noreferrer"
-              className="flex-1 whitespace-nowrap rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-white transition hover:bg-white/10"
+              className="flex-1 whitespace-nowrap rounded-2xl border border-white/15 bg-black/35 px-6 py-4 text-center text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/10"
             >
               Download from Play Store
             </a>
