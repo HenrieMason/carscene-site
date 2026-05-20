@@ -6,6 +6,11 @@ export default function Home() {
     "/screenshot4.png",
   ];
 
+  const featuredProduct = {
+    image: "/bungle.png",
+    link: "https://shop.carsceneapp.com/products/carscene-sticker-pack?variant=53364362903859",
+  };
+
   const products = [
     {
       image: "/Heritage, White.png",
@@ -98,6 +103,24 @@ export default function Home() {
       {/* PRODUCTS */}
       <section className="bg-white px-5 py-10 md:px-8 md:py-14">
         <div className="mx-auto max-w-7xl">
+          
+          {/* Featured Product */}
+          <div className="mb-14 flex justify-center">
+            <a
+              href={featuredProduct.link}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex w-full max-w-4xl items-center justify-center"
+            >
+              <img
+                src={featuredProduct.image}
+                alt=""
+                className="w-full object-contain transition duration-300 group-hover:scale-[1.02]"
+              />
+            </a>
+          </div>
+
+          {/* Regular Products */}
           <div className="grid grid-cols-2 gap-x-5 gap-y-12 md:grid-cols-4 md:gap-x-8 md:gap-y-16">
             {products.map((product) => (
               <a
