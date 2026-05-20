@@ -7,7 +7,7 @@ export default function Home() {
   ];
 
   const featuredProduct = {
-    image: "/bungle.png",
+    image: "/bundle.png",
     link: "https://shop.carsceneapp.com/products/carscene-sticker-pack?variant=53364362903859",
   };
 
