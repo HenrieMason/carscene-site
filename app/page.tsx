@@ -74,8 +74,8 @@ export default function Home() {
             className="mb-6 w-[220px] md:w-[320px]"
           />
 
-          <div className="rounded-full border border-white/10 bg-black/35 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/75 backdrop-blur-sm">
-            The app for building dream garages.
+          <div className="max-w-full whitespace-nowrap rounded-full border border-white/10 bg-black/35 px-4 py-2 text-[10px] uppercase tracking-[0.18em] text-white/75 backdrop-blur-sm sm:text-xs sm:tracking-[0.25em]">
+            The app for building dream garages
           </div>
 
           <div className="mt-8 flex w-full max-w-md flex-col gap-4 sm:flex-row">
