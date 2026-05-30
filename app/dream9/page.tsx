@@ -444,7 +444,7 @@ export default function Dream9Page() {
                 </div>
 
                 <div
-                  className={`mx-auto grid grid-cols-3 gap-x-[3%] gap-y-[4px] pt-[2.5%] text-[clamp(5px,1.15vw,9px)] font-black leading-none text-black ${
+                  className={`mx-auto grid grid-cols-3 gap-x-[3%] gap-y-[4px] pt-[2.5%] text-[clamp(5px,0.9vw,8px)] font-black leading-none text-black ${
                     mode === "shirt" ? "w-[95%]" : "w-full"
                   }`}
                 >
