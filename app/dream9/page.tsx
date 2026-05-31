@@ -222,7 +222,8 @@ export default function Dream9Page() {
       const blob = await (await fetch(dataUrl)).blob();
 
       const formData = new FormData();
-      formData.append("file", blob);
+      const filename = `dream9-${Date.now()}.png`;
+      formData.append("file", blob, filename);
       formData.append("upload_preset", "dream9_unsigned");
 
       const cloudinaryResponse = await fetch(
