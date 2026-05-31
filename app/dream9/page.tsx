@@ -108,6 +108,7 @@ export default function Dream9Page() {
   const [showSizePicker, setShowSizePicker] = useState(false);
   const [shirtSize, setShirtSize] = useState<"S" | "M" | "L" | "XL">("L");
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
+  const [movingSlot, setMovingSlot] = useState<number | null>(null);
 
   const allSlotsFilled = slots.every((slot) => slot !== null);
 
@@ -177,21 +178,35 @@ export default function Dream9Page() {
   }
 
   function selectSlot(index: number) {
-    if (slots[index]) {
-      if (deleteReadySlot === index) {
+    const car = slots[index];
+
+    if (movingSlot !== null) {
+      if (movingSlot === index) {
         setSlots((current) => {
           const next = [...current];
           next[index] = null;
           return next;
         });
 
+        setMovingSlot(null);
         setDeleteReadySlot(null);
         return;
       }
 
+      setSortByValue(false);
+      moveSlot(movingSlot, index);
+      setMovingSlot(null);
+      setDeleteReadySlot(null);
+      return;
+    }
+
+    if (car) {
+      setSortByValue(false);
+      setMovingSlot(index);
       setDeleteReadySlot(index);
 
       setTimeout(() => {
+        setMovingSlot((current) => (current === index ? null : current));
         setDeleteReadySlot((current) => (current === index ? null : current));
       }, 3000);
 
@@ -436,9 +451,11 @@ export default function Dream9Page() {
                         style={{
                           backgroundColor: classTint(type),
                         }}
-                        className={`aspect-square overflow-hidden border border-black p-0 transition ${
-                          draggedSlot === index ? "opacity-40" : ""
-                        }`}
+                        className={`aspect-square overflow-hidden border p-0 transition ${
+                          movingSlot === index
+                            ? "border-[3px] border-red-600"
+                            : "border border-black"
+                        } ${draggedSlot === index ? "opacity-40" : ""}`}
                       >
                         {car ? (
                           <div className="relative h-full w-full overflow-hidden">
@@ -516,7 +533,7 @@ export default function Dream9Page() {
               </h1>
 
               <p className="mt-2 text-sm text-white/50">
-                Tap a slot, then choose a car. Drag filled slots to move or swap cars.
+                Tap an empty slot to choose a car. Tap a filled slot, then tap another slot to move or swap.
               </p>
             </div>
 
