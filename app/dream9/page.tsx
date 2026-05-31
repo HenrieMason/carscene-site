@@ -107,6 +107,7 @@ export default function Dream9Page() {
   const [sortByValue, setSortByValue] = useState(true);
   const [showSizePicker, setShowSizePicker] = useState(false);
   const [shirtSize, setShirtSize] = useState<"S" | "M" | "L" | "XL">("L");
+  const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
 
   const allSlotsFilled = slots.every((slot) => slot !== null);
 
@@ -176,6 +177,27 @@ export default function Dream9Page() {
   }
 
   function selectSlot(index: number) {
+    if (slots[index]) {
+      if (deleteReadySlot === index) {
+        setSlots((current) => {
+          const next = [...current];
+          next[index] = null;
+          return next;
+        });
+
+        setDeleteReadySlot(null);
+        return;
+      }
+
+      setDeleteReadySlot(index);
+
+      setTimeout(() => {
+        setDeleteReadySlot((current) => (current === index ? null : current));
+      }, 3000);
+
+      return;
+    }
+
     setSelectedSlot(index);
   }
 
@@ -384,7 +406,6 @@ export default function Dream9Page() {
                 >
                   {displaySlots.map((car, index) => {
                     const type = car ? classFromPrice(car.price) : "P";
-                    const isSelected = targetSlot === index;
 
                     return (
                       <button
@@ -426,6 +447,11 @@ export default function Dream9Page() {
                               alt={car.model}
                               className="absolute left-1/2 top-1/2 w-[200%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
                             />
+                            {deleteReadySlot === index && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/35 text-[34px]">
+                              <span className="drop-shadow-lg">🗑️</span>
+                            </div>
+                          )}
                           </div>
                         ) : (
                           <div className="flex h-full items-center justify-center text-[clamp(8px,2vw,14px)] font-black text-black/35">
@@ -438,14 +464,14 @@ export default function Dream9Page() {
                 </div>
 
                 <div
-                  className={`mx-auto grid grid-cols-3 gap-x-[3%] gap-y-[4px] pt-[2.5%] text-[8px] font-black leading-none text-black ${
+                  className={`mx-auto grid grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-none text-black ${
                     mode === "shirt" ? "w-[95%]" : "w-full"
                   }`}
                 >
                   {displaySlots.map((car, index) => (
                     <div
                       key={index}
-                      className={`min-w-0 ${
+                      className={`min-w-0 overflow-hidden whitespace-nowrap text-[clamp(5px,1.45vw,8px)] ${
                         index % 3 === 0
                           ? "text-left"
                           : index % 3 === 1
