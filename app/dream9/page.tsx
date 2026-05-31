@@ -207,23 +207,16 @@ export default function Dream9Page() {
         return;
       }
 
-      const exportWidth = isShirt ? 4494 : 3600;
-      const exportHeight = isShirt ? 5097 : 4800;
+      const node = posterRef.current;
+      const rect = node.getBoundingClientRect();
 
-      const dataUrl = await toPng(posterRef.current, {
+      const exportWidth = isShirt ? 4494 : 3600;
+      const pixelRatio = exportWidth / rect.width;
+
+      const dataUrl = await toPng(node, {
         cacheBust: true,
-        pixelRatio: 1,
+        pixelRatio,
         backgroundColor: "white",
-        width: exportWidth,
-        height: exportHeight,
-        canvasWidth: exportWidth,
-        canvasHeight: exportHeight,
-        style: {
-          margin: "0",
-          transform: "none",
-          width: `${exportWidth}px`,
-          height: `${exportHeight}px`,
-        },
       });
 
       const blob = await (await fetch(dataUrl)).blob();
@@ -362,7 +355,7 @@ export default function Dream9Page() {
             </div>
           )}
 
-          <div className="mx-auto w-full max-w-[540px]">
+          <div className="mx-auto w-[540px] max-w-full">
             <div
               ref={posterRef}
               className={`w-full text-black ${
@@ -372,9 +365,9 @@ export default function Dream9Page() {
               }`}
             >
               <div className="flex h-full flex-col">
-                <div className="pb-[2%] text-center">
+                <div className="pb-[1%] text-center">
                   <div
-                    className="text-[clamp(36px,7vw,68px)] font-black italic leading-none"
+                    className="text-[68px] font-black italic leading-none"
                     style={{
                       transform: "skewX(-8deg)",
                       letterSpacing: "-0.04em",
@@ -444,7 +437,7 @@ export default function Dream9Page() {
                 </div>
 
                 <div
-                  className={`mx-auto grid grid-cols-3 gap-x-[3%] gap-y-[4px] pt-[2.5%] text-[clamp(5px,0.9vw,8px)] font-black leading-none text-black ${
+                  className={`mx-auto grid grid-cols-3 gap-x-[3%] gap-y-[4px] pt-[2.5%] text-[8px] font-black leading-none text-black ${
                     mode === "shirt" ? "w-[95%]" : "w-full"
                   }`}
                 >
