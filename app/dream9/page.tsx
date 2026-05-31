@@ -274,9 +274,9 @@ export default function Dream9Page() {
   }, [slots, sortByValue]);
 
   return (
-    <main className="min-h-screen bg-black px-4 py-5 text-white md:p-6">
-      <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[420px_1fr] lg:gap-8">
-        <section className="order-1 lg:order-2">
+    <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
+      <div className="mx-auto grid w-full max-w-7xl gap-6 lg:grid-cols-[420px_1fr] lg:gap-8">
+        <section className="order-1 min-w-0 overflow-hidden lg:order-2">
           <div className="mx-auto mb-2 flex w-full max-w-[540px] gap-2">
             <button
               onClick={() => {
@@ -356,7 +356,7 @@ export default function Dream9Page() {
             </div>
           )}
 
-          <div className="mx-auto w-[540px] max-w-full">
+          <div className="mx-auto w-full max-w-[540px] overflow-hidden">
             <div
               ref={posterRef}
               className={`w-full text-black ${
