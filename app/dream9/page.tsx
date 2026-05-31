@@ -448,8 +448,8 @@ export default function Dream9Page() {
                               className="absolute left-1/2 top-1/2 w-[200%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
                             />
                             {deleteReadySlot === index && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-black/35 text-[34px]">
-                              <span className="drop-shadow-lg">🗑️</span>
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/35">
+                              <span className="text-[42px] font-black text-red-500">✕</span>
                             </div>
                           )}
                           </div>
