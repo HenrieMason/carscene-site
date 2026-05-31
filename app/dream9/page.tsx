@@ -489,11 +489,15 @@ export default function Dream9Page() {
                               loading="eager"
                               className="absolute left-1/2 top-1/2 w-[200%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
                             />
-                            {deleteReadySlot === index && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-black/35">
-                              <span className="text-[42px] font-black text-red-500">✕</span>
-                            </div>
-                          )}
+                            {movingSlot !== null && car && (
+                              <div className="absolute inset-0 flex items-center justify-center bg-black/35">
+                                {movingSlot === index ? (
+                                  <span className="text-[42px] font-black text-red-500">✕</span>
+                                ) : (
+                                  <span className="text-[38px] font-black text-white">↔</span>
+                                )}
+                              </div>
+                            )}
                           </div>
                         ) : (
                           <div className="flex h-full items-center justify-center text-[clamp(8px,2vw,14px)] font-black text-black/35">
