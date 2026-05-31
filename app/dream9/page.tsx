@@ -233,6 +233,21 @@ export default function Dream9Page() {
 
     setSelectedSlot(toIndex);
   }
+
+  function waitForPosterImages(node: HTMLElement) {
+    const images = Array.from(node.querySelectorAll("img"));
+
+    return Promise.all(
+      images.map((img) => {
+        if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+
+        return new Promise<void>((resolve) => {
+          img.onload = () => resolve();
+          img.onerror = () => resolve();
+        });
+      })
+    );
+  }
   
   async function makePoster() {
     if (!posterRef.current || !allSlotsFilled) return;
@@ -250,10 +265,17 @@ export default function Dream9Page() {
       const exportWidth = isShirt ? 4494 : 3600;
       const pixelRatio = exportWidth / rect.width;
 
+      await waitForPosterImages(node);
+
+      // Mobile Safari/Chrome sometimes needs one extra paint frame
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       const dataUrl = await toPng(node, {
         cacheBust: true,
         pixelRatio,
         backgroundColor: "white",
+        imagePlaceholder:
+          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
       });
 
       const blob = await (await fetch(dataUrl)).blob();
@@ -462,6 +484,9 @@ export default function Dream9Page() {
                             <img
                               src={car.image}
                               alt={car.model}
+                              crossOrigin="anonymous"
+                              decoding="sync"
+                              loading="eager"
                               className="absolute left-1/2 top-1/2 w-[200%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
                             />
                             {deleteReadySlot === index && (
@@ -516,6 +541,9 @@ export default function Dream9Page() {
                     <img
                       src="/someday.png"
                       alt="Someday, one day."
+                      crossOrigin="anonymous"
+                      decoding="sync"
+                      loading="eager"
                       className="mr-[-1%] translate-y-[5px] w-[50%] object-contain opacity-45"
                     />
                   </div>
@@ -562,6 +590,9 @@ export default function Dream9Page() {
                       <img
                         src={car.image}
                         alt={car.model}
+                        crossOrigin="anonymous"
+                        decoding="sync"
+                        loading="eager"
                         className="h-14 w-24 shrink-0 object-contain"
                       />
 
@@ -601,6 +632,9 @@ export default function Dream9Page() {
                         <img
                           src={car.image}
                           alt={car.model}
+                          crossOrigin="anonymous"
+                          decoding="sync"
+                          loading="eager"
                           className="h-14 w-24 shrink-0 object-contain"
                         />
 
