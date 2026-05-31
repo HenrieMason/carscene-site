@@ -366,7 +366,7 @@ export default function Dream9Page() {
               }`}
             >
               <div className="flex h-full flex-col">
-                <div className="pb-[1%] text-center">
+                <div className="pb-[0%] text-center">
                   <div
                     className="text-[68px] font-black italic leading-none"
                     style={{
