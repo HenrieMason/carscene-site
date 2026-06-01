@@ -4,6 +4,29 @@ import { NextRequest, NextResponse } from "next/server";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+const SHOP_ID = "27277637";
+const BLUEPRINT_ID = 1220;
+const PRINT_PROVIDER_ID = 99;
+const POSTER_VARIANT_ID = 101888;
+
+type ShopifyLineItemProperty = {
+  name: string;
+  value: string;
+};
+
+type ShopifyShippingAddress = {
+  first_name?: string;
+  last_name?: string;
+  phone?: string;
+  country_code?: string;
+  province_code?: string;
+  province?: string;
+  address1?: string;
+  address2?: string;
+  city?: string;
+  zip?: string;
+};
+
 function verifyShopifyWebhook(rawBody: string, hmacHeader: string | null): boolean {
   if (!hmacHeader || !process.env.SHOPIFY_WEBHOOK_SECRET) return false;
 
@@ -46,6 +69,8 @@ export async function POST(req: NextRequest) {
   console.log("Order:", order.name);
   console.log("Email:", order.email);
 
+  const results = [];
+
   for (const item of order.line_items || []) {
     console.log("ITEM TITLE:", item.title);
     console.log("VARIANT ID:", item.variant_id);
@@ -55,21 +80,184 @@ export async function POST(req: NextRequest) {
     console.log("RAW PROPERTIES:", JSON.stringify(properties, null, 2));
 
     const dream9DesignUrl = properties.find(
-      (p: { name: string; value: string }) => p.name === "Dream 9 Design URL"
+      (p: ShopifyLineItemProperty) => p.name === "Dream 9 Design URL"
     )?.value;
 
     const dream9Product = properties.find(
-      (p: { name: string; value: string }) => p.name === "Dream 9 Product"
+      (p: ShopifyLineItemProperty) => p.name === "Dream 9 Product"
     )?.value;
 
     const dream9Size = properties.find(
-      (p: { name: string; value: string }) => p.name === "Dream 9 Size"
+      (p: ShopifyLineItemProperty) => p.name === "Dream 9 Size"
     )?.value;
 
     console.log("DREAM 9 DESIGN URL:", dream9DesignUrl);
     console.log("DREAM 9 PRODUCT:", dream9Product);
     console.log("DREAM 9 SIZE:", dream9Size);
+
+    if (!dream9DesignUrl || dream9Product !== "Poster") {
+      console.log("Skipping non-Dream 9 poster item:", item.title);
+      continue;
+    }
+
+    const result = await createPrintifyPosterOrder({
+      orderName: order.name,
+      email: order.email,
+      imageUrl: dream9DesignUrl,
+      size: dream9Size || "18x24",
+      shippingAddress: order.shipping_address,
+    });
+
+    console.log("PRINTIFY RESULT:", JSON.stringify(result, null, 2));
+    results.push(result);
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, results });
+}
+
+async function createPrintifyPosterOrder({
+  orderName,
+  email,
+  imageUrl,
+  size,
+  shippingAddress,
+}: {
+  orderName: string;
+  email: string;
+  imageUrl: string;
+  size: string;
+  shippingAddress: ShopifyShippingAddress;
+}) {
+  if (!process.env.PRINTIFY_API_TOKEN) {
+    throw new Error("Missing PRINTIFY_API_TOKEN");
+  }
+
+  if (!shippingAddress) {
+    throw new Error("Missing Shopify shipping address");
+  }
+
+  const imageResponse = await fetch("https://api.printify.com/v1/uploads/images.json", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.PRINTIFY_API_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      file_name: `${orderName.replace("#", "dream9-")}.png`,
+      url: imageUrl,
+    }),
+  });
+
+  const imageData = await imageResponse.json();
+
+  if (!imageResponse.ok) {
+    return {
+      ok: false,
+      step: "upload-image",
+      status: imageResponse.status,
+      data: imageData,
+    };
+  }
+
+  const productResponse = await fetch(
+    `https://api.printify.com/v1/shops/${SHOP_ID}/products.json`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.PRINTIFY_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: `Dream 9 Poster ${orderName}`,
+        description: `Custom Dream 9 poster for Shopify order ${orderName}. Size: ${size}.`,
+        blueprint_id: BLUEPRINT_ID,
+        print_provider_id: PRINT_PROVIDER_ID,
+        variants: [
+          {
+            id: POSTER_VARIANT_ID,
+            price: 1999,
+            is_enabled: true,
+          },
+        ],
+        print_areas: [
+          {
+            variant_ids: [POSTER_VARIANT_ID],
+            placeholders: [
+              {
+                position: "front",
+                images: [
+                  {
+                    id: imageData.id,
+                    x: 0.5,
+                    y: 0.5,
+                    scale: 1,
+                    angle: 0,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      }),
+    }
+  );
+
+  const productData = await productResponse.json();
+
+  if (!productResponse.ok) {
+    return {
+      ok: false,
+      step: "create-product",
+      status: productResponse.status,
+      data: productData,
+    };
+  }
+
+  const orderResponse = await fetch(
+    `https://api.printify.com/v1/shops/${SHOP_ID}/orders.json`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.PRINTIFY_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        external_id: `shopify-${orderName}-${Date.now()}`,
+        label: `Dream 9 Poster ${orderName}`,
+        line_items: [
+          {
+            product_id: productData.id,
+            variant_id: POSTER_VARIANT_ID,
+            quantity: 1,
+          },
+        ],
+        shipping_method: 1,
+        send_shipping_notification: false,
+        address_to: {
+          first_name: shippingAddress.first_name || "Customer",
+          last_name: shippingAddress.last_name || "",
+          email,
+          phone: shippingAddress.phone || "",
+          country: shippingAddress.country_code || "US",
+          region: shippingAddress.province_code || shippingAddress.province || "",
+          address1: shippingAddress.address1 || "",
+          address2: shippingAddress.address2 || "",
+          city: shippingAddress.city || "",
+          zip: shippingAddress.zip || "",
+        },
+      }),
+    }
+  );
+
+  const orderData = await orderResponse.json();
+
+  return {
+    ok: orderResponse.ok,
+    step: "create-order",
+    status: orderResponse.status,
+    uploaded_image_id: imageData.id,
+    product_id: productData.id,
+    printify_order: orderData,
+    size,
+  };
 }
