@@ -84,7 +84,7 @@ export default function Dream9Page() {
   const posterRef = useRef<HTMLDivElement>(null);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
-  const POSTER_VARIANT_ID = "53414613385523";
+  const POSTER_VARIANT_ID = "53414631899443";
   const SHIRT_VARIANT_IDS = {
     S: "53411038757171",
     M: "53411038789939",
