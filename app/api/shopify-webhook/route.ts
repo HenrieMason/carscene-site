@@ -47,8 +47,28 @@ export async function POST(req: NextRequest) {
   console.log("Email:", order.email);
 
   for (const item of order.line_items || []) {
-    console.log("Item:", item.title);
-    console.log("Properties:", item.properties);
+    console.log("ITEM TITLE:", item.title);
+    console.log("VARIANT ID:", item.variant_id);
+    console.log("QUANTITY:", item.quantity);
+
+    const properties = item.properties || [];
+    console.log("RAW PROPERTIES:", JSON.stringify(properties, null, 2));
+
+    const dream9DesignUrl = properties.find(
+      (p: { name: string; value: string }) => p.name === "Dream 9 Design URL"
+    )?.value;
+
+    const dream9Product = properties.find(
+      (p: { name: string; value: string }) => p.name === "Dream 9 Product"
+    )?.value;
+
+    const dream9Size = properties.find(
+      (p: { name: string; value: string }) => p.name === "Dream 9 Size"
+    )?.value;
+
+    console.log("DREAM 9 DESIGN URL:", dream9DesignUrl);
+    console.log("DREAM 9 PRODUCT:", dream9Product);
+    console.log("DREAM 9 SIZE:", dream9Size);
   }
 
   return NextResponse.json({ ok: true });
