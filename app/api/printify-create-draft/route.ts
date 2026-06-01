@@ -12,7 +12,30 @@ export async function GET() {
   const imageUrl =
     "https://res.cloudinary.com/dvcxnicew/image/upload/v1780285111/vkyiejxnhdst65wq4akl.png";
 
-  const response = await fetch(
+  const imageResponse = await fetch("https://api.printify.com/v1/uploads/images.json", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.PRINTIFY_API_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      file_name: `dream9-${Date.now()}.png`,
+      url: imageUrl,
+    }),
+  });
+
+  const imageData = await imageResponse.json();
+
+  if (!imageResponse.ok) {
+    return NextResponse.json({
+      ok: false,
+      step: "upload-image",
+      status: imageResponse.status,
+      data: imageData,
+    });
+  }
+
+  const productResponse = await fetch(
     `https://api.printify.com/v1/shops/${SHOP_ID}/products.json`,
     {
       method: "POST",
@@ -40,7 +63,7 @@ export async function GET() {
                 position: "front",
                 images: [
                   {
-                    src: imageUrl,
+                    id: imageData.id,
                     x: 0.5,
                     y: 0.5,
                     scale: 1,
@@ -55,11 +78,12 @@ export async function GET() {
     }
   );
 
-  const data = await response.json();
+  const productData = await productResponse.json();
 
   return NextResponse.json({
-    ok: response.ok,
-    status: response.status,
-    data,
+    ok: productResponse.ok,
+    status: productResponse.status,
+    uploaded_image_id: imageData.id,
+    data: productData,
   });
 }
