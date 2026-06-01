@@ -101,6 +101,8 @@ export async function POST(req: NextRequest) {
     }
 
     const result = await createPrintifyPosterOrder({
+      orderId: order.id,
+      lineItemId: item.id,
       orderName: order.name,
       email: order.email,
       imageUrl: dream9DesignUrl,
@@ -116,12 +118,16 @@ export async function POST(req: NextRequest) {
 }
 
 async function createPrintifyPosterOrder({
+  orderId,
+  lineItemId,
   orderName,
   email,
   imageUrl,
   size,
   shippingAddress,
 }: {
+  orderId: number | string;
+  lineItemId: number | string;
   orderName: string;
   email: string;
   imageUrl: string;
@@ -222,7 +228,7 @@ async function createPrintifyPosterOrder({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        external_id: `shopify-${orderName}-${Date.now()}`,
+        external_id: `shopify-dream9-${orderId}-item-${lineItemId}`,
         label: `Dream 9 Poster ${orderName}`,
         line_items: [
           {
