@@ -5,9 +5,18 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const SHOP_ID = "27277637";
-const BLUEPRINT_ID = 1220;
 const PRINT_PROVIDER_ID = 99;
+
+const POSTER_BLUEPRINT_ID = 1220;
 const POSTER_VARIANT_ID = 101888;
+
+const SHIRT_BLUEPRINT_ID = 706;
+const SHIRT_VARIANT_IDS = {
+  S: 73199,
+  M: 73203,
+  L: 73207,
+  XL: 73211,
+};
 
 type ShopifyLineItemProperty = {
   name: string;
@@ -72,12 +81,7 @@ export async function POST(req: NextRequest) {
   const results = [];
 
   for (const item of order.line_items || []) {
-    console.log("ITEM TITLE:", item.title);
-    console.log("VARIANT ID:", item.variant_id);
-    console.log("QUANTITY:", item.quantity);
-
     const properties = item.properties || [];
-    console.log("RAW PROPERTIES:", JSON.stringify(properties, null, 2));
 
     const dream9DesignUrl = properties.find(
       (p: ShopifyLineItemProperty) => p.name === "Dream 9 Design URL"
@@ -91,21 +95,18 @@ export async function POST(req: NextRequest) {
       (p: ShopifyLineItemProperty) => p.name === "Dream 9 Size"
     )?.value;
 
-    console.log("DREAM 9 DESIGN URL:", dream9DesignUrl);
-    console.log("DREAM 9 PRODUCT:", dream9Product);
-    console.log("DREAM 9 SIZE:", dream9Size);
-
-    if (!dream9DesignUrl || dream9Product !== "Poster") {
-      console.log("Skipping non-Dream 9 poster item:", item.title);
+    if (!dream9DesignUrl || !dream9Product) {
+      console.log("Skipping non-Dream 9 item:", item.title);
       continue;
     }
 
-    const result = await createPrintifyPosterOrder({
+    const result = await createPrintifyOrder({
       orderId: order.id,
       lineItemId: item.id,
       orderName: order.name,
       email: order.email,
       imageUrl: dream9DesignUrl,
+      productType: dream9Product,
       size: dream9Size || "18x24",
       shippingAddress: order.shipping_address,
     });
@@ -117,12 +118,13 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({ ok: true, results });
 }
 
-async function createPrintifyPosterOrder({
+async function createPrintifyOrder({
   orderId,
   lineItemId,
   orderName,
   email,
   imageUrl,
+  productType,
   size,
   shippingAddress,
 }: {
@@ -131,6 +133,7 @@ async function createPrintifyPosterOrder({
   orderName: string;
   email: string;
   imageUrl: string;
+  productType: string;
   size: string;
   shippingAddress: ShopifyShippingAddress;
 }) {
@@ -142,6 +145,16 @@ async function createPrintifyPosterOrder({
     throw new Error("Missing Shopify shipping address");
   }
 
+  const isShirt = productType === "Shirt";
+
+  const variantId = isShirt
+    ? SHIRT_VARIANT_IDS[size as keyof typeof SHIRT_VARIANT_IDS]
+    : POSTER_VARIANT_ID;
+
+  if (!variantId) {
+    throw new Error(`Missing Printify variant for ${productType} size ${size}`);
+  }
+
   const imageResponse = await fetch("https://api.printify.com/v1/uploads/images.json", {
     method: "POST",
     headers: {
@@ -149,7 +162,7 @@ async function createPrintifyPosterOrder({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      file_name: `${orderName.replace("#", "dream9-")}.png`,
+      file_name: `${orderName.replace("#", "dream9-")}-${productType.toLowerCase()}.png`,
       url: imageUrl,
     }),
   });
@@ -174,20 +187,20 @@ async function createPrintifyPosterOrder({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        title: `Dream 9 Poster ${orderName}`,
-        description: `Custom Dream 9 poster for Shopify order ${orderName}. Size: ${size}.`,
-        blueprint_id: BLUEPRINT_ID,
+        title: `Dream 9 ${productType} ${orderName}`,
+        description: `Custom Dream 9 ${productType.toLowerCase()} for Shopify order ${orderName}. Size: ${size}.`,
+        blueprint_id: isShirt ? SHIRT_BLUEPRINT_ID : POSTER_BLUEPRINT_ID,
         print_provider_id: PRINT_PROVIDER_ID,
         variants: [
           {
-            id: POSTER_VARIANT_ID,
-            price: 1999,
+            id: variantId,
+            price: isShirt ? 2999 : 1999,
             is_enabled: true,
           },
         ],
         print_areas: [
           {
-            variant_ids: [POSTER_VARIANT_ID],
+            variant_ids: [variantId],
             placeholders: [
               {
                 position: "front",
@@ -228,12 +241,12 @@ async function createPrintifyPosterOrder({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        external_id: `shopify-dream9-${orderId}-item-${lineItemId}`,
-        label: `Dream 9 Poster ${orderName}`,
+        external_id: `shopify-dream9-${productType.toLowerCase()}-${orderId}-item-${lineItemId}`,
+        label: `Dream 9 ${productType} ${orderName}`,
         line_items: [
           {
             product_id: productData.id,
-            variant_id: POSTER_VARIANT_ID,
+            variant_id: variantId,
             quantity: 1,
           },
         ],
@@ -264,6 +277,7 @@ async function createPrintifyPosterOrder({
     uploaded_image_id: imageData.id,
     product_id: productData.id,
     printify_order: orderData,
+    productType,
     size,
   };
 }
