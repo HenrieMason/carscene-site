@@ -4,7 +4,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const SHOP_ID = "27277637";
-const PRODUCT_ID = "6a1b0d7e4525ffd5730feadd";
+const PRODUCT_ID = "6a1b1add1babc69aaa0f2f14";
 
 export async function GET() {
   const response = await fetch(
