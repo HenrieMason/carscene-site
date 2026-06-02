@@ -18,6 +18,9 @@ const SHIRT_VARIANT_IDS = {
   XL: 73211,
 };
 
+const CARSCENE_LOGO_URL =
+  "https://res.cloudinary.com/dvcxnicew/image/upload/v1780373150/Red_Transparent-1_mffebp.png";
+
 type ShopifyLineItemProperty = {
   name: string;
   value: string;
@@ -81,7 +84,12 @@ export async function POST(req: NextRequest) {
   const results = [];
 
   for (const item of order.line_items || []) {
+    console.log("ITEM TITLE:", item.title);
+    console.log("VARIANT ID:", item.variant_id);
+    console.log("QUANTITY:", item.quantity);
+
     const properties = item.properties || [];
+    console.log("RAW PROPERTIES:", JSON.stringify(properties, null, 2));
 
     const dream9DesignUrl = properties.find(
       (p: ShopifyLineItemProperty) => p.name === "Dream 9 Design URL"
@@ -94,6 +102,10 @@ export async function POST(req: NextRequest) {
     const dream9Size = properties.find(
       (p: ShopifyLineItemProperty) => p.name === "Dream 9 Size"
     )?.value;
+
+    console.log("DREAM 9 DESIGN URL:", dream9DesignUrl);
+    console.log("DREAM 9 PRODUCT:", dream9Product);
+    console.log("DREAM 9 SIZE:", dream9Size);
 
     if (!dream9DesignUrl || !dream9Product) {
       console.log("Skipping non-Dream 9 item:", item.title);
@@ -178,6 +190,33 @@ async function createPrintifyOrder({
     };
   }
 
+  let logoImageData: { id: string } | null = null;
+
+  if (isShirt) {
+    const logoResponse = await fetch("https://api.printify.com/v1/uploads/images.json", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.PRINTIFY_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        file_name: "carscene-logo.png",
+        url: CARSCENE_LOGO_URL,
+      }),
+    });
+
+    logoImageData = await logoResponse.json();
+
+    if (!logoResponse.ok) {
+      return {
+        ok: false,
+        step: "upload-logo",
+        status: logoResponse.status,
+        data: logoImageData,
+      };
+    }
+  }
+
   const productResponse = await fetch(
     `https://api.printify.com/v1/shops/${SHOP_ID}/products.json`,
     {
@@ -201,20 +240,47 @@ async function createPrintifyOrder({
         print_areas: [
           {
             variant_ids: [variantId],
-            placeholders: [
-              {
-                position: "front",
-                images: [
+            placeholders: isShirt
+              ? [
                   {
-                    id: imageData.id,
-                    x: 0.5,
-                    y: 0.5,
-                    scale: 1,
-                    angle: 0,
+                    position: "front",
+                    images: [
+                      {
+                        id: logoImageData!.id,
+                        x: 0.18,
+                        y: 0.08,
+                        scale: 0.18,
+                        angle: 0,
+                      },
+                    ],
+                  },
+                  {
+                    position: "back",
+                    images: [
+                      {
+                        id: imageData.id,
+                        x: 0.5,
+                        y: 0.5,
+                        scale: 1,
+                        angle: 0,
+                      },
+                    ],
+                  },
+                ]
+              : [
+                  {
+                    position: "front",
+                    images: [
+                      {
+                        id: imageData.id,
+                        x: 0.5,
+                        y: 0.5,
+                        scale: 1,
+                        angle: 0,
+                      },
+                    ],
                   },
                 ],
-              },
-            ],
           },
         ],
       }),
@@ -275,6 +341,7 @@ async function createPrintifyOrder({
     step: "create-order",
     status: orderResponse.status,
     uploaded_image_id: imageData.id,
+    uploaded_logo_id: logoImageData?.id || null,
     product_id: productData.id,
     printify_order: orderData,
     productType,
