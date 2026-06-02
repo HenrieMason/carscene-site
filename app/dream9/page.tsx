@@ -86,10 +86,10 @@ export default function Dream9Page() {
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const POSTER_VARIANT_ID = "53414631899443";
   const SHIRT_VARIANT_IDS = {
-    S: "53411038757171",
-    M: "53411038789939",
-    L: "53411038822707",
-    XL: "53411038855475",
+    S: "53417034449203",
+    M: "53417034481971",
+    L: "53417034514739",
+    XL: "53417034547507",
   };
 
   const today = new Date().toLocaleDateString("en-US", {
