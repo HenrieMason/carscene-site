@@ -372,7 +372,7 @@ export default function Dream9Page() {
               disabled={!allSlotsFilled}
               className={`flex-1 py-4 text-sm font-black transition ${
                 allSlotsFilled
-                  ? "bg-red-600 text-white hover:bg-red-700"
+                  ? "animate-pulse bg-red-600 text-white hover:bg-red-700"
                   : "cursor-not-allowed bg-white/10 text-white"
               }`}
             >
