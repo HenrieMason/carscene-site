@@ -109,6 +109,7 @@ export default function Dream9Page() {
   const [shirtSize, setShirtSize] = useState<"S" | "M" | "L" | "XL">("L");
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [movingSlot, setMovingSlot] = useState<number | null>(null);
+  const [isMakingDesign, setIsMakingDesign] = useState(false);
 
   const allSlotsFilled = slots.every((slot) => slot !== null);
 
@@ -250,7 +251,7 @@ export default function Dream9Page() {
   }
   
   async function makePoster() {
-    if (!posterRef.current || !allSlotsFilled) return;
+    if (!posterRef.current || !allSlotsFilled || isMakingDesign) return;
 
     try {
       const isShirt = mode === "shirt";
@@ -258,6 +259,7 @@ export default function Dream9Page() {
         setShowSizePicker(true);
         return;
       }
+      setIsMakingDesign(true);
 
       const node = posterRef.current;
       const rect = node.getBoundingClientRect();
@@ -369,20 +371,31 @@ export default function Dream9Page() {
           <div className="mx-auto mb-3 flex w-full max-w-[540px] gap-2">
             <button
               onClick={makePoster}
-              disabled={!allSlotsFilled}
-              className={`flex-1 py-4 text-sm font-black transition ${
-                allSlotsFilled
+              disabled={!allSlotsFilled || isMakingDesign}
+              className={`flex-1 py-4 text-sm font-black transition active:scale-[0.97] ${
+                isMakingDesign
+                  ? "bg-red-700 text-white"
+                  : allSlotsFilled
                   ? "animate-pulse bg-red-600 text-white hover:bg-red-700"
                   : "cursor-not-allowed bg-white/10 text-white"
               }`}
             >
-              {allSlotsFilled
-                ? mode === "poster"
-                  ? "Make Poster"
-                  : showSizePicker
-                  ? `Make Shirt - ${shirtSize}`
-                  : "Choose Shirt Size"
-                : "Fill all 9 slots"}
+              {isMakingDesign ? (
+                <span className="inline-flex items-center justify-center gap-2">
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+                  Building...
+                </span>
+              ) : allSlotsFilled ? (
+                mode === "poster" ? (
+                  "Make Poster"
+                ) : showSizePicker ? (
+                  `Make Shirt - ${shirtSize}`
+                ) : (
+                  "Choose Shirt Size"
+                )
+              ) : (
+                "Fill all 9 slots"
+              )}
             </button>
 
             <button
