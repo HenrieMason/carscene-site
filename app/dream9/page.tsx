@@ -325,6 +325,37 @@ export default function Dream9Page() {
     }
   }
 
+  async function downloadPreview() {
+    if (!posterRef.current || !allSlotsFilled || isMakingDesign) return;
+
+    try {
+      const node = posterRef.current;
+      const rect = node.getBoundingClientRect();
+
+      const exportWidth = mode === "shirt" ? 4494 : 3600;
+      const pixelRatio = exportWidth / rect.width;
+
+      await waitForPosterImages(node);
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      const dataUrl = await toPng(node, {
+        cacheBust: true,
+        pixelRatio,
+        backgroundColor: "white",
+        imagePlaceholder:
+          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
+      });
+
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = `dream9-${mode}-preview.png`;
+      link.click();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to download preview.");
+    }
+  }
+
   const displaySlots = useMemo(() => {
     if (!sortByValue) return slots;
 
@@ -683,7 +714,19 @@ export default function Dream9Page() {
                   </div>
                 </div>
               )}
-            </div>
+             </div>
+
+            <button
+              onClick={downloadPreview}
+              disabled={!allSlotsFilled || isMakingDesign}
+              className={`mt-4 w-full py-4 text-sm font-black transition active:scale-[0.97] ${
+                allSlotsFilled && !isMakingDesign
+                  ? "bg-white text-black hover:bg-white/90"
+                  : "cursor-not-allowed bg-white/10 text-white/40"
+              }`}
+            >
+              Download Preview
+            </button>
           </div>
         </section>
       </div>
