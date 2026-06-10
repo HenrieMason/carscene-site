@@ -346,6 +346,20 @@ export default function Dream9Page() {
           "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
       });
 
+      const blob = await (await fetch(dataUrl)).blob();
+      const file = new File([blob], `dream9-${mode}-preview.png`, {
+        type: "image/png",
+      });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: "Dream 9 Preview",
+          text: "Save or share your Dream 9.",
+        });
+        return;
+      }
+
       const link = document.createElement("a");
       link.href = dataUrl;
       link.download = `dream9-${mode}-preview.png`;
