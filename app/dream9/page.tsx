@@ -386,30 +386,30 @@ export default function Dream9Page() {
           <div className="mx-auto mb-2 flex w-full max-w-[540px] gap-2">
             <button
               onClick={() => {
-                setMode("poster");
-                setShowSizePicker(false);
-              }}
-              className={`flex-1 px-5 py-4 text-sm font-black transition ${
-                mode === "poster"
-                ? "bg-red-600 text-white"
-                : "bg-white/10 text-white hover:bg-white/15"
-              }`}
-            >
-              Poster
-            </button>
-
-            <button
-              onClick={() => {
                 setMode("shirt");
                 setShowSizePicker(false);
               }}
               className={`flex-1 px-5 py-4 text-sm font-black transition ${
                 mode === "shirt"
-                ? "bg-red-600 text-white"
-                : "bg-white/10 text-white hover:bg-white/15"
+                  ? "bg-red-600 text-white"
+                  : "bg-white/10 text-white hover:bg-white/15"
               }`}
             >
               Shirt
+            </button>
+
+            <button
+              onClick={() => {
+                setMode("poster");
+                setShowSizePicker(false);
+              }}
+              className={`flex-1 px-5 py-4 text-sm font-black transition ${
+                mode === "poster"
+                  ? "bg-red-600 text-white"
+                  : "bg-white/10 text-white hover:bg-white/15"
+              }`}
+            >
+              Poster
             </button>
           </div>
 
