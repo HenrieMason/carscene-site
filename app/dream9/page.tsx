@@ -98,7 +98,7 @@ export default function Dream9Page() {
     year: "numeric",
   });
 
-  const [mode, setMode] = useState<"poster" | "shirt">("poster");
+  const [mode, setMode] = useState<"poster" | "shirt">("shirt");
   const [query, setQuery] = useState("");
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
