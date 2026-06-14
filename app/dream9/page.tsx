@@ -177,24 +177,25 @@ export default function Dream9Page() {
   }
   function addCarToTargetSlot(car: Car) {
     setSlots((current) => {
-      const next = [...current];
+      const withoutEmptySlots = current.filter((slot): slot is Car => slot !== null);
 
-      const fallbackOpenIndex = next.findIndex((slot) => slot === null);
+      if (selectedSlot !== null && selectedSlot < withoutEmptySlots.length) {
+        const next = [...withoutEmptySlots];
+        next[selectedSlot] = car;
+        return next;
+      }
 
-      const indexToFill =
-        selectedSlot !== null
-          ? selectedSlot
-          : fallbackOpenIndex === -1
-          ? 0
-          : fallbackOpenIndex;
+      if (withoutEmptySlots.length >= 9) {
+        return [...withoutEmptySlots.slice(0, 8), car];
+      }
 
-      next[indexToFill] = car;
-      return next;
+      return [...withoutEmptySlots, car];
     });
 
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
+    setDeleteReadySlot(null);
   }
 
   function selectSlot(index: number) {
