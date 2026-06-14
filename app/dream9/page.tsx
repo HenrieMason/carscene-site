@@ -102,7 +102,12 @@ export default function Dream9Page() {
   const [query, setQuery] = useState("");
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
-  const [slots, setSlots] = useState<(Car | null)[]>(Array(9).fill(null));
+  function getRandomDream9() {
+    return [...allCars]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 9);
+  }
+  const [slots, setSlots] = useState<(Car | null)[]>(getRandomDream9);
   const [draggedSlot, setDraggedSlot] = useState<number | null>(null);
   const [sortByValue, setSortByValue] = useState(true);
   const [showSizePicker, setShowSizePicker] = useState(false);
@@ -155,6 +160,26 @@ export default function Dream9Page() {
     if (!selectedBrand) return [];
     return allCars.filter((car) => car.brand === selectedBrand);
   }, [selectedBrand, allCars]);
+
+  function shuffleDream9() {
+    setSlots(getRandomDream9());
+    setSelectedSlot(null);
+    setSelectedBrand(null);
+    setQuery("");
+    setMovingSlot(null);
+    setDeleteReadySlot(null);
+    setSortByValue(true);
+  }
+
+  function clearDream9() {
+    setSlots(Array(9).fill(null));
+    setSelectedSlot(null);
+    setSelectedBrand(null);
+    setQuery("");
+    setMovingSlot(null);
+    setDeleteReadySlot(null);
+    setSortByValue(false);
+  }
 
   function addCarToTargetSlot(car: Car) {
     setSlots((current) => {
@@ -325,51 +350,6 @@ export default function Dream9Page() {
     }
   }
 
-  async function downloadPreview() {
-    if (!posterRef.current || !allSlotsFilled || isMakingDesign) return;
-
-    try {
-      const node = posterRef.current;
-      const rect = node.getBoundingClientRect();
-
-      const exportWidth = mode === "shirt" ? 4494 : 3600;
-      const pixelRatio = exportWidth / rect.width;
-
-      await waitForPosterImages(node);
-      await new Promise((resolve) => setTimeout(resolve, 500));
-
-      const dataUrl = await toPng(node, {
-        cacheBust: true,
-        pixelRatio,
-        backgroundColor: "white",
-        imagePlaceholder:
-          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
-      });
-
-      const blob = await (await fetch(dataUrl)).blob();
-      const file = new File([blob], `dream9-${mode}-preview.png`, {
-        type: "image/png",
-      });
-
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({
-          files: [file],
-          title: "Dream 9 Preview",
-          text: "Save or share your Dream 9.",
-        });
-        return;
-      }
-
-      const link = document.createElement("a");
-      link.href = dataUrl;
-      link.download = `dream9-${mode}-preview.png`;
-      link.click();
-    } catch (error) {
-      console.error(error);
-      alert("Failed to download preview.");
-    }
-  }
-
   const displaySlots = useMemo(() => {
     if (!sortByValue) return slots;
 
@@ -383,6 +363,21 @@ export default function Dream9Page() {
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
       <div className="mx-auto grid w-full max-w-7xl gap-6 lg:grid-cols-[420px_1fr] lg:gap-8">
         <section className="order-1 min-w-0 overflow-hidden lg:order-2">
+          <div className="mx-auto mb-2 flex w-full max-w-[540px] gap-2">
+            <button
+              onClick={shuffleDream9}
+              className="flex-1 bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+            >
+              Shuffle
+            </button>
+
+            <button
+              onClick={clearDream9}
+              className="flex-1 bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+            >
+              Clear
+            </button>
+          </div>
           <div className="mx-auto mb-2 flex w-full max-w-[540px] gap-2">
             <button
               onClick={() => {
@@ -456,7 +451,7 @@ export default function Dream9Page() {
           </div>
 
           {mode === "shirt" && showSizePicker && (
-            <div className="mx-auto mb-3 grid w-full max-w-[540px] grid-cols-4 gap-2">
+            <div className="mx-auto -mt-3 mb-0 grid w-full max-w-[540px] grid-cols-4 gap-2">
               {(["S", "M", "L", "XL"] as const).map((size) => (
                 <button
                   key={size}
@@ -729,18 +724,6 @@ export default function Dream9Page() {
                 </div>
               )}
              </div>
-
-            <button
-              onClick={downloadPreview}
-              disabled={!allSlotsFilled || isMakingDesign}
-              className={`mt-4 w-full py-4 text-sm font-black transition active:scale-[0.97] ${
-                allSlotsFilled && !isMakingDesign
-                  ? "bg-white text-black hover:bg-white/90"
-                  : "cursor-not-allowed bg-white/10 text-white/40"
-              }`}
-            >
-              Download Preview
-            </button>
           </div>
         </section>
       </div>
