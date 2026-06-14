@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { toPng } from "html-to-image";
 import cars from "../../data/cars.json";
 
@@ -97,7 +97,6 @@ export default function Dream9Page() {
     day: "numeric",
     year: "numeric",
   });
-
   const [mode, setMode] = useState<"poster" | "shirt">("shirt");
   const [query, setQuery] = useState("");
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
@@ -107,13 +106,13 @@ export default function Dream9Page() {
       .sort(() => Math.random() - 0.5)
       .slice(0, 9);
   }
-  const [slots, setSlots] = useState<(Car | null)[]>(getRandomDream9);
-  const [draggedSlot, setDraggedSlot] = useState<number | null>(null);
-  const [sortByValue, setSortByValue] = useState(true);
+  const [slots, setSlots] = useState<(Car | null)[]>(Array(9).fill(null));
+  useEffect(() => {
+    setSlots(getRandomDream9());
+  }, []);
   const [showSizePicker, setShowSizePicker] = useState(false);
   const [shirtSize, setShirtSize] = useState<"S" | "M" | "L" | "XL">("L");
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
-  const [movingSlot, setMovingSlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
 
   const allSlotsFilled = slots.every((slot) => slot !== null);
@@ -166,9 +165,7 @@ export default function Dream9Page() {
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
-    setMovingSlot(null);
     setDeleteReadySlot(null);
-    setSortByValue(true);
   }
 
   function clearDream9() {
@@ -176,11 +173,8 @@ export default function Dream9Page() {
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
-    setMovingSlot(null);
     setDeleteReadySlot(null);
-    setSortByValue(false);
   }
-
   function addCarToTargetSlot(car: Car) {
     setSlots((current) => {
       const next = [...current];
@@ -204,60 +198,29 @@ export default function Dream9Page() {
   }
 
   function selectSlot(index: number) {
-    const car = slots[index];
+    const car = displaySlots[index];
 
-    if (movingSlot !== null) {
-      if (movingSlot === index) {
-        setSlots((current) => {
-          const next = [...current];
-          next[index] = null;
-          return next;
-        });
-
-        setMovingSlot(null);
+    if (car) {
+      if (deleteReadySlot === index) {
+        setSlots((current) =>
+          current.filter((slot) => slot?.id !== car.id)
+        );
         setDeleteReadySlot(null);
         return;
       }
 
-      setSortByValue(false);
-      moveSlot(movingSlot, index);
-      setMovingSlot(null);
-      setDeleteReadySlot(null);
-      return;
-    }
-
-    if (car) {
-      setSortByValue(false);
-      setMovingSlot(index);
       setDeleteReadySlot(index);
 
       setTimeout(() => {
-        setMovingSlot((current) => (current === index ? null : current));
-        setDeleteReadySlot((current) => (current === index ? null : current));
+        setDeleteReadySlot((current) =>
+          current === index ? null : current
+        );
       }, 3000);
 
       return;
     }
 
     setSelectedSlot(index);
-  }
-
-  function moveSlot(fromIndex: number, toIndex: number) {
-    if (fromIndex === toIndex) return;
-
-    setSlots((current) => {
-      const next = [...current];
-
-      const fromCar = next[fromIndex];
-      const toCar = next[toIndex];
-
-      next[toIndex] = fromCar;
-      next[fromIndex] = toCar;
-
-      return next;
-    });
-
-    setSelectedSlot(toIndex);
   }
 
   function waitForPosterImages(node: HTMLElement) {
@@ -351,40 +314,40 @@ export default function Dream9Page() {
   }
 
   const displaySlots = useMemo(() => {
-    if (!sortByValue) return slots;
-
     const carsOnly = slots.filter((car): car is Car => car !== null);
     carsOnly.sort((a, b) => a.price - b.price);
 
     return [...carsOnly, ...Array(9 - carsOnly.length).fill(null)];
-  }, [slots, sortByValue]);
+  }, [slots]);
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
       <div className="mx-auto grid w-full max-w-7xl gap-6 lg:grid-cols-[420px_1fr] lg:gap-8">
         <section className="order-1 min-w-0 overflow-hidden lg:order-2">
-          <div className="mx-auto mb-2 flex w-full max-w-[540px] gap-2">
+         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
+          <div className="grid grid-cols-2 gap-2">
             <button
               onClick={shuffleDream9}
-              className="flex-1 bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
             >
               Shuffle
             </button>
 
             <button
               onClick={clearDream9}
-              className="flex-1 bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
             >
               Clear
             </button>
           </div>
-          <div className="mx-auto mb-2 flex w-full max-w-[540px] gap-2">
+
+          <div className="grid grid-cols-2 gap-2">
             <button
               onClick={() => {
                 setMode("shirt");
                 setShowSizePicker(false);
               }}
-              className={`flex-1 px-5 py-4 text-sm font-black transition ${
+              className={`px-5 py-4 text-sm font-black transition ${
                 mode === "shirt"
                   ? "bg-red-600 text-white"
                   : "bg-white/10 text-white hover:bg-white/15"
@@ -398,7 +361,7 @@ export default function Dream9Page() {
                 setMode("poster");
                 setShowSizePicker(false);
               }}
-              className={`flex-1 px-5 py-4 text-sm font-black transition ${
+              className={`px-5 py-4 text-sm font-black transition ${
                 mode === "poster"
                   ? "bg-red-600 text-white"
                   : "bg-white/10 text-white hover:bg-white/15"
@@ -408,50 +371,37 @@ export default function Dream9Page() {
             </button>
           </div>
 
-          <div className="mx-auto mb-3 flex w-full max-w-[540px] gap-2">
-            <button
-              onClick={makePoster}
-              disabled={!allSlotsFilled || isMakingDesign}
-              className={`flex-1 py-4 text-sm font-black transition active:scale-[0.97] ${
-                isMakingDesign
-                  ? "bg-red-700 text-white"
-                  : allSlotsFilled
-                  ? "animate-pulse bg-red-600 text-white hover:bg-red-700"
-                  : "cursor-not-allowed bg-white/10 text-white"
-              }`}
-            >
-              {isMakingDesign ? (
-                <span className="inline-flex items-center justify-center gap-2">
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
-                  Building...
-                </span>
-              ) : allSlotsFilled ? (
-                mode === "poster" ? (
-                  "Make Poster"
-                ) : showSizePicker ? (
-                  `Make Shirt - ${shirtSize}`
-                ) : (
-                  "Choose Shirt Size"
-                )
+          <button
+            onClick={makePoster}
+            disabled={!allSlotsFilled || isMakingDesign}
+            className={`w-full py-4 text-sm font-black transition active:scale-[0.97] ${
+              isMakingDesign
+                ? "bg-red-700 text-white"
+                : allSlotsFilled
+                ? "animate-pulse bg-red-600 text-white hover:bg-red-700"
+                : "cursor-not-allowed bg-white/10 text-white"
+            }`}
+          >
+            {isMakingDesign ? (
+              <span className="inline-flex items-center justify-center gap-2">
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+                Building...
+              </span>
+            ) : allSlotsFilled ? (
+              mode === "poster" ? (
+                "Make Poster"
+              ) : showSizePicker ? (
+                `Make Shirt - ${shirtSize}`
               ) : (
-                "Fill all 9 slots"
-              )}
-            </button>
-
-            <button
-              onClick={() => setSortByValue((v) => !v)}
-              className={`w-[120px] py-4 text-xs font-black transition ${
-                sortByValue
-                  ? "bg-red-600 text-white hover:bg-red-700"
-                  : "bg-white/10 text-white hover:bg-white/15"
-              }`}
-            >
-              Sort: {sortByValue ? "ON" : "OFF"}
-            </button>
-          </div>
+                "Choose Shirt Size"
+              )
+            ) : (
+              "Fill all 9 slots"
+            )}
+          </button>
 
           {mode === "shirt" && showSizePicker && (
-            <div className="mx-auto -mt-3 mb-0 grid w-full max-w-[540px] grid-cols-4 gap-2">
+            <div className="grid grid-cols-4 gap-2">
               {(["S", "M", "L", "XL"] as const).map((size) => (
                 <button
                   key={size}
@@ -467,7 +417,7 @@ export default function Dream9Page() {
               ))}
             </div>
           )}
-
+        </div>
           <div className="mx-auto w-full max-w-[540px] overflow-hidden">
             <div
               ref={posterRef}
@@ -501,36 +451,14 @@ export default function Dream9Page() {
                       <button
                         key={index}
                         onClick={() => selectSlot(index)}
-                        draggable={car !== null}
-                        onDragStart={(e) => {
-                          if (!car) return;
-
-                          setSortByValue(false);
-                          setDraggedSlot(index);
-
-                          e.dataTransfer.effectAllowed = "move";
-                        }}
-                        onDragOver={(e) => {
-                          e.preventDefault();
-                          e.dataTransfer.dropEffect = "move";
-                        }}
-                        onDrop={(e) => {
-                          e.preventDefault();
-
-                          if (draggedSlot === null) return;
-
-                          moveSlot(draggedSlot, index);
-                          setDraggedSlot(null);
-                        }}
-                        onDragEnd={() => setDraggedSlot(null)}
                         style={{
                           backgroundColor: classTint(type),
                         }}
                         className={`aspect-square overflow-hidden border p-0 transition ${
-                          movingSlot === index
+                          selectedSlot === index
                             ? "border-[3px] border-red-600"
                             : "border border-black"
-                        } ${draggedSlot === index ? "opacity-40" : ""}`}
+                        }`}
                       >
                         {car ? (
                           <div className="relative h-full w-full overflow-hidden">
@@ -542,13 +470,10 @@ export default function Dream9Page() {
                               loading="eager"
                               className="absolute left-1/2 top-1/2 w-[200%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
                             />
-                            {movingSlot !== null && car && (
+
+                            {deleteReadySlot === index && (
                               <div className="absolute inset-0 flex items-center justify-center bg-black/35">
-                                {movingSlot === index ? (
-                                  <span className="text-[42px] font-black text-red-500">✕</span>
-                                ) : (
-                                  <span className="text-[38px] font-black text-white">↔</span>
-                                )}
+                                <span className="text-[42px] font-black text-red-500">✕</span>
                               </div>
                             )}
                           </div>
@@ -618,7 +543,7 @@ export default function Dream9Page() {
               </h1>
 
               <p className="mt-2 text-sm text-white/50">
-                Tap an empty slot to choose a car. Tap a filled slot, then tap another slot to move or swap.
+                Shuffle your Dream 9, or tap any slot to replace a car.
               </p>
             </div>
 
