@@ -502,7 +502,7 @@ export default function Dream9Page() {
                   {displaySlots.map((car, index) => (
                     <div
                       key={index}
-                      className={`min-w-0 overflow-hidden whitespace-nowrap text-[clamp(5px,1.45vw,8px)] ${
+                      className={`min-w-0 overflow-hidden whitespace-nowrap text-[clamp(5px,1.45vw,7.8px)] ${
                         index % 3 === 0
                           ? "text-left"
                           : index % 3 === 1
@@ -510,13 +510,7 @@ export default function Dream9Page() {
                           : "text-right"
                       }`}
                     >
-                      {car && (
-                        <>
-                          {car.model}{" "}
-                          <span className="text-[1.25em]">♠</span>
-                          {car.price.toLocaleString()}
-                        </>
-                      )}
+                      {car && <>{car.model}</>}
                     </div>
                   ))}
                 </div>
