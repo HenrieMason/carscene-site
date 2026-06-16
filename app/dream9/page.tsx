@@ -426,10 +426,9 @@ export default function Dream9Page() {
           )}
         </div>
           <div className="mx-auto w-full max-w-[540px] overflow-hidden">
-            <div className="origin-top-left w-[540px] scale-[calc((100vw-32px)/540)] sm:scale-100">
-              <div
-                ref={posterRef}
-                className={`w-[540px] text-black ${
+            <div
+              ref={posterRef}
+              className={`w-full text-black ${
                 mode === "poster"
                   ? "aspect-[3/4] bg-white p-[5%]"
                   : "aspect-[4494/5097] bg-white p-[6%]"
@@ -532,7 +531,6 @@ export default function Dream9Page() {
                     />
                   </div>
                 )}
-                </div>
               </div>
             </div>
           </div>
