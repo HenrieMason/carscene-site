@@ -494,22 +494,26 @@ export default function Dream9Page() {
                 </div>
 
                 <div
-                  className={`mx-auto grid grid-cols-3 gap-x-[1%] gap-y-[5px] pt-[2.5%] font-black leading-none text-black ${
+                  className={`mx-auto grid grid-cols-3 gap-x-[1%] pt-[2.5%] font-black leading-none text-black ${
                     mode === "shirt" ? "w-[99%]" : "w-full"
                   }`}
                 >
-                  {displaySlots.map((car, index) => (
+                  {[0, 1, 2].map((col) => (
                     <div
-                      key={index}
-                      className={`min-w-0 overflow-hidden whitespace-nowrap text-[clamp(5px,1.45vw,7.8px)] md:text-[7.8px] ${
-                        index % 3 === 0
-                          ? "text-left"
-                          : index % 3 === 1
-                          ? "text-center"
-                          : "text-right"
+                      key={col}
+                      className={`flex min-w-0 flex-col gap-[5px] text-[clamp(5px,1.45vw,7.8px)] md:text-[7.8px] ${
+                        col === 0 ? "text-left" : col === 1 ? "text-center" : "text-right"
                       }`}
                     >
-                      {car && <>{car.model}</>}
+                      {[0, 1, 2].map((row) => {
+                        const car = displaySlots[row * 3 + col];
+
+                        return (
+                          <div key={row} className="min-w-0 overflow-hidden whitespace-nowrap">
+                            {car?.model}
+                          </div>
+                        );
+                      })}
                     </div>
                   ))}
                 </div>
