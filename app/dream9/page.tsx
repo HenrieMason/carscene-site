@@ -551,7 +551,7 @@ export default function Dream9Page() {
           <p className="text-center text-xs font-bold text-white/55">
             {mode === "shirt" && showSizePicker
               ? "Select shirt size."
-              : "Pick your 9 favorite cars below."}
+              : "What are your 9 favorite cars?"}
           </p>
 
           {mode === "shirt" && showSizePicker && (
