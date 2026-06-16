@@ -327,10 +327,12 @@ export default function Dream9Page() {
     return (
       <div
         className={`w-full text-black ${
-          mode === "poster"
-            ? "aspect-[3/4] bg-white p-[5%]"
-            : "aspect-[4494/5097] bg-white p-[6%]"
-        }`}
+          exportMode
+            ? "h-full bg-white"
+            : mode === "poster"
+            ? "aspect-[3/4] bg-white"
+            : "aspect-[4494/5097] bg-white"
+        } ${mode === "poster" ? "p-[5%]" : "p-[6%]"}`}
       >
         <div className="flex h-full flex-col">
           <div className="pb-[0%] text-center">
@@ -668,8 +670,14 @@ export default function Dream9Page() {
           </div>
         </section>
       </div>
-      <div className="fixed left-[-9999px] top-0">
-        <div ref={exportRef} className="w-[540px]">
+      <div className="pointer-events-none fixed left-0 top-0 opacity-0">
+        <div
+          ref={exportRef}
+          style={{
+            width: "540px",
+            height: mode === "poster" ? "720px" : "612.45px",
+          }}
+        >
           <Dream9Design exportMode />
         </div>
       </div>
