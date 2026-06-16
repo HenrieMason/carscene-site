@@ -79,6 +79,32 @@ function classTint(type: string) {
   }
 }
 
+function FitText({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    let size = 8;
+    el.style.fontSize = `${size}px`;
+
+    while (el.scrollWidth > el.clientWidth && size > 4.5) {
+      size -= 0.25;
+      el.style.fontSize = `${size}px`;
+    }
+  }, [children]);
+
+  return (
+    <div
+      ref={ref}
+      className="min-w-0 overflow-hidden whitespace-nowrap font-black leading-none"
+    >
+      {children}
+    </div>
+  );
+}
+
 export default function Dream9Page() {
   const allCars = cars as Car[];
   const posterRef = useRef<HTMLDivElement>(null);
@@ -390,9 +416,9 @@ export default function Dream9Page() {
               </span>
             ) : allSlotsFilled ? (
               mode === "poster" ? (
-                "Make Poster"
+                "Buy Poster - $21.99"
               ) : showSizePicker ? (
-                `Make Shirt - ${shirtSize}`
+                "Buy Shirt - $32.99"
               ) : (
                 "Choose Shirt Size"
               )
@@ -400,6 +426,12 @@ export default function Dream9Page() {
               "Fill all 9 slots"
             )}
           </button>
+
+          <p className="text-center text-xs font-bold text-white/55">
+            {mode === "shirt" && showSizePicker
+              ? "Select shirt size."
+              : "Pick your 9 favorite cars below."}
+          </p>
 
           {mode === "shirt" && showSizePicker && (
             <div className="grid grid-cols-4 gap-2">
@@ -505,11 +537,11 @@ export default function Dream9Page() {
                       }`}
                     >
                       {car && (
-                        <>
+                        <FitText>
                           {car.model}{" "}
                           <span className="text-[1.25em]">♠</span>
                           {car.price.toLocaleString()}
-                        </>
+                        </FitText>
                       )}
                     </div>
                   ))}
