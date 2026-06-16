@@ -79,37 +79,6 @@ function classTint(type: string) {
   }
 }
 
-function FitText({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    let size = 8;
-    el.style.fontSize = `${size}px`;
-
-    while (el.scrollWidth > el.clientWidth && size > 4.5) {
-      size -= 0.25;
-      el.style.fontSize = `${size}px`;
-    }
-  }, [children]);
-
-  return (
-    <div
-      ref={ref}
-      style={{
-        fontFamily: "Arial, Helvetica, sans-serif",
-        fontWeight: 900,
-        lineHeight: 1,
-      }}
-      className="min-w-0 overflow-hidden whitespace-nowrap"
-    >
-      {children}
-    </div>
-  );
-}
-
 export default function Dream9Page() {
   const allCars = cars as Car[];
   const posterRef = useRef<HTMLDivElement>(null);
@@ -468,10 +437,8 @@ export default function Dream9Page() {
               <div className="flex h-full flex-col">
                 <div className="pb-[0%] text-center">
                   <div
-                    className="text-[68px] italic leading-none"
+                    className="text-[68px] font-black italic leading-none"
                     style={{
-                      fontFamily: "Arial, Helvetica, sans-serif",
-                      fontWeight: 900,
                       transform: "skewX(-8deg)",
                       letterSpacing: "-0.04em",
                     }}
@@ -535,7 +502,7 @@ export default function Dream9Page() {
                   {displaySlots.map((car, index) => (
                     <div
                       key={index}
-                      className={`min-w-0 overflow-hidden whitespace-nowrap ${
+                      className={`min-w-0 overflow-hidden whitespace-nowrap text-[clamp(5px,1.45vw,8px)] ${
                         index % 3 === 0
                           ? "text-left"
                           : index % 3 === 1
@@ -544,11 +511,11 @@ export default function Dream9Page() {
                       }`}
                     >
                       {car && (
-                        <FitText>
+                        <>
                           {car.model}{" "}
                           <span className="text-[1.25em]">♠</span>
                           {car.price.toLocaleString()}
-                        </FitText>
+                        </>
                       )}
                     </div>
                   ))}
