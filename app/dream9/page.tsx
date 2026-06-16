@@ -93,11 +93,17 @@ export default function Dream9Page() {
     XL: "53417034547507",
   };
 
-  const today = new Date().toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
+  const [today, setToday] = useState("");
+
+  useEffect(() => {
+    setToday(
+      new Date().toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
+    );
+  }, []);
   const [mode, setMode] = useState<"poster" | "shirt">("shirt");
   const [query, setQuery] = useState("");
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
@@ -108,6 +114,7 @@ export default function Dream9Page() {
       .slice(0, 9);
   }
   const [slots, setSlots] = useState<(Car | null)[]>(Array(9).fill(null));
+
   useEffect(() => {
     setSlots(getRandomDream9());
   }, []);
@@ -115,6 +122,19 @@ export default function Dream9Page() {
   const [shirtSize, setShirtSize] = useState<"S" | "M" | "L" | "XL">("L");
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
+
+  const [showIntroPopup, setShowIntroPopup] = useState(false);
+
+  useEffect(() => {
+    const hasSeenPopup = localStorage.getItem("dream9-popup-seen");
+
+    setShowIntroPopup(true);
+  }, []);
+
+  function closeIntroPopup() {
+    localStorage.setItem("dream9-popup-seen", "true");
+    setShowIntroPopup(false);
+  }
 
   const allSlotsFilled = slots.every((slot) => slot !== null);
 
@@ -676,6 +696,29 @@ export default function Dream9Page() {
           </div>
         </section>
       </div>
+
+      {showIntroPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 px-5">
+          <div className="w-full max-w-sm border border-white/10 bg-[#111] p-6 text-center shadow-2xl">
+            <h2 className="text-2xl font-black tracking-tight text-white">
+              Customize your Dream 9
+            </h2>
+
+            <div className="mt-4 space-y-2 text-left text-sm font-bold leading-relaxed text-white/70">
+              <p>• Double-tap a car to remove it.</p>
+              <p>• Scroll down to search for cars.</p>
+              <p>• Build a T-Shirt or Poster.</p>
+            </div>
+
+            <button
+              onClick={closeIntroPopup}
+              className="mt-6 w-full bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
+            >
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
       <div className="pointer-events-none fixed left-0 top-0 opacity-0">
         <div
           ref={exportRef}
