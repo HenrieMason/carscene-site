@@ -528,7 +528,7 @@ export default function Dream9Page() {
                   {displaySlots.map((car, index) => (
                     <div
                       key={index}
-                      className={`min-w-0 overflow-hidden whitespace-nowrap text-[clamp(5px,1.45vw,8px)] ${
+                      className={`min-w-0 overflow-hidden whitespace-nowrap text-[8px] ${
                         index % 3 === 0
                           ? "text-left"
                           : index % 3 === 1
