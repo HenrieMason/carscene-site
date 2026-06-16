@@ -425,9 +425,9 @@ export default function Dream9Page() {
             </div>
           )}
         <div className="mx-auto w-full max-w-[540px] overflow-hidden">
-  <div
-    ref={posterRef}
-    className={`w-full text-black ${
+          <div
+            ref={posterRef}
+            className={`w-full text-black ${
                 mode === "poster"
                   ? "aspect-[3/4] bg-white p-[5%]"
                   : "aspect-[4494/5097] bg-white p-[6%]"
@@ -495,13 +495,13 @@ export default function Dream9Page() {
 
                 <div
                   className={`mx-auto grid grid-cols-3 gap-x-[1%] gap-y-[5px] pt-[2.5%] font-black leading-none text-black ${
-  mode === "shirt" ? "w-[99%]" : "w-full"
-}`}
+                    mode === "shirt" ? "w-[99%]" : "w-full"
+                  }`}
                 >
                   {displaySlots.map((car, index) => (
                     <div
                       key={index}
-                      className={`min-w-0 overflow-hidden whitespace-nowrap text-[clamp(5px,1.45vw,7.8px)] ${
+                      className={`min-w-0 overflow-hidden whitespace-nowrap text-[clamp(5px,1.45vw,7.8px)] md:text-[7.8px] ${
                         index % 3 === 0
                           ? "text-left"
                           : index % 3 === 1
