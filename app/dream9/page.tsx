@@ -242,23 +242,28 @@ export default function Dream9Page() {
   async function makePoster() {
     if (!posterRef.current || !allSlotsFilled || isMakingDesign) return;
 
+    const node = posterRef.current;
+    const oldWidth = node.style.width;
+    const oldMaxWidth = node.style.maxWidth;
+
     try {
       const isShirt = mode === "shirt";
       if (isShirt && !showSizePicker) {
         setShowSizePicker(true);
         return;
       }
+
       setIsMakingDesign(true);
 
-      const node = posterRef.current;
-      const rect = node.getBoundingClientRect();
-
       const exportWidth = isShirt ? 4494 : 3600;
+
+      node.style.width = "540px";
+      node.style.maxWidth = "540px";
+
+      const rect = node.getBoundingClientRect();
       const pixelRatio = exportWidth / rect.width;
 
       await waitForPosterImages(node);
-
-      // Mobile Safari/Chrome sometimes needs one extra paint frame
       await new Promise((resolve) => setTimeout(resolve, 500));
 
       const dataUrl = await toPng(node, {
@@ -292,8 +297,8 @@ export default function Dream9Page() {
 
       const designUrl = cloudinaryData.secure_url;
       const variantId = isShirt
-      ? SHIRT_VARIANT_IDS[shirtSize]
-      : POSTER_VARIANT_ID;
+        ? SHIRT_VARIANT_IDS[shirtSize]
+        : POSTER_VARIANT_ID;
 
       const checkoutUrl =
         `${SHOPIFY_STORE_URL}/cart/add?id=${variantId}` +
@@ -307,10 +312,13 @@ export default function Dream9Page() {
         )}`;
 
       window.location.href = checkoutUrl + "&return_to=/checkout";
-
     } catch (error) {
       console.error(error);
       alert("Failed to create design.");
+    } finally {
+      node.style.width = oldWidth;
+      node.style.maxWidth = oldMaxWidth;
+      setIsMakingDesign(false);
     }
   }
 
