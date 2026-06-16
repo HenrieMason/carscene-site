@@ -494,7 +494,7 @@ export default function Dream9Page() {
                 </div>
 
                 <div
-                  className={`mx-auto grid grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-none text-black ${
+                  className={`mx-auto grid grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1.25] text-black ${
                     mode === "shirt" ? "w-[95%]" : "w-full"
                   }`}
                 >
