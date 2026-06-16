@@ -603,7 +603,7 @@ export default function Dream9Page() {
                       />
 
                       <div className="min-w-0 flex-1 overflow-hidden">
-                        <div className="truncate font-black">
+                        <div className="line-clamp-2 font-black leading-tight">
                           {car.brand} {car.model}
                         </div>
 
@@ -645,7 +645,7 @@ export default function Dream9Page() {
                         />
 
                         <div className="min-w-0 flex-1 overflow-hidden">
-                          <div className="truncate font-black">{car.model}</div>
+                          <div className="line-clamp-2 font-black leading-tight">{car.model}</div>
 
                           <div className="text-sm text-black/60">
                             ♠{car.price.toLocaleString()}
