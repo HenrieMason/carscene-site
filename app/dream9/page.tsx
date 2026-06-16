@@ -98,7 +98,12 @@ function FitText({ children }: { children: React.ReactNode }) {
   return (
     <div
       ref={ref}
-      className="min-w-0 overflow-hidden whitespace-nowrap font-black leading-none"
+      style={{
+        fontFamily: "Arial, Helvetica, sans-serif",
+        fontWeight: 900,
+        lineHeight: 1,
+      }}
+      className="min-w-0 overflow-hidden whitespace-nowrap"
     >
       {children}
     </div>
@@ -463,8 +468,10 @@ export default function Dream9Page() {
               <div className="flex h-full flex-col">
                 <div className="pb-[0%] text-center">
                   <div
-                    className="text-[68px] font-black italic leading-none"
+                    className="text-[68px] italic leading-none"
                     style={{
+                      fontFamily: "Arial, Helvetica, sans-serif",
+                      fontWeight: 900,
                       transform: "skewX(-8deg)",
                       letterSpacing: "-0.04em",
                     }}
