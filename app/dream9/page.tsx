@@ -82,6 +82,7 @@ function classTint(type: string) {
 export default function Dream9Page() {
   const allCars = cars as Car[];
   const posterRef = useRef<HTMLDivElement>(null);
+  const exportRef = useRef<HTMLDivElement>(null);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const POSTER_VARIANT_ID = "53414631899443";
@@ -240,11 +241,9 @@ export default function Dream9Page() {
   }
   
   async function makePoster() {
-    if (!posterRef.current || !allSlotsFilled || isMakingDesign) return;
+    if (!exportRef.current || !allSlotsFilled || isMakingDesign) return;
 
-    const node = posterRef.current;
-    const oldWidth = node.style.width;
-    const oldMaxWidth = node.style.maxWidth;
+    const node = exportRef.current;
 
     try {
       const isShirt = mode === "shirt";
@@ -256,9 +255,6 @@ export default function Dream9Page() {
       setIsMakingDesign(true);
 
       const exportWidth = isShirt ? 4494 : 3600;
-
-      node.style.width = "540px";
-      node.style.maxWidth = "540px";
 
       const rect = node.getBoundingClientRect();
       const pixelRatio = exportWidth / rect.width;
@@ -316,8 +312,6 @@ export default function Dream9Page() {
       console.error(error);
       alert("Failed to create design.");
     } finally {
-      node.style.width = oldWidth;
-      node.style.maxWidth = oldMaxWidth;
       setIsMakingDesign(false);
     }
   }
@@ -328,6 +322,123 @@ export default function Dream9Page() {
 
     return [...carsOnly, ...Array(9 - carsOnly.length).fill(null)];
   }, [slots]);
+
+  function Dream9Design({ exportMode = false }: { exportMode?: boolean }) {
+    return (
+      <div
+        className={`w-full text-black ${
+          mode === "poster"
+            ? "aspect-[3/4] bg-white p-[5%]"
+            : "aspect-[4494/5097] bg-white p-[6%]"
+        }`}
+      >
+        <div className="flex h-full flex-col">
+          <div className="pb-[0%] text-center">
+            <div
+              className="text-[68px] font-black italic leading-none"
+              style={{
+                transform: "skewX(-8deg)",
+                letterSpacing: "-0.04em",
+              }}
+            >
+              Dream 9
+            </div>
+          </div>
+
+          <div
+            className={`mx-auto grid grid-cols-3 gap-0 ${
+              mode === "shirt" ? "w-[95%]" : "w-full"
+            }`}
+          >
+            {displaySlots.map((car, index) => {
+              const type = car ? classFromPrice(car.price) : "P";
+
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={exportMode ? undefined : () => selectSlot(index)}
+                  style={{ backgroundColor: classTint(type) }}
+                  className={`aspect-square overflow-hidden border p-0 transition ${
+                    !exportMode && selectedSlot === index
+                      ? "border-[3px] border-red-600"
+                      : "border border-black"
+                  }`}
+                >
+                  {car ? (
+                    <div className="relative h-full w-full overflow-hidden">
+                      <img
+                        src={car.image}
+                        alt={car.model}
+                        crossOrigin="anonymous"
+                        decoding="sync"
+                        loading="eager"
+                        className="absolute left-1/2 top-1/2 w-[200%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
+                      />
+
+                      {!exportMode && deleteReadySlot === index && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/35">
+                          <span className="text-[42px] font-black text-red-500">
+                            ✕
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="flex h-full items-center justify-center text-[clamp(8px,2vw,14px)] font-black text-black/35">
+                      Empty
+                    </div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          <div
+            className={`mx-auto grid grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1.25] text-black ${
+              mode === "shirt" ? "w-[95%]" : "w-full"
+            }`}
+          >
+            {displaySlots.map((car, index) => (
+              <div
+                key={index}
+                className={`min-w-0 overflow-hidden whitespace-nowrap ${
+                  exportMode
+                    ? "text-[7.8px]"
+                    : "text-[clamp(4.2px,1.25vw,7.8px)] lg:text-[7.8px]"
+                } ${
+                  index % 3 === 0
+                    ? "text-left"
+                    : index % 3 === 1
+                    ? "text-center"
+                    : "text-right"
+                }`}
+              >
+                {car && <>{car.model}</>}
+              </div>
+            ))}
+          </div>
+
+          {mode === "poster" && (
+            <div className="mt-auto flex items-end justify-between pt-[4%]">
+              <div className="self-end -translate-y-[2px] text-[clamp(10px,2.5vw,16px)] font-black text-black/45">
+                {today}
+              </div>
+
+              <img
+                src="/someday.png"
+                alt="Someday, one day."
+                crossOrigin="anonymous"
+                decoding="sync"
+                loading="eager"
+                className="mr-[-1%] translate-y-[5px] w-[50%] object-contain opacity-45"
+              />
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
@@ -432,116 +543,12 @@ export default function Dream9Page() {
               ))}
             </div>
           )}
+        </div>
         <div className="mx-auto w-full max-w-[540px] overflow-hidden">
-          <div
-            ref={posterRef}
-            className={`w-full text-black ${
-                mode === "poster"
-                  ? "aspect-[3/4] bg-white p-[5%]"
-                  : "aspect-[4494/5097] bg-white p-[6%]"
-              }`}
-            >
-              <div className="flex h-full flex-col">
-                <div className="pb-[0%] text-center">
-                  <div
-                    className="text-[68px] font-black italic leading-none"
-                    style={{
-                      transform: "skewX(-8deg)",
-                      letterSpacing: "-0.04em",
-                    }}
-                  >
-                    Dream 9
-                  </div>
-                </div>
-                <div
-                  className={`mx-auto grid grid-cols-3 gap-0 ${
-                    mode === "shirt" ? "w-[95%]" : "w-full"
-                  }`}
-                >
-                  {displaySlots.map((car, index) => {
-                    const type = car ? classFromPrice(car.price) : "P";
-
-                    return (
-                      <button
-                        key={index}
-                        onClick={() => selectSlot(index)}
-                        style={{
-                          backgroundColor: classTint(type),
-                        }}
-                        className={`aspect-square overflow-hidden border p-0 transition ${
-                          selectedSlot === index
-                            ? "border-[3px] border-red-600"
-                            : "border border-black"
-                        }`}
-                      >
-                        {car ? (
-                          <div className="relative h-full w-full overflow-hidden">
-                            <img
-                              src={car.image}
-                              alt={car.model}
-                              crossOrigin="anonymous"
-                              decoding="sync"
-                              loading="eager"
-                              className="absolute left-1/2 top-1/2 w-[200%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
-                            />
-
-                            {deleteReadySlot === index && (
-                              <div className="absolute inset-0 flex items-center justify-center bg-black/35">
-                                <span className="text-[42px] font-black text-red-500">✕</span>
-                              </div>
-                            )}
-                          </div>
-                        ) : (
-                          <div className="flex h-full items-center justify-center text-[clamp(8px,2vw,14px)] font-black text-black/35">
-                            Empty
-                          </div>
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <div
-                  className={`mx-auto grid grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1.25] text-black ${
-                    mode === "shirt" ? "w-[95%]" : "w-full"
-                  }`}
-                >
-                  {displaySlots.map((car, index) => (
-                    <div
-                      key={index}
-                      className={`min-w-0 overflow-hidden whitespace-nowrap text-[clamp(4.2px,1.25vw,7.8px)] lg:text-[7.8px] ${
-                        index % 3 === 0
-                          ? "text-left"
-                          : index % 3 === 1
-                          ? "text-center"
-                          : "text-right"
-                      }`}
-                    >
-                      {car && <>{car.model}</>}
-                    </div>
-                  ))}
-                </div>
-
-                {mode === "poster" && (
-                  <div className="mt-auto flex items-end justify-between pt-[4%]">
-                    <div className="self-end -translate-y-[2px] text-[clamp(10px,2.5vw,16px)] font-black text-black/45">
-                      {today}
-                    </div>
-
-                    <img
-                      src="/someday.png"
-                      alt="Someday, one day."
-                      crossOrigin="anonymous"
-                      decoding="sync"
-                      loading="eager"
-                      className="mr-[-1%] translate-y-[5px] w-[50%] object-contain opacity-45"
-                    />
-                  </div>
-                )}
-                </div>
-              </div>
-            </div>
+          <div ref={posterRef}>
+            <Dream9Design />
           </div>
+        </div>
         </section>
 
         <section className="order-2 min-w-0 lg:order-1">
@@ -660,6 +667,11 @@ export default function Dream9Page() {
              </div>
           </div>
         </section>
+      </div>
+      <div className="fixed left-[-9999px] top-0">
+        <div ref={exportRef} className="w-[540px]">
+          <Dream9Design exportMode />
+        </div>
       </div>
     </main>
   );
