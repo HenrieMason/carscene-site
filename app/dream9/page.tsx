@@ -423,7 +423,11 @@ export default function Dream9Page() {
 
           {mode === "poster" && (
             <div className="mt-auto flex items-end justify-between pt-[4%]">
-              <div className="self-end -translate-y-[2px] text-[clamp(10px,2.5vw,16px)] font-black text-black/45">
+              <div
+                className={`self-end -translate-y-[2px] font-black text-black/45 ${
+                  exportMode ? "text-[16px]" : "text-[clamp(10px,2.5vw,16px)]"
+                }`}
+              >
                 {today}
               </div>
 
@@ -433,7 +437,9 @@ export default function Dream9Page() {
                 crossOrigin="anonymous"
                 decoding="sync"
                 loading="eager"
-                className="mr-[-1%] translate-y-[5px] w-[50%] object-contain opacity-45"
+                className={`mr-[-1%] translate-y-[5px] object-contain opacity-45 ${
+                  exportMode ? "w-[50%]" : "w-[50%]"
+                }`}
               />
             </div>
           )}
