@@ -541,7 +541,7 @@ export default function Dream9Page() {
               ) : showSizePicker ? (
                 "Buy Shirt - $32.99"
               ) : (
-                "Choose Shirt Size"
+                "Select Shirt Size"
               )
             ) : (
               "Fill all 9 slots"
