@@ -574,12 +574,6 @@ export default function Dream9Page() {
               ))}
             </div>
           )}
-
-          <p className="text-center text-xs font-bold text-white/55">
-            {mode === "shirt"
-              ? `Selected size: ${shirtSize}`
-              : "18x24 poster"}
-          </p>
         </div>
         </section>
 
