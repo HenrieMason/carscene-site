@@ -216,6 +216,13 @@ export default function Dream9Page() {
     setSelectedBrand(null);
     setQuery("");
     setDeleteReadySlot(null);
+
+    setTimeout(() => {
+      posterRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
   }
 
   function selectSlot(index: number) {
