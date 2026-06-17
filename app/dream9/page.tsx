@@ -219,9 +219,14 @@ export default function Dream9Page() {
     setDeleteReadySlot(null);
 
     setTimeout(() => {
-      posterRef.current?.scrollIntoView({
+      const y =
+        instructionsRef.current!.getBoundingClientRect().top +
+        window.scrollY -
+        20;
+
+      window.scrollTo({
+        top: y,
         behavior: "smooth",
-        block: "start",
       });
     }, 100);
   }
@@ -258,9 +263,9 @@ export default function Dream9Page() {
 
     setTimeout(() => {
       const y =
-        instructionsRef.current!.getBoundingClientRect().top +
+        searchSectionRef.current!.getBoundingClientRect().top +
         window.scrollY -
-        20;
+        80;
 
       window.scrollTo({
         top: y,
