@@ -585,7 +585,7 @@ export default function Dream9Page() {
           <div className="min-w-0 overflow-hidden border border-white/10 bg-white/[0.04] p-4">
             <div className="mb-4">
               <h1 className="text-3xl font-black tracking-tight">
-                1596 Cars to Choose from...
+                Choose From 1,596 Cars
               </h1>
 
               <p className="mt-2 text-sm text-white/50">
