@@ -244,14 +244,9 @@ export default function Dream9Page() {
 
     setSelectedSlot(index);
 
-    setTimeout(() => {
-      searchInputRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-
+    requestAnimationFrame(() => {
       searchInputRef.current?.focus();
-    }, 50);
+    });
   }
 
   function waitForPosterImages(node: HTMLElement) {
@@ -519,7 +514,7 @@ export default function Dream9Page() {
 
         <div className="mx-auto mb-3 w-full max-w-[540px] text-center text-sm font-bold leading-relaxed text-white/55">
           <p>1. Double-tap a car to remove it.</p>
-          <p>2. Press empty box to replace.</p>
+          <p>2. Then press the empty box to replace it.</p>
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
