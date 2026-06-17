@@ -499,7 +499,7 @@ export default function Dream9Page() {
         <section className="order-1 min-w-0 overflow-hidden lg:order-2">
         <div className="mx-auto mb-4 w-full max-w-[540px] text-center">
           <h1 className="text-[34px] font-black leading-[0.95] tracking-tight sm:text-4xl">
-            Your 9 favorite cars.
+            <span style={{ color: "#dc2626" }}>Your 9 favorite cars.</span>
             <br />
             {mode === "shirt" ? "All on one shirt." : "All on one poster."}
           </h1>
