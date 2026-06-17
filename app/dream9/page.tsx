@@ -508,8 +508,8 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-3 w-full max-w-[540px] text-center text-sm font-bold leading-relaxed text-white/55">
-          <p>Double-tap a car to remove it.</p>
-          <p>Scroll down to search from 1,596 cars.</p>
+          <p>1. Double-tap a car to remove it.</p>
+          <p>2. Find new cars using search tool.</p>
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
