@@ -127,9 +127,7 @@ export default function Dream9Page() {
   const [showIntroPopup, setShowIntroPopup] = useState(false);
 
   useEffect(() => {
-    const hasSeenPopup = localStorage.getItem("dream9-popup-seen");
-
-    setShowIntroPopup(true);
+    setShowIntroPopup(false);
   }, []);
 
   function closeIntroPopup() {
@@ -251,9 +249,14 @@ export default function Dream9Page() {
     searchInputRef.current?.focus();
 
     setTimeout(() => {
-      searchSectionRef.current?.scrollIntoView({
+      const y =
+        searchSectionRef.current!.getBoundingClientRect().top +
+        window.scrollY -
+        60;
+
+      window.scrollTo({
+        top: y,
         behavior: "smooth",
-        block: "center",
       });
     }, 100);
   }
