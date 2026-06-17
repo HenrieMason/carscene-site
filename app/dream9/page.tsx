@@ -507,9 +507,10 @@ export default function Dream9Page() {
           </button>
         </div>
 
-        <p className="mt-2 text-center text-sm font-bold text-white/55">
-          Double-tap a car to remove it.
-        </p>
+        <div className="mx-auto mb-3 w-full max-w-[540px] text-center text-sm font-bold leading-relaxed text-white/55">
+          <p>Double-tap a car to remove it.</p>
+          <p>Scroll down to search from 1,596 cars.</p>
+        </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
           <div ref={posterRef}>
@@ -585,7 +586,7 @@ export default function Dream9Page() {
           <div className="min-w-0 overflow-hidden border border-white/10 bg-white/[0.04] p-4">
             <div className="mb-4">
               <h1 className="text-3xl font-black tracking-tight">
-                Choose From 1,596 Cars
+                Search 1,596 Cars
               </h1>
 
               <p className="mt-2 text-sm text-white/50">
