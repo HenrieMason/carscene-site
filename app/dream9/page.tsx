@@ -243,10 +243,18 @@ export default function Dream9Page() {
     }
 
     setSelectedSlot(index);
+    setSelectedBrand(null);
+    setQuery("");
+    setDeleteReadySlot(null);
 
-    requestAnimationFrame(() => {
-      searchInputRef.current?.focus();
-    });
+    searchInputRef.current?.focus();
+
+    setTimeout(() => {
+      searchInputRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }, 50);
   }
 
   function waitForPosterImages(node: HTMLElement) {
