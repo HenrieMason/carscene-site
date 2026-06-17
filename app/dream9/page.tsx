@@ -472,6 +472,54 @@ export default function Dream9Page() {
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
       <div className="mx-auto grid w-full max-w-7xl gap-6 lg:grid-cols-[420px_1fr] lg:gap-8">
         <section className="order-1 min-w-0 overflow-hidden lg:order-2">
+        <div className="mx-auto mb-4 w-full max-w-[540px] text-center">
+          <h1 className="text-[34px] font-black leading-[0.95] tracking-tight sm:text-4xl">
+            Your 9 favorite cars.
+            <br />
+            {mode === "shirt" ? "All on one shirt." : "All on one poster."}
+          </h1>
+
+          <p className="mt-3 text-sm font-bold text-white/55">
+            Customize your Dream 9 and order it as a premium T-shirt or poster.
+          </p>
+        </div>
+
+        <div className="mx-auto mb-4 grid w-full max-w-[540px] grid-cols-2 gap-2">
+          <button
+            onClick={() => {
+              setMode("shirt");
+              setShowSizePicker(false);
+            }}
+            className={`px-5 py-4 text-sm font-black transition ${
+              mode === "shirt"
+                ? "bg-red-600 text-white"
+                : "bg-white/10 text-white hover:bg-white/15"
+            }`}
+          >
+            Shirt
+          </button>
+
+          <button
+            onClick={() => {
+              setMode("poster");
+              setShowSizePicker(false);
+            }}
+            className={`px-5 py-4 text-sm font-black transition ${
+              mode === "poster"
+                ? "bg-red-600 text-white"
+                : "bg-white/10 text-white hover:bg-white/15"
+            }`}
+          >
+            Poster
+          </button>
+        </div>
+
+        <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
+          <div ref={posterRef}>
+            <Dream9Design />
+          </div>
+        </div>
+
          <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
           <div className="grid grid-cols-2 gap-2">
             <button
@@ -486,36 +534,6 @@ export default function Dream9Page() {
               className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
             >
               Clear
-            </button>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              onClick={() => {
-                setMode("shirt");
-                setShowSizePicker(false);
-              }}
-              className={`px-5 py-4 text-sm font-black transition ${
-                mode === "shirt"
-                  ? "bg-red-600 text-white"
-                  : "bg-white/10 text-white hover:bg-white/15"
-              }`}
-            >
-              Shirt
-            </button>
-
-            <button
-              onClick={() => {
-                setMode("poster");
-                setShowSizePicker(false);
-              }}
-              className={`px-5 py-4 text-sm font-black transition ${
-                mode === "poster"
-                  ? "bg-red-600 text-white"
-                  : "bg-white/10 text-white hover:bg-white/15"
-              }`}
-            >
-              Poster
             </button>
           </div>
 
@@ -571,11 +589,6 @@ export default function Dream9Page() {
               ))}
             </div>
           )}
-        </div>
-        <div className="mx-auto w-full max-w-[540px] overflow-hidden">
-          <div ref={posterRef}>
-            <Dream9Design />
-          </div>
         </div>
         </section>
 
