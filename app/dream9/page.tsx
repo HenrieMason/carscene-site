@@ -118,7 +118,6 @@ export default function Dream9Page() {
   useEffect(() => {
     setSlots(getRandomDream9());
   }, []);
-  const [showSizePicker, setShowSizePicker] = useState(false);
   const [shirtSize, setShirtSize] = useState<"S" | "M" | "L" | "XL">("L");
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
@@ -267,10 +266,6 @@ export default function Dream9Page() {
 
     try {
       const isShirt = mode === "shirt";
-      if (isShirt && !showSizePicker) {
-        setShowSizePicker(true);
-        return;
-      }
 
       setIsMakingDesign(true);
 
@@ -468,6 +463,68 @@ export default function Dream9Page() {
     );
   }
 
+  function ShirtMockupPreview() {
+    return (
+      <div className="relative left-1/2 top-[-130px] w-[1100px] max-w-none -translate-x-1/2">
+        <img
+          src="/Dream9Template.png"
+          alt="Dream 9 Shirt"
+          className="block w-full"
+        />
+
+        <div className="absolute left-1/2 top-[26.1%] w-[26.4%] -translate-x-1/2 text-black">
+          <div className="text-center text-[28px] font-black italic leading-none">
+            Dream 9
+          </div>
+
+          <div className="mt-1 grid grid-cols-3 gap-0">
+            {displaySlots.map((car, index) => {
+              const type = car ? classFromPrice(car.price) : "P";
+
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => selectSlot(index)}
+                  style={{ backgroundColor: classTint(type) }}
+                  className="aspect-square overflow-hidden border border-black p-0"
+                >
+                  {car && (
+                    <img
+                      src={car.image}
+                      alt={car.model}
+                      crossOrigin="anonymous"
+                      decoding="sync"
+                      loading="eager"
+                      className="h-full w-full object-cover"
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="mt-1 grid grid-cols-3 gap-x-1 text-[4px] font-black leading-tight">
+            {displaySlots.map((car, index) => (
+              <div
+                key={index}
+                className={`overflow-hidden whitespace-nowrap ${
+                  index % 3 === 0
+                    ? "text-left"
+                    : index % 3 === 1
+                    ? "text-center"
+                    : "text-right"
+                }`}
+              >
+                {car?.model}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
       <div className="mx-auto grid w-full max-w-7xl gap-6 lg:grid-cols-[420px_1fr] lg:gap-8">
@@ -488,7 +545,6 @@ export default function Dream9Page() {
           <button
             onClick={() => {
               setMode("shirt");
-              setShowSizePicker(false);
             }}
             className={`px-5 py-4 text-sm font-black transition ${
               mode === "shirt"
@@ -502,7 +558,6 @@ export default function Dream9Page() {
           <button
             onClick={() => {
               setMode("poster");
-              setShowSizePicker(false);
             }}
             className={`px-5 py-4 text-sm font-black transition ${
               mode === "poster"
@@ -514,9 +569,13 @@ export default function Dream9Page() {
           </button>
         </div>
 
-        <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
+        <div className="mx-auto mb-4 h-[700px] w-full max-w-[540px] overflow-hidden">
           <div ref={posterRef}>
-            <Dream9Design />
+            {mode === "shirt" ? (
+              <ShirtMockupPreview />
+            ) : (
+              <Dream9Design />
+            )}
           </div>
         </div>
 
@@ -556,29 +615,21 @@ export default function Dream9Page() {
             ) : allSlotsFilled ? (
               mode === "poster" ? (
                 "Buy Poster - $21.99"
-              ) : showSizePicker ? (
-                "Buy Shirt - $32.99"
               ) : (
-                "Select Shirt Size"
+                "Buy Shirt - $32.99"
               )
             ) : (
               "Fill all 9 slots"
             )}
           </button>
 
-          <p className="text-center text-xs font-bold text-white/55">
-            {mode === "shirt" && showSizePicker
-              ? "Select shirt size."
-              : "What are your 9 favorite cars?"}
-          </p>
-
-          {mode === "shirt" && showSizePicker && (
+          {mode === "shirt" && (
             <div className="grid grid-cols-4 gap-2">
               {(["S", "M", "L", "XL"] as const).map((size) => (
                 <button
                   key={size}
                   onClick={() => setShirtSize(size)}
-                  className={`py-3 text-sm font-black transition ${
+                  className={`py-4 text-sm font-black transition ${
                     shirtSize === size
                       ? "bg-red-600 text-white"
                       : "bg-white/10 text-white hover:bg-white/15"
@@ -589,6 +640,12 @@ export default function Dream9Page() {
               ))}
             </div>
           )}
+
+          <p className="text-center text-xs font-bold text-white/55">
+            {mode === "shirt"
+              ? `Selected size: ${shirtSize}`
+              : "18x24 poster"}
+          </p>
         </div>
         </section>
 
