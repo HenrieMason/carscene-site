@@ -85,6 +85,7 @@ export default function Dream9Page() {
   const exportRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSectionRef = useRef<HTMLDivElement>(null);
+  const instructionsRef = useRef<HTMLDivElement>(null);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const POSTER_VARIANT_ID = "53414631899443";
@@ -257,9 +258,9 @@ export default function Dream9Page() {
 
     setTimeout(() => {
       const y =
-        searchSectionRef.current!.getBoundingClientRect().top +
+        instructionsRef.current!.getBoundingClientRect().top +
         window.scrollY -
-        60;
+        20;
 
       window.scrollTo({
         top: y,
@@ -531,7 +532,10 @@ export default function Dream9Page() {
           </button>
         </div>
 
-        <div className="mx-auto mb-3 w-full max-w-[540px] text-center text-sm font-bold leading-relaxed text-white/55">
+        <div
+          ref={instructionsRef}
+          className="mx-auto mb-3 w-full max-w-[540px] text-center text-sm font-bold leading-relaxed text-white/55"
+        >
           <p>1. Double-tap a car to remove it.</p>
           <p>2. Press the empty box to replace it.</p>
         </div>
