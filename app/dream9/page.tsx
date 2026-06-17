@@ -84,6 +84,7 @@ export default function Dream9Page() {
   const posterRef = useRef<HTMLDivElement>(null);
   const exportRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchSectionRef = useRef<HTMLDivElement>(null);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const POSTER_VARIANT_ID = "53414631899443";
@@ -250,9 +251,9 @@ export default function Dream9Page() {
     searchInputRef.current?.focus();
 
     setTimeout(() => {
-      window.scrollTo({
-        top: document.body.scrollHeight,
+      searchSectionRef.current?.scrollIntoView({
         behavior: "smooth",
+        block: "center",
       });
     }, 100);
   }
@@ -596,7 +597,10 @@ export default function Dream9Page() {
         </section>
 
         <section className="order-2 min-w-0 lg:order-1">
-          <div className="min-w-0 overflow-hidden border border-white/10 bg-white/[0.04] p-4">
+          <div
+            ref={searchSectionRef}
+            className="min-w-0 overflow-hidden border border-white/10 bg-white/[0.04] p-4"
+          >
             <div className="mb-4">
               <h1 className="text-3xl font-black tracking-tight">
                 Search 1,596 Cars
