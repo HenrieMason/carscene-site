@@ -465,7 +465,7 @@ export default function Dream9Page() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
-      <div className="mx-auto grid w-full max-w-7xl gap-6 lg:grid-cols-[420px_1fr] lg:gap-8">
+      <div className="mx-auto grid w-full max-w-7xl gap-2 lg:grid-cols-[420px_1fr] lg:gap-8">
         <section className="order-1 min-w-0 overflow-hidden lg:order-2">
         <div className="mx-auto mb-4 w-full max-w-[540px] text-center">
           <h1 className="text-[34px] font-black leading-[0.95] tracking-tight sm:text-4xl">
@@ -475,7 +475,7 @@ export default function Dream9Page() {
           </h1>
 
           <p className="mt-3 text-sm font-bold text-white/55">
-            Customize your Dream 9 and order it as a premium T-shirt or poster.
+            Customize your Dream 9 premium T-shirt or poster.
           </p>
         </div>
 
@@ -581,11 +581,11 @@ export default function Dream9Page() {
           <div className="min-w-0 overflow-hidden border border-white/10 bg-white/[0.04] p-4">
             <div className="mb-4">
               <h1 className="text-3xl font-black tracking-tight">
-                Build Your Dream 9
+                1598 Cars to Choose from...
               </h1>
 
               <p className="mt-2 text-sm text-white/50">
-                Shuffle your Dream 9, or tap any slot to replace a car.
+                Before selecting a car, free space in the grid above.
               </p>
             </div>
 
