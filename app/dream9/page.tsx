@@ -643,7 +643,7 @@ export default function Dream9Page() {
               className="w-full border border-white/10 bg-white/10 px-4 py-3 text-white outline-none placeholder:text-white/40"
             />
 
-            <div className="mt-4 max-h-[60vh] overflow-auto pr-1">
+            <div className="mt-4 h-[360px] overflow-y-auto pr-1 sm:h-[60vh]">
               {query.trim() ? (
                 <div className="space-y-2">
                   {searchResults.map((car) => (
