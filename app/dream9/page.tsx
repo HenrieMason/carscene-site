@@ -646,7 +646,12 @@ export default function Dream9Page() {
             <div className="mt-4 h-[360px] overflow-y-auto pr-1 sm:h-[60vh]">
               {query.trim() ? (
                 <div className="space-y-2">
-                  {searchResults.map((car) => (
+                  {searchResults.length === 0 ? (
+                    <div className="flex h-[260px] items-center justify-center border border-white/10 bg-white/[0.04] text-center text-sm font-black text-white/40">
+                      No cars found
+                    </div>
+                  ) : (
+                    searchResults.map((car) => (
                     <button
                       key={car.id}
                       onClick={() => addCarToTargetSlot(car)}
@@ -674,7 +679,8 @@ export default function Dream9Page() {
                         </div>
                       </div>
                     </button>
-                  ))}
+                  ))
+                )}
                 </div>
               ) : selectedBrand ? (
                 <div>
