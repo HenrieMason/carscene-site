@@ -239,7 +239,7 @@ export default function Dream9Page() {
       const y =
         searchSectionRef.current!.getBoundingClientRect().top +
         window.scrollY -
-        80;
+        8;
 
       window.scrollTo({
         top: y,
