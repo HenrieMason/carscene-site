@@ -88,6 +88,7 @@ export default function Dream9Page() {
   const instructionsRef = useRef<HTMLDivElement>(null);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
+  const POSTER_VARIANT_ID = "53414631899443";
   const SHIRT_VARIANT_IDS = {
     S: "53417034449203",
     M: "53417034481971",
@@ -106,6 +107,7 @@ export default function Dream9Page() {
       })
     );
   }, []);
+  const [mode, setMode] = useState<"poster" | "shirt">("shirt");
   const [query, setQuery] = useState("");
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
@@ -196,20 +198,19 @@ export default function Dream9Page() {
   }
   function addCarToTargetSlot(car: Car) {
     setSlots((current) => {
-      const next = [...current];
+      const withoutEmptySlots = current.filter((slot): slot is Car => slot !== null);
 
-      const indexToReplace =
-        selectedSlot !== null
-          ? selectedSlot
-          : next.findIndex((slot) => slot === null);
-
-      if (indexToReplace === -1) {
-        next[8] = car;
-      } else {
-        next[indexToReplace] = car;
+      if (selectedSlot !== null && selectedSlot < withoutEmptySlots.length) {
+        const next = [...withoutEmptySlots];
+        next[selectedSlot] = car;
+        return next;
       }
 
-      return next;
+      if (withoutEmptySlots.length >= 9) {
+        return [...withoutEmptySlots.slice(0, 8), car];
+      }
+
+      return [...withoutEmptySlots, car];
     });
 
     setSelectedSlot(null);
@@ -231,6 +232,28 @@ export default function Dream9Page() {
   }
 
   function selectSlot(index: number) {
+    const car = displaySlots[index];
+
+    if (car) {
+      if (deleteReadySlot === index) {
+        setSlots((current) =>
+          current.filter((slot) => slot?.id !== car.id)
+        );
+        setDeleteReadySlot(null);
+        return;
+      }
+
+      setDeleteReadySlot(index);
+
+      setTimeout(() => {
+        setDeleteReadySlot((current) =>
+          current === index ? null : current
+        );
+      }, 3000);
+
+      return;
+    }
+
     setSelectedSlot(index);
     setSelectedBrand(null);
     setQuery("");
@@ -272,10 +295,11 @@ export default function Dream9Page() {
     const node = exportRef.current;
 
     try {
+      const isShirt = mode === "shirt";
 
       setIsMakingDesign(true);
 
-      const exportWidth = 4494;
+      const exportWidth = isShirt ? 4494 : 3600;
 
       const rect = node.getBoundingClientRect();
       const pixelRatio = exportWidth / rect.width;
@@ -313,14 +337,20 @@ export default function Dream9Page() {
       }
 
       const designUrl = cloudinaryData.secure_url;
-      const variantId = SHIRT_VARIANT_IDS[shirtSize];
+      const variantId = isShirt
+        ? SHIRT_VARIANT_IDS[shirtSize]
+        : POSTER_VARIANT_ID;
 
       const checkoutUrl =
         `${SHOPIFY_STORE_URL}/cart/add?id=${variantId}` +
         `&quantity=1` +
         `&properties[Dream 9 Design URL]=${encodeURIComponent(designUrl)}` +
-        `&properties[Dream 9 Product]=${encodeURIComponent("Shirt")}` +
-        `&properties[Dream 9 Size]=${encodeURIComponent(shirtSize)}`;
+        `&properties[Dream 9 Product]=${encodeURIComponent(
+          isShirt ? "Shirt" : "Poster"
+        )}` +
+        `&properties[Dream 9 Size]=${encodeURIComponent(
+          isShirt ? shirtSize : "18x24"
+        )}`;
 
       window.location.href = checkoutUrl + "&return_to=/checkout";
     } catch (error) {
@@ -338,16 +368,16 @@ export default function Dream9Page() {
     return [...carsOnly, ...Array(9 - carsOnly.length).fill(null)];
   }, [slots]);
 
-  const buttonSlots = useMemo(() => {
-    return [...slots, ...Array(9 - slots.length).fill(null)].slice(0, 9);
-  }, [slots]);
-
   function Dream9Design({ exportMode = false }: { exportMode?: boolean }) {
     return (
       <div
         className={`w-full text-black ${
-          exportMode ? "h-full bg-white" : "aspect-[4494/5097] bg-white"
-        } p-[6%]`}
+          exportMode
+            ? "h-full bg-white"
+            : mode === "poster"
+            ? "aspect-[3/4] bg-white"
+            : "aspect-[4494/5097] bg-white"
+        } ${mode === "poster" ? "p-[5%]" : "p-[6%]"}`}
       >
         <div className="flex h-full flex-col">
           <div className="pb-[0%] text-center">
@@ -363,7 +393,9 @@ export default function Dream9Page() {
           </div>
 
           <div
-            className="mx-auto grid w-[95%] grid-cols-3 gap-0"
+            className={`mx-auto grid grid-cols-3 gap-0 ${
+              mode === "shirt" ? "w-[95%]" : "w-full"
+            }`}
           >
             {displaySlots.map((car, index) => {
               const type = car ? classFromPrice(car.price) : "P";
@@ -410,9 +442,11 @@ export default function Dream9Page() {
           </div>
 
           <div
-            className="mx-auto grid w-[95%] grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1.25] text-black"
+            className={`mx-auto grid grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1.25] text-black ${
+              mode === "shirt" ? "w-[95%]" : "w-full"
+            }`}
           >
-            {buttonSlots.map((car, index) => (
+            {displaySlots.map((car, index) => (
               <div
                 key={index}
                 className={`min-w-0 overflow-hidden whitespace-nowrap ${
@@ -431,6 +465,29 @@ export default function Dream9Page() {
               </div>
             ))}
           </div>
+
+          {mode === "poster" && (
+            <div className="mt-auto flex items-end justify-between pt-[4%]">
+              <div
+                className={`self-end -translate-y-[2px] font-black text-black/45 ${
+                  exportMode ? "text-[16px]" : "text-[clamp(10px,2.5vw,16px)]"
+                }`}
+              >
+                {today}
+              </div>
+
+              <img
+                src="/someday.png"
+                alt="Someday, one day."
+                crossOrigin="anonymous"
+                decoding="sync"
+                loading="eager"
+                className={`mr-[-1%] translate-y-[5px] object-contain opacity-45 ${
+                  exportMode ? "w-[50%]" : "w-[50%]"
+                }`}
+              />
+            </div>
+          )}
         </div>
       </div>
     );
@@ -440,36 +497,54 @@ export default function Dream9Page() {
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
       <div className="mx-auto grid w-full max-w-7xl gap-2 lg:grid-cols-[420px_1fr] lg:gap-8">
         <section className="order-1 min-w-0 overflow-hidden lg:order-2">
-        <div
-          ref={instructionsRef}
-          className="mx-auto mb-4 w-full max-w-[540px] text-center"
-        >
+        <div className="mx-auto mb-4 w-full max-w-[540px] text-center">
           <h1 className="text-[34px] font-black leading-[0.95] tracking-tight sm:text-4xl">
             Your 9 favorite cars.
             <br />
-            <span className="text-red-600">All on one shirt.</span>
+            <span className="text-red-600">
+              {mode === "shirt" ? "All on one shirt." : "All on one poster."}
+            </span>
           </h1>
 
           <p className="mt-3 text-sm font-bold text-white/55">
-            Select your 9 favorite cars.
+            Customize your Dream 9 premium T-shirt or poster.
           </p>
+        </div>
 
-          <div className="mx-auto mt-4 grid w-full max-w-[540px] gap-2">
-            {slots.map((car, index) => (
-              <button
-                key={index}
-                type="button"
-                onClick={() => selectSlot(index)}
-                className={`w-full px-4 py-3 text-left text-sm font-black transition ${
-                  selectedSlot === index
-                    ? "bg-red-600 text-white"
-                    : "bg-white/10 text-white hover:bg-white/15"
-                }`}
-              >
-                {car ? `${car.brand} ${car.model}` : "Select a Car"}
-              </button>
-            ))}
-          </div>
+        <div className="mx-auto mb-4 grid w-full max-w-[540px] grid-cols-2 gap-2">
+          <button
+            onClick={() => {
+              setMode("shirt");
+            }}
+            className={`px-5 py-4 text-sm font-black transition ${
+              mode === "shirt"
+                ? "bg-red-600 text-white"
+                : "bg-white/10 text-white hover:bg-white/15"
+            }`}
+          >
+            Shirt
+          </button>
+
+          <button
+            onClick={() => {
+              setMode("poster");
+            }}
+            className={`px-5 py-4 text-sm font-black transition ${
+              mode === "poster"
+                ? "bg-red-600 text-white"
+                : "bg-white/10 text-white hover:bg-white/15"
+            }`}
+          >
+            Poster
+          </button>
+        </div>
+
+        <div
+          ref={instructionsRef}
+          className="mx-auto mb-3 w-full max-w-[540px] text-center text-sm font-bold leading-relaxed text-white/55"
+        >
+          <p>1. Double-tap a car to remove it.</p>
+          <p>2. Press the empty box to replace it.</p>
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
@@ -512,13 +587,18 @@ export default function Dream9Page() {
                 Building...
               </span>
             ) : allSlotsFilled ? (
-              "Buy Shirt - $32.99"
+              mode === "poster" ? (
+                "Buy Poster - $21.99"
+              ) : (
+                "Buy Shirt - $32.99"
+              )
             ) : (
               "Fill all 9 slots"
             )}
           </button>
 
-          <div className="grid grid-cols-4 gap-2">
+          {mode === "shirt" && (
+            <div className="grid grid-cols-4 gap-2">
               {(["S", "M", "L", "XL"] as const).map((size) => (
                 <button
                   key={size}
@@ -533,6 +613,7 @@ export default function Dream9Page() {
                 </button>
               ))}
             </div>
+          )}
         </div>
         </section>
 
@@ -691,7 +772,7 @@ export default function Dream9Page() {
           ref={exportRef}
           style={{
             width: "540px",
-            height: "612.45px",
+            height: mode === "poster" ? "720px" : "612.45px",
           }}
         >
           <Dream9Design exportMode />
