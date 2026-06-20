@@ -329,10 +329,16 @@ export default function Dream9Page() {
   }
 
   const displaySlots = useMemo(() => {
-    const carsOnly = slots.filter((car): car is Car => car !== null);
-    carsOnly.sort((a, b) => a.price - b.price);
+    const filledSlots = slots
+      .map((car, realIndex) => ({ car, realIndex }))
+      .filter((slot): slot is { car: Car; realIndex: number } => slot.car !== null)
+      .sort((a, b) => a.car.price - b.car.price);
 
-    return [...carsOnly, ...Array(9 - carsOnly.length).fill(null)];
+    const emptySlots = slots
+      .map((car, realIndex) => ({ car, realIndex }))
+      .filter((slot) => slot.car === null);
+
+    return [...filledSlots, ...emptySlots];
   }, [slots]);
 
   function Dream9Design({ exportMode = false }: { exportMode?: boolean }) {
@@ -358,14 +364,14 @@ export default function Dream9Page() {
           <div
             className="mx-auto grid w-[95%] grid-cols-3 gap-0"
           >
-            {displaySlots.map((car, index) => {
+            {displaySlots.map(({ car, realIndex }, index) => {
               const type = car ? classFromPrice(car.price) : "P";
 
               return (
                 <button
                   key={index}
                   type="button"
-                  onClick={exportMode ? undefined : () => selectSlot(index)}
+                  onClick={exportMode ? undefined : () => selectSlot(realIndex)}
                   style={{ backgroundColor: classTint(type) }}
                   className="aspect-square overflow-hidden border border-black p-0 transition"
                 >
@@ -401,7 +407,7 @@ export default function Dream9Page() {
           <div
             className="mx-auto grid w-[95%] grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1.25] text-black"
           >
-            {displaySlots.map((car, index) => (
+            {displaySlots.map(({ car, realIndex }, index) => (
               <div
                 key={index}
                 className={`min-w-0 overflow-hidden whitespace-nowrap ${
@@ -444,11 +450,11 @@ export default function Dream9Page() {
           </p>
 
           <div className="mx-auto mt-4 grid w-full max-w-[540px] gap-2">
-            {displaySlots.map((car, index) => (
+            {displaySlots.map(({ car, realIndex }, index) => (
               <button
                 key={index}
                 type="button"
-                onClick={() => selectSlot(index)}
+                onClick={() => selectSlot(realIndex)}
                 style={
                   car
                     ? {
