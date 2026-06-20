@@ -449,15 +449,30 @@ export default function Dream9Page() {
                 key={index}
                 type="button"
                 onClick={() => selectSlot(index)}
+                style={
+                  car
+                    ? {
+                        backgroundColor: classTint(classFromPrice(car.price)),
+                        color: "black",
+                      }
+                    : undefined
+                }
                 className={`w-full px-4 py-3 text-left text-sm font-black transition ${
-                  selectedSlot === index
-                    ? "bg-red-700 text-white"
-                    : car
-                    ? "bg-white/10 text-white hover:bg-white/15"
+                  car
+                    ? "hover:brightness-95"
                     : "bg-red-600 text-white hover:bg-red-700"
                 }`}
               >
-                {car ? `${car.brand} ${car.model}` : "Select a Car"}
+                {car ? (
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="min-w-0 truncate">{car.model}</span>
+                    <span className="shrink-0 text-black/60">
+                      ♠{car.price.toLocaleString()}
+                    </span>
+                  </div>
+                ) : (
+                  "Select a Car"
+                )}
               </button>
             ))}
           </div>
