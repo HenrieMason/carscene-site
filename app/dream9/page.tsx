@@ -121,6 +121,9 @@ export default function Dream9Page() {
   const [isMakingDesign, setIsMakingDesign] = useState(false);
 
   const [showIntroPopup, setShowIntroPopup] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
 
   useEffect(() => {
     setShowIntroPopup(false);
@@ -246,6 +249,38 @@ export default function Dream9Page() {
         behavior: "smooth",
       });
     }, 100);
+  }
+
+  async function submitEmail() {
+    if (!email.includes("@") || isSubmittingEmail) return;
+
+    try {
+      setIsSubmittingEmail(true);
+
+      const response = await fetch("https://formspree.io/f/xvzjpogb", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          source: "Dream 9",
+          coupon: "GARAGE10",
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Formspree submission failed.");
+      }
+
+      setEmailSubmitted(true);
+    } catch (error) {
+      console.error(error);
+      alert("Could not save email. Try again.");
+    } finally {
+      setIsSubmittingEmail(false);
+    }
   }
 
   function waitForPosterImages(node: HTMLElement) {
@@ -489,6 +524,40 @@ export default function Dream9Page() {
             <Dream9Design />
           </div>
         </div>
+
+        {allSlotsFilled && (
+          <div className="mx-auto mb-3 w-full max-w-[540px] border border-white/10 bg-white/[0.04] p-4">
+            <h3 className="text-lg font-black">
+              Get 10% Off Your Dream 9 Shirt
+            </h3>
+
+            <p className="mt-1 text-sm text-white/60">
+              {emailSubmitted
+                ? "Success! Use code GARAGE10 at checkout."
+                : "Enter your email and we'll send you a coupon code."}
+            </p>
+
+            {!emailSubmitted && (
+              <div className="mt-3 flex gap-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email address"
+                  className="min-w-0 flex-1 bg-white/10 px-4 py-3 outline-none"
+                />
+
+                <button
+                  onClick={submitEmail}
+                  disabled={isSubmittingEmail}
+                  className="bg-red-600 px-5 py-3 font-black text-white hover:bg-red-700 disabled:opacity-60"
+                >
+                  {isSubmittingEmail ? "Saving..." : "Get 10% Off"}
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
          <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
           <div className="grid grid-cols-2 gap-2">
