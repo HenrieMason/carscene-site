@@ -116,9 +116,6 @@ export default function Dream9Page() {
   }
   const [slots, setSlots] = useState<(Car | null)[]>(Array(9).fill(null));
 
-  useEffect(() => {
-    setSlots(getRandomDream9());
-  }, []);
   const [shirtSize, setShirtSize] = useState<"S" | "M" | "L" | "XL">("L");
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
@@ -338,10 +335,6 @@ export default function Dream9Page() {
     return [...carsOnly, ...Array(9 - carsOnly.length).fill(null)];
   }, [slots]);
 
-  const buttonSlots = useMemo(() => {
-    return [...slots, ...Array(9 - slots.length).fill(null)].slice(0, 9);
-  }, [slots]);
-
   function Dream9Design({ exportMode = false }: { exportMode?: boolean }) {
     return (
       <div
@@ -374,11 +367,7 @@ export default function Dream9Page() {
                   type="button"
                   onClick={exportMode ? undefined : () => selectSlot(index)}
                   style={{ backgroundColor: classTint(type) }}
-                  className={`aspect-square overflow-hidden border p-0 transition ${
-                    !exportMode && selectedSlot === index
-                      ? "border-[3px] border-red-600"
-                      : "border border-black"
-                  }`}
+                  className="aspect-square overflow-hidden border border-black p-0 transition"
                 >
                   {car ? (
                     <div className="relative h-full w-full overflow-hidden">
@@ -412,7 +401,7 @@ export default function Dream9Page() {
           <div
             className="mx-auto grid w-[95%] grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1.25] text-black"
           >
-            {buttonSlots.map((car, index) => (
+            {displaySlots.map((car, index) => (
               <div
                 key={index}
                 className={`min-w-0 overflow-hidden whitespace-nowrap ${
@@ -455,15 +444,17 @@ export default function Dream9Page() {
           </p>
 
           <div className="mx-auto mt-4 grid w-full max-w-[540px] gap-2">
-            {slots.map((car, index) => (
+            {displaySlots.map((car, index) => (
               <button
                 key={index}
                 type="button"
                 onClick={() => selectSlot(index)}
                 className={`w-full px-4 py-3 text-left text-sm font-black transition ${
                   selectedSlot === index
-                    ? "bg-red-600 text-white"
-                    : "bg-white/10 text-white hover:bg-white/15"
+                    ? "bg-red-700 text-white"
+                    : car
+                    ? "bg-white/10 text-white hover:bg-white/15"
+                    : "bg-red-600 text-white hover:bg-red-700"
                 }`}
               >
                 {car ? `${car.brand} ${car.model}` : "Select a Car"}
