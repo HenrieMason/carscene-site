@@ -225,6 +225,8 @@ export default function Dream9Page() {
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
+    setSearchView("featured");
+    setFeaturedSeed((s) => s + 1);
     setDeleteReadySlot(null);
 
     setTimeout(() => {
