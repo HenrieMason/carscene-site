@@ -530,7 +530,7 @@ export default function Dream9Page() {
           </div>
         </div>
 
-        <div className="mx-auto mb-3 grid w-full max-w-[540px] gap-2">
+        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
           <button
             onClick={() => {
               if (!allSlotsFilled) return;
@@ -584,7 +584,7 @@ export default function Dream9Page() {
           </div>
         </div>
 
-         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
+        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={shuffleDream9}
@@ -602,7 +602,7 @@ export default function Dream9Page() {
           </div>
         </div>
 
-        <div className="mx-auto mb-3 w-full max-w-[540px] border border-white/10 bg-white/[0.04] p-4">
+        <div className="mx-auto mb-4 w-full max-w-[540px] border border-white/10 bg-white/[0.04] p-4">
             <h3 className="text-lg font-black">
               Get 10% Off Your Dream 9 Shirt
             </h3>
@@ -635,7 +635,7 @@ export default function Dream9Page() {
           </div>
 
         </section>
-        
+
         <section className="order-2 min-w-0 lg:order-1">
           <div
             ref={searchSectionRef}
