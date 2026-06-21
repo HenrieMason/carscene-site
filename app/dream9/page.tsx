@@ -479,7 +479,7 @@ export default function Dream9Page() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
-      <div className="mx-auto grid w-full max-w-7xl gap-2 lg:grid-cols-[420px_1fr] lg:gap-8">
+      <div className="mx-auto grid w-full max-w-7xl gap-0 lg:grid-cols-[420px_1fr] lg:gap-8">
         <section className="order-1 min-w-0 overflow-hidden lg:order-2">
         <div
           ref={instructionsRef}
