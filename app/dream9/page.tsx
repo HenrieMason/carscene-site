@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toPng } from "html-to-image";
 import cars from "../../data/cars.json";
+import { featuredCars } from "../../data/featuredCars";
 
 type Car = {
   brand: string;
@@ -108,7 +109,9 @@ export default function Dream9Page() {
   }, []);
   const [query, setQuery] = useState("");
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
+  const [searchView, setSearchView] = useState<"featured" | "brands">("featured");
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
+  const [featuredSeed, setFeaturedSeed] = useState(0);
   function getRandomDream9() {
     return [...allCars]
       .sort(() => Math.random() - 0.5)
@@ -117,6 +120,7 @@ export default function Dream9Page() {
   const [slots, setSlots] = useState<(Car | null)[]>(Array(9).fill(null));
 
   const [shirtSize, setShirtSize] = useState<"S" | "M" | "L" | "XL">("L");
+  const [showSizePicker, setShowSizePicker] = useState(false);
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
 
@@ -179,6 +183,12 @@ export default function Dream9Page() {
     return allCars.filter((car) => car.brand === selectedBrand);
   }, [selectedBrand, allCars]);
 
+  const featuredCarsList = useMemo(() => {
+    return [...allCars]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 100);
+  }, [allCars, featuredSeed]);
+
   function shuffleDream9() {
     setSlots(getRandomDream9());
     setSelectedSlot(null);
@@ -234,9 +244,8 @@ export default function Dream9Page() {
     setSelectedSlot(index);
     setSelectedBrand(null);
     setQuery("");
+    setSearchView("featured");
     setDeleteReadySlot(null);
-
-    searchInputRef.current?.focus();
 
     setTimeout(() => {
       const y =
@@ -298,7 +307,7 @@ export default function Dream9Page() {
     );
   }
   
-  async function makePoster() {
+  async function makePoster(size: "S" | "M" | "L" | "XL" = shirtSize) {
     if (!exportRef.current || !allSlotsFilled || isMakingDesign) return;
 
     const node = exportRef.current;
@@ -345,14 +354,14 @@ export default function Dream9Page() {
       }
 
       const designUrl = cloudinaryData.secure_url;
-      const variantId = SHIRT_VARIANT_IDS[shirtSize];
+      const variantId = SHIRT_VARIANT_IDS[size];
 
       const checkoutUrl =
         `${SHOPIFY_STORE_URL}/cart/add?id=${variantId}` +
         `&quantity=1` +
         `&properties[Dream 9 Design URL]=${encodeURIComponent(designUrl)}` +
         `&properties[Dream 9 Product]=${encodeURIComponent("Shirt")}` +
-        `&properties[Dream 9 Size]=${encodeURIComponent(shirtSize)}`;
+        `&properties[Dream 9 Size]=${encodeURIComponent(size)}`;
 
       window.location.href = checkoutUrl + "&return_to=/checkout";
     } catch (error) {
@@ -519,6 +528,54 @@ export default function Dream9Page() {
           </div>
         </div>
 
+        <div className="mx-auto mb-3 grid w-full max-w-[540px] gap-2">
+          <button
+            onClick={() => {
+              if (!allSlotsFilled) return;
+              setShowSizePicker(true);
+            }}
+            disabled={!allSlotsFilled || isMakingDesign}
+            className={`w-full py-4 text-sm font-black transition active:scale-[0.97] ${
+              isMakingDesign
+                ? "bg-red-700 text-white"
+                : allSlotsFilled
+                ? "animate-pulse bg-red-600 text-white hover:bg-red-700"
+                : "cursor-not-allowed bg-white/10 text-white"
+            }`}
+          >
+            {isMakingDesign ? (
+              <span className="inline-flex items-center justify-center gap-2">
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+                Building...
+              </span>
+            ) : !allSlotsFilled ? (
+              "Fill all 9 slots"
+            ) : showSizePicker ? (
+              "Select Shirt Size"
+            ) : (
+              "Buy Shirt - $32.99"
+            )}
+          </button>
+
+          {showSizePicker && allSlotsFilled && (
+            <div className="grid grid-cols-4 gap-2">
+              {(["S", "M", "L", "XL"] as const).map((size) => (
+                <button
+                  key={size}
+                  onClick={() => {
+                    setShirtSize(size);
+                    makePoster(size);
+                  }}
+                  disabled={isMakingDesign}
+                  className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-red-600 disabled:opacity-60"
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
           <div ref={posterRef}>
             <Dream9Design />
@@ -575,45 +632,6 @@ export default function Dream9Page() {
               Clear
             </button>
           </div>
-
-          <button
-            onClick={makePoster}
-            disabled={!allSlotsFilled || isMakingDesign}
-            className={`w-full py-4 text-sm font-black transition active:scale-[0.97] ${
-              isMakingDesign
-                ? "bg-red-700 text-white"
-                : allSlotsFilled
-                ? "animate-pulse bg-red-600 text-white hover:bg-red-700"
-                : "cursor-not-allowed bg-white/10 text-white"
-            }`}
-          >
-            {isMakingDesign ? (
-              <span className="inline-flex items-center justify-center gap-2">
-                <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
-                Building...
-              </span>
-            ) : allSlotsFilled ? (
-              "Buy Shirt - $32.99"
-            ) : (
-              "Fill all 9 slots"
-            )}
-          </button>
-
-          <div className="grid grid-cols-4 gap-2">
-              {(["S", "M", "L", "XL"] as const).map((size) => (
-                <button
-                  key={size}
-                  onClick={() => setShirtSize(size)}
-                  className={`py-4 text-sm font-black transition ${
-                    shirtSize === size
-                      ? "bg-red-600 text-white"
-                      : "bg-white/10 text-white hover:bg-white/15"
-                  }`}
-                >
-                  {size}
-                </button>
-              ))}
-            </div>
         </div>
         </section>
 
@@ -628,7 +646,7 @@ export default function Dream9Page() {
               </h1>
 
               <p className="mt-2 text-sm text-white/50">
-                Before selecting a car, free space in the grid above.
+                Choose a featured car, search for a car, or browse by brand.
               </p>
             </div>
 
@@ -642,6 +660,38 @@ export default function Dream9Page() {
               placeholder="Search all cars..."
               className="w-full border border-white/10 bg-white/10 px-4 py-3 text-white outline-none placeholder:text-white/40"
             />
+
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <button
+                onClick={() => {
+                  setQuery("");
+                  setSelectedBrand(null);
+                  setSearchView("featured");
+                }}
+                className={`py-3 text-sm font-black transition ${
+                  searchView === "featured"
+                    ? "bg-red-600 text-white"
+                    : "bg-white/10 text-white hover:bg-white/15"
+                }`}
+              >
+                Featured
+              </button>
+
+              <button
+                onClick={() => {
+                  setQuery("");
+                  setSelectedBrand(null);
+                  setSearchView("brands");
+                }}
+                className={`py-3 text-sm font-black transition ${
+                  searchView === "brands"
+                    ? "bg-red-600 text-white"
+                    : "bg-white/10 text-white hover:bg-white/15"
+                }`}
+              >
+                Brands
+              </button>
+            </div>
 
             <div className="mt-4 h-[360px] overflow-y-auto pr-1 sm:h-[60vh]">
               {query.trim() ? (
@@ -723,6 +773,60 @@ export default function Dream9Page() {
                     ))}
                   </div>
                 </div>
+              ) : searchView === "featured" ? (
+                <div>
+                  <h2 className="mb-3 text-xl font-black">Featured Cars</h2>
+
+                  <div className="space-y-2">
+                    {featuredCarsList.map((car) => (
+                      <button
+                        key={car.id}
+                        onClick={() => addCarToTargetSlot(car)}
+                        style={{
+                          backgroundColor: classTint(classFromPrice(car.price)),
+                        }}
+                        className="flex min-w-0 w-full max-w-full items-center gap-3 overflow-hidden border border-black/20 p-3 text-left text-black transition hover:brightness-95"
+                      >
+                        <img
+                          src={car.image}
+                          alt={car.model}
+                          crossOrigin="anonymous"
+                          decoding="sync"
+                          loading="eager"
+                          className="h-14 w-24 shrink-0 object-contain"
+                        />
+
+                        <div className="min-w-0 flex-1 overflow-hidden">
+                          <div className="line-clamp-2 font-black leading-tight">
+                            {car.model}
+                          </div>
+
+                          <div className="text-sm text-black/60">
+                            ♠{car.price.toLocaleString()}
+                          </div>
+                        </div>
+                      </button>
+                        ))}
+                      </div>
+
+                      <button
+                        onClick={() => {
+                          setFeaturedSeed((s) => s + 1);
+
+                          setTimeout(() => {
+                            searchSectionRef.current
+                              ?.querySelector(".overflow-y-auto")
+                              ?.scrollTo({
+                                top: 0,
+                                behavior: "smooth",
+                              });
+                          }, 0);
+                        }}
+                        className="mt-3 w-full bg-white/10 py-3 text-sm font-black text-white transition hover:bg-white/15"
+                      >
+                        Show 100 More Cars
+                      </button>
+                    </div>
               ) : (
                 <div>
                   <h2 className="mb-3 text-xl font-black">Choose a Brand</h2>
