@@ -699,8 +699,8 @@ export default function Dream9Page() {
               {car ? (
                 <div className="flex items-center justify-between gap-3">
                   <span className="min-w-0 truncate">{car.model}</span>
-                  <span className="shrink-0 text-black/60">
-                    ♠{car.price.toLocaleString()}
+                  <span className="shrink-0 bg-black/10 px-3 py-1 text-xs font-black text-black/70">
+                    Replace
                   </span>
                 </div>
               ) : (
