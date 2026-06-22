@@ -390,39 +390,26 @@ export default function Dream9Page() {
   function Dream9Design({ exportMode = false }: { exportMode?: boolean }) {
     return (
       <div
-        className={`relative w-full overflow-hidden ${
-          exportMode ? "h-full" : "aspect-[4494/5097]"
-        }`}
+        className={`w-full text-black ${
+          exportMode ? "h-full bg-white" : "aspect-[4494/5097] bg-white"
+        } p-[6%]`}
       >
-        <img
-          src="/Dream9Template.png"
-          alt="Dream 9 Shirt"
-          crossOrigin="anonymous"
-          className="absolute inset-0 h-full w-full scale-150 object-contain"
-        />
+        <div className="flex h-full flex-col">
+          <div className="pb-[0%] text-center">
+            <div
+              className="text-[68px] font-black italic leading-none"
+              style={{
+                transform: "skewX(-8deg)",
+                letterSpacing: "-0.04em",
+              }}
+            >
+              Dream 9
+            </div>
+          </div>
 
-        <div
-          className="absolute text-center font-black italic text-black"
-          style={{
-            top: "15.5%",
-            left: "50%",
-            transform: "translateX(-50%) skewX(-8deg)",
-            fontSize: "clamp(18px, 4vw, 33px)",
-            letterSpacing: "-0.04em",
-          }}
-        >
-          Dream 9
-        </div>
-
-        <div
-          className="absolute"
-          style={{
-            top: "22%",
-            left: "30%",
-            width: "40%",
-          }}
-        >
-          <div className="grid grid-cols-3 gap-0">
+          <div
+            className="mx-auto grid w-[95%] grid-cols-3 gap-0"
+          >
             {displaySlots.map(({ car, realIndex }, index) => {
               const type = car ? classFromPrice(car.price) : "P";
 
@@ -461,38 +448,29 @@ export default function Dream9Page() {
                 </button>
               );
             })}
-            <div
-              className="absolute text-center text-black"
-              style={{
-                top: "100%",
-                left: "0",
-                width: "100%",
-                marginTop: "1px",
-              }}
-            >
+          </div>
+
+          <div
+            className="mx-auto grid w-[95%] grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1.25] text-black"
+          >
+            {displaySlots.map(({ car, realIndex }, index) => (
               <div
-                className="grid grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[.8] text-black"
+                key={index}
+                className={`min-w-0 overflow-hidden whitespace-nowrap ${
+                  exportMode
+                    ? "text-[7.8px]"
+                    : "text-[clamp(4.2px,1.25vw,7.8px)] lg:text-[7.8px]"
+                } ${
+                  index % 3 === 0
+                    ? "text-left"
+                    : index % 3 === 1
+                    ? "text-center"
+                    : "text-right"
+                }`}
               >
-                {displaySlots.map(({ car }, index) => (
-                  <div
-                    key={index}
-                    className={`min-w-0 overflow-hidden whitespace-nowrap ${
-                      exportMode
-                        ? "text-[7.8px]"
-                        : "text-[4px]"
-                    } ${
-                      index % 3 === 0
-                        ? "text-left"
-                        : index % 3 === 1
-                        ? "text-center"
-                        : "text-right"
-                    }`}
-                  >
-                    {car && <>{car.model}</>}
-                  </div>
-                ))}
+                {car && <>{car.model}</>}
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
