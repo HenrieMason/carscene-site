@@ -485,7 +485,7 @@ export default function Dream9Page() {
                     className={`min-w-0 whitespace-nowrap ${
                       exportMode
                         ? "text-[7.8px]"
-                        : "text-[clamp(2.8px,0.6vw,2.8px)]"
+                        : "text-[clamp(2.8px,0.6vw,2.5px)]"
                     } ${
                       index % 3 === 0
                         ? "text-left"
