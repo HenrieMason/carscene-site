@@ -118,11 +118,13 @@ export default function Dream9Page() {
       .slice(0, 9);
   }
   const [slots, setSlots] = useState<(Car | null)[]>(() => {
-    return featuredCars
-      .slice(0, 9)
-      .map((name) =>
-        allCars.find((car) => car.model === name) ?? null
-      );
+    const randomFeatured = [...featuredCars]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 9);
+
+    return randomFeatured.map(
+      (name) => allCars.find((car) => car.model === name) ?? null
+    );
   });
 
   const [shirtSize, setShirtSize] = useState<"S" | "M" | "L" | "XL">("L");
@@ -438,7 +440,7 @@ export default function Dream9Page() {
                   type="button"
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
                   style={{ backgroundColor: classTint(type) }}
-                  className="aspect-square overflow-hidden border border-black p-0 transition"
+                  className="aspect-square overflow-hidden border-[0.5px] border-black md:border p-0 transition"
                 >
                   {car ? (
                     <div className="relative h-full w-full overflow-hidden">
