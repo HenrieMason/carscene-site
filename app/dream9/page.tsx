@@ -477,7 +477,7 @@ export default function Dream9Page() {
               }}
             >
               <div
-                className="grid grid-cols-3 gap-x-[3%] gap-y-[6px] pt-[3%] font-black leading-[1.15] text-black"
+                className="grid grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1] text-black"
               >
                 {displaySlots.map(({ car }, index) => (
                   <div
@@ -485,7 +485,7 @@ export default function Dream9Page() {
                     className={`min-w-0 overflow-hidden whitespace-nowrap ${
                       exportMode
                         ? "text-[7.8px]"
-                        : "text-[clamp(5px,1.45vw,7px)]"
+                        : "text-[clamp(3.5px,0.75vw,3px)]"
                     } ${
                       index % 3 === 0
                         ? "text-left"
