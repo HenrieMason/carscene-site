@@ -531,54 +531,6 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
-          <button
-            onClick={() => {
-              if (!allSlotsFilled) return;
-              setShowSizePicker(true);
-            }}
-            disabled={!allSlotsFilled || isMakingDesign}
-            className={`w-full py-4 text-sm font-black transition active:scale-[0.97] ${
-              isMakingDesign
-                ? "bg-red-700 text-white"
-                : allSlotsFilled
-                ? "animate-pulse bg-red-600 text-white hover:bg-red-700"
-                : "cursor-not-allowed bg-white/10 text-white"
-            }`}
-          >
-            {isMakingDesign ? (
-              <span className="inline-flex items-center justify-center gap-2">
-                <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
-                Building...
-              </span>
-            ) : !allSlotsFilled ? (
-              "Fill all 9 slots"
-            ) : showSizePicker ? (
-              "Select Shirt Size"
-            ) : (
-              "Buy Shirt - $32.99"
-            )}
-          </button>
-
-          {showSizePicker && allSlotsFilled && (
-            <div className="grid grid-cols-4 gap-2">
-              {(["S", "M", "L", "XL"] as const).map((size) => (
-                <button
-                  key={size}
-                  onClick={() => {
-                    setShirtSize(size);
-                    makePoster(size);
-                  }}
-                  disabled={isMakingDesign}
-                  className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-red-600 disabled:opacity-60"
-                >
-                  {size}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={shuffleDream9}
@@ -628,6 +580,54 @@ export default function Dream9Page() {
               )}
             </button>
           ))}
+        </div>
+
+        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
+          <button
+            onClick={() => {
+              if (!allSlotsFilled) return;
+              setShowSizePicker(true);
+            }}
+            disabled={!allSlotsFilled || isMakingDesign}
+            className={`w-full py-4 text-sm font-black transition active:scale-[0.97] ${
+              isMakingDesign
+                ? "bg-red-700 text-white"
+                : allSlotsFilled
+                ? "animate-pulse bg-red-600 text-white hover:bg-red-700"
+                : "cursor-not-allowed bg-white/10 text-white"
+            }`}
+          >
+            {isMakingDesign ? (
+              <span className="inline-flex items-center justify-center gap-2">
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+                Building...
+              </span>
+            ) : !allSlotsFilled ? (
+              "Fill all 9 slots"
+            ) : showSizePicker ? (
+              "Select Shirt Size"
+            ) : (
+              "Buy Shirt - $32.99"
+            )}
+          </button>
+
+          {showSizePicker && allSlotsFilled && (
+            <div className="grid grid-cols-4 gap-2">
+              {(["S", "M", "L", "XL"] as const).map((size) => (
+                <button
+                  key={size}
+                  onClick={() => {
+                    setShirtSize(size);
+                    makePoster(size);
+                  }}
+                  disabled={isMakingDesign}
+                  className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-red-600 disabled:opacity-60"
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px] border border-white/10 bg-white/[0.04] p-4">
