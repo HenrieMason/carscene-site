@@ -479,7 +479,7 @@ export default function Dream9Page() {
                     className={`min-w-0 overflow-hidden whitespace-nowrap ${
                       exportMode
                         ? "text-[7.8px]"
-                        : "text-[4px]"
+                        : "text-[clamp(3.5px,0.75vw,5px)]"
                     } ${
                       index % 3 === 0
                         ? "text-left"
