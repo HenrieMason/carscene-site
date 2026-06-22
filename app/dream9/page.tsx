@@ -494,11 +494,89 @@ export default function Dream9Page() {
                         : "text-right"
                     }`}
                   >
-                    {car && <>{car.model}</>}
+                    {car ? car.model : "Empty"}
                   </div>
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function OldExportDesign({ exportMode = false }: { exportMode?: boolean }) {
+    return (
+      <div
+        className={`w-full text-black ${
+          exportMode ? "h-full bg-white" : "aspect-[4494/5097] bg-white"
+        } p-[6%]`}
+      >
+        <div className="flex h-full flex-col">
+          <div className="pb-[0%] text-center">
+            <div
+              className="text-[68px] font-black italic leading-none"
+              style={{
+                transform: "skewX(-8deg)",
+                letterSpacing: "-0.04em",
+              }}
+            >
+              Dream 9
+            </div>
+          </div>
+
+          <div className="mx-auto grid w-[95%] grid-cols-3 gap-0">
+            {displaySlots.map(({ car, realIndex }, index) => {
+              const type = car ? classFromPrice(car.price) : "P";
+
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={exportMode ? undefined : () => selectSlot(realIndex)}
+                  style={{ backgroundColor: classTint(type) }}
+                  className="aspect-square overflow-hidden border border-black p-0 transition"
+                >
+                  {car ? (
+                    <div className="relative h-full w-full overflow-hidden">
+                      <img
+                        src={car.image}
+                        alt={car.model}
+                        crossOrigin="anonymous"
+                        decoding="sync"
+                        loading="eager"
+                        className="absolute left-1/2 top-1/2 w-[200%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex h-full items-center justify-center text-[clamp(8px,2vw,14px)] font-black text-black/35">
+                      Empty
+                    </div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="mx-auto grid w-[95%] grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1.25] text-black">
+            {displaySlots.map(({ car }, index) => (
+              <div
+                key={index}
+                className={`min-w-0 overflow-hidden whitespace-nowrap ${
+                  exportMode
+                    ? "text-[7.8px]"
+                    : "text-[clamp(4.2px,1.25vw,7.8px)] lg:text-[7.8px]"
+                } ${
+                  index % 3 === 0
+                    ? "text-left"
+                    : index % 3 === 1
+                    ? "text-center"
+                    : "text-right"
+                }`}
+              >
+                {car ? car.model : "Empty"}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -908,7 +986,7 @@ export default function Dream9Page() {
             height: "612.45px",
           }}
         >
-          <Dream9Design exportMode />
+          <OldExportDesign exportMode />
         </div>
       </div>
     </main>
