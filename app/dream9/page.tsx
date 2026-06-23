@@ -656,24 +656,33 @@ export default function Dream9Page() {
           </button>
 
           {showSizePicker && allSlotsFilled && (
-            <div className="grid grid-cols-4 gap-2">
-              {(["S", "M", "L", "XL"] as const).map((size) => (
-                <button
-                  key={size}
-                  onClick={() => {
-                    setShirtSize(size);
-                    makePoster(size);
-                  }}
-                  disabled={isMakingDesign}
-                  className={`py-4 text-sm font-black text-white transition disabled:opacity-60 ${
-                    shirtSize === size
-                      ? "bg-red-600"
-                      : "bg-white/10 hover:bg-red-600"
-                  }`}
-                >
-                  {size}
-                </button>
-              ))}
+            <div className="grid gap-2">
+              <div className="grid grid-cols-4 gap-2">
+                {(["S", "M", "L", "XL"] as const).map((size) => (
+                  <button
+                    key={size}
+                    onClick={() => {
+                      setShirtSize(size);
+                    }}
+                    disabled={isMakingDesign}
+                    className={`py-4 text-sm font-black text-white transition disabled:opacity-60 ${
+                      shirtSize === size
+                        ? "bg-red-600"
+                        : "bg-white/10 hover:bg-red-600"
+                    }`}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                onClick={() => makePoster(shirtSize)}
+                disabled={isMakingDesign}
+                className="bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 disabled:opacity-60"
+              >
+                Continue
+              </button>
             </div>
           )}
         </div>
