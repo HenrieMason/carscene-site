@@ -618,7 +618,7 @@ export default function Dream9Page() {
             <button
               type="button"
               onClick={() => setZoomed((z) => !z)}
-              className="absolute top-1 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-red-600 text-xl text-white shadow-lg backdrop-blur transition active:scale-95"
+              className="absolute top-1 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white text-xl text-black shadow-lg transition hover:bg-white/90 active:scale-95"
               aria-label="Zoom Dream 9 preview"
             >
               🔍
@@ -626,7 +626,7 @@ export default function Dream9Page() {
           </div>
         </div>
 
-        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
+        <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
           <button
             onClick={() => {
               if (!allSlotsFilled) return;
