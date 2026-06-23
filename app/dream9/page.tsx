@@ -87,6 +87,7 @@ export default function Dream9Page() {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSectionRef = useRef<HTMLDivElement>(null);
   const instructionsRef = useRef<HTMLDivElement>(null);
+  const [zoomed, setZoomed] = useState(false);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const SHIRT_VARIANT_IDS = {
@@ -398,7 +399,7 @@ export default function Dream9Page() {
   function Dream9Design({ exportMode = false }: { exportMode?: boolean }) {
     return (
       <div
-        className={`relative w-full overflow-hidden ${
+        className={`relative w-full overflow-hidden transition-transform duration-300 ${
           exportMode ? "h-full" : "aspect-[4494/5097]"
         }`}
       >
@@ -605,8 +606,23 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
-          <div ref={posterRef}>
-            <Dream9Design />
+          <div ref={posterRef} className="relative overflow-visible">
+            <div
+              className={`origin-[50%_32%] transition-transform duration-300 ${
+                zoomed ? "scale-[2]" : "scale-100"
+              }`}
+            >
+              <Dream9Design />
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setZoomed((z) => !z)}
+              className="absolute bottom-3 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-black/75 text-xl text-white shadow-lg backdrop-blur transition active:scale-95"
+              aria-label="Zoom Dream 9 preview"
+            >
+              🔍
+            </button>
           </div>
         </div>
 
