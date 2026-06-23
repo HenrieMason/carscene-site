@@ -608,8 +608,8 @@ export default function Dream9Page() {
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
           <div ref={posterRef} className="relative overflow-visible">
             <div
-              className={`origin-[50%_32%] transition-transform duration-300 ${
-                zoomed ? "scale-[2]" : "scale-100"
+              className={`origin-[50%_34%] transition-transform duration-300 ${
+                zoomed ? "scale-[1.9]" : "scale-100"
               }`}
             >
               <Dream9Design />
