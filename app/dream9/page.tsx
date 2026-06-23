@@ -608,8 +608,8 @@ export default function Dream9Page() {
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
           <div ref={posterRef} className="relative overflow-visible">
             <div
-              className={`origin-[50%_34%] transition-transform duration-300 ${
-                zoomed ? "scale-[1.9]" : "scale-100"
+              className={`origin-[50%_30%] transition-transform duration-300 ${
+                zoomed ? "scale-[2.1]" : "scale-100"
               }`}
             >
               <Dream9Design />
@@ -618,7 +618,7 @@ export default function Dream9Page() {
             <button
               type="button"
               onClick={() => setZoomed((z) => !z)}
-              className="absolute bottom-3 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-black/75 text-xl text-white shadow-lg backdrop-blur transition active:scale-95"
+              className="absolute top-3 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-black/75 text-xl text-white shadow-lg backdrop-blur transition active:scale-95"
               aria-label="Zoom Dream 9 preview"
             >
               🔍
