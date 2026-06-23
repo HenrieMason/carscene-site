@@ -16,18 +16,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CarScene",
+  title: "CarScene | Custom Dream 9 Car Shirts",
   description:
-    "Track rare cars, build dream garages, and compete with friends.",
+    "Create a custom Dream 9 shirt with your 9 favorite cars. Search 1,596 cars, build your lineup, and order your shirt.",
 
   icons: {
     icon: "/icon.png?v=3",
   },
 
   openGraph: {
-    title: "CarScene",
+    title: "CarScene | Custom Dream 9 Car Shirts",
     description:
-      "Track rare cars, build dream garages, and compete with friends.",
+      "Create a custom Dream 9 shirt with your 9 favorite cars. Search 1,596 cars, build your lineup, and order your shirt.",
     url: "https://carsceneapp.com",
     siteName: "CarScene",
     images: [
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "CarScene",
+        alt: "CarScene Dream 9 Shirt",
       },
     ],
     type: "website",
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "CarScene",
+    title: "CarScene | Custom Dream 9 Car Shirts",
     description:
-      "Track rare cars, build dream garages, and compete with friends.",
+      "Create a custom Dream 9 shirt with your 9 favorite cars. Search 1,596 cars, build your lineup, and order your shirt.",
     images: ["/og-image.jpg"],
   },
 };
