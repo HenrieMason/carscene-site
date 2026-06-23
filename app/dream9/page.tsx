@@ -128,7 +128,7 @@ export default function Dream9Page() {
     );
   });
 
-  const [shirtSize, setShirtSize] = useState<"S" | "M" | "L" | "XL">("L");
+  const [shirtSize, setShirtSize] = useState<"S" | "M" | "L" | "XL" | null>(null);
   const [showSizePicker, setShowSizePicker] = useState(false);
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
@@ -318,7 +318,7 @@ export default function Dream9Page() {
     );
   }
   
-  async function makePoster(size: "S" | "M" | "L" | "XL" = shirtSize) {
+  async function makePoster(size: "S" | "M" | "L" | "XL") {
     if (!exportRef.current || !allSlotsFilled || isMakingDesign) return;
 
     const node = exportRef.current;
