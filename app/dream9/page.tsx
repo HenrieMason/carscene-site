@@ -618,7 +618,7 @@ export default function Dream9Page() {
             <button
               type="button"
               onClick={() => setZoomed((z) => !z)}
-              className="absolute top-2 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-black/75 text-xl text-white shadow-lg backdrop-blur transition active:scale-95"
+              className="absolute top-1 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-red-600 text-xl text-white shadow-lg backdrop-blur transition active:scale-95"
               aria-label="Zoom Dream 9 preview"
             >
               🔍
