@@ -665,7 +665,11 @@ export default function Dream9Page() {
                     makePoster(size);
                   }}
                   disabled={isMakingDesign}
-                  className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-red-600 disabled:opacity-60"
+                  className={`py-4 text-sm font-black text-white transition disabled:opacity-60 ${
+                    shirtSize === size
+                      ? "bg-red-600"
+                      : "bg-white/10 hover:bg-red-600"
+                  }`}
                 >
                   {size}
                 </button>
