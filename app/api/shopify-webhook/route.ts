@@ -163,31 +163,6 @@ async function createPrintifyOrder({
   const externalId = `shopify-dream9-${productType.toLowerCase()}-${orderId}-item-${lineItemId}`;
     console.log("PRINTIFY EXTERNAL ID:", externalId);
 
-    const existingOrderResponse = await fetch(
-    `https://api.printify.com/v1/shops/${SHOP_ID}/orders.json?external_id=${encodeURIComponent(externalId)}`,
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.PRINTIFY_API_TOKEN}`,
-      },
-    }
-  );
-
-  const existingOrderData = await existingOrderResponse.json();
-
-  if (
-    existingOrderResponse.ok &&
-    Array.isArray(existingOrderData.data) &&
-    existingOrderData.data.length > 0
-  ) {
-    console.log("Printify order already exists, skipping:", externalId);
-    return {
-      ok: true,
-      step: "duplicate-skip",
-      externalId,
-      existing_order: existingOrderData.data[0],
-    };
-  }
-
   const isShirt = productType === "Shirt";
 
   const variantId = isShirt
