@@ -91,11 +91,11 @@ export default function Dream9Page() {
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const SHIRT_VARIANT_IDS = {
-    S: "53417034449203",
-    M: "53417034481971",
-    L: "53417034514739",
-    XL: "53417034547507",
-  };
+  M: "53558192668979",
+  L: "53558192701747",
+  XL: "53558192734515",
+  "2XL": "53558192767283",
+} as const;
 
   const [today, setToday] = useState("");
 
@@ -128,7 +128,7 @@ export default function Dream9Page() {
     );
   });
 
-  const [shirtSize, setShirtSize] = useState<"S" | "M" | "L" | "XL" | null>(null);
+  const [shirtSize, setShirtSize] = useState<"M" | "L" | "XL" | "2XL" | null>(null);
   const [showSizePicker, setShowSizePicker] = useState(false);
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
@@ -318,7 +318,7 @@ export default function Dream9Page() {
     );
   }
   
-  async function makePoster(size: "S" | "M" | "L" | "XL") {
+  async function makePoster(size: "M" | "L" | "XL" | "2XL") {
     if (!exportRef.current || !allSlotsFilled || isMakingDesign) return;
 
     const node = exportRef.current;
@@ -657,7 +657,7 @@ export default function Dream9Page() {
 
           {showSizePicker && allSlotsFilled && (
             <div className="grid grid-cols-4 gap-2">
-              {(["S", "M", "L", "XL"] as const).map((size) => (
+              {(["M", "L", "XL", "2XL"] as const).map((size) => (
                 <button
                   key={size}
                   onClick={() => {
