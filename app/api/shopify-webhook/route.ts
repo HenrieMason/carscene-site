@@ -12,11 +12,11 @@ const POSTER_VARIANT_ID = 101888;
 
 const SHIRT_BLUEPRINT_ID = 706;
 const SHIRT_VARIANT_IDS = {
-  S: 73199,
   M: 73203,
   L: 73207,
   XL: 73211,
-};
+  "2XL": 73215,
+} as const;
 
 const CARSCENE_LOGO_URL =
   "https://res.cloudinary.com/dvcxnicew/image/upload/v1780373150/Red_Transparent-1_mffebp.png";
