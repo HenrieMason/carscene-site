@@ -67,6 +67,9 @@ export async function POST(req: NextRequest) {
   const hmac = req.headers.get("x-shopify-hmac-sha256");
   const topic = req.headers.get("x-shopify-topic");
 
+  const webhookId = req.headers.get("x-shopify-webhook-id");
+  console.log("WEBHOOK ID:", webhookId);
+
   const isValid = verifyShopifyWebhook(rawBody, hmac);
 
   if (!isValid) {
@@ -157,6 +160,9 @@ async function createPrintifyOrder({
     throw new Error("Missing Shopify shipping address");
   }
 
+  const externalId = `shopify-dream9-${productType.toLowerCase()}-${orderId}-item-${lineItemId}`;
+  console.log("PRINTIFY EXTERNAL ID:", externalId);
+
   const isShirt = productType === "Shirt";
 
   const variantId = isShirt
@@ -226,7 +232,7 @@ async function createPrintifyOrder({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        title: `Dream 9 ${productType} ${orderName}`,
+        title: `Dream 9 ${productType} ${orderName} Item ${lineItemId}`,
         description: `Custom Dream 9 ${productType.toLowerCase()} for Shopify order ${orderName}. Size: ${size}.`,
         blueprint_id: isShirt ? SHIRT_BLUEPRINT_ID : POSTER_BLUEPRINT_ID,
         print_provider_id: PRINT_PROVIDER_ID,
@@ -307,7 +313,7 @@ async function createPrintifyOrder({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        external_id: `shopify-dream9-${productType.toLowerCase()}-${orderId}-item-${lineItemId}`,
+        external_id: externalId,
         label: `Dream 9 ${productType} ${orderName}`,
         line_items: [
           {
