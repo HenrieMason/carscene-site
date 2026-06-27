@@ -651,7 +651,7 @@ export default function Dream9Page() {
             ) : showSizePicker ? (
               "Select Shirt Size"
             ) : (
-              "Buy Shirt - $32.99 USD"
+              "Buy Shirt - $34.99 USD"
             )}
           </button>
 
