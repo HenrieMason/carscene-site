@@ -164,7 +164,7 @@ async function createPrintifyOrder({
     throw new Error("Missing Shopify shipping address");
   }
 
-  const externalId = `shopify-dream9-${productType.toLowerCase()}-${orderId}-item-${lineItemId}`;
+  const externalId = `shopify-dream9-${orderId}-item-${lineItemId}`;
     console.log("PRINTIFY EXTERNAL ID:", externalId);
 
   const isShirt = productType === "Shirt";
@@ -345,6 +345,10 @@ async function createPrintifyOrder({
   );
 
   const orderData = await orderResponse.json();
+
+  if (!orderResponse.ok && orderResponse.status === 400) {
+    console.log("Likely duplicate Printify order:", orderData);
+  }
 
   return {
     ok: orderResponse.ok,
