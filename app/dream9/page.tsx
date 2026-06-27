@@ -537,7 +537,7 @@ export default function Dream9Page() {
                   key={index}
                   type="button"
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
-                  style={{ backgroundColor: classTint(type) }}
+                  style={{ backgroundColor: "transparent" }}
                   className="aspect-square overflow-hidden border border-black p-0 transition"
                 >
                   {car ? (
@@ -548,7 +548,7 @@ export default function Dream9Page() {
                         crossOrigin="anonymous"
                         decoding="sync"
                         loading="eager"
-                        className="absolute right-0 top-0 h-full w-auto max-w-none object-contain"
+                        className="absolute -right-[35%] -bottom-[0%] h-[95%] w-auto max-w-none object-contain"
                       />
                     </div>
                   ) : (
@@ -618,7 +618,7 @@ export default function Dream9Page() {
             <button
               type="button"
               onClick={() => setZoomed((z) => !z)}
-              className="absolute top-1 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-red-600 text-xl text-white shadow-lg transition hover:bg-red-700 active:scale-95"
+              className="absolute top-1 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-gray-400 text-xl text-white shadow-lg transition hover:bg-gray-600 active:scale-95"
               aria-label="Zoom Dream 9 preview"
             >
               🔍
