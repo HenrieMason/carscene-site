@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import { kv } from "@vercel/kv";
 import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs";
@@ -68,9 +69,24 @@ export async function POST(req: NextRequest) {
   const topic = req.headers.get("x-shopify-topic");
 
   const webhookId = req.headers.get("x-shopify-webhook-id");
-  console.log("WEBHOOK ID:", webhookId);
+    console.log("WEBHOOK ID:", webhookId);
 
   const isValid = verifyShopifyWebhook(rawBody, hmac);
+
+  if (!webhookId) {
+    return NextResponse.json({ error: "Missing webhook id" }, { status: 400 });
+  }
+
+  const lockKey = `shopify-webhook:${webhookId}`;
+
+  const alreadyProcessing = await kv.get(lockKey);
+
+  if (alreadyProcessing) {
+    console.log("Duplicate Shopify webhook skipped:", webhookId);
+    return NextResponse.json({ ok: true, duplicate: true });
+  }
+
+  await kv.set(lockKey, "processing", { ex: 60 * 60 * 24 * 7 });
 
   if (!isValid) {
     console.log("Invalid Shopify webhook");
