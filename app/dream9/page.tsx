@@ -328,19 +328,16 @@ export default function Dream9Page() {
       setIsMakingDesign(true);
 
       const exportWidth = 4494;
-      const exportHeight = 5097;
-      const pixelRatio = 1;
+
+      const rect = node.getBoundingClientRect();
+      const pixelRatio = exportWidth / rect.width;
 
       await waitForPosterImages(node);
       await new Promise((resolve) => setTimeout(resolve, 500));
 
       const dataUrl = await toPng(node, {
         cacheBust: true,
-        width: exportWidth,
-        height: exportHeight,
-        pixelRatio: 1,
-        canvasWidth: exportWidth,
-        canvasHeight: exportHeight,
+        pixelRatio,
         backgroundColor: "white",
         imagePlaceholder:
           "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
@@ -1014,7 +1011,7 @@ export default function Dream9Page() {
             height: "612.45px",
           }}
         >
-          <OldExportDesign exportMode />
+          <Dream9Design exportMode />
         </div>
       </div>
     </main>
