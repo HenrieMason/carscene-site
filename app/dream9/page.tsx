@@ -87,7 +87,7 @@ export default function Dream9Page() {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSectionRef = useRef<HTMLDivElement>(null);
   const instructionsRef = useRef<HTMLDivElement>(null);
-  const [zoomed, setZoomed] = useState(false);
+  const [zoomed, setZoomed] = useState(true);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const SHIRT_VARIANT_IDS = {
@@ -440,7 +440,7 @@ export default function Dream9Page() {
                   key={index}
                   type="button"
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
-                  style={{ backgroundColor: classTint(type) }}
+                  style={{ backgroundColor: "transparent" }}
                   className="aspect-square overflow-hidden border-[0.5px] border-black md:border p-0 transition"
                 >
                   {car ? (
@@ -451,7 +451,7 @@ export default function Dream9Page() {
                         crossOrigin="anonymous"
                         decoding="sync"
                         loading="eager"
-                        className="absolute right-0 top-0 h-full w-auto max-w-none object-contain"
+                        className="absolute -right-[35%] -bottom-[0%] h-[95%] w-auto max-w-none object-contain"
                       />
 
                       {!exportMode && deleteReadySlot === index && (
@@ -618,7 +618,7 @@ export default function Dream9Page() {
             <button
               type="button"
               onClick={() => setZoomed((z) => !z)}
-              className="absolute top-1 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white text-xl text-black shadow-lg transition hover:bg-white/90 active:scale-95"
+              className="absolute top-1 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-red-600 text-xl text-white shadow-lg transition hover:bg-red-700 active:scale-95"
               aria-label="Zoom Dream 9 preview"
             >
               🔍
