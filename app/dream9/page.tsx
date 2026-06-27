@@ -451,7 +451,7 @@ export default function Dream9Page() {
                         crossOrigin="anonymous"
                         decoding="sync"
                         loading="eager"
-                        className="absolute left-1/2 top-1/2 w-[200%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
+                        className="absolute right-0 top-0 h-full w-auto max-w-none object-contain"
                       />
 
                       {!exportMode && deleteReadySlot === index && (
@@ -548,7 +548,7 @@ export default function Dream9Page() {
                         crossOrigin="anonymous"
                         decoding="sync"
                         loading="eager"
-                        className="absolute left-1/2 top-1/2 w-[200%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
+                        className="absolute right-0 top-0 h-full w-auto max-w-none object-contain"
                       />
                     </div>
                   ) : (
