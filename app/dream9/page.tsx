@@ -332,11 +332,7 @@ export default function Dream9Page() {
 
       const dataUrl = await toPng(node, {
         cacheBust: true,
-        pixelRatio: 1,
-        width: 4494,
-        height: 5097,
-        canvasWidth: 4494,
-        canvasHeight: 5097,
+        pixelRatio: 8.3222222222,
         backgroundColor: "white",
         imagePlaceholder:
           "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
@@ -1010,8 +1006,8 @@ export default function Dream9Page() {
         <div
           ref={exportRef}
           style={{
-            width: "4494px",
-            height: "5097px",
+            width: "540px",
+            height: "612.45px",
           }}
         >
           <OldExportDesign exportMode />
