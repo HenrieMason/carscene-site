@@ -1015,7 +1015,7 @@ export default function Dream9Page() {
             height: "612.45px",
           }}
         >
-          <Dream9Design exportMode />
+          <OldExportDesign exportMode />
         </div>
       </div>
     </main>
