@@ -376,8 +376,12 @@ export default function Dream9Page() {
 
       window.location.href = checkoutUrl + "&return_to=/checkout";
     } catch (error) {
-      console.error(error);
-      alert("Failed to create design.");
+      console.error("MAKE POSTER FAILED:", error);
+      alert(
+        error instanceof Error
+          ? error.message
+          : "Failed to create design."
+      );
     } finally {
       setIsMakingDesign(false);
     }
