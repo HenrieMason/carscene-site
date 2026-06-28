@@ -600,7 +600,7 @@ export default function Dream9Page() {
           </h1>
 
           <p className="mt-3 text-sm font-bold text-white/55">
-            Select your 9 favorite cars.
+            Tap any car to make it yours.
           </p>
         </div>
 
