@@ -633,7 +633,7 @@ export default function Dream9Page() {
           </div>
         </div>
 
-        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
+        <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={shuffleDream9}
