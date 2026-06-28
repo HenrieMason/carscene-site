@@ -952,14 +952,18 @@ export default function Dream9Page() {
                         onClick={() => {
                           setFeaturedSeed((s) => s + 1);
 
-                          setTimeout(() => {
-                            searchSectionRef.current
-                              ?.querySelector(".overflow-y-auto")
-                              ?.scrollTo({
+                          requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                              (
+                                searchSectionRef.current?.querySelector(
+                                  ".overflow-y-auto"
+                                ) as HTMLDivElement | null
+                              )?.scrollTo({
                                 top: 0,
                                 behavior: "smooth",
                               });
-                          }, 0);
+                            });
+                          });
                         }}
                         className="mt-3 w-full bg-white/10 py-3 text-sm font-black text-white transition hover:bg-white/15"
                       >
