@@ -633,7 +633,25 @@ export default function Dream9Page() {
           </div>
         </div>
 
-        <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
+        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              onClick={shuffleDream9}
+              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+            >
+              Shuffle
+            </button>
+
+            <button
+              onClick={clearDream9}
+              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
           <button
             onClick={() => {
               if (!allSlotsFilled) return;
@@ -686,24 +704,6 @@ export default function Dream9Page() {
               ))}
             </div>
           )}
-        </div>
-
-        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              onClick={shuffleDream9}
-              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
-            >
-              Shuffle
-            </button>
-
-            <button
-              onClick={clearDream9}
-              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
-            >
-              Clear
-            </button>
-          </div>
         </div>
 
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
