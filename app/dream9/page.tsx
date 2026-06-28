@@ -778,7 +778,7 @@ export default function Dream9Page() {
           </h3>
 
           <p className="mt-1 text-sm text-white/60">
-            Build your dream garage and go car spotting!
+            Build your dream garage and go car spotting.
           </p>
 
           <div className="mt-3 grid grid-cols-2 gap-2">
