@@ -118,15 +118,19 @@ export default function Dream9Page() {
       .sort(() => Math.random() - 0.5)
       .slice(0, 9);
   }
-  const [slots, setSlots] = useState<(Car | null)[]>(() => {
+  const [slots, setSlots] = useState<(Car | null)[]>(Array(9).fill(null));
+
+  useEffect(() => {
     const randomFeatured = [...featuredCars]
       .sort(() => Math.random() - 0.5)
       .slice(0, 9);
 
-    return randomFeatured.map(
-      (name) => allCars.find((car) => car.model === name) ?? null
+    setSlots(
+      randomFeatured.map(
+        (name) => allCars.find((car) => car.model === name) ?? null
+      )
     );
-  });
+  }, []);
 
   const [shirtSize, setShirtSize] = useState<"M" | "L" | "XL" | "2XL" | null>(null);
   const [showSizePicker, setShowSizePicker] = useState(false);
@@ -192,11 +196,15 @@ export default function Dream9Page() {
     return allCars.filter((car) => car.brand === selectedBrand);
   }, [selectedBrand, allCars]);
 
-  const featuredCarsList = useMemo(() => {
-    return [...allCars]
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 100);
-  }, [allCars, featuredSeed]);
+  const [featuredCarsList, setFeaturedCarsList] = useState<Car[]>([]);
+
+  useEffect(() => {
+    setFeaturedCarsList(
+      [...allCars]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 100)
+    );
+  }, [featuredSeed]);
 
   function shuffleDream9() {
     setSlots(getRandomDream9());
@@ -636,7 +644,7 @@ export default function Dream9Page() {
               isMakingDesign
                 ? "bg-red-700 text-white"
                 : allSlotsFilled
-                ? "animate-pulse bg-red-600 text-white hover:bg-red-700"
+                ? "bg-red-600 text-white hover:bg-red-700"
                 : "cursor-not-allowed bg-white/10 text-white"
             }`}
           >
