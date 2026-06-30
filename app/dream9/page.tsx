@@ -742,7 +742,7 @@ export default function Dream9Page() {
 
         <div className="relative mx-auto mb-4 flex min-h-[260px] w-full max-w-[540px] flex-col overflow-hidden border border-white/10 bg-white/[0.04] p-6">
         <img
-          src="/shirtman.png"
+          src="/ShirtMan.png"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-80"
