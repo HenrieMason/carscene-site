@@ -740,27 +740,19 @@ export default function Dream9Page() {
           ))}
         </div>
 
-        <div className="relative mx-auto mb-4 flex min-h-[260px] w-full max-w-[540px] flex-col overflow-hidden border border-white/10 bg-white/[0.04] p-6">
-        <img
-          src="/shirtman.png"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-80"
-        />
-        <div className="relative z-10 flex h-full flex-1 flex-col justify-end">
+        <div className="mx-auto mb-4 w-full max-w-[540px] border border-white/10 bg-white/[0.04] p-4">
+            <h3 className="text-lg font-black">
+              Get 10% Off Your Dream 9 Shirt
+            </h3>
 
-          <h3 className="text-lg font-black">
-            Get 10% Off Your Dream 9 Shirt
-          </h3>
+            <p className="mt-1 text-sm text-white/60">
+              {emailSubmitted
+                ? "Success! Use code GARAGE10 at checkout."
+                : "Enter your email and we'll send you a coupon code."}
+            </p>
 
-          <p className="mt-1 text-sm text-white/60">
-            {emailSubmitted
-              ? "Success! Use code GARAGE10 at checkout."
-              : "Enter your email and we'll send you a coupon code."}
-          </p>
-
-          {!emailSubmitted && (
-            <div className="mt-3 flex gap-2">
+            {!emailSubmitted && (
+              <div className="mt-3 flex gap-2">
                 <input
                   type="email"
                   value={email}
@@ -778,6 +770,35 @@ export default function Dream9Page() {
                 </button>
               </div>
             )}
+          </div>
+
+        <div className="mx-auto mb-4 w-full max-w-[540px] border border-white/10 bg-white/[0.04] p-4">
+          <h3 className="text-lg font-black">
+            Like cars? Download the app.
+          </h3>
+
+          <p className="mt-1 text-sm text-white/60">
+            Build your dream garage and go car spotting.
+          </p>
+
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <a
+              href="https://apps.apple.com/us/app/carscene-dream-garage/id6760978493"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white/10 px-4 py-3 text-center text-sm font-black text-white transition hover:bg-white/15"
+            >
+              iPhone
+            </a>
+
+            <a
+              href="https://play.google.com/store/apps/details?id=com.carscene.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white/10 px-4 py-3 text-center text-sm font-black text-white transition hover:bg-white/15"
+            >
+              Android
+            </a>
           </div>
         </div>
 
@@ -997,37 +1018,6 @@ export default function Dream9Page() {
                 </div>
               )}
              </div>
-          </div>
-
-          {/* APP DOWNLOAD */}
-          <div className="mt-4 border border-white/10 bg-white/[0.04] p-4">
-            <h3 className="text-lg font-black">
-              Like cars? Download the app.
-            </h3>
-
-            <p className="mt-1 text-sm text-white/60">
-              Build your dream garage and go car spotting.
-            </p>
-
-            <div className="mt-3 grid grid-cols-2 gap-2">
-              <a
-                href="https://apps.apple.com/us/app/carscene-dream-garage/id6760978493"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white/10 px-4 py-3 text-center text-sm font-black text-white transition hover:bg-white/15"
-              >
-                iPhone
-              </a>
-
-              <a
-                href="https://play.google.com/store/apps/details?id=com.carscene.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white/10 px-4 py-3 text-center text-sm font-black text-white transition hover:bg-white/15"
-              >
-                Android
-              </a>
-            </div>
           </div>
         </section>
       </div>
