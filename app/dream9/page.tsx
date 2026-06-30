@@ -760,19 +760,19 @@ export default function Dream9Page() {
           </p>
 
           {!emailSubmitted && (
-            <div className="mt-3 flex gap-2">
+            <div className="mt-3 grid grid-cols-[1fr_auto] gap-2">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email address"
-                  className="min-w-0 flex-1 bg-white/10 px-4 py-3 outline-none"
+                  className="min-w-0 flex-1 border border-white/10 bg-white/10 px-4 py-3 text-white outline-none placeholder:text-white/40"
                 />
 
                 <button
                   onClick={submitEmail}
                   disabled={isSubmittingEmail}
-                  className="bg-red-600 px-5 py-3 font-black text-white hover:bg-red-700 disabled:opacity-60"
+                  className="min-w-[170px] py-3 text-sm font-black text-white transition bg-red-600 hover:bg-red-700 disabled:opacity-60"
                 >
                   {isSubmittingEmail ? "Saving..." : "Get 10% Off"}
                 </button>
