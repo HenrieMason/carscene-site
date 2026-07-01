@@ -682,7 +682,7 @@ export default function Dream9Page() {
 
           <div className="text-center">
             <p className="mt-2 text-sm font-black text-white/80">
-              Free 7–10 Day Shipping
+              🚚 Free 7–10 Day Shipping
             </p>
           </div>
 
