@@ -651,12 +651,6 @@ export default function Dream9Page() {
           </div>
         </div>
 
-        <div className="mx-auto mb-3 w-full max-w-[540px] text-center">
-          <p className="text-sm font-black text-white/80">
-            🚚 Free 7–10 Day Shipping
-          </p>
-        </div>
-
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
           <button
             onClick={() => {
@@ -685,6 +679,12 @@ export default function Dream9Page() {
               "Buy Shirt - $34.99 USD"
             )}
           </button>
+
+          <div className="text-center">
+            <p className="mt-2 text-sm font-black text-white/80">
+              Free 7–10 Day Shipping
+            </p>
+          </div>
 
           {showSizePicker && allSlotsFilled && (
             <div className="grid grid-cols-4 gap-2">
