@@ -680,9 +680,13 @@ export default function Dream9Page() {
             )}
           </button>
 
-          <div className="text-center">
-            <p className="mt-2 text-sm font-black text-white/80">
+          <div className="mt-2 text-center space-y-1">
+            <p className="text-sm font-black text-white/80">
               🚚 Free 7–10 Day Shipping
+            </p>
+
+            <p className="text-sm font-black text-white/80">
+              🔥 100+ Dream 9 Shirts Ordered in June
             </p>
           </div>
 
@@ -785,13 +789,7 @@ export default function Dream9Page() {
             )}
           </div>
         </div>
-
-        <div className="mx-auto mb-4 w-full max-w-[540px] text-center">
-          <p className="text-sm font-black text-white/80">
-            🔥 100+ Dream 9 Shirts Ordered in June
-          </p>
-        </div>
-
+        
         </section>
 
         <section className="order-2 min-w-0 lg:order-1">
