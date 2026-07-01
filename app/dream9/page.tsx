@@ -80,15 +80,7 @@ function classTint(type: string) {
   }
 }
 
-export default function Dream9Page() {
-  const allCars = cars as Car[];
-  const posterRef = useRef<HTMLDivElement>(null);
-  const exportRef = useRef<HTMLDivElement>(null);
-  const searchInputRef = useRef<HTMLInputElement>(null);
-  const searchSectionRef = useRef<HTMLDivElement>(null);
-  const instructionsRef = useRef<HTMLDivElement>(null);
-  const [zoomed, setZoomed] = useState(true);
-
+function HeroRotatingMessage() {
   const heroMessages = [
     "Tap any car to make it yours.",
     "🚚 Free 7–10 Day Shipping",
@@ -98,6 +90,43 @@ export default function Dream9Page() {
 
   const [heroMessageIndex, setHeroMessageIndex] = useState(0);
   const [heroVisible, setHeroVisible] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroVisible(false);
+
+      const timeout = setTimeout(() => {
+        setHeroMessageIndex(
+          (current) => (current + 1) % heroMessages.length
+        );
+        setHeroVisible(true);
+      }, 300);
+
+      return () => clearTimeout(timeout);
+    }, 7500);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <p
+      className={`mt-3 h-5 text-sm font-bold text-white/55 transition-opacity duration-300 ${
+        heroVisible ? "opacity-100" : "opacity-0"
+      }`}
+    >
+      {heroMessages[heroMessageIndex]}
+    </p>
+  );
+}
+
+export default function Dream9Page() {
+  const allCars = cars as Car[];
+  const posterRef = useRef<HTMLDivElement>(null);
+  const exportRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchSectionRef = useRef<HTMLDivElement>(null);
+  const instructionsRef = useRef<HTMLDivElement>(null);
+  const [zoomed, setZoomed] = useState(true);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const SHIRT_VARIANT_IDS = {
@@ -117,22 +146,6 @@ export default function Dream9Page() {
         year: "numeric",
       })
     );
-  }, []);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Fade out
-      setHeroVisible(false);
-
-      // After fade out, switch text and fade back in
-      setTimeout(() => {
-        setHeroMessageIndex(
-          (current) => (current + 1) % heroMessages.length
-        );
-        setHeroVisible(true);
-      }, 300);
-    }, 7500);
-
-    return () => clearInterval(interval);
   }, []);
   const [query, setQuery] = useState("");
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
@@ -633,13 +646,7 @@ export default function Dream9Page() {
             <span className="text-red-600">All on one shirt.</span>
           </h1>
 
-          <p
-            className={`mt-3 h-5 text-sm font-bold text-white/55 transition-opacity duration-300 ${
-              heroVisible ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            {heroMessages[heroMessageIndex]}
-          </p>
+        <HeroRotatingMessage />
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
