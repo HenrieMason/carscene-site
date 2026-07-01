@@ -89,6 +89,16 @@ export default function Dream9Page() {
   const instructionsRef = useRef<HTMLDivElement>(null);
   const [zoomed, setZoomed] = useState(true);
 
+  const heroMessages = [
+    "Tap any car to make it yours.",
+    "🚚 Free 7–10 Day Shipping",
+    "🔥 100+ Dream 9 Shirts Ordered in June",
+    "👕 Made Just for You",
+  ];
+
+  const [heroMessageIndex, setHeroMessageIndex] = useState(0);
+  const [heroVisible, setHeroVisible] = useState(true);
+
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const SHIRT_VARIANT_IDS = {
   M: "53558192668979",
@@ -107,6 +117,22 @@ export default function Dream9Page() {
         year: "numeric",
       })
     );
+  }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Fade out
+      setHeroVisible(false);
+
+      // After fade out, switch text and fade back in
+      setTimeout(() => {
+        setHeroMessageIndex(
+          (current) => (current + 1) % heroMessages.length
+        );
+        setHeroVisible(true);
+      }, 300);
+    }, 7500);
+
+    return () => clearInterval(interval);
   }, []);
   const [query, setQuery] = useState("");
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
@@ -607,8 +633,12 @@ export default function Dream9Page() {
             <span className="text-red-600">All on one shirt.</span>
           </h1>
 
-          <p className="mt-3 text-sm font-bold text-white/55">
-            Tap any car to make it yours.
+          <p
+            className={`mt-3 h-5 text-sm font-bold text-white/55 transition-opacity duration-300 ${
+              heroVisible ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {heroMessages[heroMessageIndex]}
           </p>
         </div>
 
@@ -753,10 +783,10 @@ export default function Dream9Page() {
             Get 10% Off Your Dream 9 Shirt
           </h3>
 
-          <p className="mt-1 text-sm text-white/60">
+          <p className="mt-1 text-sm text-white">
             {emailSubmitted
               ? "Success! Use code GARAGE10 at checkout."
-              : "Enter your email and we'll send you a coupon code."}
+              : "Enter your email and we'll display a coupon code."}
           </p>
 
           {!emailSubmitted && (
@@ -766,9 +796,8 @@ export default function Dream9Page() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email address"
-                  className="min-w-0 flex-1 bg-white/10 px-4 py-3 outline-none"
+                  className="min-w-0 flex-1 border border-white bg-white/10 px-4 py-3 text-white placeholder:text-white/70 outline-none"
                 />
-
                 <button
                   onClick={submitEmail}
                   disabled={isSubmittingEmail}
