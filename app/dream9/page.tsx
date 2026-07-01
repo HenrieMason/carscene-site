@@ -89,31 +89,17 @@ function HeroRotatingMessage() {
   ];
 
   const [heroMessageIndex, setHeroMessageIndex] = useState(0);
-  const [heroVisible, setHeroVisible] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setHeroVisible(false);
-
-      const timeout = setTimeout(() => {
-        setHeroMessageIndex(
-          (current) => (current + 1) % heroMessages.length
-        );
-        setHeroVisible(true);
-      }, 300);
-
-      return () => clearTimeout(timeout);
+      setHeroMessageIndex((current) => (current + 1) % heroMessages.length);
     }, 7500);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <p
-      className={`mt-3 h-5 text-sm font-bold text-white/55 transition-opacity duration-300 ${
-        heroVisible ? "opacity-100" : "opacity-0"
-      }`}
-    >
+    <p className="mt-3 h-5 text-sm font-bold text-white/55">
       {heroMessages[heroMessageIndex]}
     </p>
   );
@@ -652,7 +638,7 @@ export default function Dream9Page() {
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
           <div ref={posterRef} className="relative overflow-visible">
             <div
-              className={`origin-[50%_30%] transform-gpu will-change-transform transition-transform duration-300 ${
+              className={`origin-[50%_30%] transition-transform duration-300 ${
                 zoomed ? "scale-[2.1]" : "scale-100"
               }`}
             >
