@@ -80,31 +80,6 @@ function classTint(type: string) {
   }
 }
 
-function HeroRotatingMessage() {
-  const heroMessages = [
-    "Tap any car to make it yours.",
-    "🚚 Free 7–10 Day Shipping",
-    "🔥 100+ Dream 9 Shirts Ordered in June",
-    "👕 Made Just for You",
-  ];
-
-  const [heroMessageIndex, setHeroMessageIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setHeroMessageIndex((current) => (current + 1) % heroMessages.length);
-    }, 7500);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <p className="mt-3 h-5 text-sm font-bold text-white/55">
-      {heroMessages[heroMessageIndex]}
-    </p>
-  );
-}
-
 export default function Dream9Page() {
   const allCars = cars as Car[];
   const posterRef = useRef<HTMLDivElement>(null);
@@ -632,7 +607,9 @@ export default function Dream9Page() {
             <span className="text-red-600">All on one shirt.</span>
           </h1>
 
-        <HeroRotatingMessage />
+        <p className="mt-3 text-sm font-bold text-white/55">
+          Tap any car to make it yours.
+        </p>
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
@@ -672,6 +649,12 @@ export default function Dream9Page() {
               Clear
             </button>
           </div>
+        </div>
+
+        <div className="mx-auto mb-3 w-full max-w-[540px] text-center">
+          <p className="text-sm font-black text-white/80">
+            🚚 Free 7–10 Day Shipping
+          </p>
         </div>
 
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
@@ -801,6 +784,12 @@ export default function Dream9Page() {
               </div>
             )}
           </div>
+        </div>
+
+        <div className="mx-auto mb-4 w-full max-w-[540px] text-center">
+          <p className="text-sm font-black text-white/80">
+            🔥 100+ Dream 9 Shirts Ordered in June
+          </p>
         </div>
 
         </section>
