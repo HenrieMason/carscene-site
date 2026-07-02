@@ -1049,12 +1049,12 @@ export default function Dream9Page() {
               <span className="text-red-600">your 9 dream cars.</span>
             </h2>
 
-            <div className="mt-5 grid grid-cols-2 gap-2">
+            <div className="-mt-6 grid grid-cols-2 gap-2">
               <div>
                 <img
                   src="/carscenefront.png"
                   alt="Front of Dream 9 shirt"
-                  className="h-[340px] w-full scale-125 object-contain"
+                  className="h-[300px] w-full scale-110 object-contain"
                 />
                 <p className="-mt-3 text-sm font-black text-white/70">Front</p>
               </div>
@@ -1063,7 +1063,7 @@ export default function Dream9Page() {
                 <img
                   src="/og-image.jpg"
                   alt="Back of Dream 9 shirt"
-                  className="h-[340px] w-full scale-125 object-contain"
+                  className="h-[300px] w-full scale-110 object-contain"
                 />
                 <p className="-mt-3 text-sm font-black text-white/70">Back</p>
               </div>
@@ -1071,7 +1071,7 @@ export default function Dream9Page() {
 
             <button
               onClick={closeIntroPopup}
-              className="mt-3 w-full bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
+              className="mt-1 w-full bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
             >
               Start Building
             </button>
