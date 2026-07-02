@@ -80,6 +80,25 @@ function classTint(type: string) {
   }
 }
 
+const DREAM9_COLORS = [
+  "#e3e3e3",
+  "#92c2ea",
+  "#aa94d1",
+  "#fbd050",
+  "#ff3131",
+  "#ffffff",
+  "#111111",
+  "#ff8c00",
+  "#34d399",
+  "#f472b6",
+];
+
+function getRandomSlotColors() {
+  return Array.from({ length: 9 }, () =>
+    DREAM9_COLORS[Math.floor(Math.random() * DREAM9_COLORS.length)]
+  );
+}
+
 export default function Dream9Page() {
   const allCars = cars as Car[];
   const posterRef = useRef<HTMLDivElement>(null);
@@ -88,7 +107,6 @@ export default function Dream9Page() {
   const searchSectionRef = useRef<HTMLDivElement>(null);
   const instructionsRef = useRef<HTMLDivElement>(null);
   const [zoomed, setZoomed] = useState(true);
-  const [showFront, setShowFront] = useState(false);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const SHIRT_VARIANT_IDS = {
@@ -101,13 +119,17 @@ export default function Dream9Page() {
   const [today, setToday] = useState("");
 
   useEffect(() => {
-    setToday(
-      new Date().toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      })
+    const randomFeatured = [...featuredCars]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 9);
+
+    setSlots(
+      randomFeatured.map(
+        (name) => allCars.find((car) => car.model === name) ?? null
+      )
     );
+
+    setSlotColors(getRandomSlotColors());
   }, []);
   const [query, setQuery] = useState("");
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
@@ -120,18 +142,8 @@ export default function Dream9Page() {
       .slice(0, 9);
   }
   const [slots, setSlots] = useState<(Car | null)[]>(Array(9).fill(null));
-
-  useEffect(() => {
-    const randomFeatured = [...featuredCars]
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 9);
-
-    setSlots(
-      randomFeatured.map(
-        (name) => allCars.find((car) => car.model === name) ?? null
-      )
-    );
-  }, []);
+  const [slotColors, setSlotColors] = useState<string[]>(getRandomSlotColors);
+  const [openColorSlot, setOpenColorSlot] = useState<number | null>(null);
 
   const [shirtSize, setShirtSize] = useState<"M" | "L" | "XL" | "2XL" | null>(null);
   const [showSizePicker, setShowSizePicker] = useState(false);
@@ -144,7 +156,7 @@ export default function Dream9Page() {
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
 
   useEffect(() => {
-    setShowIntroPopup(false);
+    setShowIntroPopup(true);
   }, []);
 
   function closeIntroPopup() {
@@ -208,6 +220,7 @@ export default function Dream9Page() {
 
   function shuffleDream9() {
     setSlots(getRandomDream9());
+    setSlotColors(getRandomSlotColors());
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
@@ -216,6 +229,7 @@ export default function Dream9Page() {
 
   function clearDream9() {
     setSlots(Array(9).fill(null));
+    setSlotColors(getRandomSlotColors());
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
@@ -277,6 +291,16 @@ export default function Dream9Page() {
         behavior: "smooth",
       });
     }, 100);
+  }
+
+  function changeSlotColor(index: number, color: string) {
+    setSlotColors((current) => {
+      const next = [...current];
+      next[index] = color;
+      return next;
+    });
+
+    setOpenColorSlot(null);
   }
 
   async function submitEmail() {
@@ -447,11 +471,14 @@ export default function Dream9Page() {
                   key={index}
                   type="button"
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
-                  style={{ backgroundColor: "transparent" }}
+                  style={{ backgroundColor: slotColors[realIndex] }}
                   className="aspect-square overflow-hidden border-[0.5px] border-black md:border p-0 transition"
                 >
                   {car ? (
-                    <div className="relative h-full w-full overflow-hidden">
+                    <div
+                      className="relative h-full w-full overflow-hidden"
+                      style={{ backgroundColor: slotColors[realIndex] }}
+                    >
                       <img
                         src={car.image}
                         alt={car.model}
@@ -459,6 +486,10 @@ export default function Dream9Page() {
                         decoding="sync"
                         loading="eager"
                         className="absolute -right-[35%] -bottom-[0%] h-[95%] w-auto max-w-none object-contain"
+                        style={{
+                          mixBlendMode: "multiply",
+                          filter: "contrast(1.15) saturate(1.1)",
+                        }}
                       />
 
                       {!exportMode && deleteReadySlot === index && (
@@ -544,11 +575,14 @@ export default function Dream9Page() {
                   key={index}
                   type="button"
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
-                  style={{ backgroundColor: "transparent" }}
+                  style={{ backgroundColor: slotColors[realIndex] }}
                   className="aspect-square overflow-hidden border border-black p-0 transition"
                 >
                   {car ? (
-                    <div className="relative h-full w-full overflow-hidden">
+                    <div
+                      className="relative h-full w-full overflow-hidden"
+                      style={{ backgroundColor: slotColors[realIndex] }}
+                    >
                       <img
                         src={car.image}
                         alt={car.model}
@@ -556,6 +590,10 @@ export default function Dream9Page() {
                         decoding="sync"
                         loading="eager"
                         className="absolute -right-[35%] -bottom-[0%] h-[95%] w-auto max-w-none object-contain"
+                        style={{
+                          mixBlendMode: "multiply",
+                          filter: "contrast(1.15) saturate(1.1)",
+                        }}
                       />
                     </div>
                   ) : (
@@ -619,29 +657,8 @@ export default function Dream9Page() {
                 zoomed ? "scale-[2.1]" : "scale-100"
               }`}
             >
-              {showFront ? (
-                <div className="relative aspect-[4494/5097] w-full overflow-hidden">
-                  <img
-                    src="/carscenefront.png"
-                    alt="Front of Dream 9 shirt"
-                    className="absolute inset-0 h-full w-full scale-150 object-contain"
-                  />
-                </div>
-              ) : (
-                <Dream9Design />
-              )}
+              <Dream9Design />
             </div>
-            <button
-              type="button"
-              onClick={() => {
-                setZoomed(false);
-                setShowFront((v) => !v);
-              }}
-              className="absolute top-1 left-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-gray-400 text-xl text-white shadow-lg transition hover:bg-gray-600 active:scale-95"
-              aria-label="Flip shirt preview"
-            >
-              ⇄
-            </button>
 
             <button
               type="button"
@@ -697,9 +714,19 @@ export default function Dream9Page() {
             ) : showSizePicker ? (
               "Select Shirt Size"
             ) : (
-              "Buy Shirt - $34.99 (Free Shipping)"
+              "Buy Shirt - $34.99 USD"
             )}
           </button>
+
+          <div className="mt-2 text-center space-y-1">
+            <p className="text-sm font-black text-white/80">
+              🚚 Free 7–10 Day Shipping
+            </p>
+
+            <p className="text-sm font-black text-white/80">
+              🔥 100+ Dream 9 Shirts Ordered in June
+            </p>
+          </div>
 
           {showSizePicker && allSlotsFilled && (
             <div className="grid grid-cols-4 gap-2">
@@ -750,9 +777,53 @@ export default function Dream9Page() {
               {car ? (
                 <div className="flex items-center justify-between gap-3">
                   <span className="min-w-0 truncate">{car.model}</span>
-                  <span className="shrink-0 bg-black/10 px-3 py-1 text-xs font-black text-black/70">
-                    Replace
-                  </span>
+                  <div className="relative shrink-0">
+                    <span
+                      role="button"
+                      tabIndex={0}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setOpenColorSlot(openColorSlot === realIndex ? null : realIndex);
+                      }}
+                      style={{ backgroundColor: slotColors[realIndex] }}
+                      className="block h-8 w-8 rounded-full border-2 border-black shadow cursor-pointer"
+                      aria-label="Choose color"
+                    />
+
+                    {openColorSlot === realIndex && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute right-0 top-10 z-50 rounded-xl border border-black/20 bg-white p-3 shadow-xl"
+                      >
+                        <input
+                          type="color"
+                          value={slotColors[realIndex]}
+                          onChange={(e) => {
+                            const color = e.target.value;
+
+                            // Reduce saturation to 60%
+                            const ctx = document.createElement("canvas").getContext("2d")!;
+                            ctx.fillStyle = color;
+
+                            const rgb = ctx.fillStyle.match(/\d+/g)!.map(Number);
+                            const [r, g, b] = rgb;
+
+                            const gray = (r + g + b) / 3;
+                            const amount = 0.6; // 0 = grayscale, 1 = full color
+
+                            const newColor = `rgb(
+                              ${Math.round(gray + (r - gray) * amount)},
+                              ${Math.round(gray + (g - gray) * amount)},
+                              ${Math.round(gray + (b - gray) * amount)}
+                            )`;
+
+                            changeSlotColor(realIndex, newColor);
+                          }}
+                          className="h-16 w-16 cursor-pointer border-0 bg-transparent p-0"
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
               ) : (
                 "Select a Car"
