@@ -143,11 +143,10 @@ export default function Dream9Page() {
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
 
   useEffect(() => {
-    setShowIntroPopup(false);
+    setShowIntroPopup(true);
   }, []);
 
   function closeIntroPopup() {
-    localStorage.setItem("dream9-popup-seen", "true");
     setShowIntroPopup(false);
   }
 
@@ -1042,23 +1041,39 @@ export default function Dream9Page() {
       </div>
 
       {showIntroPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 px-5">
-          <div className="w-full max-w-sm border border-white/10 bg-[#111] p-6 text-center shadow-2xl">
-            <h2 className="text-2xl font-black tracking-tight text-white">
-              Customize your Dream 9
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
+          <div className="w-full max-w-xl border border-white/10 bg-[#111] p-5 text-center shadow-2xl">
+            <h2 className="text-3xl font-black leading-[0.95] tracking-tight text-white">
+              Build a shirt with
+              <br />
+              <span className="text-red-600">your 9 dream cars.</span>
             </h2>
 
-            <div className="mt-4 space-y-2 text-left text-sm font-bold leading-relaxed text-white/70">
-              <p>• Double-tap a car to remove it.</p>
-              <p>• Scroll down to search for cars.</p>
-              <p>• Build a T-Shirt or Poster.</p>
+            <div className="mt-5 grid grid-cols-2 gap-2">
+              <div>
+                <img
+                  src="/carscenefront.png"
+                  alt="Front of Dream 9 shirt"
+                  className="h-[260px] w-full object-contain"
+                />
+                <p className="-mt-3 text-sm font-black text-white/70">Front</p>
+              </div>
+
+              <div>
+                <img
+                  src="/og-image.jpg"
+                  alt="Back of Dream 9 shirt"
+                  className="h-[260px] w-full object-contain"
+                />
+                <p className="-mt-3 text-sm font-black text-white/70">Back</p>
+              </div>
             </div>
 
             <button
               onClick={closeIntroPopup}
-              className="mt-6 w-full bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
+              className="mt-3 w-full bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
             >
-              Got it
+              Start Building
             </button>
           </div>
         </div>
