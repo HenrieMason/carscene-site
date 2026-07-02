@@ -608,7 +608,7 @@ export default function Dream9Page() {
           </h1>
 
         <p className="mt-3 text-sm font-bold text-white/55">
-          Tap any car to make it yours.
+          Tap any car to replace it.
         </p>
         </div>
 
