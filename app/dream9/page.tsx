@@ -1054,7 +1054,7 @@ export default function Dream9Page() {
                 <img
                   src="/carscenefront.png"
                   alt="Front of Dream 9 shirt"
-                  className="h-[260px] w-full object-contain"
+                  className="h-[340px] w-full scale-125 object-contain"
                 />
                 <p className="-mt-3 text-sm font-black text-white/70">Front</p>
               </div>
@@ -1063,7 +1063,7 @@ export default function Dream9Page() {
                 <img
                   src="/og-image.jpg"
                   alt="Back of Dream 9 shirt"
-                  className="h-[260px] w-full object-contain"
+                  className="h-[340px] w-full scale-125 object-contain"
                 />
                 <p className="-mt-3 text-sm font-black text-white/70">Back</p>
               </div>
