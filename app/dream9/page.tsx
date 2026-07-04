@@ -84,6 +84,7 @@ export default function Dream9Page() {
   const allCars = cars as Car[];
   const posterRef = useRef<HTMLDivElement>(null);
   const exportRef = useRef<HTMLDivElement>(null);
+  const shareExportRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSectionRef = useRef<HTMLDivElement>(null);
   const instructionsRef = useRef<HTMLDivElement>(null);
@@ -327,12 +328,12 @@ export default function Dream9Page() {
   }
 
   async function shareDream9() {
-    if (!exportRef.current || !allSlotsFilled) {
+    if (!shareExportRef.current || !allSlotsFilled) {
       alert("Fill all 9 slots before sharing.");
       return;
     }
 
-    const node = exportRef.current;
+    const node = shareExportRef.current;
 
     try {
       await waitForPosterImages(node);
@@ -563,7 +564,13 @@ export default function Dream9Page() {
     );
   }
 
-  function OldExportDesign({ exportMode = false }: { exportMode?: boolean }) {
+  function OldExportDesign({
+    exportMode = false,
+    title = "Dream 9",
+  }: {
+    exportMode?: boolean;
+    title?: string;
+  }) {
     return (
       <div
         className={`w-full text-black ${
@@ -579,7 +586,7 @@ export default function Dream9Page() {
                 letterSpacing: "-0.04em",
               }}
             >
-              Dream 9
+              {title}
             </div>
           </div>
 
@@ -1153,7 +1160,17 @@ export default function Dream9Page() {
             height: "612.45px",
           }}
         >
-          <OldExportDesign exportMode />
+          <OldExportDesign exportMode title="Dream 9" />
+        </div>
+
+        <div
+          ref={shareExportRef}
+          style={{
+            width: "540px",
+            height: "612.45px",
+          }}
+        >
+          <OldExportDesign exportMode title="My Dream 9" />
         </div>
       </div>
     </main>
