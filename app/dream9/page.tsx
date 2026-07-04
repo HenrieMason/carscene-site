@@ -595,7 +595,7 @@ export default function Dream9Page() {
                   top: "-18px",
                 }}
               >
-                Build yours at carsceneapp.com
+                carsceneapp.com
               </div>
             )}
           </div>
