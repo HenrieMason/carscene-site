@@ -325,6 +325,54 @@ export default function Dream9Page() {
       })
     );
   }
+
+  async function shareDream9() {
+    if (!exportRef.current || !allSlotsFilled) {
+      alert("Fill all 9 slots before sharing.");
+      return;
+    }
+
+    const node = exportRef.current;
+
+    try {
+      await waitForPosterImages(node);
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      const dataUrl = await toPng(node, {
+        cacheBust: true,
+        pixelRatio: 4,
+        backgroundColor: "white",
+        imagePlaceholder:
+          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
+      });
+
+      const blob = await (await fetch(dataUrl)).blob();
+
+      const file = new File([blob], "dream9-carscene.png", {
+        type: "image/png",
+      });
+
+      if (
+        navigator.canShare &&
+        navigator.canShare({ files: [file] }) &&
+        navigator.share
+      ) {
+        await navigator.share({
+          title: "My Dream 9 Garage",
+          text: "Build your own Dream 9 at carsceneapp.com",
+          files: [file],
+        });
+      } else {
+        const link = document.createElement("a");
+        link.href = dataUrl;
+        link.download = "dream9-carscene.png";
+        link.click();
+      }
+    } catch (error) {
+      console.error("SHARE DREAM 9 FAILED:", error);
+      alert("Could not share your Dream 9. Try again.");
+    }
+  }
   
   async function makePoster(size: "M" | "L" | "XL" | "2XL") {
     if (!exportRef.current || !allSlotsFilled || isMakingDesign) return;
@@ -655,7 +703,7 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-3 gap-2">
             <button
               onClick={shuffleDream9}
               className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
@@ -668,6 +716,13 @@ export default function Dream9Page() {
               className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
             >
               Clear
+            </button>
+            
+            <button
+              onClick={shareDream9}
+              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+            >
+              Share
             </button>
           </div>
         </div>
