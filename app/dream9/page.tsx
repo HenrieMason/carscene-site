@@ -5,6 +5,12 @@ import { toPng } from "html-to-image";
 import cars from "../../data/cars.json";
 import { featuredCars } from "../../data/featuredCars";
 
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+  }
+}
+
 type Car = {
   brand: string;
   model: string;
@@ -425,6 +431,17 @@ export default function Dream9Page() {
         `&properties[Dream 9 Design URL]=${encodeURIComponent(designUrl)}` +
         `&properties[Dream 9 Product]=${encodeURIComponent("Shirt")}` +
         `&properties[Dream 9 Size]=${encodeURIComponent(size)}`;
+
+      if (typeof window !== "undefined" && window.fbq) {
+        window.fbq("track", "InitiateCheckout", {
+          value: 34.99,
+          currency: "USD",
+          content_name: "Dream 9 Shirt",
+          content_type: "product",
+          content_ids: [variantId],
+          num_items: 1,
+        });
+      }
 
       window.location.href = checkoutUrl + "&return_to=/checkout";
     } catch (error) {
