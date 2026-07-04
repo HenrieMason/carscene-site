@@ -590,12 +590,12 @@ export default function Dream9Page() {
             </div>
             {title === "My Dream 9" && (
               <div
-                className="absolute left-1/2 -translate-x-1/2 text-[16px] font-bold text-neutral-500 whitespace-nowrap"
+                className="absolute right-0 text-[16px] font-bold text-neutral-500 whitespace-nowrap"
                 style={{
                   top: "-18px",
                 }}
               >
-                carsceneapp.com
+                Build yours at carsceneapp.com
               </div>
             )}
           </div>
