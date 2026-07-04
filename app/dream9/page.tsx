@@ -579,12 +579,6 @@ export default function Dream9Page() {
       >
         <div className="flex h-full flex-col">
           <div className="pb-[0%] text-center">
-            {title === "My Dream 9" && (
-              <div className="mb-1 text-[16px] font-bold text-neutral-500">
-                carsceneapp.com
-              </div>
-            )}
-
             <div
               className="text-[68px] font-black italic leading-none"
               style={{
