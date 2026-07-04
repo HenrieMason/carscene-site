@@ -579,6 +579,12 @@ export default function Dream9Page() {
       >
         <div className="flex h-full flex-col">
           <div className="pb-[1.5%] text-center">
+            {title === "My Dream 9" && (
+              <div className="mb-2 text-[16px] font-bold text-neutral-500">
+                Build yours at carsceneapp.com
+              </div>
+            )}
+
             <div
               className="text-[68px] font-black italic leading-none"
               style={{
@@ -588,12 +594,6 @@ export default function Dream9Page() {
             >
               {title}
             </div>
-
-            {title === "My Dream 9" && (
-              <div className="mt-1 text-[16px] font-bold text-neutral-500">
-                Build yours at carsceneapp.com
-              </div>
-            )}
           </div>
 
           <div className="mx-auto grid w-[95%] grid-cols-3 gap-0">
