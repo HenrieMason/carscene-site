@@ -578,7 +578,7 @@ export default function Dream9Page() {
         } p-[6%]`}
       >
         <div className="flex h-full flex-col">
-          <div className="pb-[0%] text-center">
+          <div className="relative pb-[0%] text-center">
             <div
               className="text-[68px] font-black italic leading-none"
               style={{
@@ -588,6 +588,16 @@ export default function Dream9Page() {
             >
               {title}
             </div>
+            {title === "My Dream 9" && (
+              <div
+                className="absolute left-1/2 -translate-x-1/2 text-[16px] font-bold text-neutral-500 whitespace-nowrap"
+                style={{
+                  top: "-18px",
+                }}
+              >
+                carsceneapp.com
+              </div>
+            )}
           </div>
 
           <div className="mx-auto grid w-[95%] grid-cols-3 gap-0">
