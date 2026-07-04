@@ -578,15 +578,11 @@ export default function Dream9Page() {
         } p-[6%]`}
       >
         <div className="flex h-full flex-col">
-          <div className="pb-[1.5%] text-center">
-            {title === "My Dream 9" && (
-              <div className="mb-2 text-[16px] font-bold text-neutral-500">
-                Build yours at carsceneapp.com
-              </div>
-            )}
-
+          <div className="relative pb-[0%] text-center">
             <div
-              className="text-[68px] font-black italic leading-none"
+              className={`font-black italic leading-none ${
+                title === "My Dream 9" ? "-mt-4" : ""
+              } text-[68px]`}
               style={{
                 transform: "skewX(-8deg)",
                 letterSpacing: "-0.04em",
@@ -594,6 +590,16 @@ export default function Dream9Page() {
             >
               {title}
             </div>
+            {title === "My Dream 9" && (
+              <div
+                className="absolute right-0 text-[15px] font-bold text-neutral-500"
+                style={{
+                  top: "78px",
+                }}
+              >
+                Build yours at carsceneapp.com
+              </div>
+            )}
           </div>
 
           <div className="mx-auto grid w-[95%] grid-cols-3 gap-0">
