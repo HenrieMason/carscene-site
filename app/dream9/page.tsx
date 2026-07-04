@@ -590,7 +590,7 @@ export default function Dream9Page() {
             </div>
             {title === "My Dream 9" && (
               <div
-                className="absolute right-2 text-[10px] font-bold text-neutral-400/50 whitespace-nowrap"
+                className="absolute right-3 text-[12px] font-bold text-neutral-400/50 whitespace-nowrap"
                 style={{
                   top: "-18px",
                 }}
