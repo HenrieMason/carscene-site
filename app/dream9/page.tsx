@@ -94,7 +94,6 @@ export default function Dream9Page() {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSectionRef = useRef<HTMLDivElement>(null);
   const instructionsRef = useRef<HTMLDivElement>(null);
-  const [zoomed, setZoomed] = useState(true);
   const [showFront, setShowFront] = useState(false);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
@@ -708,9 +707,7 @@ export default function Dream9Page() {
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
           <div ref={posterRef} className="relative overflow-visible">
             <div
-              className={`origin-[50%_30%] transition-transform duration-300 ${
-                zoomed ? "scale-[2.1]" : "scale-100"
-              }`}
+              className="origin-[50%_30%] scale-[2.1] transition-transform duration-300"
             >
               {showFront ? (
                 <div className="relative aspect-[4494/5097] w-full overflow-hidden">
@@ -724,33 +721,13 @@ export default function Dream9Page() {
                 <Dream9Design />
               )}
             </div>
-            <button
-              type="button"
-              onClick={() => {
-                setZoomed(false);
-                setShowFront((v) => !v);
-              }}
-              className="absolute top-1 left-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-gray-400 text-xl text-white shadow-lg transition hover:bg-gray-600 active:scale-95"
-              aria-label="Flip shirt preview"
-            >
-              ⇄
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setZoomed((z) => !z)}
-              className="absolute top-1 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-gray-400 text-xl text-white shadow-lg transition hover:bg-gray-600 active:scale-95"
-              aria-label="Zoom Dream 9 preview"
-            >
-              🔍
-            </button>
           </div>
         </div>
 
         {showCheckoutHint && allSlotsFilled && (
           <div className="mx-auto mb-3 w-full max-w-[540px] text-center">
             <p className="text-sm font-bold text-red-500">
-              Your Dream 9 is ready. Press Buy Shirt to continue.
+              Your Dream 9 is ready. Select your shirt size.
             </p>
           </div>
         )}
@@ -784,6 +761,8 @@ export default function Dream9Page() {
           <button
             onClick={() => {
               if (!allSlotsFilled) return;
+              setShirtSize(null);
+              setShowFront(false);
               setShowSizePicker(true);
             }}
             disabled={!allSlotsFilled || isMakingDesign}
@@ -795,44 +774,8 @@ export default function Dream9Page() {
                 : "cursor-not-allowed bg-white/10 text-white"
             }`}
           >
-            {isMakingDesign ? (
-              <span className="inline-flex items-center justify-center gap-2">
-                <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
-                Building...
-              </span>
-            ) : !allSlotsFilled ? (
-              "Fill all 9 slots"
-            ) : showSizePicker ? (
-              "Select Shirt Size"
-            ) : (
-              "Buy Shirt - $34.99 (Free Shipping)"
-            )}
+            {!allSlotsFilled ? "Fill all 9 slots" : "Select Shirt Size"}
           </button>
-
-          {showSizePicker && allSlotsFilled && (
-            <div className="grid grid-cols-4 gap-2">
-              {(["M", "L", "XL", "2XL"] as const).map((size) => (
-                <button
-                  key={size}
-                  onClick={() => {
-                    setShirtSize(size);
-
-                    setTimeout(() => {
-                      makePoster(size);
-                    }, 150);
-                  }}
-                  disabled={isMakingDesign}
-                  className={`py-4 text-sm font-black text-white transition disabled:opacity-60 ${
-                    shirtSize === size
-                      ? "bg-red-600"
-                      : "bg-white/10 hover:bg-red-600"
-                  }`}
-                >
-                  {size}
-                </button>
-              ))}
-            </div>
-          )}
         </div>
 
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
@@ -1159,6 +1102,87 @@ export default function Dream9Page() {
           </div>
         </section>
       </div>
+
+      {showSizePicker && allSlotsFilled && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
+          <div className="max-h-[92vh] w-full max-w-[540px] overflow-y-auto border border-white/10 bg-[#111] p-4 text-center shadow-2xl">
+            <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
+              <div className="relative overflow-visible">
+                <div className="origin-[50%_30%] scale-100 transition-transform duration-300">
+                  {showFront ? (
+                    <div className="relative aspect-[4494/5097] w-full overflow-hidden">
+                      <img
+                        src="/carscenefront.png"
+                        alt="Front of Dream 9 shirt"
+                        className="absolute inset-0 h-full w-full scale-150 object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <Dream9Design />
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-4 gap-2">
+              {(["M", "L", "XL", "2XL"] as const).map((size) => (
+                <button
+                  key={size}
+                  onClick={() => setShirtSize(size)}
+                  disabled={isMakingDesign}
+                  className={`py-4 text-sm font-black text-white transition disabled:opacity-60 ${
+                    shirtSize === size
+                      ? "bg-red-600"
+                      : "bg-white/10 hover:bg-red-600"
+                  }`}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => {
+                if (!shirtSize) {
+                  alert("Choose a shirt size first.");
+                  return;
+                }
+
+                makePoster(shirtSize);
+              }}
+              disabled={isMakingDesign}
+              className="mt-3 w-full bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 disabled:opacity-60 active:scale-[0.97]"
+            >
+              {isMakingDesign ? (
+                <span className="inline-flex items-center justify-center gap-2">
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+                  Building...
+                </span>
+              ) : (
+                "Buy Shirt - $34.99 (Free Shipping)"
+              )}
+            </button>
+
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => setShowFront((v) => !v)}
+                className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+              >
+                Flip
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setShowSizePicker(false)}
+                className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+              >
+                Keep Editing
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {showIntroPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
