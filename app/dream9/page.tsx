@@ -144,6 +144,8 @@ export default function Dream9Page() {
   const [showSizePicker, setShowSizePicker] = useState(false);
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
+  const [showCheckoutHint, setShowCheckoutHint] = useState(false);
+  const [shouldPulseBuyButton, setShouldPulseBuyButton] = useState(false);
 
   const [showIntroPopup, setShowIntroPopup] = useState(false);
   const [email, setEmail] = useState("");
@@ -159,6 +161,15 @@ export default function Dream9Page() {
   }
 
   const allSlotsFilled = slots.every((slot) => slot !== null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowCheckoutHint(true);
+      setShouldPulseBuyButton(true);
+    }, 3 * 60 * 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const brands = useMemo(() => {
     const existingBrands = new Set(allCars.map((car) => car.brand));
@@ -736,6 +747,14 @@ export default function Dream9Page() {
           </div>
         </div>
 
+        {showCheckoutHint && allSlotsFilled && (
+          <div className="mx-auto mb-3 w-full max-w-[540px] text-center">
+            <p className="text-sm font-bold text-red-500">
+              Your Dream 9 is ready. Press Buy Shirt to continue.
+            </p>
+          </div>
+        )}
+
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
           <div className="grid grid-cols-3 gap-2">
             <button
@@ -772,7 +791,7 @@ export default function Dream9Page() {
               isMakingDesign
                 ? "bg-red-700 text-white"
                 : allSlotsFilled
-                ? "bg-red-600 text-white hover:bg-red-700"
+                ? `${shouldPulseBuyButton ? "animate-pulse" : ""} bg-red-600 text-white hover:bg-red-700`
                 : "cursor-not-allowed bg-white/10 text-white"
             }`}
           >

@@ -125,6 +125,16 @@ export default function Dream9Page() {
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
 
+  const [shouldPulseBuyButton, setShouldPulseBuyButton] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShouldPulseBuyButton(true);
+    }, 5 * 60 * 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const [showIntroPopup, setShowIntroPopup] = useState(false);
 
   useEffect(() => {
@@ -577,7 +587,7 @@ export default function Dream9Page() {
               isMakingDesign
                 ? "bg-red-700 text-white"
                 : allSlotsFilled
-                ? "animate-pulse bg-red-600 text-white hover:bg-red-700"
+                ? `${shouldPulseBuyButton ? "animate-pulse" : ""} bg-red-600 text-white hover:bg-red-700`
                 : "cursor-not-allowed bg-white/10 text-white"
             }`}
           >
