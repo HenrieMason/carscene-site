@@ -95,6 +95,7 @@ export default function Dream9Page() {
   const searchSectionRef = useRef<HTMLDivElement>(null);
   const instructionsRef = useRef<HTMLDivElement>(null);
   const [showFront, setShowFront] = useState(false);
+  const [modalShowFront, setModalShowFront] = useState(false);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const SHIRT_VARIANT_IDS = {
@@ -762,7 +763,7 @@ export default function Dream9Page() {
             onClick={() => {
               if (!allSlotsFilled) return;
               setShirtSize(null);
-              setShowFront(false);
+              setModalShowFront(false);
               setShowSizePicker(true);
             }}
             disabled={!allSlotsFilled || isMakingDesign}
@@ -1109,7 +1110,7 @@ export default function Dream9Page() {
             <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
               <div className="relative overflow-visible">
                 <div className="origin-[50%_30%] scale-100 transition-transform duration-300">
-                  {showFront ? (
+                  {modalShowFront ? (
                     <div className="relative aspect-[4494/5097] w-full overflow-hidden">
                       <img
                         src="/carscenefront.png"
@@ -1166,7 +1167,7 @@ export default function Dream9Page() {
             <div className="mt-3 grid grid-cols-2 gap-2">
               <button
                 type="button"
-                onClick={() => setShowFront((v) => !v)}
+                onClick={() => setModalShowFront((v) => !v)}
                 className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
               >
                 Flip
