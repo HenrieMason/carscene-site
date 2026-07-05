@@ -166,7 +166,7 @@ export default function Dream9Page() {
     const timer = setTimeout(() => {
       setShowCheckoutHint(true);
       setShouldPulseBuyButton(true);
-    }, 3 * 60 * 1000);
+    }, 1 * 60 * 1000);
 
     return () => clearTimeout(timer);
   }, []);
