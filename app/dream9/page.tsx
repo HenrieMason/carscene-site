@@ -1127,7 +1127,7 @@ export default function Dream9Page() {
           >
             ×
           </button>
-          
+
             <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
               <div className="relative overflow-visible">
                 <div className="origin-[50%_30%] scale-100 transition-transform duration-300">
@@ -1144,6 +1144,12 @@ export default function Dream9Page() {
                   )}
                 </div>
               </div>
+            </div>
+
+            <div className="mb-4 rounded-lg border border-red-600/30 bg-red-600/10 px-4 py-3 text-center">
+              <p className="text-sm font-black text-red-400">
+                🔥 100+ Dream 9 shirts ordered in June
+              </p>
             </div>
 
             <div className="grid grid-cols-4 gap-2">
