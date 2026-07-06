@@ -1183,11 +1183,20 @@ export default function Dream9Page() {
               </p>
             </div>
 
+            <div className="mb-3 text-center">
+              <h3 className="text-lg font-black text-white">
+                Select Shirt Size • $34.99
+              </h3>
+            </div>
+
             <div className="grid grid-cols-4 gap-2">
               {(["M", "L", "XL", "2XL"] as const).map((size) => (
                 <button
                   key={size}
-                  onClick={() => setShirtSize(size)}
+                  onClick={() => {
+                    setShirtSize(size);
+                    makePoster(size);
+                  }}
                   disabled={isMakingDesign}
                   className={`py-4 text-sm font-black text-white transition disabled:opacity-60 ${
                     shirtSize === size
@@ -1199,28 +1208,6 @@ export default function Dream9Page() {
                 </button>
               ))}
             </div>
-
-            <button
-              onClick={() => {
-                if (!shirtSize) {
-                  alert("Choose a shirt size first.");
-                  return;
-                }
-
-                makePoster(shirtSize);
-              }}
-              disabled={isMakingDesign}
-              className="mt-3 w-full bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 disabled:opacity-60 active:scale-[0.97]"
-            >
-              {isMakingDesign ? (
-                <span className="inline-flex items-center justify-center gap-2">
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
-                  Building...
-                </span>
-              ) : (
-                "Buy Shirt - $34.99 (Free Shipping)"
-              )}
-            </button>
 
             <div className="mt-3 grid grid-cols-2 gap-2">
               <button
