@@ -156,6 +156,17 @@ export default function Dream9Page() {
     setShowIntroPopup(false);
   }, []);
 
+  useEffect(() => {
+    if (!showSizePicker) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [showSizePicker]);
+
   function closeIntroPopup() {
     setShowIntroPopup(false);
   }
@@ -1106,7 +1117,17 @@ export default function Dream9Page() {
 
       {showSizePicker && allSlotsFilled && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
-          <div className="max-h-[92vh] w-full max-w-[540px] overflow-y-auto border border-white/10 bg-[#111] p-4 text-center shadow-2xl">
+          <div className="relative max-h-[92vh] w-full max-w-[540px] overflow-y-auto border border-white/10 bg-[#111] p-4 text-center shadow-2xl">
+
+          <button
+            type="button"
+            onClick={() => setShowSizePicker(false)}
+            className="absolute top-3 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-gray-400 text-2xl font-black text-white shadow-lg transition hover:bg-gray-600 active:scale-95"
+            aria-label="Close size picker"
+          >
+            ×
+          </button>
+          
             <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
               <div className="relative overflow-visible">
                 <div className="origin-[50%_30%] scale-100 transition-transform duration-300">
