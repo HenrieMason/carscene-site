@@ -144,6 +144,8 @@ export default function Dream9Page() {
   const [showSizePicker, setShowSizePicker] = useState(false);
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
+  const [preparedDesignUrl, setPreparedDesignUrl] = useState<string | null>(null);
+  const [prepareDesignPromise, setPrepareDesignPromise] = useState<Promise<string> | null>(null);
   const [showCheckoutHint, setShowCheckoutHint] = useState(false);
   const [shouldPulseBuyButton, setShouldPulseBuyButton] = useState(false);
 
@@ -403,48 +405,77 @@ export default function Dream9Page() {
     }
   }
   
-  async function makePoster(size: "M" | "L" | "XL" | "2XL") {
-    if (!exportRef.current || !allSlotsFilled || isMakingDesign) return;
+  async function prepareDesignUpload() {
+    if (!exportRef.current || !allSlotsFilled) {
+      throw new Error("Design is not ready yet.");
+    }
 
     const node = exportRef.current;
 
-    try {
+    await waitForPosterImages(node);
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
+    const dataUrl = await toPng(node, {
+      cacheBust: true,
+      pixelRatio: 8.3222222222,
+      backgroundColor: "white",
+      imagePlaceholder:
+        "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
+    });
+
+    const blob = await (await fetch(dataUrl)).blob();
+
+    const formData = new FormData();
+    const filename = `dream9-${Date.now()}.png`;
+    formData.append("file", blob, filename);
+    formData.append("upload_preset", "dream9_unsigned");
+
+    const cloudinaryResponse = await fetch(
+      "https://api.cloudinary.com/v1_1/dvcxnicew/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const cloudinaryData = await cloudinaryResponse.json();
+
+    if (!cloudinaryData.secure_url) {
+      throw new Error("Cloudinary upload failed.");
+    }
+
+    setPreparedDesignUrl(cloudinaryData.secure_url);
+    return cloudinaryData.secure_url as string;
+  }
+
+  function startPreparingDesign() {
+    if (preparedDesignUrl || prepareDesignPromise || !allSlotsFilled) return;
+
+    const promise = prepareDesignUpload();
+
+    setPrepareDesignPromise(promise);
+
+    promise.catch((error) => {
+      console.error("BACKGROUND DESIGN PREP FAILED:", error);
+      setPrepareDesignPromise(null);
+      setPreparedDesignUrl(null);
+    });
+  }
+
+  async function makePoster(size: "M" | "L" | "XL" | "2XL") {
+    if (!allSlotsFilled || isMakingDesign) return;
+
+    try {
       setIsMakingDesign(true);
 
-      await waitForPosterImages(node);
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      let designUrl = preparedDesignUrl;
 
-      const dataUrl = await toPng(node, {
-        cacheBust: true,
-        pixelRatio: 8.3222222222,
-        backgroundColor: "white",
-        imagePlaceholder:
-          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
-      });
-
-      const blob = await (await fetch(dataUrl)).blob();
-
-      const formData = new FormData();
-      const filename = `dream9-${Date.now()}.png`;
-      formData.append("file", blob, filename);
-      formData.append("upload_preset", "dream9_unsigned");
-
-      const cloudinaryResponse = await fetch(
-        "https://api.cloudinary.com/v1_1/dvcxnicew/image/upload",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      const cloudinaryData = await cloudinaryResponse.json();
-
-      if (!cloudinaryData.secure_url) {
-        throw new Error("Cloudinary upload failed.");
+      if (!designUrl) {
+        designUrl = prepareDesignPromise
+          ? await prepareDesignPromise
+          : await prepareDesignUpload();
       }
 
-      const designUrl = cloudinaryData.secure_url;
       const variantId = SHIRT_VARIANT_IDS[size];
 
       const checkoutUrl =
@@ -468,11 +499,7 @@ export default function Dream9Page() {
       window.location.href = checkoutUrl + "&return_to=/checkout";
     } catch (error) {
       console.error("MAKE POSTER FAILED:", error);
-      alert(
-        error instanceof Error
-          ? error.message
-          : "Failed to create design."
-      );
+      alert(error instanceof Error ? error.message : "Failed to create design.");
     } finally {
       setIsMakingDesign(false);
     }
@@ -776,6 +803,10 @@ export default function Dream9Page() {
               setShirtSize(null);
               setModalShowFront(false);
               setShowSizePicker(true);
+
+              setTimeout(() => {
+                startPreparingDesign();
+              }, 100);
             }}
             disabled={!allSlotsFilled || isMakingDesign}
             className={`w-full py-4 text-sm font-black transition active:scale-[0.97] ${
