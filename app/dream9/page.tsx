@@ -516,16 +516,16 @@ export default function Dream9Page() {
         });
       }
 
-      const cartAddPath =
-        `/cart/add?id=${variantId}` +
+      const checkoutUrl =
+        `${SHOPIFY_STORE_URL}/cart/add?id=${variantId}` +
         `&quantity=1` +
         `&properties[Dream 9 Design URL]=${encodeURIComponent(designUrl)}` +
         `&properties[Dream 9 Product]=${encodeURIComponent("Shirt")}` +
         `&properties[Dream 9 Size]=${encodeURIComponent(size)}` +
+        `&discount=GARAGE10` +
         `&return_to=/checkout`;
 
-      window.location.href =
-        `${SHOPIFY_STORE_URL}/discount/GARAGE10?redirect=${encodeURIComponent(cartAddPath)}`;
+      window.location.href = checkoutUrl;
     } catch (error) {
       console.error("MAKE POSTER FAILED:", error);
       alert(error instanceof Error ? error.message : "Failed to create design.");
