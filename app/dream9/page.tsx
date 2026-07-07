@@ -156,6 +156,8 @@ export default function Dream9Page() {
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
+  const [checkoutSize, setCheckoutSize] = useState<"M" | "L" | "XL" | "2XL" | null>(null);
+  const [showModalEmailStep, setShowModalEmailStep] = useState(false);
 
   useEffect(() => {
     setShowIntroPopup(false);
@@ -826,6 +828,9 @@ export default function Dream9Page() {
             onClick={() => {
               if (!allSlotsFilled) return;
               setShirtSize(null);
+              setCheckoutSize(null);
+              setShowModalEmailStep(false);
+              setEmailSubmitted(false);
               setModalShowFront(false);
               setShowSizePicker(true);
 
@@ -878,46 +883,6 @@ export default function Dream9Page() {
               )}
             </button>
           ))}
-        </div>
-
-        <div className="relative mx-auto mb-4 flex min-h-[260px] w-full max-w-[540px] flex-col overflow-hidden border border-white/10 bg-white/[0.04] p-6">
-        <img
-          src="/ShirtMan.png"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-80"
-        />
-        <div className="relative z-10 flex h-full flex-1 flex-col justify-end">
-
-          <h3 className="text-lg font-black">
-            Get 10% Off Your Dream 9 Shirt
-          </h3>
-
-          <p className="mt-1 text-sm text-white">
-            {emailSubmitted
-              ? "Success! Use code GARAGE10 at checkout."
-              : "Enter your email and we'll display a coupon code."}
-          </p>
-
-          {!emailSubmitted && (
-            <div className="mt-3 flex gap-2">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email address"
-                  className="min-w-0 flex-1 border border-white bg-white/10 px-4 py-3 text-white placeholder:text-white/70 outline-none"
-                />
-                <button
-                  onClick={submitEmail}
-                  disabled={isSubmittingEmail}
-                  className="bg-red-600 px-5 py-3 font-black text-white hover:bg-red-700 disabled:opacity-60"
-                >
-                  {isSubmittingEmail ? "Saving..." : "Get 10% Off"}
-                </button>
-              </div>
-            )}
-          </div>
         </div>
         
         </section>
@@ -1280,45 +1245,89 @@ export default function Dream9Page() {
 
             <div className="mb-3 text-center">
               <h3 className="text-lg font-black text-white">
-                Select Shirt Size • $34.99
+                {emailSubmitted
+                  ? "Use code GARAGE10 at checkout"
+                  : showModalEmailStep
+                  ? "Enter your email, get 10% off"
+                  : "Select Shirt Size • $34.99"}
               </h3>
             </div>
 
-            <div className="grid grid-cols-4 gap-2">
-              {(["M", "L", "XL", "2XL"] as const).map((size) => (
-                <button
-                  key={size}
-                  onClick={() => {
-                    setShirtSize(size);
-                    makePoster(size);
-                  }}
-                  disabled={isMakingDesign}
-                  className={`py-4 text-sm font-black text-white transition disabled:opacity-60 ${
-                    shirtSize === size
-                      ? "bg-red-600"
-                      : "bg-white/10 hover:bg-red-600"
-                  }`}
-                >
-                  {size}
-                </button>
-              ))}
+            <div className="grid min-h-[52px] grid-cols-4 gap-2">
+              {!showModalEmailStep ? (
+                (["M", "L", "XL", "2XL"] as const).map((size) => (
+                  <button
+                    key={size}
+                    onClick={() => {
+                      setShirtSize(size);
+                      setCheckoutSize(size);
+                      setShowModalEmailStep(true);
+                    }}
+                    disabled={isMakingDesign}
+                    className={`py-4 text-sm font-black text-white transition disabled:opacity-60 ${
+                      shirtSize === size
+                        ? "bg-red-600"
+                        : "bg-white/10 hover:bg-red-600"
+                    }`}
+                  >
+                    {size}
+                  </button>
+                ))
+              ) : (
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email address"
+                  className="col-span-4 border border-white/10 bg-white/10 px-4 py-4 text-sm font-bold text-white outline-none placeholder:text-white/40"
+                />
+              )}
             </div>
 
             <div className="mt-3 grid grid-cols-2 gap-2">
               <button
                 type="button"
-                onClick={() => setModalShowFront((v) => !v)}
-                className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+                onClick={() => {
+                  if (showModalEmailStep && checkoutSize) {
+                    makePoster(checkoutSize);
+                    return;
+                  }
+
+                  setModalShowFront((v) => !v);
+                }}
+                disabled={isMakingDesign}
+                className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97] disabled:opacity-60"
               >
-                Flip
+                {showModalEmailStep ? "No Thanks" : "Flip"}
               </button>
 
               <button
                 type="button"
-                onClick={() => setShowSizePicker(false)}
-                className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+                onClick={async () => {
+                  if (!showModalEmailStep) {
+                    setShowSizePicker(false);
+                    return;
+                  }
+
+                  if (!checkoutSize) return;
+
+                  if (!emailSubmitted) {
+                    await submitEmail();
+                    return;
+                  }
+
+                  makePoster(checkoutSize);
+                }}
+                disabled={isMakingDesign || isSubmittingEmail || (showModalEmailStep && !email.includes("@"))}
+                className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97] disabled:opacity-60"
               >
-                Keep Editing
+                {!showModalEmailStep
+                  ? "Keep Editing"
+                  : emailSubmitted
+                  ? "Continue to Checkout"
+                  : isSubmittingEmail
+                  ? "Saving..."
+                  : "Claim Discount"}
               </button>
             </div>
           </div>
