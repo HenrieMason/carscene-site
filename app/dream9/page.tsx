@@ -1296,11 +1296,7 @@ export default function Dream9Page() {
                   setModalShowFront((v) => !v);
                 }}
                 disabled={isMakingDesign}
-                className={`py-4 text-sm font-black text-white transition active:scale-[0.97] disabled:opacity-60 ${
-                  showModalEmailStep
-                    ? "bg-red-600 hover:bg-red-700"
-                    : "bg-white/10 hover:bg-white/15"
-                }`}
+                className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97] disabled:opacity-60"
               >
                 {showModalEmailStep ? "No Thanks" : "Flip"}
               </button>
