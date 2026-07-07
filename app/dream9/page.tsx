@@ -122,6 +122,8 @@ export default function Dream9Page() {
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
   const [featuredSeed, setFeaturedSeed] = useState(0);
   const [hasCustomizedDream9, setHasCustomizedDream9] = useState(false);
+  const [showShuffleConfirm, setShowShuffleConfirm] = useState(false);
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
   function getRandomDream9() {
     return [...allCars]
       .sort(() => Math.random() - 0.5)
@@ -238,14 +240,7 @@ export default function Dream9Page() {
     );
   }, [featuredSeed]);
 
-  function shuffleDream9() {
-    if (
-      hasCustomizedDream9 &&
-      !window.confirm("Replace all 9 cars with random cars?")
-    ) {
-      return;
-    }
-
+  function randomizeDream9() {
     setSlots(getRandomDream9());
     setSelectedSlot(null);
     setSelectedBrand(null);
@@ -254,13 +249,31 @@ export default function Dream9Page() {
     setHasCustomizedDream9(false);
   }
 
-  function clearDream9() {
+  function emptyDream9() {
     setSlots(Array(9).fill(null));
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
     setDeleteReadySlot(null);
     setHasCustomizedDream9(false);
+  }
+
+  function shuffleDream9() {
+    if (hasCustomizedDream9) {
+      setShowShuffleConfirm(true);
+      return;
+    }
+
+    randomizeDream9();
+  }
+
+  function clearDream9() {
+    if (hasCustomizedDream9) {
+      setShowClearConfirm(true);
+      return;
+    }
+
+    emptyDream9();
   }
   function addCarToTargetSlot(car: Car) {
     setHasCustomizedDream9(true);
@@ -1157,6 +1170,76 @@ export default function Dream9Page() {
           </div>
         </section>
       </div>
+
+      {showShuffleConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
+          <div className="w-full max-w-[420px] border border-white/10 bg-[#111] p-5 text-center shadow-2xl">
+            <h3 className="text-xl font-black text-white">
+              Replace all 9 cars?
+            </h3>
+
+            <p className="mt-2 text-sm font-bold text-white/60">
+              This will replace your current Dream 9 with random cars.
+            </p>
+
+            <div className="mt-5 grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => setShowShuffleConfirm(false)}
+                className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setShowShuffleConfirm(false);
+                  randomizeDream9();
+                }}
+                className="bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
+              >
+                Replace
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showClearConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
+          <div className="w-full max-w-[420px] border border-white/10 bg-[#111] p-5 text-center shadow-2xl">
+            <h3 className="text-xl font-black text-white">
+              Clear your Dream 9?
+            </h3>
+
+            <p className="mt-2 text-sm font-bold text-white/60">
+              This will remove every car from your current Dream 9.
+            </p>
+
+            <div className="mt-5 grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => setShowClearConfirm(false)}
+                className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setShowClearConfirm(false);
+                  emptyDream9();
+                }}
+                className="bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {showSizePicker && allSlotsFilled && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
