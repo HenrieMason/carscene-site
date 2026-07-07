@@ -121,6 +121,7 @@ export default function Dream9Page() {
   const [searchView, setSearchView] = useState<"featured" | "brands">("featured");
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
   const [featuredSeed, setFeaturedSeed] = useState(0);
+  const [hasCustomizedDream9, setHasCustomizedDream9] = useState(false);
   function getRandomDream9() {
     return [...allCars]
       .sort(() => Math.random() - 0.5)
@@ -238,11 +239,19 @@ export default function Dream9Page() {
   }, [featuredSeed]);
 
   function shuffleDream9() {
+    if (
+      hasCustomizedDream9 &&
+      !window.confirm("Replace all 9 cars with random cars?")
+    ) {
+      return;
+    }
+
     setSlots(getRandomDream9());
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
     setDeleteReadySlot(null);
+    setHasCustomizedDream9(false);
   }
 
   function clearDream9() {
@@ -251,8 +260,11 @@ export default function Dream9Page() {
     setSelectedBrand(null);
     setQuery("");
     setDeleteReadySlot(null);
+    setHasCustomizedDream9(false);
   }
   function addCarToTargetSlot(car: Car) {
+    setHasCustomizedDream9(true);
+
     setSlots((current) => {
       const next = [...current];
 
