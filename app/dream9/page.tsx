@@ -507,7 +507,7 @@ export default function Dream9Page() {
 
       if (typeof window !== "undefined" && window.fbq) {
         window.fbq("track", "InitiateCheckout", {
-          value: 34.99,
+          value: 37.99,
           currency: "USD",
           content_name: "Dream 9 Shirt",
           content_type: "product",
@@ -1249,7 +1249,7 @@ export default function Dream9Page() {
               <h3 className="text-lg font-black text-white">
                 {showModalEmailStep
                   ? "Enter your email, get 10% off"
-                  : "Select Shirt Size • $34.99"}
+                  : "Select Shirt Size • $37.99"}
               </h3>
             </div>
 
