@@ -352,7 +352,7 @@ export default function Dream9Page() {
         body: JSON.stringify({
           email,
           source: "Dream 9",
-          coupon: "GARAGE10",
+          coupon: "DREAM9",
         }),
       });
 
@@ -522,7 +522,7 @@ export default function Dream9Page() {
         `&properties[Dream 9 Design URL]=${encodeURIComponent(designUrl)}` +
         `&properties[Dream 9 Product]=${encodeURIComponent("Shirt")}` +
         `&properties[Dream 9 Size]=${encodeURIComponent(size)}` +
-        `&discount=GARAGE10` +
+        `&discount=DREAM9` +
         `&return_to=/checkout`;
 
       window.location.href = checkoutUrl;
