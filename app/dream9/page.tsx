@@ -1261,7 +1261,10 @@ export default function Dream9Page() {
                     onClick={() => {
                       setShirtSize(size);
                       setCheckoutSize(size);
-                      setShowModalEmailStep(true);
+
+                      setTimeout(() => {
+                        setShowModalEmailStep(true);
+                      }, 500);
                     }}
                     disabled={isMakingDesign}
                     className={`py-4 text-sm font-black text-white transition disabled:opacity-60 ${
