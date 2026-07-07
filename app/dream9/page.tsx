@@ -505,13 +505,6 @@ export default function Dream9Page() {
 
       const variantId = SHIRT_VARIANT_IDS[size];
 
-      const checkoutUrl =
-        `${SHOPIFY_STORE_URL}/cart/add?id=${variantId}` +
-        `&quantity=1` +
-        `&properties[Dream 9 Design URL]=${encodeURIComponent(designUrl)}` +
-        `&properties[Dream 9 Product]=${encodeURIComponent("Shirt")}` +
-        `&properties[Dream 9 Size]=${encodeURIComponent(size)}`;
-
       if (typeof window !== "undefined" && window.fbq) {
         window.fbq("track", "InitiateCheckout", {
           value: 34.99,
@@ -523,7 +516,16 @@ export default function Dream9Page() {
         });
       }
 
-      window.location.href = checkoutUrl + "&return_to=/checkout";
+      const cartAddPath =
+        `/cart/add?id=${variantId}` +
+        `&quantity=1` +
+        `&properties[Dream 9 Design URL]=${encodeURIComponent(designUrl)}` +
+        `&properties[Dream 9 Product]=${encodeURIComponent("Shirt")}` +
+        `&properties[Dream 9 Size]=${encodeURIComponent(size)}` +
+        `&return_to=/checkout`;
+
+      window.location.href =
+        `${SHOPIFY_STORE_URL}/discount/GARAGE10?redirect=${encodeURIComponent(cartAddPath)}`;
     } catch (error) {
       console.error("MAKE POSTER FAILED:", error);
       alert(error instanceof Error ? error.message : "Failed to create design.");
@@ -1245,9 +1247,7 @@ export default function Dream9Page() {
 
             <div className="mb-3 text-center">
               <h3 className="text-lg font-black text-white">
-                {emailSubmitted
-                  ? "Use code GARAGE10 at checkout"
-                  : showModalEmailStep
+                {showModalEmailStep
                   ? "Enter your email, get 10% off"
                   : "Select Shirt Size • $34.99"}
               </h3>
@@ -1313,6 +1313,7 @@ export default function Dream9Page() {
 
                   if (!emailSubmitted) {
                     await submitEmail();
+                    makePoster(checkoutSize);
                     return;
                   }
 
