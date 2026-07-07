@@ -1324,7 +1324,11 @@ export default function Dream9Page() {
                   makePoster(checkoutSize);
                 }}
                 disabled={isMakingDesign || isSubmittingEmail || (showModalEmailStep && !email.includes("@"))}
-                className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97] disabled:opacity-60"
+                className={`py-4 text-sm font-black text-white transition active:scale-[0.97] disabled:opacity-60 ${
+                  showModalEmailStep
+                    ? "bg-red-600 hover:bg-red-700"
+                    : "bg-white/10 hover:bg-white/15"
+                }`}
               >
                 {!showModalEmailStep
                   ? "Keep Editing"
