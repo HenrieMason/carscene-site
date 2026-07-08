@@ -117,6 +117,7 @@ export default function Dream9Page() {
     );
   }, []);
   const [query, setQuery] = useState("");
+  const lastLogged = useRef("");
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
   const [searchView, setSearchView] = useState<"featured" | "brands">("featured");
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
@@ -228,11 +229,15 @@ export default function Dream9Page() {
   }, [query, allCars]);
 
   useEffect(() => {
-    const q = query.trim();
+    const q = query.trim().toLowerCase();
 
     if (q.length < 3) return;
 
     const timer = setTimeout(() => {
+      if (lastLogged.current === q) return;
+
+      lastLogged.current = q;
+
       fetch("/api/search-log", {
         method: "POST",
         headers: {
