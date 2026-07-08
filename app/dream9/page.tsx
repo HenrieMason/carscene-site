@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toPng } from "html-to-image";
+import { track } from "@vercel/analytics";
 import cars from "../../data/cars.json";
 import { featuredCars } from "../../data/featuredCars";
 
@@ -226,6 +227,27 @@ export default function Dream9Page() {
       })
       .slice(0, 36);
   }, [query, allCars]);
+
+  useEffect(() => {
+    const q = query.trim();
+
+    if (q.length < 3) return;
+
+    const timer = setTimeout(() => {
+      track("Dream9 Search", {
+        query: q.toLowerCase(),
+        results: String(searchResults.length),
+      });
+
+      if (searchResults.length === 0) {
+        track("Dream9 No Results", {
+          query: q.toLowerCase(),
+        });
+      }
+    }, 900);
+
+    return () => clearTimeout(timer);
+  }, [query, searchResults.length]);
 
   const brandCars = useMemo(() => {
     if (!selectedBrand) return [];
