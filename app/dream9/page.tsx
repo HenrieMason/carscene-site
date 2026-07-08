@@ -1326,18 +1326,16 @@ export default function Dream9Page() {
                 onClick={() => {
                   if (checkoutSize) {
                     makePoster(checkoutSize);
-                  } else {
-                    setShowSizePicker(false);
                   }
                 }}
-                disabled={isMakingDesign}
+                disabled={!checkoutSize || isMakingDesign}
                 className={`py-4 text-sm font-black text-white transition active:scale-[0.97] disabled:opacity-60 ${
                   checkoutSize
-                    ? "bg-red-600 hover:bg-red-700"
-                    : "bg-white/10 hover:bg-white/15"
+                    ? "animate-pulse bg-red-600 hover:bg-red-700"
+                    : "bg-white/10"
                 }`}
               >
-                {checkoutSize ? "Checkout" : "Keep Editing"}
+                Checkout
               </button>
             </div>
           </div>
