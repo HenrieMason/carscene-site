@@ -1333,7 +1333,7 @@ export default function Dream9Page() {
                 disabled={isMakingDesign}
                 className={`py-4 text-sm font-black text-white transition active:scale-[0.97] disabled:opacity-60 ${
                   checkoutSize
-                    ? "animate-bounce bg-red-600 hover:bg-red-700"
+                    ? "bg-red-600 hover:bg-red-700"
                     : "bg-white/10 hover:bg-white/15"
                 }`}
               >
