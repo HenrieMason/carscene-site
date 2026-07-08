@@ -1288,7 +1288,7 @@ export default function Dream9Page() {
 
             <div className="mb-3 text-center">
               <h3 className="text-lg font-black text-white">
-                Select Shirt Size • $37.99
+                {checkoutSize ? "Press Checkout • $37.99" : "Select Shirt Size • $37.99"}
               </h3>
             </div>
 
@@ -1299,10 +1299,6 @@ export default function Dream9Page() {
                   onClick={() => {
                     setShirtSize(size);
                     setCheckoutSize(size);
-
-                    setTimeout(() => {
-                      makePoster(size);
-                    }, 500);
                   }}
                   disabled={isMakingDesign}
                   className={`py-4 text-sm font-black text-white transition disabled:opacity-60 ${
@@ -1327,11 +1323,21 @@ export default function Dream9Page() {
 
               <button
                 type="button"
-                onClick={() => setShowSizePicker(false)}
+                onClick={() => {
+                  if (checkoutSize) {
+                    makePoster(checkoutSize);
+                  } else {
+                    setShowSizePicker(false);
+                  }
+                }}
                 disabled={isMakingDesign}
-                className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97] disabled:opacity-60"
+                className={`py-4 text-sm font-black text-white transition active:scale-[0.97] disabled:opacity-60 ${
+                  checkoutSize
+                    ? "bg-red-600 hover:bg-red-700"
+                    : "bg-white/10 hover:bg-white/15"
+                }`}
               >
-                Keep Editing
+                {checkoutSize ? "Checkout" : "Keep Editing"}
               </button>
             </div>
           </div>
