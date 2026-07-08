@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toPng } from "html-to-image";
-import { track } from "@vercel/analytics";
 import cars from "../../data/cars.json";
 import { featuredCars } from "../../data/featuredCars";
 
@@ -234,16 +233,18 @@ export default function Dream9Page() {
     if (q.length < 3) return;
 
     const timer = setTimeout(() => {
-      track("Dream9 Search", {
-        query: q.toLowerCase(),
-        results: String(searchResults.length),
+      fetch("/api/search-log", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query: q,
+          results_count: searchResults.length,
+        }),
+      }).catch((error) => {
+        console.error("Could not log search:", error);
       });
-
-      if (searchResults.length === 0) {
-        track("Dream9 No Results", {
-          query: q.toLowerCase(),
-        });
-      }
     }, 900);
 
     return () => clearTimeout(timer);
@@ -529,7 +530,7 @@ export default function Dream9Page() {
 
       if (typeof window !== "undefined" && window.fbq) {
         window.fbq("track", "InitiateCheckout", {
-          value: 36.99,
+          value: 34.99,
           currency: "USD",
           content_name: "Dream 9 Shirt",
           content_type: "product",
@@ -1310,7 +1311,7 @@ export default function Dream9Page() {
 
             <div className="mb-3 text-center">
               <h3 className="text-lg font-black text-white">
-                {checkoutSize ? "Press Checkout • $36.99" : "Select Shirt Size • $36.99"}
+                {checkoutSize ? "Press Checkout • $34.99" : "Select Shirt Size • $34.99"}
               </h3>
             </div>
 
