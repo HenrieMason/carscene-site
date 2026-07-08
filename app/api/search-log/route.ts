@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST() {
   return NextResponse.json({
-    ok: true,
-    message: "search log route is working",
+    hasUrl: !!process.env.SUPABASE_URL,
+    hasKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+    url: process.env.SUPABASE_URL,
+    keyPrefix: process.env.SUPABASE_SERVICE_ROLE_KEY?.slice(0, 12),
   });
 }
