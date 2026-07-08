@@ -507,7 +507,7 @@ export default function Dream9Page() {
 
       if (typeof window !== "undefined" && window.fbq) {
         window.fbq("track", "InitiateCheckout", {
-          value: 37.99,
+          value: 36.99,
           currency: "USD",
           content_name: "Dream 9 Shirt",
           content_type: "product",
@@ -1288,7 +1288,7 @@ export default function Dream9Page() {
 
             <div className="mb-3 text-center">
               <h3 className="text-lg font-black text-white">
-                {checkoutSize ? "Press Checkout • $37.99" : "Select Shirt Size • $37.99"}
+                {checkoutSize ? "Press Checkout • $36.99" : "Select Shirt Size • $36.99"}
               </h3>
             </div>
 
