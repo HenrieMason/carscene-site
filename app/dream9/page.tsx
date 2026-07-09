@@ -540,7 +540,7 @@ export default function Dream9Page() {
     const dataUrl = await toPng(node, {
       cacheBust: true,
       pixelRatio: 8.3222222222,
-      backgroundColor: "white",
+      backgroundColor: "transparent",
       imagePlaceholder:
         "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
     });
@@ -811,11 +811,16 @@ export default function Dream9Page() {
     exportMode?: boolean;
     title?: string;
   }) {
+    const exportGridColor = gridColor(shirtColor);
     return (
       <div
-        className={`w-full text-black ${
-          exportMode ? "h-full bg-white" : "aspect-[4494/5097] bg-white"
+        className={`w-full ${
+          exportMode ? "h-full" : "aspect-[4494/5097]"
         } p-[6%]`}
+        style={{
+          color: exportGridColor,
+          backgroundColor: "transparent",
+        }}
       >
         <div className="flex h-full flex-col">
           <div className="relative pb-[0%] text-center">
@@ -824,6 +829,7 @@ export default function Dream9Page() {
               style={{
                 transform: "skewX(-8deg)",
                 letterSpacing: "-0.04em",
+                color: exportGridColor,
               }}
             >
               {title}
@@ -849,8 +855,11 @@ export default function Dream9Page() {
                   key={index}
                   type="button"
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
-                  style={{ backgroundColor: "transparent" }}
-                  className="aspect-square overflow-hidden border border-black p-0 transition"
+                  className="aspect-square overflow-hidden border p-0 transition"
+                  style={{
+                    backgroundColor: "transparent",
+                    borderColor: exportGridColor,
+                  }}
                 >
                   {car ? (
                     <div className="relative h-full w-full overflow-hidden">
@@ -864,7 +873,10 @@ export default function Dream9Page() {
                       />
                     </div>
                   ) : (
-                    <div className="flex h-full items-center justify-center text-[clamp(8px,2vw,14px)] font-black text-black/35">
+                    <div
+                      className="flex h-full items-center justify-center text-[clamp(8px,2vw,14px)] font-black"
+                      style={{ color: exportGridColor + "66" }}
+                    >
                       Empty
                     </div>
                   )}
@@ -873,7 +885,8 @@ export default function Dream9Page() {
             })}
           </div>
 
-          <div className="mx-auto grid w-[95%] grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1.25] text-black">
+          <div className="mx-auto grid w-[95%] grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1.25]"
+            style={{ color: exportGridColor }}>
             {displaySlots.map(({ car }, index) => (
               <div
                 key={index}
