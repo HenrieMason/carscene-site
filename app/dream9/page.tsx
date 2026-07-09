@@ -673,7 +673,7 @@ export default function Dream9Page() {
       White: "#f5f5f0",
       Black: "#111111",
       "Blue Spruce": "#2f4f4f",
-      "True Navy": "#101a33",
+      "True Navy": "#2E4A6B",
       Orchid: "#c9a0dc",
     };
 
