@@ -674,7 +674,7 @@ export default function Dream9Page() {
       Black: "#111111",
       "Blue Spruce": "#2f4f4f",
       "True Navy": "#2E4A6B",
-      Orchid: "#c9a0dc",
+      Orchid: "#F2A7C4",
     };
 
     const COLOR_ORDER: ShirtColor[] = [
