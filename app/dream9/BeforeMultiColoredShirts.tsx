@@ -86,10 +86,6 @@ function classTint(type: string) {
   }
 }
 
-function gridColor(color: string) {
-  return color === "White" ? "#000000" : "#FFFFFF";
-}
-
 export default function Dream9Page() {
   const allCars = cars as Car[];
   const posterRef = useRef<HTMLDivElement>(null);
@@ -102,74 +98,12 @@ export default function Dream9Page() {
   const [modalShowFront, setModalShowFront] = useState(false);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
-  const SHIRT_COLORS = {
-    White: {
-      front: "/carscenefront-white.png",
-      back: "/Dream9Template-white.png",
-      sizes: ["S", "M", "L", "XL", "2XL"],
-    },
-    Black: {
-      front: "/carscenefront-black.png",
-      back: "/Dream9Template-black.png",
-      sizes: ["S", "M", "L", "XL", "2XL"],
-    },
-    "Blue Spruce": {
-      front: "/carscenefront-blue-spruce.png",
-      back: "/Dream9Template-blue-spruce.png",
-      sizes: ["S", "M", "L", "XL", "2XL"],
-    },
-    "True Navy": {
-      front: "/carscenefront-true-navy.png",
-      back: "/Dream9Template-true-navy.png",
-      sizes: ["S", "M", "L", "XL", "2XL"],
-    },
-    Orchid: {
-      front: "/carscenefront-orchid.png",
-      back: "/Dream9Template-orchid.png",
-      sizes: ["S", "M", "XL", "2XL", "3XL"],
-    },
-  } as const;
-
-  type ShirtColor = keyof typeof SHIRT_COLORS;
-  type ShirtSize = "S" | "M" | "L" | "XL" | "2XL" | "3XL";
-
-  const SHIRT_VARIANT_IDS: Record<ShirtColor, Partial<Record<ShirtSize, string>>> = {
-    White: {
-      S: "53631942623539",
-      M: "53558192668979",
-      L: "53558192701747",
-      XL: "53558192734515",
-      "2XL": "53558192767283",
-    },
-    Black: {
-      S: "53631955173683",
-      M: "53631955206451",
-      L: "53631955239219",
-      XL: "53631955271987",
-      "2XL": "53631955304755",
-    },
-    "Blue Spruce": {
-      S: "53631963201843",
-      M: "53631963234611",
-      L: "53631963267379",
-      XL: "53631963300147",
-      "2XL": "53631963332915",
-    },
-    "True Navy": {
-      S: "53631969329459",
-      M: "53631969362227",
-      L: "53631969394995",
-      XL: "53631969427763",
-      "2XL": "53631969460531",
-    },
-    Orchid: {
-      S: "53631977062707",
-      M: "53631977095475",
-      XL: "53631977161011",
-      "2XL": "53631977193779",
-      "3XL": "53631979618611",
-    },
-  };
+  const SHIRT_VARIANT_IDS = {
+  M: "53558192668979",
+  L: "53558192701747",
+  XL: "53558192734515",
+  "2XL": "53558192767283",
+} as const;
 
   const [today, setToday] = useState("");
 
@@ -210,6 +144,7 @@ export default function Dream9Page() {
     );
   }, []);
 
+  const [shirtSize, setShirtSize] = useState<"M" | "L" | "XL" | "2XL" | null>(null);
   const [showSizePicker, setShowSizePicker] = useState(false);
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
@@ -222,9 +157,7 @@ export default function Dream9Page() {
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
-  const [shirtColor, setShirtColor] = useState<ShirtColor>("White");
-  const [shirtSize, setShirtSize] = useState<ShirtSize | null>(null);
-  const [checkoutSize, setCheckoutSize] = useState<ShirtSize | null>(null);
+  const [checkoutSize, setCheckoutSize] = useState<"M" | "L" | "XL" | "2XL" | null>(null);
   const [showModalEmailStep, setShowModalEmailStep] = useState(false);
 
   useEffect(() => {
@@ -584,7 +517,7 @@ export default function Dream9Page() {
     });
   }
 
-  async function makePoster(size: ShirtSize) {
+  async function makePoster(size: "M" | "L" | "XL" | "2XL") {
     if (!allSlotsFilled || isMakingDesign) return;
 
     try {
@@ -598,12 +531,7 @@ export default function Dream9Page() {
           : await prepareDesignUpload();
       }
 
-      const variantId = SHIRT_VARIANT_IDS[shirtColor][size];
-
-      if (!variantId) {
-        alert(`${shirtColor} is not available in ${size}.`);
-        return;
-      }
+      const variantId = SHIRT_VARIANT_IDS[size];
 
       if (typeof window !== "undefined" && window.fbq) {
         window.fbq("track", "InitiateCheckout", {
@@ -622,7 +550,6 @@ export default function Dream9Page() {
         `&properties[Dream 9 Design URL]=${encodeURIComponent(designUrl)}` +
         `&properties[Dream 9 Product]=${encodeURIComponent("Shirt")}` +
         `&properties[Dream 9 Size]=${encodeURIComponent(size)}` +
-        `&properties[Dream 9 Color]=${encodeURIComponent(shirtColor)}` +
         `&discount=DREAM9` +
         `&return_to=/checkout`;
 
@@ -633,41 +560,6 @@ export default function Dream9Page() {
     } finally {
       setIsMakingDesign(false);
     }
-  }
-
-  function ColorPicker() {
-    const COLOR_SWATCHES: Record<ShirtColor, string> = {
-      White: "#f5f5f0",
-      Black: "#111111",
-      "Blue Spruce": "#2f4f4f",
-      "True Navy": "#101a33",
-      Orchid: "#c9a0dc",
-    };
-
-    return (
-      <div className="grid grid-cols-5 gap-2">
-        {(Object.keys(SHIRT_COLORS) as ShirtColor[]).map((color) => (
-          <button
-            key={color}
-            type="button"
-            onClick={() => {
-              setShirtColor(color);
-              setShirtSize(null);
-              setCheckoutSize(null);
-              setPreparedDesignUrl(null);
-              setPrepareDesignPromise(null);
-            }}
-            title={color}
-            style={{ backgroundColor: COLOR_SWATCHES[color] }}
-            className={`h-12 border-2 transition active:scale-[0.97] ${
-              shirtColor === color
-                ? "border-red-600"
-                : "border-white/20 hover:border-white/50"
-            }`}
-          />
-        ))}
-      </div>
-    );
   }
 
   const displaySlots = useMemo(() => {
@@ -684,8 +576,6 @@ export default function Dream9Page() {
   }, [slots]);
 
   function Dream9Design({ exportMode = false }: { exportMode?: boolean }) {
-    const borderColor = gridColor(shirtColor);
-
     return (
       <div
         className={`relative w-full overflow-hidden transition-transform duration-300 ${
@@ -693,16 +583,15 @@ export default function Dream9Page() {
         }`}
       >
         <img
-          src={SHIRT_COLORS[shirtColor].back}
+          src="/Dream9Template.png"
           alt="Dream 9 Shirt"
           crossOrigin="anonymous"
           className="absolute inset-0 h-full w-full scale-150 object-contain"
         />
 
         <div
-          className="absolute text-center font-black italic"
+          className="absolute text-center font-black italic text-black"
           style={{
-            color: borderColor,
             top: "15.5%",
             left: "50%",
             transform: "translateX(-50%) skewX(-8deg)",
@@ -730,11 +619,8 @@ export default function Dream9Page() {
                   key={index}
                   type="button"
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
-                  style={{
-                    backgroundColor: "transparent",
-                    borderColor,
-                  }}
-                  className="aspect-square overflow-hidden border-[0.5px] md:border p-0 transition"
+                  style={{ backgroundColor: "transparent" }}
+                  className="aspect-square overflow-hidden border-[0.5px] border-black md:border p-0 transition"
                 >
                   {car ? (
                     <div className="relative h-full w-full overflow-hidden">
@@ -756,8 +642,7 @@ export default function Dream9Page() {
                       )}
                     </div>
                   ) : (
-                    <div className="flex h-full items-center justify-center text-[clamp(8px,2vw,14px)] font-black"
-                      style={{ color: borderColor + "66" }}>
+                    <div className="flex h-full items-center justify-center text-[clamp(8px,2vw,14px)] font-black text-black/35">
                       Empty
                     </div>
                   )}
@@ -765,9 +650,8 @@ export default function Dream9Page() {
               );
             })}
             <div
-              className="absolute text-center"
+              className="absolute text-center text-black"
               style={{
-                color: borderColor,
                 top: "100%",
                 left: "0",
                 width: "100%",
@@ -775,8 +659,7 @@ export default function Dream9Page() {
               }}
             >
               <div
-                className="grid grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1]"
-                style={{ color: borderColor }}
+                className="grid grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1] text-black"
               >
                 {displaySlots.map(({ car }, index) => (
                   <div
@@ -925,7 +808,7 @@ export default function Dream9Page() {
               {showFront ? (
                 <div className="relative aspect-[4494/5097] w-full overflow-hidden">
                   <img
-                    src={SHIRT_COLORS[shirtColor].front}
+                    src="/carscenefront.png"
                     alt="Front of Dream 9 shirt"
                     className="absolute inset-0 h-full w-full scale-150 object-contain"
                   />
@@ -970,7 +853,7 @@ export default function Dream9Page() {
           </div>
         </div>
 
-        <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
+        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
           <button
             onClick={() => {
               if (!allSlotsFilled) return;
@@ -996,10 +879,6 @@ export default function Dream9Page() {
           >
             {!allSlotsFilled ? "Fill all 9 slots" : "Select Shirt Size"}
           </button>
-        </div>
-
-        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
-          <ColorPicker />
         </div>
 
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
@@ -1417,7 +1296,7 @@ export default function Dream9Page() {
                   {modalShowFront ? (
                     <div className="relative aspect-[4494/5097] w-full overflow-hidden">
                       <img
-                        src={SHIRT_COLORS[shirtColor].front}
+                        src="/carscenefront.png"
                         alt="Front of Dream 9 shirt"
                         className="absolute inset-0 h-full w-full scale-150 object-contain"
                       />
@@ -1441,18 +1320,8 @@ export default function Dream9Page() {
               </h3>
             </div>
 
-            <div className="mb-3">
-            <ColorPicker />
-          </div>
-
-            <div
-              className={`grid min-h-[52px] gap-2 ${
-                SHIRT_COLORS[shirtColor].sizes.length === 5
-                  ? "grid-cols-5"
-                  : "grid-cols-4"
-              }`}
-            >
-              {SHIRT_COLORS[shirtColor].sizes.map((size) => (
+            <div className="grid min-h-[52px] grid-cols-4 gap-2">
+              {(["M", "L", "XL", "2XL"] as const).map((size) => (
                 <button
                   key={size}
                   onClick={() => {
@@ -1513,7 +1382,7 @@ export default function Dream9Page() {
             <div className="-mt-6 grid grid-cols-2 gap-2">
               <div>
                 <img
-                  src={SHIRT_COLORS[shirtColor].front}
+                  src="/carscenefront.png"
                   alt="Front of Dream 9 shirt"
                   className="h-[300px] w-full scale-110 object-contain"
                 />
