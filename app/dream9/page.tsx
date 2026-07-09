@@ -855,7 +855,7 @@ export default function Dream9Page() {
     const exportGridColor = gridColor(shirtColor);
     return (
       <div
-        className={`w-full ${
+        className={`relative w-full ${
           exportMode ? "h-full" : "aspect-[4494/5097]"
         } p-[6%]`}
         style={{
@@ -863,6 +863,14 @@ export default function Dream9Page() {
           backgroundColor: "transparent",
         }}
       >
+        {exportMode && title === "Dream 9" && (
+          <>
+            <div className="absolute left-0 top-0 h-[1px] w-[1px] bg-white/5" />
+            <div className="absolute right-0 top-0 h-[1px] w-[1px] bg-white/5" />
+            <div className="absolute bottom-0 left-0 h-[1px] w-[1px] bg-white/5" />
+            <div className="absolute bottom-0 right-0 h-[1px] w-[1px] bg-white/5" />
+          </>
+        )}
         <div className="flex h-full flex-col">
           <div className="relative pb-[0%] text-center">
             <div
