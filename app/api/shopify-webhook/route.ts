@@ -56,8 +56,13 @@ const SHIRT_VARIANT_IDS = {
   },
 } as const;
 
-const CARSCENE_LOGO_URL =
-  "https://res.cloudinary.com/dvcxnicew/image/upload/v1780373150/Red_Transparent-1_mffebp.png";
+const CARSCENE_LOGO_URLS = {
+  White: "https://res.cloudinary.com/dvcxnicew/image/upload/v1780373150/Red_Transparent-1_mffebp.png",
+  Black: "https://res.cloudinary.com/dvcxnicew/image/upload/v1783589209/TransparentWhite_eqsijo.png",
+  "Blue Spruce": "https://res.cloudinary.com/dvcxnicew/image/upload/v1783589209/TransparentWhite_eqsijo.png",
+  "True Navy": "https://res.cloudinary.com/dvcxnicew/image/upload/v1783589209/TransparentWhite_eqsijo.png",
+  Orchid: "https://res.cloudinary.com/dvcxnicew/image/upload/v1783589209/TransparentWhite_eqsijo.png",
+} as const;
 
 type ShopifyLineItemProperty = {
   name: string;
@@ -233,6 +238,15 @@ async function createPrintifyOrder({
     ? SHIRT_VARIANT_IDS[shirtColor]?.[shirtSize]
     : POSTER_VARIANT_ID;
 
+  console.log("SELECTED PRINTIFY VARIANT:", {
+    productType,
+    color,
+    size,
+    shirtColor,
+    shirtSize,
+    variantId,
+  });
+
   if (!variantId) {
     throw new Error(`Missing Printify variant for ${productType} color ${color} size ${size}`);
   }
@@ -271,7 +285,7 @@ async function createPrintifyOrder({
       },
       body: JSON.stringify({
         file_name: "carscene-logo.png",
-        url: CARSCENE_LOGO_URL,
+        url: CARSCENE_LOGO_URLS[shirtColor] || CARSCENE_LOGO_URLS.White,
       }),
     });
 
