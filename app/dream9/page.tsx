@@ -90,6 +90,22 @@ function gridColor(color: string) {
   return color === "White" ? "#000000" : "#FFFFFF";
 }
 
+function shareBackgroundColor(color: string) {
+  switch (color) {
+    case "Black":
+      return "#111111";
+    case "True Navy":
+      return "#101a33";
+    case "Blue Spruce":
+      return "#2f4f4f";
+    case "Orchid":
+      return "#c9a0dc";
+    case "White":
+    default:
+      return "#ffffff";
+  }
+}
+
 export default function Dream9Page() {
   const allCars = cars as Car[];
   const posterRef = useRef<HTMLDivElement>(null);
@@ -494,7 +510,7 @@ export default function Dream9Page() {
       const dataUrl = await toPng(node, {
         cacheBust: true,
         pixelRatio: 4,
-        backgroundColor: "white",
+        backgroundColor: shareBackgroundColor(shirtColor),
         imagePlaceholder:
           "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
       });
@@ -865,7 +881,9 @@ export default function Dream9Page() {
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
                   className="aspect-square overflow-hidden border p-0 transition"
                   style={{
-                    backgroundColor: "transparent",
+                    backgroundColor: title === "My Dream 9"
+                      ? shareBackgroundColor(shirtColor)
+                      : "transparent",
                     borderColor: exportGridColor,
                   }}
                 >
