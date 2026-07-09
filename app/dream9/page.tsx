@@ -222,7 +222,7 @@ export default function Dream9Page() {
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
-  const [shirtColor, setShirtColor] = useState<ShirtColor>("White");
+  const [shirtColor, setShirtColor] = useState<ShirtColor>("Black");
   const [shirtSize, setShirtSize] = useState<ShirtSize | null>(null);
   const [checkoutSize, setCheckoutSize] = useState<ShirtSize | null>(null);
   const [showModalEmailStep, setShowModalEmailStep] = useState(false);
@@ -644,9 +644,17 @@ export default function Dream9Page() {
       Orchid: "#c9a0dc",
     };
 
+    const COLOR_ORDER: ShirtColor[] = [
+      "Black",
+      "True Navy",
+      "Blue Spruce",
+      "White",
+      "Orchid",
+    ];
+
     return (
       <div className="grid grid-cols-5 gap-2">
-        {(Object.keys(SHIRT_COLORS) as ShirtColor[]).map((color) => (
+        {COLOR_ORDER.map((color) => (
           <button
             key={color}
             type="button"
