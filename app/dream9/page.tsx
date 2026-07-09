@@ -99,7 +99,7 @@ function shareBackgroundColor(color: string) {
     case "Blue Spruce":
       return "#2f4f4f";
     case "Orchid":
-      return "#c9a0dc";
+      return "#ffb6c1";
     case "White":
     default:
       return "#ffffff";
@@ -107,6 +107,23 @@ function shareBackgroundColor(color: string) {
 }
 
 export default function Dream9Page() {
+  const SITE_PAUSED = true;
+
+  if (SITE_PAUSED) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-black px-6 text-center text-white">
+        <div className="max-w-md">
+          <h1 className="text-4xl font-black text-red-600">
+            Dream 9 is temporarily paused
+          </h1>
+
+          <p className="mt-4 text-sm font-bold text-white/60">
+            We’re making a few updates. Check back soon.
+          </p>
+        </div>
+      </main>
+    );
+  }
   const allCars = cars as Car[];
   const posterRef = useRef<HTMLDivElement>(null);
   const exportRef = useRef<HTMLDivElement>(null);
