@@ -107,7 +107,7 @@ function shareBackgroundColor(color: string) {
 }
 
 export default function Dream9Page() {
-  const SITE_PAUSED = true;
+  const SITE_PAUSED = false;
 
   if (SITE_PAUSED) {
     return (
@@ -159,7 +159,7 @@ export default function Dream9Page() {
     Orchid: {
       front: "/carscenefront-orchid.png",
       back: "/Dream9Template-orchid.png",
-      sizes: ["S", "M", "XL", "2XL", "3XL"],
+      sizes: ["S", "M", "L", "XL", "2XL"],
     },
   } as const;
 

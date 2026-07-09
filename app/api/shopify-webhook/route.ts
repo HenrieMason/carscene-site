@@ -52,8 +52,7 @@ const SHIRT_VARIANT_IDS = {
     L: 79038,
     XL: 79039,
     "2XL": 79040,
-    // No 3XL exists for provider 99
-  },
+  }
 } as const;
 
 const CARSCENE_LOGO_URLS = {
