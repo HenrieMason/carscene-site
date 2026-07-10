@@ -127,6 +127,7 @@ export default function Dream9Page() {
   const allCars = cars as Car[];
   const posterRef = useRef<HTMLDivElement>(null);
   const exportRef = useRef<HTMLDivElement>(null);
+  const designGenerationRef = useRef(0);
   const shareExportRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSectionRef = useRef<HTMLDivElement>(null);
@@ -266,6 +267,21 @@ export default function Dream9Page() {
   }
 
   const allSlotsFilled = slots.every((slot) => slot !== null);
+
+  useEffect(() => {
+    if (!allSlotsFilled) {
+      designGenerationRef.current += 1;
+      setPreparedDesignUrl(null);
+      setPrepareDesignPromise(null);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      startPreparingDesign();
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [slots, shirtColor, allSlotsFilled]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -613,22 +629,36 @@ export default function Dream9Page() {
       throw new Error("Cloudinary upload failed.");
     }
 
-    setPreparedDesignUrl(cloudinaryData.secure_url);
     return cloudinaryData.secure_url as string;
   }
 
   function startPreparingDesign() {
-    if (preparedDesignUrl || prepareDesignPromise || !allSlotsFilled) return;
+    if (!allSlotsFilled) return;
+
+    const generation = ++designGenerationRef.current;
+
+    setPreparedDesignUrl(null);
 
     const promise = prepareDesignUpload();
 
     setPrepareDesignPromise(promise);
 
-    promise.catch((error) => {
-      console.error("BACKGROUND DESIGN PREP FAILED:", error);
-      setPrepareDesignPromise(null);
-      setPreparedDesignUrl(null);
-    });
+    promise
+      .then((designUrl) => {
+        // Only keep the newest generated design.
+        if (generation === designGenerationRef.current) {
+          setPreparedDesignUrl(designUrl);
+          setPrepareDesignPromise(null);
+        }
+      })
+      .catch((error) => {
+        console.error("BACKGROUND DESIGN PREP FAILED:", error);
+
+        if (generation === designGenerationRef.current) {
+          setPrepareDesignPromise(null);
+          setPreparedDesignUrl(null);
+        }
+      });
   }
 
   async function makePoster(size: ShirtSize) {
