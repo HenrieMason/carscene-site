@@ -1077,12 +1077,16 @@ export default function Dream9Page() {
               : isMakingDesign
               ? "Preparing Checkout..."
               : `Checkout • ${shirtSize} • ${
-                  shirtColor === "True Navy" ? "Navy" : shirtColor
-                }`}
+                shirtColor === "True Navy"
+                  ? "Navy"
+                  : shirtColor === "Blue Spruce"
+                  ? "Green"
+                  : shirtColor
+              }`}
           </button>
         </div>
 
-        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
+        <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
           <ColorPicker />
         </div>
 
