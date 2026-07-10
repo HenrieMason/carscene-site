@@ -132,6 +132,7 @@ export default function Dream9Page() {
   const searchSectionRef = useRef<HTMLDivElement>(null);
   const instructionsRef = useRef<HTMLDivElement>(null);
   const [showFront, setShowFront] = useState(false);
+  const [modalShowFront, setModalShowFront] = useState(false);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const SHIRT_COLORS = {
@@ -197,9 +198,9 @@ export default function Dream9Page() {
     Orchid: {
       S: "53631977062707",
       M: "53631977095475",
-      L: "53638299910451",
       XL: "53631977161011",
       "2XL": "53631977193779",
+      "3XL": "53631979618611",
     },
   };
 
@@ -242,6 +243,7 @@ export default function Dream9Page() {
     );
   }, []);
 
+  const [showSizePicker, setShowSizePicker] = useState(false);
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
   const [preparedDesignUrl, setPreparedDesignUrl] = useState<string | null>(null);
@@ -254,11 +256,24 @@ export default function Dream9Page() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
   const [shirtColor, setShirtColor] = useState<ShirtColor>("Black");
-  const [shirtSize, setShirtSize] = useState<ShirtSize>("L");
+  const [shirtSize, setShirtSize] = useState<ShirtSize | null>(null);
+  const [checkoutSize, setCheckoutSize] = useState<ShirtSize | null>(null);
+  const [showModalEmailStep, setShowModalEmailStep] = useState(false);
 
   useEffect(() => {
     setShowIntroPopup(false);
   }, []);
+
+  useEffect(() => {
+    if (!showSizePicker) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [showSizePicker]);
 
   function closeIntroPopup() {
     setShowIntroPopup(false);
@@ -362,8 +377,6 @@ export default function Dream9Page() {
     setQuery("");
     setDeleteReadySlot(null);
     setHasCustomizedDream9(false);
-    setPreparedDesignUrl(null);
-    setPrepareDesignPromise(null);
   }
 
   function emptyDream9() {
@@ -373,8 +386,6 @@ export default function Dream9Page() {
     setQuery("");
     setDeleteReadySlot(null);
     setHasCustomizedDream9(false);
-    setPreparedDesignUrl(null);
-    setPrepareDesignPromise(null);
   }
 
   function shuffleDream9() {
@@ -396,8 +407,6 @@ export default function Dream9Page() {
   }
   function addCarToTargetSlot(car: Car) {
     setHasCustomizedDream9(true);
-    setPreparedDesignUrl(null);
-    setPrepareDesignPromise(null);
 
     setSlots((current) => {
       const next = [...current];
@@ -647,6 +656,7 @@ export default function Dream9Page() {
         `&properties[Dream 9 Product]=${encodeURIComponent("Shirt")}` +
         `&properties[Dream 9 Size]=${encodeURIComponent(size)}` +
         `&properties[Dream 9 Color]=${encodeURIComponent(shirtColor)}` +
+        `&discount=DREAM9` +
         `&return_to=/checkout`;
 
       window.location.href = checkoutUrl;
@@ -683,6 +693,8 @@ export default function Dream9Page() {
             type="button"
             onClick={() => {
               setShirtColor(color);
+              setShirtSize(null);
+              setCheckoutSize(null);
               setPreparedDesignUrl(null);
               setPrepareDesignPromise(null);
             }}
@@ -1025,8 +1037,17 @@ export default function Dream9Page() {
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
           <button
             onClick={() => {
-              if (!allSlotsFilled || isMakingDesign) return;
-              makePoster(shirtSize);
+              if (!allSlotsFilled) return;
+              setShirtSize(null);
+              setCheckoutSize(null);
+              setShowModalEmailStep(false);
+              setEmailSubmitted(false);
+              setModalShowFront(false);
+              setShowSizePicker(true);
+
+              setTimeout(() => {
+                startPreparingDesign();
+              }, 100);
             }}
             disabled={!allSlotsFilled || isMakingDesign}
             className={`w-full py-4 text-sm font-black transition active:scale-[0.97] ${
@@ -1037,42 +1058,12 @@ export default function Dream9Page() {
                 : "cursor-not-allowed bg-white/10 text-white"
             }`}
           >
-            {!allSlotsFilled
-              ? "Fill all 9 slots"
-              : isMakingDesign
-              ? "Preparing Checkout..."
-              : `Checkout • ${shirtSize} • ${
-                  shirtColor === "True Navy" ? "Navy" : shirtColor
-                }`}
+            {!allSlotsFilled ? "Fill all 9 slots" : "Claim Your Dream 9"}
           </button>
         </div>
 
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
           <ColorPicker />
-        </div>
-
-        <div className="mx-auto mb-4 w-full max-w-[540px]">
-          <p className="mb-2 text-center text-sm font-black text-white/70">
-            Select Shirt Size
-          </p>
-
-          <div className="grid grid-cols-5 gap-2">
-            {SHIRT_COLORS[shirtColor].sizes.map((size) => (
-              <button
-                key={size}
-                type="button"
-                onClick={() => setShirtSize(size)}
-                disabled={isMakingDesign}
-                className={`py-4 text-sm font-black text-white transition active:scale-[0.97] disabled:opacity-60 ${
-                  shirtSize === size
-                    ? "bg-red-600"
-                    : "bg-white/10 hover:bg-white/15"
-                }`}
-              >
-                {size}
-              </button>
-            ))}
-          </div>
         </div>
 
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
@@ -1465,6 +1456,109 @@ export default function Dream9Page() {
                 className="bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
               >
                 Clear
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showSizePicker && allSlotsFilled && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
+          <div className="relative max-h-[92vh] w-full max-w-[540px] overflow-y-auto border border-white/10 bg-[#111] p-4 text-center shadow-2xl">
+
+          <button
+            type="button"
+            onClick={() => setShowSizePicker(false)}
+            className="absolute top-3 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-gray-400 text-2xl font-black text-white shadow-lg transition hover:bg-gray-600 active:scale-95"
+            aria-label="Close size picker"
+          >
+            ×
+          </button>
+
+            <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
+              <div className="relative overflow-visible">
+                <div className="origin-[50%_30%] scale-100 transition-transform duration-300">
+                  {modalShowFront ? (
+                    <div className="relative aspect-[4494/5097] w-full overflow-hidden">
+                      <img
+                        src={SHIRT_COLORS[shirtColor].front}
+                        alt="Front of Dream 9 shirt"
+                        className="absolute inset-0 h-full w-full scale-150 object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <Dream9Design />
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="mb-4 rounded-lg border border-red-600/30 bg-red-600/10 px-4 py-3 text-center">
+              <p className="text-sm font-black text-red-400">
+                🔥 100+ Dream 9 shirts ordered in June
+              </p>
+            </div>
+
+            <div className="mb-3 text-center">
+              <h3 className="text-lg font-black text-white">
+                {checkoutSize ? "Press Checkout • $34.99" : "Select Shirt Size • $34.99"}
+              </h3>
+            </div>
+
+            <div className="mb-3">
+            <ColorPicker />
+          </div>
+
+            <div
+              className={`grid min-h-[52px] gap-2 ${
+                SHIRT_COLORS[shirtColor].sizes.length === 5
+                  ? "grid-cols-5"
+                  : "grid-cols-4"
+              }`}
+            >
+              {SHIRT_COLORS[shirtColor].sizes.map((size) => (
+                <button
+                  key={size}
+                  onClick={() => {
+                    setShirtSize(size);
+                    setCheckoutSize(size);
+                  }}
+                  disabled={isMakingDesign}
+                  className={`py-4 text-sm font-black text-white transition disabled:opacity-60 ${
+                    shirtSize === size
+                      ? "bg-red-600"
+                      : "bg-white/10 hover:bg-red-600"
+                  }`}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => setModalShowFront((v) => !v)}
+                disabled={isMakingDesign}
+                className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97] disabled:opacity-60"
+              >
+                Flip
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  if (checkoutSize) {
+                    makePoster(checkoutSize);
+                  }
+                }}
+                disabled={!checkoutSize || isMakingDesign}
+                className={`py-4 text-sm font-black text-white transition active:scale-[0.97] disabled:opacity-60 ${
+                  checkoutSize
+                    ? "animate-pulse bg-red-600 hover:bg-red-700"
+                    : "bg-white/10"
+                }`}
+              >
+                Checkout
               </button>
             </div>
           </div>
