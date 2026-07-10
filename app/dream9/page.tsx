@@ -132,6 +132,7 @@ export default function Dream9Page() {
   const searchSectionRef = useRef<HTMLDivElement>(null);
   const instructionsRef = useRef<HTMLDivElement>(null);
   const [showFront, setShowFront] = useState(false);
+  const [previewStep, setPreviewStep] = useState(0);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const SHIRT_COLORS = {
@@ -501,6 +502,28 @@ export default function Dream9Page() {
         });
       })
     );
+  }
+
+  function cyclePreview() {
+    setPreviewStep((currentStep) => {
+      const nextStep = (currentStep + 1) % 4;
+
+      if (nextStep === 0) {
+        // Zoomed in, back
+        setShowFront(false);
+      } else if (nextStep === 1) {
+        // Zoomed out, back
+        setShowFront(false);
+      } else if (nextStep === 2) {
+        // Zoomed out, front
+        setShowFront(true);
+      } else if (nextStep === 3) {
+        // Zoomed out, back
+        setShowFront(false);
+      }
+
+      return nextStep;
+    });
   }
 
   async function shareDream9() {
@@ -972,7 +995,9 @@ export default function Dream9Page() {
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
           <div ref={posterRef} className="relative overflow-visible">
             <div
-              className="origin-[50%_30%] scale-[2.1] transition-transform duration-300"
+              className={`origin-[50%_30%] transition-transform duration-300 ${
+                previewStep === 0 ? "scale-[2.1]" : "scale-100"
+              }`}
             >
               {showFront ? (
                 <div className="relative aspect-[4494/5097] w-full overflow-hidden">
@@ -986,6 +1011,16 @@ export default function Dream9Page() {
                 <Dream9Design />
               )}
             </div>
+
+            <button
+              type="button"
+              onClick={cyclePreview}
+              className="absolute right-3 top-1 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-gray-400 text-xl text-white shadow-lg transition hover:bg-gray-600 active:scale-95"
+              aria-label="Inspect Dream 9 shirt"
+              title="Inspect shirt"
+            >
+              👁
+            </button>
           </div>
         </div>
 
@@ -1052,10 +1087,6 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px]">
-          <p className="mb-2 text-center text-sm font-black text-white/70">
-            Select Shirt Size
-          </p>
-
           <div className="grid grid-cols-5 gap-2">
             {SHIRT_COLORS[shirtColor].sizes.map((size) => (
               <button
