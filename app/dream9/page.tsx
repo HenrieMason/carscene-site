@@ -783,7 +783,7 @@ export default function Dream9Page() {
     return [...filledSlots, ...emptySlots];
   }, [slots]);
 
-  function Dream9Design({ exportMode = false }: { exportMode?: boolean }) {
+  function renderDream9Design(exportMode = false) {
     const borderColor = gridColor(shirtColor);
 
     return (
@@ -1056,7 +1056,7 @@ export default function Dream9Page() {
                   />
                 </div>
               ) : (
-                <Dream9Design />
+                renderDream9Design(false)
               )}
             </div>
 
