@@ -165,7 +165,7 @@ export default function Dream9Page() {
   } as const;
 
   type ShirtColor = keyof typeof SHIRT_COLORS;
-  type ShirtSize = "S" | "M" | "L" | "XL" | "2XL" | "3XL";
+  type ShirtSize = "S" | "M" | "L" | "XL" | "2XL";
 
   const SHIRT_VARIANT_IDS: Record<ShirtColor, Partial<Record<ShirtSize, string>>> = {
     White: {
@@ -782,6 +782,40 @@ export default function Dream9Page() {
     );
   }
 
+  function SizePicker() {
+    const SIZE_ORDER: ShirtSize[] = ["S", "M", "L", "XL", "2XL"];
+
+    return (
+      <div className="grid grid-cols-5 gap-2">
+        {SIZE_ORDER.map((size) => {
+          const isAvailable = SHIRT_COLORS[shirtColor].sizes.includes(
+            size as never
+          );
+
+          return (
+            <button
+              key={size}
+              type="button"
+              disabled={!isAvailable || isMakingDesign}
+              onClick={() => setShirtSize(size)}
+              className={`h-12 text-sm font-black transition active:scale-[0.97] ${
+                shirtSize === size
+                  ? "bg-red-600 text-white"
+                  : "bg-white/10 text-white hover:bg-white/15"
+              } ${
+                !isAvailable
+                  ? "cursor-not-allowed opacity-30"
+                  : ""
+              }`}
+            >
+              {size}
+            </button>
+          );
+        })}
+      </div>
+    );
+  }
+
   const displaySlots = useMemo(() => {
     const filledSlots = slots
       .map((car, realIndex) => ({ car, realIndex }))
@@ -1149,62 +1183,9 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px]">
-          <div className="grid grid-cols-2 gap-2">
-            <div className="relative">
-              <select
-                value={shirtSize}
-                onChange={(e) => setShirtSize(e.target.value as ShirtSize)}
-                disabled={isMakingDesign}
-                className="w-full appearance-none bg-white/10 px-4 py-4 text-sm font-black text-white outline-none transition hover:bg-white/15 disabled:opacity-60"
-              >
-                {SHIRT_COLORS[shirtColor].sizes.map((size) => (
-                  <option key={size} value={size} className="bg-black text-white">
-                    Size: {size}
-                  </option>
-                ))}
-              </select>
-
-              <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs text-white">
-                ▼
-              </span>
-            </div>
-
-            <div className="relative">
-              <select
-                value={shirtColor}
-                onChange={(e) => {
-                  setShirtColor(e.target.value as ShirtColor);
-                  setPreparedDesignBlob(null);
-                  setPrepareDesignPromise(null);
-                }}
-                disabled={isMakingDesign}
-                className="w-full appearance-none bg-white/10 px-4 py-4 text-sm font-black text-white outline-none transition hover:bg-white/15 disabled:opacity-60"
-              >
-                <option value="Black" className="bg-black text-white">
-                  Color: Black
-                </option>
-
-                <option value="True Navy" className="bg-black text-white">
-                  Color: True Navy
-                </option>
-
-                <option value="Blue Spruce" className="bg-black text-white">
-                  Color: Blue Spruce
-                </option>
-
-                <option value="White" className="bg-black text-white">
-                  Color: White
-                </option>
-
-                <option value="Orchid" className="bg-black text-white">
-                  Color: Orchid
-                </option>
-              </select>
-
-              <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs text-white">
-                ▼
-              </span>
-            </div>
+          <div className="space-y-2">
+            <SizePicker />
+            <ColorPicker />
           </div>
         </div>
 
