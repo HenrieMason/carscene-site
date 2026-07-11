@@ -254,11 +254,13 @@ export default function Dream9Page() {
 
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
-  const [preparedDesignUrl, setPreparedDesignUrl] = useState<string | null>(null);
-  const [prepareDesignPromise, setPrepareDesignPromise] = useState<Promise<string> | null>(null);
+  const [preparedDesignBlob, setPreparedDesignBlob] = useState<Blob | null>(null);
+  const [prepareDesignPromise, setPrepareDesignPromise] =
+    useState<Promise<Blob> | null>(null);
   const [showCheckoutHint, setShowCheckoutHint] = useState(false);
   const [shouldPulseBuyButton, setShouldPulseBuyButton] = useState(false);
   const [pulseEye, setPulseEye] = useState(false);
+  const [hasUsedEye, setHasUsedEye] = useState(false);
 
   const [showIntroPopup, setShowIntroPopup] = useState(false);
   const [email, setEmail] = useState("");
@@ -278,12 +280,11 @@ export default function Dream9Page() {
   const allSlotsFilled = slots.every((slot) => slot !== null);
 
   useEffect(() => {
-    if (!allSlotsFilled) {
-      designGenerationRef.current += 1;
-      setPreparedDesignUrl(null);
-      setPrepareDesignPromise(null);
-      return;
-    }
+    designGenerationRef.current += 1;
+    setPreparedDesignBlob(null);
+    setPrepareDesignPromise(null);
+
+    if (!allSlotsFilled) return;
 
     const timer = setTimeout(() => {
       startPreparingDesign();
@@ -302,16 +303,21 @@ export default function Dream9Page() {
   }, []);
 
   useEffect(() => {
+    if (hasUsedEye) {
+      setPulseEye(false);
+      return;
+    }
+
     const interval = setInterval(() => {
       setPulseEye(true);
 
       setTimeout(() => {
         setPulseEye(false);
       }, 1200);
-    }, 60000);
+    }, 20000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [hasUsedEye]);
 
   const brands = useMemo(() => {
     const existingBrands = new Set(allCars.map((car) => car.brand));
@@ -400,7 +406,7 @@ export default function Dream9Page() {
     setQuery("");
     setDeleteReadySlot(null);
     setHasCustomizedDream9(false);
-    setPreparedDesignUrl(null);
+    setPreparedDesignBlob(null);
     setPrepareDesignPromise(null);
   }
 
@@ -411,7 +417,7 @@ export default function Dream9Page() {
     setQuery("");
     setDeleteReadySlot(null);
     setHasCustomizedDream9(false);
-    setPreparedDesignUrl(null);
+    setPreparedDesignBlob(null);
     setPrepareDesignPromise(null);
   }
 
@@ -434,7 +440,7 @@ export default function Dream9Page() {
   }
   function addCarToTargetSlot(car: Car) {
     setHasCustomizedDream9(true);
-    setPreparedDesignUrl(null);
+    setPreparedDesignBlob(null);
     setPrepareDesignPromise(null);
 
     setSlots((current) => {
@@ -542,6 +548,7 @@ export default function Dream9Page() {
   }
 
   function cyclePreview() {
+    setHasUsedEye(true);
     setPreviewStep((currentStep) => {
       const nextStep = (currentStep + 1) % 3;
 
@@ -608,7 +615,7 @@ export default function Dream9Page() {
     }
   }
   
-  async function prepareDesignUpload() {
+  async function prepareDesignBlob() {
     if (!exportRef.current || !allSlotsFilled) {
       throw new Error("Design is not ready yet.");
     }
@@ -626,10 +633,13 @@ export default function Dream9Page() {
         "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
     });
 
-    const blob = await (await fetch(dataUrl)).blob();
+    return await (await fetch(dataUrl)).blob();
+  }
 
+  async function uploadDesignBlob(blob: Blob) {
     const formData = new FormData();
     const filename = `dream9-${Date.now()}.png`;
+
     formData.append("file", blob, filename);
     formData.append("upload_preset", "dream9_unsigned");
 
@@ -653,19 +663,19 @@ export default function Dream9Page() {
   function startPreparingDesign() {
     if (!allSlotsFilled) return;
 
-    const generation = ++designGenerationRef.current;
+    const generation = designGenerationRef.current;
 
-    setPreparedDesignUrl(null);
+    setPreparedDesignBlob(null);
 
-    const promise = prepareDesignUpload();
+    const promise = prepareDesignBlob();
 
     setPrepareDesignPromise(promise);
 
     promise
-      .then((designUrl) => {
-        // Only keep the newest generated design.
+      .then((blob) => {
+        // Only keep the PNG if the design has not changed.
         if (generation === designGenerationRef.current) {
-          setPreparedDesignUrl(designUrl);
+          setPreparedDesignBlob(blob);
           setPrepareDesignPromise(null);
         }
       })
@@ -674,7 +684,7 @@ export default function Dream9Page() {
 
         if (generation === designGenerationRef.current) {
           setPrepareDesignPromise(null);
-          setPreparedDesignUrl(null);
+          setPreparedDesignBlob(null);
         }
       });
   }
@@ -685,13 +695,15 @@ export default function Dream9Page() {
     try {
       setIsMakingDesign(true);
 
-      let designUrl = preparedDesignUrl;
+      let designBlob = preparedDesignBlob;
 
-      if (!designUrl) {
-        designUrl = prepareDesignPromise
+      if (!designBlob) {
+        designBlob = prepareDesignPromise
           ? await prepareDesignPromise
-          : await prepareDesignUpload();
+          : await prepareDesignBlob();
       }
+
+      const designUrl = await uploadDesignBlob(designBlob);
 
       const variantId = SHIRT_VARIANT_IDS[shirtColor][size];
 
@@ -754,7 +766,7 @@ export default function Dream9Page() {
             type="button"
             onClick={() => {
               setShirtColor(color);
-              setPreparedDesignUrl(null);
+              setPreparedDesignBlob(null);
               setPrepareDesignPromise(null);
             }}
             title={color}
@@ -1160,7 +1172,7 @@ export default function Dream9Page() {
                 value={shirtColor}
                 onChange={(e) => {
                   setShirtColor(e.target.value as ShirtColor);
-                  setPreparedDesignUrl(null);
+                  setPreparedDesignBlob(null);
                   setPrepareDesignPromise(null);
                 }}
                 disabled={isMakingDesign}
