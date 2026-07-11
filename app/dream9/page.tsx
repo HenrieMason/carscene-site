@@ -1017,14 +1017,8 @@ export default function Dream9Page() {
             <span className="text-red-600">All on one shirt.</span>
           </h1>
 
-        <p
-          className={`mt-3 text-sm font-bold ${
-            showCheckoutHint ? "text-red-500" : "text-white/55"
-          }`}
-        >
-          {showCheckoutHint
-            ? "Wear the garage you're working toward."
-            : "Tap any car to replace it."}
+        <p className="mt-3 text-sm font-bold text-white/55">
+          Tap any car to replace it.
         </p>
         </div>
 
@@ -1059,6 +1053,14 @@ export default function Dream9Page() {
             </button>
           </div>
         </div>
+
+        {showCheckoutHint && (
+          <div className="mx-auto mb-3 w-full max-w-[540px] text-center">
+            <p className="text-sm font-bold text-red-500">
+              Wear your Dream 9. Then make it reality.
+            </p>
+          </div>
+        )}
 
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
           <div className="grid grid-cols-3 gap-2">
