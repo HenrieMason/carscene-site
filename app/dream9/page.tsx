@@ -827,7 +827,7 @@ export default function Dream9Page() {
 
               return (
                 <button
-                  key={index}
+                  key={car?.id ?? `empty-${realIndex}`}
                   type="button"
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
                   style={{
@@ -960,7 +960,7 @@ export default function Dream9Page() {
 
               return (
                 <button
-                  key={index}
+                  key={car?.id ?? `empty-${realIndex}`}
                   type="button"
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
                   className="aspect-square overflow-hidden border p-0 transition"
