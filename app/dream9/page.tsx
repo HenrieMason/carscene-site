@@ -250,6 +250,7 @@ export default function Dream9Page() {
   const [prepareDesignPromise, setPrepareDesignPromise] = useState<Promise<string> | null>(null);
   const [showCheckoutHint, setShowCheckoutHint] = useState(false);
   const [shouldPulseBuyButton, setShouldPulseBuyButton] = useState(false);
+  const [pulseEye, setPulseEye] = useState(false);
 
   const [showIntroPopup, setShowIntroPopup] = useState(false);
   const [email, setEmail] = useState("");
@@ -290,6 +291,18 @@ export default function Dream9Page() {
     }, 1 * 60 * 1000);
 
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPulseEye(true);
+
+      setTimeout(() => {
+        setPulseEye(false);
+      }, 1200);
+    }, 60000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const brands = useMemo(() => {
@@ -522,20 +535,17 @@ export default function Dream9Page() {
 
   function cyclePreview() {
     setPreviewStep((currentStep) => {
-      const nextStep = (currentStep + 1) % 4;
+      const nextStep = (currentStep + 1) % 3;
 
       if (nextStep === 0) {
-        // Zoomed in, back
+        // Zoomed in on the back
         setShowFront(false);
       } else if (nextStep === 1) {
-        // Zoomed out, back
+        // Zoomed out on the back
         setShowFront(false);
-      } else if (nextStep === 2) {
-        // Zoomed out, front
+      } else {
+        // Zoomed out on the front
         setShowFront(true);
-      } else if (nextStep === 3) {
-        // Zoomed out, back
-        setShowFront(false);
       }
 
       return nextStep;
@@ -1045,7 +1055,9 @@ export default function Dream9Page() {
             <button
               type="button"
               onClick={cyclePreview}
-              className="absolute right-3 top-1 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-gray-400 text-xl text-white shadow-lg transition hover:bg-gray-600 active:scale-95"
+              className={`absolute right-3 top-1 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-gray-400 text-xl text-white shadow-lg transition hover:bg-gray-600 active:scale-95 ${
+                pulseEye ? "animate-pulse" : ""
+              }`}
               aria-label="Inspect Dream 9 shirt"
               title="Inspect shirt"
             >
@@ -1107,12 +1119,10 @@ export default function Dream9Page() {
               : isMakingDesign
               ? "Preparing Checkout..."
               : `$34.99 • Free Shipping • ${shirtSize} • ${
-                  shirtColor === "True Navy"
-                    ? "Navy"
-                    : shirtColor === "Blue Spruce"
-                    ? "Green"
-                    : shirtColor
-                }`}
+                shirtColor === "True Navy"
+                  ? "Navy"
+                  : shirtColor
+              }`}
           </button>
         </div>
 
