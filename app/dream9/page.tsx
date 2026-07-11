@@ -313,7 +313,7 @@ export default function Dream9Page() {
 
       setTimeout(() => {
         setPulseEye(false);
-      }, 1200);
+      }, 700);
     }, 20000);
 
     return () => clearInterval(interval);
@@ -1075,8 +1075,10 @@ export default function Dream9Page() {
             <button
               type="button"
               onClick={cyclePreview}
-              className={`absolute right-3 top-1 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-gray-400 text-xl text-white shadow-lg transition hover:bg-gray-600 active:scale-95 ${
-                pulseEye ? "animate-pulse" : ""
+              className={`absolute right-3 top-1 z-20 flex h-11 w-11 items-center justify-center rounded-full text-xl text-white shadow-lg transition-colors duration-500 active:scale-95 ${
+                pulseEye
+                  ? "bg-red-600"
+                  : "bg-gray-400 hover:bg-gray-600"
               }`}
               aria-label="Inspect Dream 9 shirt"
               title="Inspect shirt"
