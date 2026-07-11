@@ -230,9 +230,17 @@ export default function Dream9Page() {
       .sort(() => Math.random() - 0.5)
       .slice(0, 9);
   }
-  const [slots, setSlots] = useState<(Car | null)[]>(Array(9).fill(null));
+  const [slots, setSlots] = useState<(Car | null)[]>(
+    Array(9).fill(null)
+  );
+
+  const hasInitializedSlots = useRef(false);
 
   useEffect(() => {
+    if (hasInitializedSlots.current) return;
+
+    hasInitializedSlots.current = true;
+
     const randomFeatured = [...featuredCars]
       .sort(() => Math.random() - 0.5)
       .slice(0, 9);
