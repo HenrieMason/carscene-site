@@ -723,6 +723,10 @@ export default function Dream9Page() {
         });
       }
 
+      const checkoutDestination = emailSubmitted
+        ? "/discount/DREAM9?redirect=/checkout"
+        : "/checkout";
+
       const checkoutUrl =
         `${SHOPIFY_STORE_URL}/cart/add?id=${variantId}` +
         `&quantity=1` +
@@ -730,7 +734,7 @@ export default function Dream9Page() {
         `&properties[Dream 9 Product]=${encodeURIComponent("Shirt")}` +
         `&properties[Dream 9 Size]=${encodeURIComponent(size)}` +
         `&properties[Dream 9 Color]=${encodeURIComponent(shirtColor)}` +
-        `&return_to=/checkout`;
+        `&return_to=${encodeURIComponent(checkoutDestination)}`;
 
       window.location.href = checkoutUrl;
     } catch (error) {
@@ -1238,7 +1242,7 @@ export default function Dream9Page() {
 
             <p className="mt-1 text-sm text-white">
               {emailSubmitted
-                ? "Success! Use code DREAM9 at checkout."
+                ? "Success! 10% discount applied to checkout."
                 : "Enter your email and we'll display a coupon code."}
             </p>
 
