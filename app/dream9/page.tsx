@@ -723,18 +723,20 @@ export default function Dream9Page() {
         });
       }
 
-      const checkoutDestination = emailSubmitted
-        ? "/discount/DREAM9?redirect=/checkout"
-        : "/checkout";
-
-      const checkoutUrl =
-        `${SHOPIFY_STORE_URL}/cart/add?id=${variantId}` +
+      const cartAddPath =
+        `/cart/add?id=${variantId}` +
         `&quantity=1` +
         `&properties[Dream 9 Design URL]=${encodeURIComponent(designUrl)}` +
         `&properties[Dream 9 Product]=${encodeURIComponent("Shirt")}` +
         `&properties[Dream 9 Size]=${encodeURIComponent(size)}` +
         `&properties[Dream 9 Color]=${encodeURIComponent(shirtColor)}` +
-        `&return_to=${encodeURIComponent(checkoutDestination)}`;
+        `&return_to=${encodeURIComponent("/checkout")}`;
+
+      const checkoutUrl = emailSubmitted
+        ? `${SHOPIFY_STORE_URL}/discount/DREAM9?redirect=${encodeURIComponent(
+            cartAddPath
+          )}`
+        : `${SHOPIFY_STORE_URL}${cartAddPath}`;
 
       window.location.href = checkoutUrl;
     } catch (error) {
