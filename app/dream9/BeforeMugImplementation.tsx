@@ -166,7 +166,6 @@ export default function Dream9Page() {
 
   type ShirtColor = keyof typeof SHIRT_COLORS;
   type ShirtSize = "S" | "M" | "L" | "XL" | "2XL";
-  type ProductType = "shirt" | "mug";
 
   const SHIRT_VARIANT_IDS: Record<ShirtColor, Partial<Record<ShirtSize, string>>> = {
     White: {
@@ -205,8 +204,6 @@ export default function Dream9Page() {
       "2XL": "53631977193779",
     },
   };
-
-  const MUG_VARIANT_ID = "53652974698803";
 
   const [today, setToday] = useState("");
 
@@ -269,24 +266,8 @@ export default function Dream9Page() {
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
-  const [productType, setProductType] =
-    useState<ProductType>("shirt");
-
-  const [shirtColor, setShirtColor] =
-    useState<ShirtColor>("Black");
-
-  const [shirtSize, setShirtSize] =
-    useState<ShirtSize>("L");
-
-  const isMug = productType === "mug";
-
-  useEffect(() => {
-    if (productType === "mug") {
-      setShowFront(false);
-      setPreviewStep(0);
-      setPulseEye(false);
-    }
-  }, [productType]);
+  const [shirtColor, setShirtColor] = useState<ShirtColor>("Black");
+  const [shirtSize, setShirtSize] = useState<ShirtSize>("L");
 
   useEffect(() => {
     setShowIntroPopup(false);
@@ -310,7 +291,7 @@ export default function Dream9Page() {
     }, 1500);
 
     return () => clearTimeout(timer);
-  }, [slots, shirtColor, productType, allSlotsFilled]);
+  }, [slots, shirtColor, allSlotsFilled]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -601,9 +582,7 @@ export default function Dream9Page() {
       const dataUrl = await toPng(node, {
         cacheBust: true,
         pixelRatio: 4,
-        backgroundColor: isMug
-          ? "#ffffff"
-          : shareBackgroundColor(shirtColor),
+        backgroundColor: shareBackgroundColor(shirtColor),
         imagePlaceholder:
           "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
       });
@@ -726,29 +705,18 @@ export default function Dream9Page() {
 
       const designUrl = await uploadDesignBlob(designBlob);
 
-      const variantId =
-        productType === "mug"
-          ? MUG_VARIANT_ID
-          : SHIRT_VARIANT_IDS[shirtColor][size];
+      const variantId = SHIRT_VARIANT_IDS[shirtColor][size];
 
       if (!variantId) {
-        alert(
-          productType === "mug"
-            ? "The mug checkout variant is not connected."
-            : `${shirtColor} is not available in ${size}.`
-        );
+        alert(`${shirtColor} is not available in ${size}.`);
         return;
       }
 
-      const checkoutValue = productType === "mug" ? 19.99 : 34.99;
-      const checkoutName =
-        productType === "mug" ? "Dream 9 Coffee Mug" : "Dream 9 Shirt";
-
       if (typeof window !== "undefined" && window.fbq) {
         window.fbq("track", "InitiateCheckout", {
-          value: checkoutValue,
+          value: 34.99,
           currency: "USD",
-          content_name: checkoutName,
+          content_name: "Dream 9 Shirt",
           content_type: "product",
           content_ids: [variantId],
           num_items: 1,
@@ -759,15 +727,9 @@ export default function Dream9Page() {
         `${SHOPIFY_STORE_URL}/cart/add?id=${variantId}` +
         `&quantity=1` +
         `&properties[Dream 9 Design URL]=${encodeURIComponent(designUrl)}` +
-        `&properties[Dream 9 Product]=${encodeURIComponent(
-          productType === "mug" ? "Mug" : "Shirt"
-        )}` +
-        `&properties[Dream 9 Size]=${encodeURIComponent(
-          productType === "mug" ? "11oz" : size
-        )}` +
-        (productType === "shirt"
-          ? `&properties[Dream 9 Color]=${encodeURIComponent(shirtColor)}`
-          : "") +
+        `&properties[Dream 9 Product]=${encodeURIComponent("Shirt")}` +
+        `&properties[Dream 9 Size]=${encodeURIComponent(size)}` +
+        `&properties[Dream 9 Color]=${encodeURIComponent(shirtColor)}` +
         `&return_to=/checkout`;
 
       window.location.href = checkoutUrl;
@@ -868,9 +830,7 @@ export default function Dream9Page() {
   }, [slots]);
 
   function renderDream9Design(exportMode = false) {
-    const borderColor = isMug
-      ? "#000000"
-      : gridColor(shirtColor);
+    const borderColor = gridColor(shirtColor);
 
     return (
       <div
@@ -878,18 +838,12 @@ export default function Dream9Page() {
           exportMode ? "h-full" : "aspect-[4494/5097]"
         }`}
       >
-        {!isMug && (
-          <img
-            src={SHIRT_COLORS[shirtColor].back}
-            alt="Dream 9 Shirt"
-            crossOrigin="anonymous"
-            className="absolute inset-0 h-full w-full scale-150 object-contain"
-          />
-        )}
-
-        {isMug && (
-          <div className="absolute inset-0 bg-white" />
-        )}
+        <img
+          src={SHIRT_COLORS[shirtColor].back}
+          alt="Dream 9 Shirt"
+          crossOrigin="anonymous"
+          className="absolute inset-0 h-full w-full scale-150 object-contain"
+        />
 
         <div
           className="absolute text-center font-black italic"
@@ -1003,9 +957,7 @@ export default function Dream9Page() {
     exportMode?: boolean;
     title?: string;
   }) {
-    const exportGridColor = isMug
-      ? "#000000"
-      : gridColor(shirtColor);
+    const exportGridColor = gridColor(shirtColor);
     return (
       <div
         className={`relative w-full ${
@@ -1129,45 +1081,19 @@ export default function Dream9Page() {
             <span className="text-red-600">All on one shirt.</span>
           </h1>
 
-        <div className="mt-4 grid grid-cols-2 gap-2">
-          <button
-            type="button"
-            onClick={() => setProductType("shirt")}
-            className={`py-3 text-sm font-black transition active:scale-[0.97] ${
-              productType === "shirt"
-                ? "bg-red-600 text-white"
-                : "bg-white/10 text-white hover:bg-white/15"
-            }`}
-          >
-            T-Shirt
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setProductType("mug")}
-            className={`py-3 text-sm font-black transition active:scale-[0.97] ${
-              productType === "mug"
-                ? "bg-red-600 text-white"
-                : "bg-white/10 text-white hover:bg-white/15"
-            }`}
-          >
-            Coffee Mug
-          </button>
-        </div>
+        <p className="mt-3 text-sm font-bold text-white/55">
+          Tap any car to replace it.
+        </p>
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
           <div ref={posterRef} className="relative overflow-visible">
             <div
               className={`origin-[50%_30%] transition-transform duration-300 ${
-                (productType === "shirt" && previewStep === 0) || productType === "mug"
-                  ? "scale-[2.1]"
-                  : "scale-100"
+                previewStep === 0 ? "scale-[2.1]" : "scale-100"
               }`}
             >
-              {productType === "mug" ? (
-                renderDream9Design(false)
-              ) : showFront ? (
+              {showFront ? (
                 <div className="relative aspect-[4494/5097] w-full overflow-hidden">
                   <img
                     src={SHIRT_COLORS[shirtColor].front}
@@ -1180,21 +1106,19 @@ export default function Dream9Page() {
               )}
             </div>
 
-            {productType === "shirt" && (
-              <button
-                type="button"
-                onClick={cyclePreview}
-                className={`absolute right-3 top-1 z-20 flex h-11 w-11 items-center justify-center rounded-full text-xl text-white shadow-lg transition-colors duration-500 active:scale-95 ${
-                  pulseEye
-                    ? "bg-red-600"
-                    : "bg-gray-400 hover:bg-gray-600"
-                }`}
-                aria-label="Inspect Dream 9 shirt"
-                title="Inspect shirt"
-              >
-                👁
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={cyclePreview}
+              className={`absolute right-3 top-1 z-20 flex h-11 w-11 items-center justify-center rounded-full text-xl text-white shadow-lg transition-colors duration-500 active:scale-95 ${
+                pulseEye
+                  ? "bg-red-600"
+                  : "bg-gray-400 hover:bg-gray-600"
+              }`}
+              aria-label="Inspect Dream 9 shirt"
+              title="Inspect shirt"
+            >
+              👁
+            </button>
           </div>
         </div>
 
@@ -1235,7 +1159,6 @@ export default function Dream9Page() {
           <button
             onClick={() => {
               if (!allSlotsFilled || isMakingDesign) return;
-
               makePoster(shirtSize);
             }}
             disabled={!allSlotsFilled || isMakingDesign}
@@ -1251,24 +1174,20 @@ export default function Dream9Page() {
               ? "Fill all 9 slots"
               : isMakingDesign
               ? "Preparing Checkout..."
-              : productType === "mug"
-              ? "24.99 • Free Shipping • 11oz Coffee Mug"
               : `$34.99 • Free Shipping • ${shirtSize} • ${
-                  shirtColor === "True Navy"
-                    ? "Navy"
-                    : shirtColor
-                }`}
+                shirtColor === "True Navy"
+                  ? "Navy"
+                  : shirtColor
+              }`}
           </button>
         </div>
 
-        {productType === "shirt" && (
-          <div className="mx-auto mb-4 w-full max-w-[540px]">
-            <div className="space-y-2">
-              <SizePicker />
-              <ColorPicker />
-            </div>
+        <div className="mx-auto mb-4 w-full max-w-[540px]">
+          <div className="space-y-2">
+            <SizePicker />
+            <ColorPicker />
           </div>
-        )}
+        </div>
 
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
           {displaySlots.map(({ car, realIndex }, index) => (
