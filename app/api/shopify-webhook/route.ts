@@ -381,11 +381,6 @@ async function createPrintifyOrder({
     };
   }
 
-  const destinationCountry =
-    shippingAddress.country_code?.toUpperCase() || "US";
-
-  const shippingMethod = destinationCountry === "US" ? 4 : 1;
-
   const orderResponse = await fetch(
     `https://api.printify.com/v1/shops/${SHOP_ID}/orders.json`,
     {
@@ -404,14 +399,14 @@ async function createPrintifyOrder({
             quantity: 1,
           },
         ],
-        shipping_method: shippingMethod,
+        shipping_method: 1,
         send_shipping_notification: false,
         address_to: {
           first_name: shippingAddress.first_name || "Customer",
           last_name: shippingAddress.last_name || "",
           email,
           phone: shippingAddress.phone || "",
-          country: destinationCountry,
+          country: shippingAddress.country_code || "US",
           region: shippingAddress.province_code || shippingAddress.province || "",
           address1: shippingAddress.address1 || "",
           address2: shippingAddress.address2 || "",
