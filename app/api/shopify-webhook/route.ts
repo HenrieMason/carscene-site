@@ -381,11 +381,6 @@ async function createPrintifyOrder({
     };
   }
 
-  const destinationCountry =
-    shippingAddress.country_code?.toUpperCase() || "US";
-
-  const shippingMethod = destinationCountry === "US" ? 4 : 1;
-
   const orderResponse = await fetch(
     `https://api.printify.com/v1/shops/${SHOP_ID}/orders.json`,
     {
@@ -404,7 +399,7 @@ async function createPrintifyOrder({
             quantity: 1,
           },
         ],
-        shipping_method: shippingMethod,
+        shipping_method: 1,
         send_shipping_notification: false,
         address_to: {
           first_name: shippingAddress.first_name || "Customer",
