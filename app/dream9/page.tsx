@@ -1126,7 +1126,9 @@ export default function Dream9Page() {
           <h1 className="text-[34px] font-black leading-[0.95] tracking-tight sm:text-4xl">
             Your 9 favorite cars.
             <br />
-            <span className="text-red-600">All on one shirt.</span>
+            <span className="text-red-600">
+              {productType === "mug" ? "All on one mug." : "All on one shirt."}
+            </span>
           </h1>
 
         <div className="mt-4 grid grid-cols-2 gap-2">
