@@ -1258,7 +1258,7 @@ export default function Dream9Page() {
         {showCheckoutHint && (
           <div className="mx-auto mb-3 w-full max-w-[540px] text-center">
             <p className="text-sm font-bold text-red-500">
-              Wear your Dream 9. Then make it reality.
+              Show off your taste. Wear your Dream 9.
             </p>
           </div>
         )}
