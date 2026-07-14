@@ -397,20 +397,21 @@ async function createPrintifyOrder({
                     {
                       position: "front",
                       images: [
+                        // Dream 9
                         {
-                          // Dream 9 graphic
                           id: imageData.id,
-                          x: 0.0081,   // 0.81% from left
-                          y: 0.0426,   // 4.26% from top
-                          scale: 0.20, // 20%
+                          x: 0.20,   // farther left
+                          y: 0.30,   // higher
+                          scale: 0.20,
                           angle: 0,
                         },
+
+                        // Logo
                         {
-                          // CarScene logo
                           id: logoImageData!.id,
-                          x: 0.6575,   // 65.75% from left
-                          y: 0.3212,   // 32.12% from top
-                          scale: 0.30, // 30%
+                          x: 0.66,   // slightly left
+                          y: 0.32,   // higher
+                          scale: 0.30,
                           angle: 0,
                         },
                       ],
