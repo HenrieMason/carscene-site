@@ -1309,7 +1309,7 @@ export default function Dream9Page() {
             }`}
           >
             {!allSlotsFilled
-              ? "Fill all 9 slots"
+              ? "Fill all 9 empty slots to continue."
               : isMakingDesign
               ? "Preparing Checkout..."
               : productType === "mug"
