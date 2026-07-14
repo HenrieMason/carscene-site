@@ -568,6 +568,25 @@ export default function Dream9Page() {
 
   function cyclePreview() {
     setHasUsedEye(true);
+
+    if (isMug) {
+      setPreviewStep((currentStep) => {
+        const nextStep = (currentStep + 1) % 3;
+
+        if (nextStep === 2) {
+          // Show the rear mug
+          setShowFront(true);
+        } else {
+          // Steps 0 and 1 show the front mug
+          setShowFront(false);
+        }
+
+        return nextStep;
+      });
+
+      return;
+    }
+
     setPreviewStep((currentStep) => {
       const nextStep = (currentStep + 1) % 3;
 
@@ -887,32 +906,43 @@ export default function Dream9Page() {
           />
         )}
 
-        {isMug && (
-          <div className="absolute inset-0 bg-white" />
+        {isMug && !exportMode && (
+          <img
+            src={showFront ? "/mugrear.png" : "/mug.png"}
+            alt="Dream 9 Coffee Mug"
+            crossOrigin="anonymous"
+            className={`absolute inset-0 h-full w-full object-contain ${
+              showFront
+                ? "translate-x-[05%] translate-y-[-12%] scale-[1.1]"
+                : "translate-x-[-6%] -translate-y-[12%] scale-[1.1]"
+            }`}
+          />
         )}
 
-        <div
-          className="absolute text-center font-black italic"
-          style={{
-            color: borderColor,
-            top: "15.5%",
-            left: "50%",
-            transform: "translateX(-50%) skewX(-8deg)",
-            fontSize: "clamp(18px, 4vw, 33px)",
-            letterSpacing: "-0.04em",
-          }}
-        >
-          Dream 9
-        </div>
+        {(!isMug || !showFront) && (
+          <>
+            <div
+              className="absolute text-center font-black italic"
+              style={{
+                color: borderColor,
+                top: "15.5%",
+                left: "50%",
+                transform: "translateX(-50%) skewX(-8deg)",
+                fontSize: "clamp(18px, 4vw, 33px)",
+                letterSpacing: "-0.04em",
+              }}
+            >
+              Dream 9
+            </div>
 
-        <div
-          className="absolute"
-          style={{
-            top: "22%",
-            left: "30%",
-            width: "40%",
-          }}
-        >
+            <div
+              className="absolute"
+              style={{
+                top: "22%",
+                left: "30%",
+                width: "40%",
+              }}
+            >
           <div className="grid grid-cols-3 gap-0">
             {displaySlots.map(({ car, realIndex }, index) => {
               const type = car ? classFromPrice(car.price) : "P";
@@ -992,6 +1022,8 @@ export default function Dream9Page() {
             </div>
           </div>
         </div>
+        </>
+        )}
       </div>
     );
   }
@@ -1131,7 +1163,7 @@ export default function Dream9Page() {
             </span>
           </h1>
 
-        <div className="mt-4 grid grid-cols-2 gap-2">
+          <div className="mt-4 grid grid-cols-2 gap-2">
           <button
             type="button"
             onClick={() => setProductType("shirt")}
@@ -1156,15 +1188,16 @@ export default function Dream9Page() {
             Coffee Mug
           </button>
         </div>
+          <p className="mt-3 text-sm font-bold text-white/55">
+            Tap any car to replace it.
+          </p>
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
           <div ref={posterRef} className="relative overflow-visible">
             <div
               className={`origin-[50%_30%] transition-transform duration-300 ${
-                (productType === "shirt" && previewStep === 0) || productType === "mug"
-                  ? "scale-[2.1]"
-                  : "scale-100"
+                previewStep === 0 ? "scale-[2.1]" : "scale-100"
               }`}
             >
               {productType === "mug" ? (
@@ -1182,8 +1215,7 @@ export default function Dream9Page() {
               )}
             </div>
 
-            {productType === "shirt" && (
-              <button
+            <button
                 type="button"
                 onClick={cyclePreview}
                 className={`absolute right-3 top-1 z-20 flex h-11 w-11 items-center justify-center rounded-full text-xl text-white shadow-lg transition-colors duration-500 active:scale-95 ${
@@ -1191,12 +1223,15 @@ export default function Dream9Page() {
                     ? "bg-red-600"
                     : "bg-gray-400 hover:bg-gray-600"
                 }`}
-                aria-label="Inspect Dream 9 shirt"
-                title="Inspect shirt"
+                aria-label={
+                  isMug
+                    ? "Inspect Dream 9 coffee mug"
+                    : "Inspect Dream 9 shirt"
+                }
+                title={isMug ? "Inspect mug" : "Inspect shirt"}
               >
                 👁
               </button>
-            )}
           </div>
         </div>
 
@@ -1233,7 +1268,11 @@ export default function Dream9Page() {
           </div>
         </div>
 
-        <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
+        <div
+          className={`mx-auto grid w-full max-w-[540px] gap-2 ${
+            productType === "mug" ? "mb-4" : "mb-2"
+          }`}
+        >
           <button
             onClick={() => {
               if (!allSlotsFilled || isMakingDesign) return;
