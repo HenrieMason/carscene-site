@@ -913,7 +913,7 @@ export default function Dream9Page() {
             crossOrigin="anonymous"
             className={`absolute inset-0 h-full w-full object-contain ${
               showFront
-                ? "translate-x-[05%] translate-y-[-12%] scale-[1.1]"
+                ? "translate-x-[06%] translate-y-[-12%] scale-[1.1]"
                 : "translate-x-[-6%] -translate-y-[12%] scale-[1.1]"
             }`}
           />
