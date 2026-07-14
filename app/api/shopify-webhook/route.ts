@@ -401,7 +401,7 @@ async function createPrintifyOrder({
                         {
                           id: imageData.id,
                           x: 0.19,   // farther left was 19
-                          y: 0.50,   // higher was 50
+                          y: 0.48,   // higher was 50
                           scale: 0.35, // was 40
                           angle: 0,
                         },
@@ -409,7 +409,7 @@ async function createPrintifyOrder({
                         // Logo
                         {
                           id: logoImageData!.id,
-                          x: 0.80,   // slightly left was 80
+                          x: 0.76,   // slightly left was 80
                           y: 0.50,   // higher
                           scale: 0.30,
                           angle: 0,
