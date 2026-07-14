@@ -270,7 +270,7 @@ export default function Dream9Page() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
   const [productType, setProductType] =
-    useState<ProductType>("shirt");
+    useState<ProductType>("mug");
 
   const [shirtColor, setShirtColor] =
     useState<ShirtColor>("Black");
@@ -279,6 +279,17 @@ export default function Dream9Page() {
     useState<ShirtSize>("L");
 
   const isMug = productType === "mug";
+
+  useEffect(() => {
+    const preloadImage = (src: string) => {
+      const image = new Image();
+      image.src = src;
+      image.decode?.().catch(() => {});
+    };
+
+    preloadImage("/mug.png");
+    preloadImage("/mugrear.png");
+  }, []);
 
   useEffect(() => {
     if (productType === "mug") {
@@ -907,16 +918,25 @@ export default function Dream9Page() {
         )}
 
         {isMug && !exportMode && (
-          <img
-            src={showFront ? "/mugrear.png" : "/mug.png"}
-            alt="Dream 9 Coffee Mug"
-            crossOrigin="anonymous"
-            className={`absolute inset-0 h-full w-full object-contain ${
-              showFront
-                ? "translate-x-[06%] translate-y-[-12%] scale-[1.1]"
-                : "translate-x-[-6%] -translate-y-[12%] scale-[1.1]"
-            }`}
-          />
+          <>
+            <img
+              src="/mug.png"
+              alt="Front of Dream 9 Coffee Mug"
+              crossOrigin="anonymous"
+              className={`absolute inset-0 h-full w-full -translate-x-[6%] -translate-y-[12%] scale-[1.1] object-contain transition-opacity duration-200 ${
+                showFront ? "opacity-0" : "opacity-100"
+              }`}
+            />
+
+            <img
+              src="/mugrear.png"
+              alt="Rear of Dream 9 Coffee Mug"
+              crossOrigin="anonymous"
+              className={`absolute inset-0 h-full w-full translate-x-[6%] -translate-y-[12%] scale-[1.1] object-contain transition-opacity duration-200 ${
+                showFront ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          </>
         )}
 
         {(!isMug || !showFront) && (
