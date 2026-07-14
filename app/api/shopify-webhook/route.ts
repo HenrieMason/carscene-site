@@ -400,17 +400,17 @@ async function createPrintifyOrder({
                         // Dream 9
                         {
                           id: imageData.id,
-                          x: 0.20,   // farther left
-                          y: 0.30,   // higher
-                          scale: 0.20,
+                          x: 0.18,   // farther left
+                          y: 0.40,   // higher
+                          scale: 0.25,
                           angle: 0,
                         },
 
                         // Logo
                         {
                           id: logoImageData!.id,
-                          x: 0.66,   // slightly left
-                          y: 0.32,   // higher
+                          x: 0.70,   // slightly left
+                          y: 0.40,   // higher
                           scale: 0.30,
                           angle: 0,
                         },
