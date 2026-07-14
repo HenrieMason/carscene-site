@@ -270,7 +270,7 @@ export default function Dream9Page() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
   const [productType, setProductType] =
-    useState<ProductType>("mug");
+    useState<ProductType>("shirt");
 
   const [shirtColor, setShirtColor] =
     useState<ShirtColor>("Black");
