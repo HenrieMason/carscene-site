@@ -1175,39 +1175,43 @@ export default function Dream9Page() {
           ref={instructionsRef}
           className="mx-auto mb-4 w-full max-w-[540px] text-center"
         >
-          <h1 className="text-[34px] font-black leading-[0.95] tracking-tight sm:text-4xl">
-            Your 9 favorite cars.
-            <br />
-            <span className="text-red-600">
-              {productType === "mug" ? "All on one mug." : "All on one shirt."}
-            </span>
-          </h1>
+          <div className="flex w-full items-center justify-between gap-3">
+            <button
+              type="button"
+              onClick={() => setProductType("shirt")}
+              aria-label="Select T-Shirt"
+              title="T-Shirt"
+              className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-full text-2xl shadow-lg transition active:scale-[0.94] sm:h-16 sm:w-16 sm:text-3xl ${
+                productType === "shirt"
+                  ? "bg-red-600 text-white"
+                  : "bg-white/10 text-white/60 hover:bg-white/15 hover:text-white"
+              }`}
+            >
+              👕
+            </button>
 
-          <div className="mt-4 grid grid-cols-2 gap-2">
-          <button
-            type="button"
-            onClick={() => setProductType("shirt")}
-            className={`py-3 text-sm font-black transition active:scale-[0.97] ${
-              productType === "shirt"
-                ? "bg-red-600 text-white"
-                : "bg-white/10 text-white hover:bg-white/15"
-            }`}
-          >
-            T-Shirt
-          </button>
+            <h1 className="min-w-0 flex-1 text-[25px] font-black leading-[0.95] tracking-tight sm:text-[30px]">
+              Your 9 favorite cars.
+              <br />
+              <span className="text-red-600">
+                {productType === "mug" ? "All on one mug." : "All on one shirt."}
+              </span>
+            </h1>
 
-          <button
-            type="button"
-            onClick={() => setProductType("mug")}
-            className={`py-3 text-sm font-black transition active:scale-[0.97] ${
-              productType === "mug"
-                ? "bg-red-600 text-white"
-                : "bg-white/10 text-white hover:bg-white/15"
-            }`}
-          >
-            Coffee Mug
-          </button>
-        </div>
+            <button
+              type="button"
+              onClick={() => setProductType("mug")}
+              aria-label="Select Coffee Mug"
+              title="Coffee Mug"
+              className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-full text-2xl shadow-lg transition active:scale-[0.94] sm:h-16 sm:w-16 sm:text-3xl ${
+                productType === "mug"
+                  ? "bg-red-600 text-white"
+                  : "bg-white/10 text-white/60 hover:bg-white/15 hover:text-white"
+              }`}
+            >
+              ☕
+            </button>
+          </div>
           <p className="mt-3 text-sm font-bold text-white/55">
             Tap any car to replace it.
           </p>
