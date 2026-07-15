@@ -10,6 +10,15 @@ const PRINT_PROVIDER_ID = 99;
 
 const POSTER_BLUEPRINT_ID = 1220;
 const POSTER_VARIANT_ID = 101888;
+const MUG_BLUEPRINT_ID = 478;
+
+const MUG_VARIANT_IDS = {
+  "11oz": 65216,
+  "15oz": 104692,
+} as const;
+
+const MUG_LOGO_URL =
+  "https://res.cloudinary.com/dvcxnicew/image/upload/v1780373150/Red_Transparent-1_mffebp.png";
 
 const SHIRT_BLUEPRINT_ID = 706;
 const SHIRT_VARIANT_IDS = {
@@ -177,6 +186,13 @@ export async function POST(req: NextRequest) {
       continue;
     }
 
+    const defaultSize =
+      dream9Product === "Mug"
+        ? "11oz"
+        : dream9Product === "Shirt"
+          ? "L"
+          : "18x24";
+
     const result = await createPrintifyOrder({
       orderId: order.id,
       lineItemId: item.id,
@@ -184,7 +200,7 @@ export async function POST(req: NextRequest) {
       email: order.email,
       imageUrl: dream9DesignUrl,
       productType: dream9Product,
-      size: dream9Size || "18x24",
+      size: dream9Size || defaultSize,
       color: dream9Color || "White",
       shippingAddress: order.shipping_address,
     });
@@ -229,13 +245,24 @@ async function createPrintifyOrder({
     console.log("PRINTIFY EXTERNAL ID:", externalId);
 
   const isShirt = productType === "Shirt";
+    const isMug = productType === "Mug";
+    const isPoster = productType === "Poster";
 
-  const shirtColor = color as keyof typeof SHIRT_VARIANT_IDS;
-  const shirtSize = size as keyof (typeof SHIRT_VARIANT_IDS)[keyof typeof SHIRT_VARIANT_IDS];
+    const shirtColor = color as keyof typeof SHIRT_VARIANT_IDS;
+    const shirtSize =
+      size as keyof (typeof SHIRT_VARIANT_IDS)[keyof typeof SHIRT_VARIANT_IDS];
 
-  const variantId = isShirt
-    ? SHIRT_VARIANT_IDS[shirtColor]?.[shirtSize]
-    : POSTER_VARIANT_ID;
+    const mugSize = size as keyof typeof MUG_VARIANT_IDS;
+
+    let variantId: number | undefined;
+
+    if (isShirt) {
+      variantId = SHIRT_VARIANT_IDS[shirtColor]?.[shirtSize];
+    } else if (isMug) {
+      variantId = MUG_VARIANT_IDS[mugSize];
+    } else if (isPoster) {
+      variantId = POSTER_VARIANT_ID;
+    }
 
   console.log("SELECTED PRINTIFY VARIANT:", {
     productType,
@@ -243,6 +270,7 @@ async function createPrintifyOrder({
     size,
     shirtColor,
     shirtSize,
+    mugSize,
     variantId,
   });
 
@@ -275,7 +303,7 @@ async function createPrintifyOrder({
 
   let logoImageData: { id: string } | null = null;
 
-  if (isShirt) {
+  if (isShirt || isMug) {
     const logoResponse = await fetch("https://api.printify.com/v1/uploads/images.json", {
       method: "POST",
       headers: {
@@ -284,7 +312,9 @@ async function createPrintifyOrder({
       },
       body: JSON.stringify({
         file_name: "carscene-logo.png",
-        url: CARSCENE_LOGO_URLS[shirtColor] || CARSCENE_LOGO_URLS.White,
+        url: isMug
+          ? MUG_LOGO_URL
+          : CARSCENE_LOGO_URLS[shirtColor] || CARSCENE_LOGO_URLS.White,
       }),
     });
 
@@ -311,18 +341,30 @@ async function createPrintifyOrder({
       body: JSON.stringify({
         title: `Dream 9 ${productType} ${orderName}`,
         description: `Custom Dream 9 ${productType.toLowerCase()} for Shopify order ${orderName}. Color: ${color}. Size: ${size}.`,
-        blueprint_id: isShirt ? SHIRT_BLUEPRINT_ID : POSTER_BLUEPRINT_ID,
+        blueprint_id: isShirt
+          ? SHIRT_BLUEPRINT_ID
+          : isMug
+            ? MUG_BLUEPRINT_ID
+            : POSTER_BLUEPRINT_ID,
+
         print_provider_id: PRINT_PROVIDER_ID,
+
         variants: [
           {
             id: variantId,
-            price: isShirt ? 2999 : 1999,
+            price: isShirt
+              ? 2999
+              : isMug
+                ? 1999
+                : 1999,
             is_enabled: true,
           },
         ],
+
         print_areas: [
           {
             variant_ids: [variantId],
+
             placeholders: isShirt
               ? [
                   {
@@ -350,20 +392,45 @@ async function createPrintifyOrder({
                     ],
                   },
                 ]
-              : [
-                  {
-                    position: "front",
-                    images: [
-                      {
-                        id: imageData.id,
-                        x: 0.5,
-                        y: 0.5,
-                        scale: 1,
-                        angle: 0,
-                      },
-                    ],
-                  },
-                ],
+              : isMug
+                ? [
+                    {
+                      position: "front",
+                      images: [
+                        // Dream 9
+                        {
+                          id: imageData.id,
+                          x: 0.19,   // farther left was 19
+                          y: 0.48,   // higher was 50
+                          scale: 0.35, // was 40
+                          angle: 0,
+                        },
+
+                        // Logo
+                        {
+                          id: logoImageData!.id,
+                          x: 0.815,   // slightly left was 80
+                          y: 0.45,   // higher
+                          scale: 0.30,
+                          angle: 0,
+                        },
+                      ],
+                    },
+                  ]
+                : [
+                    {
+                      position: "front",
+                      images: [
+                        {
+                          id: imageData.id,
+                          x: 0.5,
+                          y: 0.5,
+                          scale: 1,
+                          angle: 0,
+                        },
+                      ],
+                    },
+                  ],
           },
         ],
       }),
