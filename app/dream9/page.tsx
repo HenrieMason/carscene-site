@@ -21,7 +21,7 @@ type Car = {
 };
 
 const ENTHUSIAST_CATEGORIES = {
-  "JDM Junkie": [
+  "JDM": [
     "NSX MK1",
     "Supra MK4",
     "S2000",
@@ -33,7 +33,7 @@ const ENTHUSIAST_CATEGORIES = {
     "AE86",
   ],
 
-  "Muscle Maniac": [
+  "Muscle": [
     "Mustang MK7 GT",
     "Barracuda MK3",
     "GTX MK2",
@@ -45,7 +45,7 @@ const ENTHUSIAST_CATEGORIES = {
     "Chevelle MK2 SS",
   ],
 
-  "Euro Enthusiast": [
+  "Euro": [
     "Golf MK8 R",
     "TT RS 8S",
     "M3 E30",
@@ -57,7 +57,7 @@ const ENTHUSIAST_CATEGORIES = {
     "S Class W223",
   ],
 
-  "Supercar Snob": [
+  "Supercars": [
     "R8 Type 4S V10",
     "GT-R MK1.3 Premium",
     "720S Spider",
@@ -69,7 +69,7 @@ const ENTHUSIAST_CATEGORIES = {
     "488 Pista",
   ],
 
-  "Classic Connoisseur": [
+  "Classic": [
     "Corvette C1 Early",
     "E-Type Series II",
     "Impala MK2",
@@ -81,7 +81,7 @@ const ENTHUSIAST_CATEGORIES = {
     "288 GTO",
   ],
 
-  "Offroad Outlaw": [
+  "Offroad": [
     "Grenadier",
     "TRX",
     "Defender (Modern)",
@@ -93,7 +93,7 @@ const ENTHUSIAST_CATEGORIES = {
     "4Runner MK4",
   ],
 
-  "Luxury Lover": [
+  "Luxury": [
     "X7 G07 LCI M60i",
     "Urus",
     "Maybach S 580 W223",
@@ -105,7 +105,7 @@ const ENTHUSIAST_CATEGORIES = {
     "AMG G 63 W465",
   ],
 
-  "Hypercar Hunter": [
+  "Hypercars": [
     "918 Spyder",
     "Valkyrie",
     "LaFerrari",
@@ -117,7 +117,7 @@ const ENTHUSIAST_CATEGORIES = {
     "Huayra Coupe",
   ],
 
-  "Rally Runner": [
+  "Rally": [
     "Impreza Blobeye WRX",
     "Celica MK6",
     "Huracan Sterrato",
@@ -129,7 +129,7 @@ const ENTHUSIAST_CATEGORIES = {
     "Lancer MK6 Evo",
   ],
 
-  "Truck Titan": [
+  "Trucks": [
     "F-150 MK13 Shelby",
     "F-150 MK10 SVT Lightning",
     "C/K MK2",
@@ -1760,7 +1760,7 @@ export default function Dream9Page() {
           <div className="flex max-h-[90vh] w-full max-w-2xl flex-col border border-white/10 bg-[#111] p-5 shadow-2xl sm:p-6">
             <div className="text-center">
               <h2 className="text-3xl font-black leading-tight text-white sm:text-4xl">
-                What car enthusiast are you?
+                  What cars are you into?
               </h2>
 
               <p className="mt-2 text-sm font-bold text-white/55">
@@ -1768,7 +1768,7 @@ export default function Dream9Page() {
               </p>
             </div>
 
-            <div className="mt-5 grid min-h-0 flex-1 grid-cols-1 gap-2 overflow-y-auto pr-1 sm:grid-cols-2">
+            <div className="mt-5 grid min-h-0 flex-1 grid-cols-2 gap-2 overflow-y-auto pr-1">
               {(
                 Object.keys(
                   ENTHUSIAST_CATEGORIES
