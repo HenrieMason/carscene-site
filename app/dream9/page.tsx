@@ -1759,12 +1759,12 @@ export default function Dream9Page() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 px-4 py-6">
           <div className="flex max-h-[90vh] w-full max-w-2xl flex-col border border-white/10 bg-[#111] p-5 shadow-2xl sm:p-6">
             <div className="text-center">
-              <h2 className="text-3xl font-black leading-tight text-white sm:text-4xl">
+              <h2 className="whitespace-nowrap text-[28px] font-black leading-tight text-white sm:text-4xl">
                   What cars are you into?
               </h2>
 
-              <p className="mt-2 text-sm font-bold text-white/55">
-                Choose your style and we’ll build your starting Dream 9.
+              <p className="mt-2 whitespace-nowrap text-sm font-bold text-white/55">
+                Pick a style to begin your Dream 9.
               </p>
             </div>
 
