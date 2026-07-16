@@ -20,6 +20,130 @@ type Car = {
   image: string;
 };
 
+const ENTHUSIAST_CATEGORIES = {
+  "JDM": [
+    "NSX MK1",
+    "Supra MK4",
+    "S2000",
+    "350Z",
+    "300ZX Z32",
+    "Skyline R34 GT-R",
+    "240SX (S14.2)",
+    "Lancer MK8 Evo",
+    "AE86",
+  ],
+
+  "Muscle": [
+    "Mustang MK7 GT",
+    "Barracuda MK3",
+    "GTX MK2",
+    "Challenger MK3.2 SRT Hellcat",
+    "Grand Cherokee MK4 Track Hawk",
+    "Camaro MK1 RS Z28",
+    "GTO MK1 Hard Top",
+    "Cougar MK1",
+    "Chevelle MK2 SS",
+  ],
+
+  "Euro": [
+    "Golf MK8 R",
+    "TT RS 8S",
+    "M3 E30",
+    "M3 G80 LCI Comp",
+    "CSL",
+    "AMG CLK DTM W209",
+    "AMG GT 63 X290",
+    "A7 C8 Sportback",
+    "S Class W223",
+  ],
+
+  "Supercars": [
+    "R8 Type 4S V10",
+    "GT-R MK1.3 Premium",
+    "720S Spider",
+    "Huracan Evo RWD",
+    "MC20",
+    "911 GT3 992.2",
+    "DB12",
+    "AMG GT Black Series C190",
+    "488 Pista",
+  ],
+
+  "Classic": [
+    "Corvette C1 Early",
+    "E-Type Series II",
+    "Impala MK2",
+    "911 Turbo G-Body",
+    "Shelby GT500 MK1.2",
+    "300SL",
+    "Cobra 427",
+    "GT40 MK2",
+    "288 GTO",
+  ],
+
+  "Offroad": [
+    "Grenadier",
+    "TRX",
+    "Defender (Modern)",
+    "Wrangler JK Rubicon 392",
+    "Bronco MK6 Raptor",
+    "Land Cruiser J80",
+    "F-150 MK14 Raptor R",
+    "K5 Blazer MK2",
+    "4Runner MK4",
+  ],
+
+  "Luxury": [
+    "X7 G07 LCI M60i",
+    "Urus",
+    "Maybach S 580 W223",
+    "Escalade MK5.2 V ESV",
+    "Range Rover MK5 SV",
+    "Bentayga MK1.2",
+    "Wraith MK2",
+    "DBX",
+    "AMG G 63 W465",
+  ],
+
+  "Hypercars": [
+    "918 Spyder",
+    "Valkyrie",
+    "LaFerrari",
+    "Enzo",
+    "F1",
+    "Veneno",
+    "P1",
+    "Veyron Grand Sport",
+    "Huayra Coupe",
+  ],
+
+  "Rally": [
+    "Impreza Blobeye WRX",
+    "Celica MK6",
+    "Huracan Sterrato",
+    "911 Dakar 992.1",
+    "GR Corolla",
+    "RS200",
+    "WRX VB",
+    "Quattro",
+    "Lancer MK6 Evo",
+  ],
+
+  "Trucks": [
+    "F-150 MK13 Shelby",
+    "F-150 MK10 SVT Lightning",
+    "C/K MK2",
+    "Silverado HD MK4",
+    "3100 Task Force",
+    "TRX",
+    "2500",
+    "Ram MK1",
+    "F-150 MK9",
+  ],
+} as const;
+
+type EnthusiastCategory = keyof typeof ENTHUSIAST_CATEGORIES;
+
 const kBrandOrder = [
   "Acura",
   "Alfa Romeo",
@@ -105,6 +229,53 @@ function shareBackgroundColor(color: string) {
       return "#ffffff";
   }
 }
+
+const MANUFACTURER_ALIASES: Record<string, string[]> = {
+  apollo: ["Intensa Emozione", "Project Evo"],
+
+  plymouth: [
+    "Road Runner",
+    "Barracuda",
+    "Prowler",
+  ],
+
+  lancia: [
+    "037 Stradale",
+    "Delta S4 Stradale",
+  ],
+
+  scion: [
+    "xB MK1",
+    "tC MK",
+    "FR-S",
+  ],
+
+  kia: [
+    "K5",
+    "Stinger",
+  ],
+
+  amc: [
+    "AMX",
+  ],
+
+  oldsmobile: [
+    "442",
+  ],
+
+  evolution: [
+    "Lancer",
+  ],
+};
+
+const CAR_SEARCH_ALIASES: Record<string, string[]> = {
+  "MX-5": ["miata", "mazda miata", "mx5"],
+  "GT-R": ["gtr", "godzilla"],
+  "911": ["nine eleven"],
+  "C/K": ["c10", "chevy c10"],
+  "Impreza": ["sti", "subie", "subs"],
+  "RX-7": ["rx7"],
+};
 
 export default function Dream9Page() {
   const SITE_PAUSED = false;
@@ -236,21 +407,76 @@ export default function Dream9Page() {
 
   const hasInitializedSlots = useRef(false);
 
-  useEffect(() => {
-    if (hasInitializedSlots.current) return;
-
-    hasInitializedSlots.current = true;
-
-    const randomFeatured = [...featuredCars]
+  function getRandomFeaturedDream9() {
+    return [...featuredCars]
       .sort(() => Math.random() - 0.5)
-      .slice(0, 9);
+      .slice(0, 9)
+      .map((name) => allCars.find((car) => car.model === name) ?? null);
+  }
+
+  function normalizeModelName(value: string) {
+    return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+  }
+
+  function chooseEnthusiastCategory(category: EnthusiastCategory) {
+    const selectedCars = ENTHUSIAST_CATEGORIES[category].map((model) => {
+      const exactMatch = allCars.find((car) => car.model === model);
+
+      if (exactMatch) {
+        return exactMatch;
+      }
+
+      return (
+        allCars.find(
+          (car) =>
+            normalizeModelName(car.model) === normalizeModelName(model)
+        ) ?? null
+      );
+    });
+
+    const missingModels = ENTHUSIAST_CATEGORIES[category].filter(
+      (_, index) => selectedCars[index] === null
+    );
+
+    if (missingModels.length > 0) {
+      console.warn(`Missing cars for ${category}:`, missingModels);
+    }
+
+    const fallbackCars = getRandomDream9().filter(
+      (car) =>
+        !selectedCars.some((selectedCar) => selectedCar?.id === car.id)
+    );
+
+    let fallbackIndex = 0;
 
     setSlots(
-      randomFeatured.map(
-        (name) => allCars.find((car) => car.model === name) ?? null
+      selectedCars.map(
+        (car) => car ?? fallbackCars[fallbackIndex++] ?? null
       )
     );
-  }, []);
+
+    setHasCustomizedDream9(false);
+    setSelectedSlot(null);
+    setSelectedBrand(null);
+    setQuery("");
+    setPreparedDesignBlob(null);
+    setPrepareDesignPromise(null);
+    setShowIntroPopup(false);
+    }
+
+    function skipEnthusiastPopup() {
+      setSlots(getRandomFeaturedDream9());
+      setShowIntroPopup(false);
+    }
+
+    useEffect(() => {
+      if (hasInitializedSlots.current) return;
+
+      hasInitializedSlots.current = true;
+
+      setSlots(getRandomDream9());
+      setShowIntroPopup(false);
+    }, []);
 
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
@@ -268,15 +494,6 @@ export default function Dream9Page() {
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
   const [shirtColor, setShirtColor] = useState<ShirtColor>("Black");
   const [shirtSize, setShirtSize] = useState<ShirtSize>("L");
-
-  useEffect(() => {
-    setShowIntroPopup(false);
-  }, []);
-
-  function closeIntroPopup() {
-    setShowIntroPopup(false);
-  }
-
   const allSlotsFilled = slots.every((slot) => slot !== null);
 
   useEffect(() => {
@@ -340,11 +557,14 @@ export default function Dream9Page() {
 
   const searchResults = useMemo(() => {
     const q = query.trim().toLowerCase();
+    const normalizedQuery = normalizeModelName(q);
+
     if (!q) return [];
 
     return allCars
       .filter((car) => {
         const searchable = `${car.brand} ${car.model}`.toLowerCase();
+        const normalizedSearchable = normalizeModelName(searchable);
 
         const acronym = car.model
           .split(/[\s-]+/)
@@ -352,7 +572,34 @@ export default function Dream9Page() {
           .join("")
           .toLowerCase();
 
-        return searchable.includes(q) || acronym.includes(q);
+        const carAliases = Object.entries(CAR_SEARCH_ALIASES)
+          .filter(([modelName]) =>
+            normalizeModelName(car.model).includes(
+              normalizeModelName(modelName)
+            )
+          )
+          .flatMap(([, aliases]) => aliases);
+
+        const manufacturerAliases = Object.entries(MANUFACTURER_ALIASES)
+          .filter(([, models]) =>
+            models.some((model) =>
+              normalizeModelName(car.model).includes(
+                normalizeModelName(model)
+              )
+            )
+          )
+          .map(([manufacturer]) => manufacturer);
+
+        const aliases = [...carAliases, ...manufacturerAliases].map(
+          normalizeModelName
+        );
+
+        return (
+          searchable.includes(q) ||
+          normalizedSearchable.includes(normalizedQuery) ||
+          acronym.includes(q) ||
+          aliases.some((alias) => alias.includes(normalizedQuery))
+        );
       })
       .slice(0, 36);
   }, [query, allCars]);
@@ -1586,39 +1833,41 @@ export default function Dream9Page() {
       )}
 
       {showIntroPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
-          <div className="w-full max-w-xl border border-white/10 bg-[#111] p-5 text-center shadow-2xl">
-            <h2 className="text-3xl font-black leading-[0.95] tracking-tight text-white">
-              Build a shirt with
-              <br />
-              <span className="text-red-600">your 9 dream cars.</span>
-            </h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 px-4 py-6">
+          <div className="flex max-h-[90vh] w-full max-w-2xl flex-col border border-white/10 bg-[#111] p-5 shadow-2xl sm:p-6">
+            <div className="text-center">
+              <h2 className="whitespace-nowrap text-[28px] font-black leading-tight text-white sm:text-4xl">
+                  What cars are you into?
+              </h2>
 
-            <div className="-mt-6 grid grid-cols-2 gap-2">
-              <div>
-                <img
-                  src={SHIRT_COLORS[shirtColor].front}
-                  alt="Front of Dream 9 shirt"
-                  className="h-[300px] w-full scale-110 object-contain"
-                />
-                <p className="-mt-3 text-sm font-black text-white/70">Front</p>
-              </div>
+              <p className="mt-2 whitespace-nowrap text-sm font-bold text-white/55">
+                Pick a style to begin your Dream 9.
+              </p>
+            </div>
 
-              <div>
-                <img
-                  src="/og-image.jpg"
-                  alt="Back of Dream 9 shirt"
-                  className="h-[300px] w-full scale-110 object-contain"
-                />
-                <p className="-mt-3 text-sm font-black text-white/70">Back</p>
-              </div>
+            <div className="mt-5 grid min-h-0 flex-1 grid-cols-2 gap-2 overflow-y-auto pr-1">
+              {(
+                Object.keys(
+                  ENTHUSIAST_CATEGORIES
+                ) as EnthusiastCategory[]
+              ).map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => chooseEnthusiastCategory(category)}
+                  className="border border-white/10 bg-white/[0.06] px-4 py-4 text-left text-sm font-black text-white transition hover:border-red-600 hover:bg-red-600 active:scale-[0.98]"
+                >
+                  {category}
+                </button>
+              ))}
             </div>
 
             <button
-              onClick={closeIntroPopup}
-              className="mt-1 w-full bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
+              type="button"
+              onClick={skipEnthusiastPopup}
+              className="mt-3 w-full bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.98]"
             >
-              Start Building
+              Skip — Surprise Me
             </button>
           </div>
         </div>
