@@ -1427,7 +1427,7 @@ export default function Dream9Page() {
           </button>
 
           <div className="mt-1 w-full rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
-            $39.99 • Free Shipping
+            $39.99 • Free Shippingg
           </div>
         </div>
 
