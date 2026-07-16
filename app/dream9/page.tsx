@@ -1421,13 +1421,15 @@ export default function Dream9Page() {
               ? "Fill all 9 slots"
               : isMakingDesign
               ? "Preparing Checkout..."
-              : `Checkout • ${shirtSize} • ${
-                  shirtColor === "True Navy" ? "Navy" : shirtColor
-                }`}
+              : "Checkout"}
           </button>
 
           <div className="mt-1 w-full rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
-            $39.99 • Free Shippingg
+            {!allSlotsFilled
+              ? "$34.99 • Free Shipping"
+              : `$34.99 • Free Shipping • ${shirtSize} • ${
+                  shirtColor === "True Navy" ? "Navy" : shirtColor
+                }`}
           </div>
         </div>
 
