@@ -230,6 +230,53 @@ function shareBackgroundColor(color: string) {
   }
 }
 
+const MANUFACTURER_ALIASES: Record<string, string[]> = {
+  apollo: ["Intensa Emozione", "Project Evo"],
+
+  plymouth: [
+    "Road Runner",
+    "Barracuda",
+    "Prowler",
+  ],
+
+  lancia: [
+    "037 Stradale",
+    "Delta S4 Stradale",
+  ],
+
+  scion: [
+    "xB MK1",
+    "tC MK",
+    "FR-S",
+  ],
+
+  kia: [
+    "K5",
+    "Stinger",
+  ],
+
+  amc: [
+    "AMX",
+  ],
+
+  oldsmobile: [
+    "442",
+  ],
+
+  evolution: [
+    "Lancer",
+  ],
+};
+
+const CAR_SEARCH_ALIASES: Record<string, string[]> = {
+  "MX-5": ["miata", "mazda miata", "mx5"],
+  "GT-R": ["gtr", "godzilla"],
+  "911": ["nine eleven"],
+  "C/K": ["c10", "chevy c10"],
+  "Impreza": ["sti", "subie", "subs"],
+  "RX-7": ["rx7"],
+};
+
 export default function Dream9Page() {
   const SITE_PAUSED = false;
 
@@ -510,11 +557,14 @@ export default function Dream9Page() {
 
   const searchResults = useMemo(() => {
     const q = query.trim().toLowerCase();
+    const normalizedQuery = normalizeModelName(q);
+
     if (!q) return [];
 
     return allCars
       .filter((car) => {
         const searchable = `${car.brand} ${car.model}`.toLowerCase();
+        const normalizedSearchable = normalizeModelName(searchable);
 
         const acronym = car.model
           .split(/[\s-]+/)
@@ -522,7 +572,34 @@ export default function Dream9Page() {
           .join("")
           .toLowerCase();
 
-        return searchable.includes(q) || acronym.includes(q);
+        const carAliases = Object.entries(CAR_SEARCH_ALIASES)
+          .filter(([modelName]) =>
+            normalizeModelName(car.model).includes(
+              normalizeModelName(modelName)
+            )
+          )
+          .flatMap(([, aliases]) => aliases);
+
+        const manufacturerAliases = Object.entries(MANUFACTURER_ALIASES)
+          .filter(([, models]) =>
+            models.some((model) =>
+              normalizeModelName(car.model).includes(
+                normalizeModelName(model)
+              )
+            )
+          )
+          .map(([manufacturer]) => manufacturer);
+
+        const aliases = [...carAliases, ...manufacturerAliases].map(
+          normalizeModelName
+        );
+
+        return (
+          searchable.includes(q) ||
+          normalizedSearchable.includes(normalizedQuery) ||
+          acronym.includes(q) ||
+          aliases.some((alias) => alias.includes(normalizedQuery))
+        );
       })
       .slice(0, 36);
   }, [query, allCars]);
