@@ -1097,7 +1097,7 @@ export default function Dream9Page() {
           className="absolute text-center"
           style={{
             fontFamily: "var(--font-geist-sans)",
-            fontWeight: 900,
+            fontWeight: 700,
             fontStyle: "italic",
             color: borderColor,
             top: "15.5%",
@@ -1233,7 +1233,7 @@ export default function Dream9Page() {
               className="text-[68px] leading-none"
               style={{
                 fontFamily: "var(--font-geist-sans)",
-                fontWeight: 900,
+                fontWeight: 700,
                 fontStyle: "italic",
 
                 transform: "skewX(-8deg)",
