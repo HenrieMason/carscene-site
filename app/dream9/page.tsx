@@ -1016,6 +1016,10 @@ export default function Dream9Page() {
               setShirtColor(color);
               setPreparedDesignBlob(null);
               setPrepareDesignPromise(null);
+
+              // Always show the full back of the shirt
+              setPreviewStep(1);
+              setShowFront(false);
             }}
             title={color}
             style={{ backgroundColor: COLOR_SWATCHES[color] }}
