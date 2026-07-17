@@ -1444,6 +1444,10 @@ export default function Dream9Page() {
             <SizePicker />
             <ColorPicker />
           </div>
+
+          <div className="mt-2 rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
+            100+ Orders • Opening Day: July 6, 2026
+          </div>
         </div>
 
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
