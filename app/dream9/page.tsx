@@ -20,130 +20,6 @@ type Car = {
   image: string;
 };
 
-const ENTHUSIAST_CATEGORIES = {
-  "JDM": [
-    "NSX MK1",
-    "Supra MK4",
-    "S2000",
-    "350Z",
-    "300ZX Z32",
-    "Skyline R34 GT-R",
-    "240SX (S14.2)",
-    "Lancer MK8 Evo",
-    "AE86",
-  ],
-
-  "Muscle": [
-    "Mustang MK7 GT",
-    "Barracuda MK3",
-    "GTX MK2",
-    "Challenger MK3.2 SRT Hellcat",
-    "Grand Cherokee MK4 Track Hawk",
-    "Camaro MK1 RS Z28",
-    "GTO MK1 Hard Top",
-    "Cougar MK1",
-    "Chevelle MK2 SS",
-  ],
-
-  "Euro": [
-    "Golf MK8 R",
-    "TT RS 8S",
-    "M3 E30",
-    "M3 G80 LCI Comp",
-    "CSL",
-    "AMG CLK DTM W209",
-    "AMG GT 63 X290",
-    "A7 C8 Sportback",
-    "S Class W223",
-  ],
-
-  "Supercars": [
-    "R8 Type 4S V10",
-    "GT-R MK1.3 Premium",
-    "720S Spider",
-    "Huracan Evo RWD",
-    "MC20",
-    "911 GT3 992.2",
-    "DB12",
-    "AMG GT Black Series C190",
-    "488 Pista",
-  ],
-
-  "Classic": [
-    "Corvette C1 Early",
-    "E-Type Series II",
-    "Impala MK2",
-    "911 Turbo G-Body",
-    "Shelby GT500 MK1.2",
-    "300SL",
-    "Cobra 427",
-    "GT40 MK2",
-    "288 GTO",
-  ],
-
-  "Offroad": [
-    "Grenadier",
-    "TRX",
-    "Defender (Modern)",
-    "Wrangler JK Rubicon 392",
-    "Bronco MK6 Raptor",
-    "Land Cruiser J80",
-    "F-150 MK14 Raptor R",
-    "K5 Blazer MK2",
-    "4Runner MK4",
-  ],
-
-  "Luxury": [
-    "X7 G07 LCI M60i",
-    "Urus",
-    "Maybach S 580 W223",
-    "Escalade MK5.2 V ESV",
-    "Range Rover MK5 SV",
-    "Bentayga MK1.2",
-    "Wraith MK2",
-    "DBX",
-    "AMG G 63 W465",
-  ],
-
-  "Hypercars": [
-    "918 Spyder",
-    "Valkyrie",
-    "LaFerrari",
-    "Enzo",
-    "F1",
-    "Veneno",
-    "P1",
-    "Veyron Grand Sport",
-    "Huayra Coupe",
-  ],
-
-  "Rally": [
-    "Impreza Blobeye WRX",
-    "Celica MK6",
-    "Huracan Sterrato",
-    "911 Dakar 992.1",
-    "GR Corolla",
-    "RS200",
-    "WRX VB",
-    "Quattro",
-    "Lancer MK6 Evo",
-  ],
-
-  "Trucks": [
-    "F-150 MK13 Shelby",
-    "F-150 MK10 SVT Lightning",
-    "C/K MK2",
-    "Silverado HD MK4",
-    "3100 Task Force",
-    "TRX",
-    "2500",
-    "Ram MK1",
-    "F-150 MK9",
-  ],
-} as const;
-
-type EnthusiastCategory = keyof typeof ENTHUSIAST_CATEGORIES;
-
 const kBrandOrder = [
   "Acura",
   "Alfa Romeo",
@@ -230,53 +106,6 @@ function shareBackgroundColor(color: string) {
   }
 }
 
-const MANUFACTURER_ALIASES: Record<string, string[]> = {
-  apollo: ["Intensa Emozione", "Project Evo"],
-
-  plymouth: [
-    "Road Runner",
-    "Barracuda",
-    "Prowler",
-  ],
-
-  lancia: [
-    "037 Stradale",
-    "Delta S4 Stradale",
-  ],
-
-  scion: [
-    "xB MK1",
-    "tC MK",
-    "FR-S",
-  ],
-
-  kia: [
-    "K5",
-    "Stinger",
-  ],
-
-  amc: [
-    "AMX",
-  ],
-
-  oldsmobile: [
-    "442",
-  ],
-
-  evolution: [
-    "Lancer",
-  ],
-};
-
-const CAR_SEARCH_ALIASES: Record<string, string[]> = {
-  "MX-5": ["miata", "mazda miata", "mx5"],
-  "GT-R": ["gtr", "godzilla"],
-  "911": ["nine eleven"],
-  "C/K": ["c10", "chevy c10"],
-  "Impreza": ["sti", "subie", "subs"],
-  "RX-7": ["rx7"],
-};
-
 export default function Dream9Page() {
   const SITE_PAUSED = false;
 
@@ -337,6 +166,7 @@ export default function Dream9Page() {
 
   type ShirtColor = keyof typeof SHIRT_COLORS;
   type ShirtSize = "S" | "M" | "L" | "XL" | "2XL";
+  type ProductType = "shirt" | "mug";
 
   const SHIRT_VARIANT_IDS: Record<ShirtColor, Partial<Record<ShirtSize, string>>> = {
     White: {
@@ -376,6 +206,8 @@ export default function Dream9Page() {
     },
   };
 
+  const MUG_VARIANT_ID = "53652974698803";
+
   const [today, setToday] = useState("");
 
   useEffect(() => {
@@ -407,76 +239,21 @@ export default function Dream9Page() {
 
   const hasInitializedSlots = useRef(false);
 
-  function getRandomFeaturedDream9() {
-    return [...featuredCars]
+  useEffect(() => {
+    if (hasInitializedSlots.current) return;
+
+    hasInitializedSlots.current = true;
+
+    const randomFeatured = [...featuredCars]
       .sort(() => Math.random() - 0.5)
-      .slice(0, 9)
-      .map((name) => allCars.find((car) => car.model === name) ?? null);
-  }
-
-  function normalizeModelName(value: string) {
-    return value.toLowerCase().replace(/[^a-z0-9]/g, "");
-  }
-
-  function chooseEnthusiastCategory(category: EnthusiastCategory) {
-    const selectedCars = ENTHUSIAST_CATEGORIES[category].map((model) => {
-      const exactMatch = allCars.find((car) => car.model === model);
-
-      if (exactMatch) {
-        return exactMatch;
-      }
-
-      return (
-        allCars.find(
-          (car) =>
-            normalizeModelName(car.model) === normalizeModelName(model)
-        ) ?? null
-      );
-    });
-
-    const missingModels = ENTHUSIAST_CATEGORIES[category].filter(
-      (_, index) => selectedCars[index] === null
-    );
-
-    if (missingModels.length > 0) {
-      console.warn(`Missing cars for ${category}:`, missingModels);
-    }
-
-    const fallbackCars = getRandomDream9().filter(
-      (car) =>
-        !selectedCars.some((selectedCar) => selectedCar?.id === car.id)
-    );
-
-    let fallbackIndex = 0;
+      .slice(0, 9);
 
     setSlots(
-      selectedCars.map(
-        (car) => car ?? fallbackCars[fallbackIndex++] ?? null
+      randomFeatured.map(
+        (name) => allCars.find((car) => car.model === name) ?? null
       )
     );
-
-    setHasCustomizedDream9(false);
-    setSelectedSlot(null);
-    setSelectedBrand(null);
-    setQuery("");
-    setPreparedDesignBlob(null);
-    setPrepareDesignPromise(null);
-    setShowIntroPopup(false);
-    }
-
-    function skipEnthusiastPopup() {
-      setSlots(getRandomFeaturedDream9());
-      setShowIntroPopup(false);
-    }
-
-    useEffect(() => {
-      if (hasInitializedSlots.current) return;
-
-      hasInitializedSlots.current = true;
-
-      setSlots(getRandomDream9());
-      setShowIntroPopup(false);
-    }, []);
+  }, []);
 
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
@@ -492,8 +269,44 @@ export default function Dream9Page() {
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
-  const [shirtColor, setShirtColor] = useState<ShirtColor>("Black");
-  const [shirtSize, setShirtSize] = useState<ShirtSize>("L");
+  const [productType, setProductType] =
+    useState<ProductType>("shirt");
+
+  const [shirtColor, setShirtColor] =
+    useState<ShirtColor>("Black");
+
+  const [shirtSize, setShirtSize] =
+    useState<ShirtSize>("L");
+
+  const isMug = productType === "mug";
+
+  useEffect(() => {
+    const preloadImage = (src: string) => {
+      const image = new Image();
+      image.src = src;
+      image.decode?.().catch(() => {});
+    };
+
+    preloadImage("/mug.png");
+    preloadImage("/mugrear.png");
+  }, []);
+
+  useEffect(() => {
+    if (productType === "mug") {
+      setShowFront(false);
+      setPreviewStep(0);
+      setPulseEye(false);
+    }
+  }, [productType]);
+
+  useEffect(() => {
+    setShowIntroPopup(false);
+  }, []);
+
+  function closeIntroPopup() {
+    setShowIntroPopup(false);
+  }
+
   const allSlotsFilled = slots.every((slot) => slot !== null);
 
   useEffect(() => {
@@ -508,7 +321,7 @@ export default function Dream9Page() {
     }, 1500);
 
     return () => clearTimeout(timer);
-  }, [slots, shirtColor, allSlotsFilled]);
+  }, [slots, shirtColor, productType, allSlotsFilled]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -557,14 +370,11 @@ export default function Dream9Page() {
 
   const searchResults = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const normalizedQuery = normalizeModelName(q);
-
     if (!q) return [];
 
     return allCars
       .filter((car) => {
         const searchable = `${car.brand} ${car.model}`.toLowerCase();
-        const normalizedSearchable = normalizeModelName(searchable);
 
         const acronym = car.model
           .split(/[\s-]+/)
@@ -572,34 +382,7 @@ export default function Dream9Page() {
           .join("")
           .toLowerCase();
 
-        const carAliases = Object.entries(CAR_SEARCH_ALIASES)
-          .filter(([modelName]) =>
-            normalizeModelName(car.model).includes(
-              normalizeModelName(modelName)
-            )
-          )
-          .flatMap(([, aliases]) => aliases);
-
-        const manufacturerAliases = Object.entries(MANUFACTURER_ALIASES)
-          .filter(([, models]) =>
-            models.some((model) =>
-              normalizeModelName(car.model).includes(
-                normalizeModelName(model)
-              )
-            )
-          )
-          .map(([manufacturer]) => manufacturer);
-
-        const aliases = [...carAliases, ...manufacturerAliases].map(
-          normalizeModelName
-        );
-
-        return (
-          searchable.includes(q) ||
-          normalizedSearchable.includes(normalizedQuery) ||
-          acronym.includes(q) ||
-          aliases.some((alias) => alias.includes(normalizedQuery))
-        );
+        return searchable.includes(q) || acronym.includes(q);
       })
       .slice(0, 36);
   }, [query, allCars]);
@@ -796,6 +579,25 @@ export default function Dream9Page() {
 
   function cyclePreview() {
     setHasUsedEye(true);
+
+    if (isMug) {
+      setPreviewStep((currentStep) => {
+        const nextStep = (currentStep + 1) % 3;
+
+        if (nextStep === 2) {
+          // Show the rear mug
+          setShowFront(true);
+        } else {
+          // Steps 0 and 1 show the front mug
+          setShowFront(false);
+        }
+
+        return nextStep;
+      });
+
+      return;
+    }
+
     setPreviewStep((currentStep) => {
       const nextStep = (currentStep + 1) % 3;
 
@@ -829,7 +631,9 @@ export default function Dream9Page() {
       const dataUrl = await toPng(node, {
         cacheBust: true,
         pixelRatio: 4,
-        backgroundColor: shareBackgroundColor(shirtColor),
+        backgroundColor: isMug
+          ? "#ffffff"
+          : shareBackgroundColor(shirtColor),
         imagePlaceholder:
           "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
       });
@@ -869,7 +673,6 @@ export default function Dream9Page() {
 
     const node = exportRef.current;
 
-    await document.fonts.ready;
     await waitForPosterImages(node);
     await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -953,18 +756,29 @@ export default function Dream9Page() {
 
       const designUrl = await uploadDesignBlob(designBlob);
 
-      const variantId = SHIRT_VARIANT_IDS[shirtColor][size];
+      const variantId =
+        productType === "mug"
+          ? MUG_VARIANT_ID
+          : SHIRT_VARIANT_IDS[shirtColor][size];
 
       if (!variantId) {
-        alert(`${shirtColor} is not available in ${size}.`);
+        alert(
+          productType === "mug"
+            ? "The mug checkout variant is not connected."
+            : `${shirtColor} is not available in ${size}.`
+        );
         return;
       }
 
+      const checkoutValue = productType === "mug" ? 19.99 : 34.99;
+      const checkoutName =
+        productType === "mug" ? "Dream 9 Coffee Mug" : "Dream 9 Shirt";
+
       if (typeof window !== "undefined" && window.fbq) {
         window.fbq("track", "InitiateCheckout", {
-          value: 34.99,
+          value: checkoutValue,
           currency: "USD",
-          content_name: "Dream 9 Shirt",
+          content_name: checkoutName,
           content_type: "product",
           content_ids: [variantId],
           num_items: 1,
@@ -975,9 +789,15 @@ export default function Dream9Page() {
         `${SHOPIFY_STORE_URL}/cart/add?id=${variantId}` +
         `&quantity=1` +
         `&properties[Dream 9 Design URL]=${encodeURIComponent(designUrl)}` +
-        `&properties[Dream 9 Product]=${encodeURIComponent("Shirt")}` +
-        `&properties[Dream 9 Size]=${encodeURIComponent(size)}` +
-        `&properties[Dream 9 Color]=${encodeURIComponent(shirtColor)}` +
+        `&properties[Dream 9 Product]=${encodeURIComponent(
+          productType === "mug" ? "Mug" : "Shirt"
+        )}` +
+        `&properties[Dream 9 Size]=${encodeURIComponent(
+          productType === "mug" ? "11oz" : size
+        )}` +
+        (productType === "shirt"
+          ? `&properties[Dream 9 Color]=${encodeURIComponent(shirtColor)}`
+          : "") +
         `&return_to=/checkout`;
 
       window.location.href = checkoutUrl;
@@ -1078,7 +898,9 @@ export default function Dream9Page() {
   }, [slots]);
 
   function renderDream9Design(exportMode = false) {
-    const borderColor = gridColor(shirtColor);
+    const borderColor = isMug
+      ? "#000000"
+      : gridColor(shirtColor);
 
     return (
       <div
@@ -1086,38 +908,61 @@ export default function Dream9Page() {
           exportMode ? "h-full" : "aspect-[4494/5097]"
         }`}
       >
-        <img
-          src={SHIRT_COLORS[shirtColor].back}
-          alt="Dream 9 Shirt"
-          crossOrigin="anonymous"
-          className="absolute inset-0 h-full w-full scale-150 object-contain"
-        />
+        {!isMug && (
+          <img
+            src={SHIRT_COLORS[shirtColor].back}
+            alt="Dream 9 Shirt"
+            crossOrigin="anonymous"
+            className="absolute inset-0 h-full w-full scale-150 object-contain"
+          />
+        )}
 
-        <div
-          className="absolute text-center"
-          style={{
-            fontFamily: "var(--font-geist-sans)",
-            fontWeight: 700,
-            fontStyle: "italic",
-            color: borderColor,
-            top: "15.5%",
-            left: "50%",
-            transform: "translateX(-50%) skewX(-8deg)",
-            fontSize: "clamp(18px, 4vw, 33px)",
-            letterSpacing: "-0.04em",
-          }}
-        >
-          Dream 9
-        </div>
+        {isMug && !exportMode && (
+          <>
+            <img
+              src="/mug.png"
+              alt="Front of Dream 9 Coffee Mug"
+              crossOrigin="anonymous"
+              className={`absolute inset-0 h-full w-full -translate-x-[6%] -translate-y-[12%] scale-[1.1] object-contain transition-opacity duration-200 ${
+                showFront ? "opacity-0" : "opacity-100"
+              }`}
+            />
 
-        <div
-          className="absolute"
-          style={{
-            top: "22%",
-            left: "30%",
-            width: "40%",
-          }}
-        >
+            <img
+              src="/mugrear.png"
+              alt="Rear of Dream 9 Coffee Mug"
+              crossOrigin="anonymous"
+              className={`absolute inset-0 h-full w-full translate-x-[6%] -translate-y-[12%] scale-[1.1] object-contain transition-opacity duration-200 ${
+                showFront ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          </>
+        )}
+
+        {(!isMug || !showFront) && (
+          <>
+            <div
+              className="absolute text-center font-black italic"
+              style={{
+                color: borderColor,
+                top: "15.5%",
+                left: "50%",
+                transform: "translateX(-50%) skewX(-8deg)",
+                fontSize: "clamp(18px, 4vw, 33px)",
+                letterSpacing: "-0.04em",
+              }}
+            >
+              Dream 9
+            </div>
+
+            <div
+              className="absolute"
+              style={{
+                top: "22%",
+                left: "30%",
+                width: "40%",
+              }}
+            >
           <div className="grid grid-cols-3 gap-0">
             {displaySlots.map(({ car, realIndex }, index) => {
               const type = car ? classFromPrice(car.price) : "P";
@@ -1197,6 +1042,8 @@ export default function Dream9Page() {
             </div>
           </div>
         </div>
+        </>
+        )}
       </div>
     );
   }
@@ -1208,7 +1055,9 @@ export default function Dream9Page() {
     exportMode?: boolean;
     title?: string;
   }) {
-    const exportGridColor = gridColor(shirtColor);
+    const exportGridColor = isMug
+      ? "#000000"
+      : gridColor(shirtColor);
     return (
       <div
         className={`relative w-full ${
@@ -1230,12 +1079,8 @@ export default function Dream9Page() {
         <div className="flex h-full flex-col">
           <div className="relative pb-[0%] text-center">
             <div
-              className="text-[68px] leading-none"
+              className="text-[68px] font-black italic leading-none"
               style={{
-                fontFamily: "var(--font-geist-sans)",
-                fontWeight: 700,
-                fontStyle: "italic",
-
                 transform: "skewX(-8deg)",
                 letterSpacing: "-0.04em",
                 color: exportGridColor,
@@ -1333,12 +1178,39 @@ export default function Dream9Page() {
           <h1 className="text-[34px] font-black leading-[0.95] tracking-tight sm:text-4xl">
             Your 9 favorite cars.
             <br />
-            <span className="text-red-600">All on one shirt.</span>
+            <span className="text-red-600">
+              {productType === "mug" ? "All on one mug." : "All on one shirt."}
+            </span>
           </h1>
 
-        <p className="mt-3 text-sm font-bold text-white/55">
-          Tap any car to replace it.
-        </p>
+          <div className="mt-4 grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            onClick={() => setProductType("shirt")}
+            className={`py-3 text-sm font-black transition active:scale-[0.97] ${
+              productType === "shirt"
+                ? "bg-red-600 text-white"
+                : "bg-white/10 text-white hover:bg-white/15"
+            }`}
+          >
+            T-Shirt
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setProductType("mug")}
+            className={`py-3 text-sm font-black transition active:scale-[0.97] ${
+              productType === "mug"
+                ? "bg-red-600 text-white"
+                : "bg-white/10 text-white hover:bg-white/15"
+            }`}
+          >
+            Coffee Mug
+          </button>
+        </div>
+          <p className="mt-3 text-sm font-bold text-white/55">
+            Tap any car to replace it.
+          </p>
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
@@ -1348,7 +1220,9 @@ export default function Dream9Page() {
                 previewStep === 0 ? "scale-[2.1]" : "scale-100"
               }`}
             >
-              {showFront ? (
+              {productType === "mug" ? (
+                renderDream9Design(false)
+              ) : showFront ? (
                 <div className="relative aspect-[4494/5097] w-full overflow-hidden">
                   <img
                     src={SHIRT_COLORS[shirtColor].front}
@@ -1362,25 +1236,29 @@ export default function Dream9Page() {
             </div>
 
             <button
-              type="button"
-              onClick={cyclePreview}
-              className={`absolute right-3 top-1 z-20 flex h-11 w-11 items-center justify-center rounded-full text-xl text-white shadow-lg transition-colors duration-500 active:scale-95 ${
-                pulseEye
-                  ? "bg-red-600"
-                  : "bg-gray-400 hover:bg-gray-600"
-              }`}
-              aria-label="Inspect Dream 9 shirt"
-              title="Inspect shirt"
-            >
-              👁
-            </button>
+                type="button"
+                onClick={cyclePreview}
+                className={`absolute right-3 top-1 z-20 flex h-11 w-11 items-center justify-center rounded-full text-xl text-white shadow-lg transition-colors duration-500 active:scale-95 ${
+                  pulseEye
+                    ? "bg-red-600"
+                    : "bg-gray-400 hover:bg-gray-600"
+                }`}
+                aria-label={
+                  isMug
+                    ? "Inspect Dream 9 coffee mug"
+                    : "Inspect Dream 9 shirt"
+                }
+                title={isMug ? "Inspect mug" : "Inspect shirt"}
+              >
+                👁
+              </button>
           </div>
         </div>
 
         {showCheckoutHint && (
           <div className="mx-auto mb-3 w-full max-w-[540px] text-center">
             <p className="text-sm font-bold text-red-500">
-              Wear your Dream 9. Then make it reality.
+              Show off your taste. Wear your Dream 9.
             </p>
           </div>
         )}
@@ -1410,10 +1288,15 @@ export default function Dream9Page() {
           </div>
         </div>
 
-        <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
+        <div
+          className={`mx-auto grid w-full max-w-[540px] gap-2 ${
+            productType === "mug" ? "mb-4" : "mb-2"
+          }`}
+        >
           <button
             onClick={() => {
               if (!allSlotsFilled || isMakingDesign) return;
+
               makePoster(shirtSize);
             }}
             disabled={!allSlotsFilled || isMakingDesign}
@@ -1426,25 +1309,27 @@ export default function Dream9Page() {
             }`}
           >
             {!allSlotsFilled
-              ? "Fill all 9 slots"
+              ? "Fill all 9 empty slots to continue."
               : isMakingDesign
               ? "Preparing Checkout..."
-              : `Checkout • ${shirtSize} • ${
-                  shirtColor === "True Navy" ? "Navy" : shirtColor
+              : productType === "mug"
+              ? "24.99 • Free Shipping • 11oz Coffee Mug"
+              : `$34.99 • Free Shipping • ${shirtSize} • ${
+                  shirtColor === "True Navy"
+                    ? "Navy"
+                    : shirtColor
                 }`}
           </button>
-
-          <div className="mt-1 w-full rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
-            $34.99 • Free Shipping
-          </div>
         </div>
 
-        <div className="mx-auto mb-4 w-full max-w-[540px]">
-          <div className="space-y-2">
-            <SizePicker />
-            <ColorPicker />
+        {productType === "shirt" && (
+          <div className="mx-auto mb-4 w-full max-w-[540px]">
+            <div className="space-y-2">
+              <SizePicker />
+              <ColorPicker />
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
           {displaySlots.map(({ car, realIndex }, index) => (
@@ -1843,41 +1728,39 @@ export default function Dream9Page() {
       )}
 
       {showIntroPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 px-4 py-6">
-          <div className="flex max-h-[90vh] w-full max-w-2xl flex-col border border-white/10 bg-[#111] p-5 shadow-2xl sm:p-6">
-            <div className="text-center">
-              <h2 className="whitespace-nowrap text-[28px] font-black leading-tight text-white sm:text-4xl">
-                  What cars are you into?
-              </h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
+          <div className="w-full max-w-xl border border-white/10 bg-[#111] p-5 text-center shadow-2xl">
+            <h2 className="text-3xl font-black leading-[0.95] tracking-tight text-white">
+              Build a shirt with
+              <br />
+              <span className="text-red-600">your 9 dream cars.</span>
+            </h2>
 
-              <p className="mt-2 whitespace-nowrap text-sm font-bold text-white/55">
-                Pick a style to begin your Dream 9.
-              </p>
-            </div>
+            <div className="-mt-6 grid grid-cols-2 gap-2">
+              <div>
+                <img
+                  src={SHIRT_COLORS[shirtColor].front}
+                  alt="Front of Dream 9 shirt"
+                  className="h-[300px] w-full scale-110 object-contain"
+                />
+                <p className="-mt-3 text-sm font-black text-white/70">Front</p>
+              </div>
 
-            <div className="mt-5 grid min-h-0 flex-1 grid-cols-2 gap-2 overflow-y-auto pr-1">
-              {(
-                Object.keys(
-                  ENTHUSIAST_CATEGORIES
-                ) as EnthusiastCategory[]
-              ).map((category) => (
-                <button
-                  key={category}
-                  type="button"
-                  onClick={() => chooseEnthusiastCategory(category)}
-                  className="border border-white/10 bg-white/[0.06] px-4 py-4 text-left text-sm font-black text-white transition hover:border-red-600 hover:bg-red-600 active:scale-[0.98]"
-                >
-                  {category}
-                </button>
-              ))}
+              <div>
+                <img
+                  src="/og-image.jpg"
+                  alt="Back of Dream 9 shirt"
+                  className="h-[300px] w-full scale-110 object-contain"
+                />
+                <p className="-mt-3 text-sm font-black text-white/70">Back</p>
+              </div>
             </div>
 
             <button
-              type="button"
-              onClick={skipEnthusiastPopup}
-              className="mt-3 w-full bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.98]"
+              onClick={closeIntroPopup}
+              className="mt-1 w-full bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
             >
-              Skip — Surprise Me
+              Start Building
             </button>
           </div>
         </div>
