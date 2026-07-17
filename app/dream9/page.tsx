@@ -869,6 +869,7 @@ export default function Dream9Page() {
 
     const node = exportRef.current;
 
+    await document.fonts.ready;
     await waitForPosterImages(node);
     await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -1093,8 +1094,11 @@ export default function Dream9Page() {
         />
 
         <div
-          className="absolute text-center font-black italic"
+          className="absolute text-center"
           style={{
+            fontFamily: "var(--font-geist-sans)",
+            fontWeight: 900,
+            fontStyle: "italic",
             color: borderColor,
             top: "15.5%",
             left: "50%",
@@ -1226,8 +1230,12 @@ export default function Dream9Page() {
         <div className="flex h-full flex-col">
           <div className="relative pb-[0%] text-center">
             <div
-              className="text-[68px] font-black italic leading-none"
+              className="text-[68px] leading-none"
               style={{
+                fontFamily: "var(--font-geist-sans)",
+                fontWeight: 900,
+                fontStyle: "italic",
+
                 transform: "skewX(-8deg)",
                 letterSpacing: "-0.04em",
                 color: exportGridColor,
