@@ -1494,7 +1494,7 @@ export default function Dream9Page() {
           ))}
         </div>
 
-        <div className="mt-2 rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
+        <div className="mb-2 rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
           Model is 5'11" wearing a size Large
         </div>
 
