@@ -1025,7 +1025,7 @@ export default function Dream9Page() {
               setTimeout(() => {
                 setPreviewStep(0);
                 setShowFront(false);
-              }, 2000);
+              }, 5000);
             }}
             title={color}
             style={{ backgroundColor: COLOR_SWATCHES[color] }}
