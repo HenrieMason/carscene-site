@@ -1488,12 +1488,18 @@ export default function Dream9Page() {
           ))}
         </div>
 
-        <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden border border-white/10 bg-white/[0.04]">
-          <img
-            src="/model.webp"
-            alt="Model wearing a Dream 9 shirt"
-            className="w-full h-auto object-cover"
-          />
+        <div className="mx-auto mb-4 w-full max-w-[540px]">
+          <div className="overflow-hidden border border-white/10 bg-white/[0.04]">
+            <img
+              src="/model.webp"
+              alt="Model wearing a Dream 9 shirt"
+              className="w-full h-auto object-cover"
+            />
+          </div>
+
+          <div className="mt-2 rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
+            Model is 5'11" wearing a size Large
+          </div>
         </div>
 
         </section>
