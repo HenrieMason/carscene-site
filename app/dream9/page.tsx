@@ -483,7 +483,6 @@ export default function Dream9Page() {
   const [preparedDesignBlob, setPreparedDesignBlob] = useState<Blob | null>(null);
   const [prepareDesignPromise, setPrepareDesignPromise] =
     useState<Promise<Blob> | null>(null);
-  const [showCheckoutHint, setShowCheckoutHint] = useState(false);
   const [shouldPulseBuyButton, setShouldPulseBuyButton] = useState(false);
   const [pulseEye, setPulseEye] = useState(false);
   const [hasUsedEye, setHasUsedEye] = useState(false);
@@ -512,7 +511,6 @@ export default function Dream9Page() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowCheckoutHint(true);
       setShouldPulseBuyButton(true);
     }, 1 * 60 * 1000);
 
@@ -1387,14 +1385,6 @@ export default function Dream9Page() {
           </div>
         </div>
 
-        {showCheckoutHint && (
-          <div className="mx-auto mb-3 w-full max-w-[540px] text-center">
-            <p className="text-sm font-bold text-red-500">
-              Wear your Dream 9. Then make it reality.
-            </p>
-          </div>
-        )}
-
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
           <div className="grid grid-cols-3 gap-2">
             <button
@@ -1495,6 +1485,9 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px]">
+          <p className="mb-3 text-center text-sm font-bold text-red-500">
+            Wear your Dream 9. Then make it reality.
+          </p>
           <div className="overflow-hidden border border-white/10 bg-white/[0.04]">
             <img
               src="/model2.webp"
