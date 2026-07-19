@@ -1391,10 +1391,6 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-4">
-          <div className="rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
-            Press Clear to start fresh.
-          </div>
-
           <div className="grid grid-cols-3 gap-2">
             <button
               onClick={shuffleDream9}
@@ -1430,9 +1426,7 @@ export default function Dream9Page() {
               isMakingDesign
                 ? "bg-red-700 text-white"
                 : allSlotsFilled
-                ? `${
-                    shouldPulseBuyButton ? "animate-pulse" : ""
-                  } bg-red-600 text-white hover:bg-red-700`
+                ? "bg-red-600 text-white hover:bg-red-700"
                 : "cursor-not-allowed bg-white/10 text-white"
             }`}
           >
