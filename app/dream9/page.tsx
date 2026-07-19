@@ -1491,7 +1491,7 @@ export default function Dream9Page() {
         <div className="mx-auto mb-4 w-full max-w-[540px]">
           <div className="overflow-hidden border border-white/10 bg-white/[0.04]">
             <img
-              src="/model.webp"
+              src="/model2.webp"
               alt="Model wearing a Dream 9 shirt"
               className="w-full h-auto object-cover"
             />
