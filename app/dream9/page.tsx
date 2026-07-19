@@ -1380,9 +1380,7 @@ export default function Dream9Page() {
               type="button"
               onClick={cyclePreview}
               className={`absolute right-3 top-1 z-20 flex h-11 w-11 items-center justify-center rounded-full text-xl text-white shadow-lg transition-colors duration-500 active:scale-95 ${
-                pulseEye
-                  ? "bg-red-600"
-                  : "bg-gray-400 hover:bg-gray-600"
+                pulseEye ? "bg-red-600" : "bg-gray-400 hover:bg-gray-600"
               }`}
               aria-label="Inspect Dream 9 shirt"
               title="Inspect shirt"
@@ -1392,73 +1390,76 @@ export default function Dream9Page() {
           </div>
         </div>
 
-        <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
-  <div className="my-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
-    Press Clear to start fresh.
-  </div>
+        <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-4">
+          <div className="rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
+            Press Clear to start fresh.
+          </div>
 
-  <div className="grid grid-cols-3 gap-2">
-    <button
-      onClick={shuffleDream9}
-      className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
-    >
-      Shuffle
-    </button>
+          <div className="grid grid-cols-3 gap-2">
+            <button
+              onClick={shuffleDream9}
+              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+            >
+              Shuffle
+            </button>
 
-    <button
-      onClick={clearDream9}
-      className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
-    >
-      Clear
-    </button>
+            <button
+              onClick={clearDream9}
+              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+            >
+              Clear
+            </button>
 
-    <button
-      onClick={shareDream9}
-      className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
-    >
-      Share
-    </button>
-  </div>
-</div>
+            <button
+              onClick={shareDream9}
+              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+            >
+              Share
+            </button>
+          </div>
+        </div>
 
-<div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
-  <button
-    onClick={() => {
-      if (!allSlotsFilled || isMakingDesign) return;
-      makePoster(shirtSize);
-    }}
-    disabled={!allSlotsFilled || isMakingDesign}
-    className={`w-full py-4 text-sm font-black transition active:scale-[0.97] ${
-      isMakingDesign
-        ? "bg-red-700 text-white"
-        : allSlotsFilled
-        ? `${shouldPulseBuyButton ? "animate-pulse" : ""} bg-red-600 text-white hover:bg-red-700`
-        : "cursor-not-allowed bg-white/10 text-white"
-    }`}
-  >
-    {!allSlotsFilled
-      ? "Fill all 9 slots below"
-      : isMakingDesign
-      ? "Preparing Checkout..."
-      : `Checkout • ${shirtSize} • ${
-          shirtColor === "True Navy" ? "Navy" : shirtColor
-        }`}
-  </button>
+        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-4">
+          <button
+            onClick={() => {
+              if (!allSlotsFilled || isMakingDesign) return;
+              makePoster(shirtSize);
+            }}
+            disabled={!allSlotsFilled || isMakingDesign}
+            className={`w-full py-4 text-sm font-black transition active:scale-[0.97] ${
+              isMakingDesign
+                ? "bg-red-700 text-white"
+                : allSlotsFilled
+                ? `${
+                    shouldPulseBuyButton ? "animate-pulse" : ""
+                  } bg-red-600 text-white hover:bg-red-700`
+                : "cursor-not-allowed bg-white/10 text-white"
+            }`}
+          >
+            {!allSlotsFilled
+              ? "Fill all 9 slots below"
+              : isMakingDesign
+              ? "Preparing Checkout..."
+              : `Checkout • ${shirtSize} • ${
+                  shirtColor === "True Navy" ? "Navy" : shirtColor
+                }`}
+          </button>
 
-  <div className="my-4 w-full rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
-    $34.99 • Free Shipping
-  </div>
-</div>
+          <div className="w-full rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
+            $34.99 • Free Shipping
+          </div>
+        </div>
 
-<div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
-  <SizePicker />
+        <div className="mx-auto mb-4 w-full max-w-[540px]">
+          <div className="grid gap-2">
+            <SizePicker />
+            <ColorPicker />
+          </div>
 
-  <ColorPicker />
-
-  <div className="my-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
-    100+ Orders • Opening Day: July 6, 2026
-  </div>
-</div>
+          <div className="mt-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
+            100+ Orders • Opening Day: July 6, 2026
+          </div>
+        </div>
 
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
           {displaySlots.map(({ car, realIndex }, index) => (
@@ -1483,6 +1484,7 @@ export default function Dream9Page() {
               {car ? (
                 <div className="flex items-center justify-between gap-3">
                   <span className="min-w-0 truncate">{car.model}</span>
+
                   <span className="shrink-0 bg-black/10 px-3 py-1 text-xs font-black text-black/70">
                     Replace
                   </span>
@@ -1494,16 +1496,16 @@ export default function Dream9Page() {
           ))}
         </div>
 
-        <div className="mb-2 rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
-          Model is 5'11" wearing a size Large
-        </div>
-
         <div className="mx-auto mb-4 w-full max-w-[540px]">
+          <div className="mb-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
+            Model is 5'11" wearing a size Large
+          </div>
+
           <div className="overflow-hidden border border-white/10 bg-white/[0.04]">
             <img
               src="/model2.webp"
               alt="Model wearing a Dream 9 shirt"
-              className="w-full h-auto object-cover"
+              className="h-auto w-full object-cover"
             />
           </div>
         </div>
