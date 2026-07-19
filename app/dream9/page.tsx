@@ -1346,7 +1346,7 @@ export default function Dream9Page() {
           className="mx-auto mb-4 w-full max-w-[540px] text-center"
         >
           <h1 className="text-[34px] font-black leading-[0.95] tracking-tight sm:text-4xl">
-            Your Dream Garage
+            Your Dream Garage.
             <br />
             <span className="text-red-600">On a T-Shirt.</span>
           </h1>
@@ -1393,7 +1393,7 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
-          <div className="rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
+          <div className="rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
             Press Clear to start fresh.
           </div>
 
@@ -1445,17 +1445,17 @@ export default function Dream9Page() {
                 }`}
           </button>
 
-          <div className="w-full rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
+          <div className="w-full rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
             $34.99 • Free Shipping
           </div>
         </div>
 
-        <div className="mx-auto mb-4 w-full max-w-[540px] grid gap-2">
+        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
           <SizePicker />
 
           <ColorPicker />
 
-          <div className="rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
+          <div className="rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
             100+ Orders • Opening Day: July 6, 2026
           </div>
         </div>
