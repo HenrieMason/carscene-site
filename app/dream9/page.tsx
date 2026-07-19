@@ -1488,45 +1488,12 @@ export default function Dream9Page() {
           ))}
         </div>
 
-        <div className="relative mx-auto mb-4 flex min-h-[260px] w-full max-w-[540px] flex-col overflow-hidden border border-white/10 bg-white/[0.04] p-6">
+        <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden border border-white/10 bg-white/[0.04]">
           <img
-            src="/ShirtMan.png"
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-80"
+            src="/model.webp"
+            alt="Model wearing a Dream 9 shirt"
+            className="w-full h-auto object-cover"
           />
-
-          <div className="relative z-10 flex h-full flex-1 flex-col justify-end">
-            <h3 className="text-lg font-black">
-              Get 10% Off Your Dream 9 Shirt
-            </h3>
-
-            <p className="mt-1 text-sm text-white">
-              {emailSubmitted
-                ? "Success! Use code DREAM9 at checkout."
-                : "Enter your email and we'll display a coupon code."}
-            </p>
-
-            {!emailSubmitted && (
-              <div className="mt-3 flex gap-2">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email address"
-                  className="min-w-0 flex-1 border border-white bg-white/10 px-4 py-3 text-white placeholder:text-white/70 outline-none"
-                />
-
-                <button
-                  onClick={submitEmail}
-                  disabled={isSubmittingEmail}
-                  className="bg-red-600 px-5 py-3 font-black text-white hover:bg-red-700 disabled:opacity-60"
-                >
-                  {isSubmittingEmail ? "Saving..." : "Get 10% Off"}
-                </button>
-              </div>
-            )}
-          </div>
         </div>
 
         </section>
