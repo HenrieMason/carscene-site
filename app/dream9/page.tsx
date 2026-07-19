@@ -1346,9 +1346,9 @@ export default function Dream9Page() {
           className="mx-auto mb-4 w-full max-w-[540px] text-center"
         >
           <h1 className="text-[34px] font-black leading-[0.95] tracking-tight sm:text-4xl">
-            Your 9 favorite cars.
+            Your Dream Garage
             <br />
-            <span className="text-red-600">All on one shirt.</span>
+            <span className="text-red-600">On a T-Shirt.</span>
           </h1>
 
         <p className="mt-3 text-sm font-bold text-white/55">
@@ -1396,7 +1396,8 @@ export default function Dream9Page() {
           <div className="rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
             Press Clear to start fresh.
           </div>
-          <div className="mt-1 grid grid-cols-3 gap-2">
+
+          <div className="grid grid-cols-3 gap-2">
             <button
               onClick={shuffleDream9}
               className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
@@ -1410,7 +1411,7 @@ export default function Dream9Page() {
             >
               Clear
             </button>
-            
+
             <button
               onClick={shareDream9}
               className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
@@ -1444,18 +1445,17 @@ export default function Dream9Page() {
                 }`}
           </button>
 
-          <div className="mt-1 w-full rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
+          <div className="w-full rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
             $34.99 • Free Shipping
           </div>
         </div>
 
-        <div className="mx-auto mb-4 w-full max-w-[540px]">
-          <div className="space-y-2">
-            <SizePicker />
-            <ColorPicker />
-          </div>
+        <div className="mx-auto mb-4 w-full max-w-[540px] grid gap-2">
+          <SizePicker />
 
-          <div className="mt-2 rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
+          <ColorPicker />
+
+          <div className="rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
             100+ Orders • Opening Day: July 6, 2026
           </div>
         </div>
