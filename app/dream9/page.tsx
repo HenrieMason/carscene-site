@@ -299,6 +299,7 @@ export default function Dream9Page() {
   const posterRef = useRef<HTMLDivElement>(null);
   const exportRef = useRef<HTMLDivElement>(null);
   const designGenerationRef = useRef(0);
+  const colorZoomTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shareExportRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSectionRef = useRef<HTMLDivElement>(null);
@@ -1015,15 +1016,21 @@ export default function Dream9Page() {
               setPreparedDesignBlob(null);
               setPrepareDesignPromise(null);
 
-              // Always show the full back of the shirt
+              // Cancel the previous timer
+              if (colorZoomTimeoutRef.current) {
+                clearTimeout(colorZoomTimeoutRef.current);
+              }
+
+              // Show the full shirt
               setPreviewStep(1);
               setShowFront(false);
 
-              // Automatically zoom back in after 2 seconds
-              setTimeout(() => {
+              // Zoom back in 2 seconds after the LAST color selection
+              colorZoomTimeoutRef.current = setTimeout(() => {
                 setPreviewStep(0);
                 setShowFront(false);
-              }, 4000);
+                colorZoomTimeoutRef.current = null;
+              }, 2000);
             }}
             title={color}
             style={{ backgroundColor: COLOR_SWATCHES[color] }}
