@@ -1415,7 +1415,7 @@ export default function Dream9Page() {
           </div>
         </div>
 
-        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-4">
+        <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-4">
           <button
             onClick={() => {
               if (!allSlotsFilled || isMakingDesign) return;
