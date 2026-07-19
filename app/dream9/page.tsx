@@ -1493,7 +1493,7 @@ export default function Dream9Page() {
 
         <div className="mx-auto mb-4 w-full max-w-[540px]">
           <p className="mb-3 text-center text-sm font-bold text-red-500">
-            Wear your Dream 9. Then make it reality.
+            Wear your dream garage.
           </p>
           <div className="overflow-hidden border border-white/10 bg-white/[0.04]">
             <img
