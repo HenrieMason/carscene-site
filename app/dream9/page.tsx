@@ -1396,7 +1396,7 @@ export default function Dream9Page() {
           <div className="mb-1 rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
             Press Clear to start fresh.
           </div>
-          <div className="grid grid-cols-3 gap-1">
+          <div className="grid grid-cols-3 gap-2">
             <button
               onClick={shuffleDream9}
               className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
@@ -1494,6 +1494,10 @@ export default function Dream9Page() {
           ))}
         </div>
 
+        <div className="mt-2 rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
+          Model is 5'11" wearing a size Large
+        </div>
+
         <div className="mx-auto mb-4 w-full max-w-[540px]">
           <div className="overflow-hidden border border-white/10 bg-white/[0.04]">
             <img
@@ -1501,10 +1505,6 @@ export default function Dream9Page() {
               alt="Model wearing a Dream 9 shirt"
               className="w-full h-auto object-cover"
             />
-          </div>
-
-          <div className="mt-2 rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
-            Model is 5'11" wearing a size Large
           </div>
         </div>
 
