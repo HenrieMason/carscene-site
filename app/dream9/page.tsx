@@ -1438,10 +1438,6 @@ export default function Dream9Page() {
                   shirtColor === "True Navy" ? "Navy" : shirtColor
                 }`}
           </button>
-
-          <div className="w-full rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
-            $34.99 • Free Shipping
-          </div>
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px]">
@@ -1451,7 +1447,7 @@ export default function Dream9Page() {
           </div>
 
           <div className="mt-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
-            100+ Orders • Opening Day: July 6, 2026
+             $34.99 • Free Shipping
           </div>
         </div>
 
@@ -1502,8 +1498,11 @@ export default function Dream9Page() {
               className="h-auto w-full object-cover"
             />
           </div>
-        </div>
 
+          <div className="mt-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
+            100+ Orders • Opening Day: July 6, 2026
+          </div>
+        </div>
         </section>
 
         <section className="order-2 min-w-0 lg:order-1">
