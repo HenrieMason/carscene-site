@@ -1030,7 +1030,7 @@ export default function Dream9Page() {
                 setPreviewStep(0);
                 setShowFront(false);
                 colorZoomTimeoutRef.current = null;
-              }, 2000);
+              }, 5000);
             }}
             title={color}
             style={{ backgroundColor: COLOR_SWATCHES[color] }}
