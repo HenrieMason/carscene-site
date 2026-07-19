@@ -1025,7 +1025,7 @@ export default function Dream9Page() {
               setTimeout(() => {
                 setPreviewStep(0);
                 setShowFront(false);
-              }, 5000);
+              }, 4000);
             }}
             title={color}
             style={{ backgroundColor: COLOR_SWATCHES[color] }}
@@ -1436,7 +1436,7 @@ export default function Dream9Page() {
             }`}
           >
             {!allSlotsFilled
-              ? "Fill all 9 slots"
+              ? "Fill all 9 slots below"
               : isMakingDesign
               ? "Preparing Checkout..."
               : `Checkout • ${shirtSize} • ${
