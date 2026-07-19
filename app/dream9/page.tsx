@@ -1394,9 +1394,9 @@ export default function Dream9Page() {
 
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
           <div className="mb-1 rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
-            Press <span className="text-red-500">Clear</span> to start fresh.
+            Press Clear to start fresh.
           </div>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-1">
             <button
               onClick={shuffleDream9}
               className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
@@ -1495,9 +1495,6 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px]">
-          <p className="mb-3 text-center text-sm font-bold text-red-500">
-            Wear your dream garage.
-          </p>
           <div className="overflow-hidden border border-white/10 bg-white/[0.04]">
             <img
               src="/model2.webp"
