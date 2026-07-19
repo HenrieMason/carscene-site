@@ -1393,9 +1393,9 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
-          <p className="mb-2 text-center text-sm font-bold text-white/55">
+          <div className="mb-2 rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
             Press <span className="text-red-500">Clear</span> to start fresh.
-          </p>
+          </div>
           <div className="grid grid-cols-3 gap-2">
             <button
               onClick={shuffleDream9}
