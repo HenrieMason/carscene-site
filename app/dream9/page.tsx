@@ -1393,72 +1393,72 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
-          <div className="rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
-            Press Clear to start fresh.
-          </div>
+  <div className="my-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
+    Press Clear to start fresh.
+  </div>
 
-          <div className="grid grid-cols-3 gap-2">
-            <button
-              onClick={shuffleDream9}
-              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
-            >
-              Shuffle
-            </button>
+  <div className="grid grid-cols-3 gap-2">
+    <button
+      onClick={shuffleDream9}
+      className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+    >
+      Shuffle
+    </button>
 
-            <button
-              onClick={clearDream9}
-              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
-            >
-              Clear
-            </button>
+    <button
+      onClick={clearDream9}
+      className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+    >
+      Clear
+    </button>
 
-            <button
-              onClick={shareDream9}
-              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
-            >
-              Share
-            </button>
-          </div>
-        </div>
+    <button
+      onClick={shareDream9}
+      className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+    >
+      Share
+    </button>
+  </div>
+</div>
 
-        <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
-          <button
-            onClick={() => {
-              if (!allSlotsFilled || isMakingDesign) return;
-              makePoster(shirtSize);
-            }}
-            disabled={!allSlotsFilled || isMakingDesign}
-            className={`w-full py-4 text-sm font-black transition active:scale-[0.97] ${
-              isMakingDesign
-                ? "bg-red-700 text-white"
-                : allSlotsFilled
-                ? `${shouldPulseBuyButton ? "animate-pulse" : ""} bg-red-600 text-white hover:bg-red-700`
-                : "cursor-not-allowed bg-white/10 text-white"
-            }`}
-          >
-            {!allSlotsFilled
-              ? "Fill all 9 slots below"
-              : isMakingDesign
-              ? "Preparing Checkout..."
-              : `Checkout • ${shirtSize} • ${
-                  shirtColor === "True Navy" ? "Navy" : shirtColor
-                }`}
-          </button>
+<div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
+  <button
+    onClick={() => {
+      if (!allSlotsFilled || isMakingDesign) return;
+      makePoster(shirtSize);
+    }}
+    disabled={!allSlotsFilled || isMakingDesign}
+    className={`w-full py-4 text-sm font-black transition active:scale-[0.97] ${
+      isMakingDesign
+        ? "bg-red-700 text-white"
+        : allSlotsFilled
+        ? `${shouldPulseBuyButton ? "animate-pulse" : ""} bg-red-600 text-white hover:bg-red-700`
+        : "cursor-not-allowed bg-white/10 text-white"
+    }`}
+  >
+    {!allSlotsFilled
+      ? "Fill all 9 slots below"
+      : isMakingDesign
+      ? "Preparing Checkout..."
+      : `Checkout • ${shirtSize} • ${
+          shirtColor === "True Navy" ? "Navy" : shirtColor
+        }`}
+  </button>
 
-          <div className="w-full rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
-            $34.99 • Free Shipping
-          </div>
-        </div>
+  <div className="my-4 w-full rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
+    $34.99 • Free Shipping
+  </div>
+</div>
 
-        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
-          <SizePicker />
+<div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
+  <SizePicker />
 
-          <ColorPicker />
+  <ColorPicker />
 
-          <div className="rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
-            100+ Orders • Opening Day: July 6, 2026
-          </div>
-        </div>
+  <div className="my-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
+    100+ Orders • Opening Day: July 6, 2026
+  </div>
+</div>
 
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
           {displaySlots.map(({ car, realIndex }, index) => (
