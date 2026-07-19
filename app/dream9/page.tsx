@@ -1020,6 +1020,12 @@ export default function Dream9Page() {
               // Always show the full back of the shirt
               setPreviewStep(1);
               setShowFront(false);
+
+              // Automatically zoom back in after 2 seconds
+              setTimeout(() => {
+                setPreviewStep(0);
+                setShowFront(false);
+              }, 2000);
             }}
             title={color}
             style={{ backgroundColor: COLOR_SWATCHES[color] }}
