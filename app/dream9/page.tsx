@@ -1393,10 +1393,10 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-2">
-          <div className="mb-1 rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
+          <div className="rounded-sm bg-white/5 py-1 text-center text-xs font-bold text-white/45">
             Press Clear to start fresh.
           </div>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="mt-1 grid grid-cols-3 gap-2">
             <button
               onClick={shuffleDream9}
               className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
