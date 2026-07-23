@@ -1464,7 +1464,7 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px]">
-          <div className="mb-2 border border-white bg-white px-4 py-3 text-center text-sm font-black text-black">
+          <div className="mb-2 border border-white bg-black px-4 py-3 text-center text-sm font-black text-white">
             Dream Garage Value: ♠{dreamGarageValue.toLocaleString()}
           </div>
 
