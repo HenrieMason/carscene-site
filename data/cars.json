@@ -3981,7 +3981,7 @@
     "price": 20000,
     "id": "CH025",
     "class": "P",
-    "image": "/WebPCars/C/K_1500_MK4.webp"
+    "image": "/WebPCars/CIIK_1500_MK4.webp"
   },
   {
     "brand": "Chevrolet",
@@ -4813,7 +4813,7 @@
     "price": 30000,
     "id": "DO032",
     "class": "P",
-    "image": "/WebPCars/Durango_MK3.2_R/T.webp"
+    "image": "/WebPCars/Durango_MK3.2_RIIT.webp"
   },
   {
     "brand": "Dodge",
@@ -4861,7 +4861,7 @@
     "price": 50000,
     "id": "DO037",
     "class": "A",
-    "image": "/WebPCars/Viper_SR_I_RT/10.webp"
+    "image": "/WebPCars/Viper_SR_I_RTII10.webp"
   },
   {
     "brand": "Dodge",
@@ -4869,7 +4869,7 @@
     "price": 50000,
     "id": "DO038",
     "class": "A",
-    "image": "/WebPCars/Viper_SR_II_RT/10.webp"
+    "image": "/WebPCars/Viper_SR_II_RTII10.webp"
   },
   {
     "brand": "Dodge",
@@ -5237,7 +5237,7 @@
     "price": 350000,
     "id": "FE037",
     "class": "S",
-    "image": "/WebPCars/250_GT/E_Series_III.webp"
+    "image": "/WebPCars/250_GTIIE_Series_III.webp"
   },
   {
     "brand": "Ferrari",
@@ -5381,7 +5381,7 @@
     "price": 150000,
     "id": "FE055",
     "class": "S",
-    "image": "/WebPCars/365_GTC/4_Daytona.webp"
+    "image": "/WebPCars/365_GTCII4_Daytona.webp"
   },
   {
     "brand": "Ferrari",
@@ -8445,7 +8445,7 @@
     "price": 10000,
     "id": "LE002",
     "class": "P",
-    "image": "/WebPCars/GS_MK2_300/430.webp"
+    "image": "/WebPCars/GS_MK2_300II430.webp"
   },
   {
     "brand": "Lexus",
@@ -8453,7 +8453,7 @@
     "price": 15000,
     "id": "LE003",
     "class": "P",
-    "image": "/WebPCars/GS_MK3_300/350.webp"
+    "image": "/WebPCars/GS_MK3_300II350.webp"
   },
   {
     "brand": "Lexus",
@@ -8525,7 +8525,7 @@
     "price": 20000,
     "id": "LE012",
     "class": "P",
-    "image": "/WebPCars/IS_MK3.1_200t/250/350.webp"
+    "image": "/WebPCars/IS_MK3.1_200tII250II350.webp"
   },
   {
     "brand": "Lexus",
@@ -8629,7 +8629,7 @@
     "price": 20000,
     "id": "LE025",
     "class": "P",
-    "image": "/WebPCars/NX_MK1_200t/300.webp"
+    "image": "/WebPCars/NX_MK1_200tII300.webp"
   },
   {
     "brand": "Lexus",
@@ -9197,7 +9197,7 @@
     "price": 15000,
     "id": "MZ008",
     "class": "P",
-    "image": "/WebPCars/RX-7_SA/FB.webp"
+    "image": "/WebPCars/RX-7_SAIIFB.webp"
   },
   {
     "brand": "Mazda",
@@ -9257,14 +9257,6 @@
   },
   {
     "brand": "McLaren",
-    "model": "P1-GTR",
-    "price": 3500000,
-    "id": "MC028",
-    "class": "X",
-    "image": "/WebPCars/P1-GTR.webp"
-  },
-  {
-    "brand": "McLaren",
     "model": "GT",
     "price": 210000,
     "id": "MC004",
@@ -9294,6 +9286,14 @@
     "id": "MC007",
     "class": "X",
     "image": "/WebPCars/P1.webp"
+  },
+  {
+    "brand": "McLaren",
+    "model": "P1-GTR",
+    "price": 3500000,
+    "id": "MC028",
+    "class": "X",
+    "image": "/WebPCars/P1-GTR.webp"
   },
   {
     "brand": "McLaren",
@@ -11145,11 +11145,11 @@
   },
   {
     "brand": "Oldsmobile",
-    "model": "Cutlass Supreme MK3",
-    "price": 30000,
+    "model": "Cutlass Supreme MK2",
+    "price": 35000,
     "id": "OC008",
     "class": "P",
-    "image": "/WebPCars/Cutlass_Supreme_MK3.webp"
+    "image": "/WebPCars/Cutlass_Supreme_MK2.webp"
   },
   {
     "brand": "Oldsmobile",
@@ -11378,7 +11378,7 @@
   {
     "brand": "Plymouth",
     "model": "Satellite MK1",
-    "price": 35000,
+    "price": 30000,
     "id": "PL006",
     "class": "P",
     "image": "/WebPCars/Satellite_MK1.webp"
@@ -11386,7 +11386,7 @@
   {
     "brand": "Plymouth",
     "model": "Satellite MK2",
-    "price": 35000,
+    "price": 40000,
     "id": "PL007",
     "class": "P",
     "image": "/WebPCars/Satellite_MK2.webp"
@@ -11394,7 +11394,7 @@
   {
     "brand": "Plymouth",
     "model": "Satellite MK3",
-    "price": 35000,
+    "price": 25000,
     "id": "PL008",
     "class": "P",
     "image": "/WebPCars/Satellite_MK3.webp"
