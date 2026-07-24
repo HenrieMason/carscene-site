@@ -702,10 +702,14 @@ export default function Dream9Page() {
     setPrepareDesignPromise(null);
 
     setSlots((current) => {
-      const next = [...current];
+      const next = current.slice(0, 9);
+
+      while (next.length < 9) {
+        next.push(null);
+      }
 
       const indexToReplace =
-        selectedSlot !== null
+        selectedSlot !== null && selectedSlot >= 0 && selectedSlot < 9
           ? selectedSlot
           : next.findIndex((slot) => slot === null);
 
@@ -715,7 +719,7 @@ export default function Dream9Page() {
         next[indexToReplace] = car;
       }
 
-      return next;
+      return next.slice(0, 9);
     });
 
     setSelectedSlot(null);
@@ -726,8 +730,12 @@ export default function Dream9Page() {
     setDeleteReadySlot(null);
 
     setTimeout(() => {
+      const instructions = instructionsRef.current;
+
+      if (!instructions) return;
+
       const y =
-        instructionsRef.current!.getBoundingClientRect().top +
+        instructions.getBoundingClientRect().top +
         window.scrollY -
         20;
 
@@ -1092,16 +1100,25 @@ export default function Dream9Page() {
   }
 
   const displaySlots = useMemo(() => {
-    const filledSlots = slots
+    const safeSlots = slots.slice(0, 9);
+
+    while (safeSlots.length < 9) {
+      safeSlots.push(null);
+    }
+
+    const filledSlots = safeSlots
       .map((car, realIndex) => ({ car, realIndex }))
-      .filter((slot): slot is { car: Car; realIndex: number } => slot.car !== null)
+      .filter(
+        (slot): slot is { car: Car; realIndex: number } =>
+          slot.car !== null
+      )
       .sort((a, b) => a.car.price - b.car.price);
 
-    const emptySlots = slots
+    const emptySlots = safeSlots
       .map((car, realIndex) => ({ car, realIndex }))
       .filter((slot) => slot.car === null);
 
-    return [...filledSlots, ...emptySlots];
+    return [...filledSlots, ...emptySlots].slice(0, 9);
   }, [slots]);
 
   function renderDream9Design(exportMode = false) {
@@ -1151,7 +1168,7 @@ export default function Dream9Page() {
 
               return (
                 <button
-                  key={car?.id ?? `empty-${realIndex}`}
+                  key={`preview-slot-${realIndex}`}
                   type="button"
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
                   style={{
@@ -1288,7 +1305,7 @@ export default function Dream9Page() {
 
               return (
                 <button
-                  key={car?.id ?? `empty-${realIndex}`}
+                  key={`export-slot-${realIndex}`}
                   type="button"
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
                   className="aspect-square overflow-hidden border p-0 transition"
@@ -1471,7 +1488,7 @@ export default function Dream9Page() {
           <div className="grid gap-2">
             {displaySlots.map(({ car, realIndex }, index) => (
               <button
-                key={car?.id ?? `empty-button-${realIndex}`}
+                key={`selection-button-${realIndex}`}
                 type="button"
                 onClick={() => selectSlot(realIndex)}
                 style={
