@@ -502,12 +502,6 @@ export default function Dream9Page() {
   const [shirtSize, setShirtSize] = useState<ShirtSize>("L");
   const allSlotsFilled = slots.every((slot) => slot !== null);
 
-  const dreamGarageValue = useMemo(() => {
-    return slots.reduce((total, car) => {
-      return total + (car?.price ?? 0);
-    }, 0);
-  }, [slots]);
-
   useEffect(() => {
     designGenerationRef.current += 1;
     setPreparedDesignBlob(null);
@@ -1480,53 +1474,39 @@ export default function Dream9Page() {
           </div>
         </div>
 
-        <div className="mx-auto mb-4 w-full max-w-[540px]">
-          <div className="mb-2 border border-white bg-black px-4 py-3 text-center text-sm font-black text-white">
-            Dream Garage Value: ♠{dreamGarageValue.toLocaleString()}
-          </div>
+        <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
+          {displaySlots.map(({ car, realIndex }, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => selectSlot(realIndex)}
+              style={
+                car
+                  ? {
+                      backgroundColor: classTint(classFromPrice(car.price)),
+                      color: "black",
+                    }
+                  : undefined
+              }
+              className={`w-full px-4 py-3 text-left text-sm font-black transition ${
+                car
+                  ? "hover:brightness-95"
+                  : "bg-red-600 text-white hover:bg-red-700"
+              }`}
+            >
+              {car ? (
+                <div className="flex items-center justify-between gap-3">
+                  <span className="min-w-0 truncate">{car.model}</span>
 
-          <div className="grid gap-2">
-            {displaySlots.map(({ car, realIndex }, index) => (
-              <button
-                key={`selection-button-${realIndex}`}
-                type="button"
-                onClick={() => selectSlot(realIndex)}
-                style={
-                  car
-                    ? {
-                        backgroundColor: classTint(classFromPrice(car.price)),
-                        color: "black",
-                      }
-                    : undefined
-                }
-                className={`min-h-[68px] w-full px-4 py-3 text-left text-sm font-black transition ${
-                  car
-                    ? "hover:brightness-95"
-                    : "bg-red-600 text-white hover:bg-red-700"
-                }`}
-              >
-                {car ? (
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="min-w-0 flex-1">
-                      <div className="truncate">{car.model}</div>
-
-                      <div className="mt-1 text-xs font-bold text-black/60">
-                        ♠{car.price.toLocaleString()}
-                      </div>
-                    </div>
-
-                    <span className="shrink-0 bg-black/10 px-3 py-1 text-xs font-black text-black/70">
-                      Replace
-                    </span>
-                  </div>
-                ) : (
-                  <div className="flex min-h-[44px] items-center">
-                    Select a Car
-                  </div>
-                )}
-              </button>
-            ))}
-          </div>
+                  <span className="shrink-0 bg-black/10 px-3 py-1 text-xs font-black text-black/70">
+                    Replace
+                  </span>
+                </div>
+              ) : (
+                "Select a Car"
+              )}
+            </button>
+          ))}
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px]">
@@ -1555,7 +1535,7 @@ export default function Dream9Page() {
           >
             <div className="mb-4">
               <h1 className="text-3xl font-black tracking-tight">
-                Search 1,596 Cars
+                Search 1,842 Cars
               </h1>
 
               <p className="mt-2 text-sm text-white/50">
