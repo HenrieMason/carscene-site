@@ -309,6 +309,7 @@ export default function Dream9Page() {
   const shareExportRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSectionRef = useRef<HTMLDivElement>(null);
+  const searchResultsScrollRef = useRef<HTMLDivElement>(null);
   const instructionsRef = useRef<HTMLDivElement>(null);
   const [showFront, setShowFront] = useState(false);
   const [previewStep, setPreviewStep] = useState(0);
@@ -640,6 +641,17 @@ export default function Dream9Page() {
     if (!selectedBrand) return [];
     return allCars.filter((car) => car.brand === selectedBrand);
   }, [selectedBrand, allCars]);
+
+  useEffect(() => {
+    if (!selectedBrand) return;
+
+    requestAnimationFrame(() => {
+      searchResultsScrollRef.current?.scrollTo({
+        top: 0,
+        behavior: "instant",
+      });
+    });
+  }, [selectedBrand]);
 
   const [featuredCarsList, setFeaturedCarsList] = useState<Car[]>([]);
 
@@ -1616,7 +1628,10 @@ export default function Dream9Page() {
               </button>
             </div>
 
-            <div className="mt-4 h-[360px] overflow-y-auto pr-1 sm:h-[60vh]">
+            <div
+              ref={searchResultsScrollRef}
+              className="mt-4 h-[360px] overflow-y-auto pr-1 sm:h-[60vh]"
+            >
               {query.trim() ? (
                 <div className="space-y-2">
                   {searchResults.length === 0 ? (
