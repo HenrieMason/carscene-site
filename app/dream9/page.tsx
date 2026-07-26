@@ -1509,22 +1509,49 @@ export default function Dream9Page() {
           ))}
         </div>
 
-        <div className="mx-auto mb-4 w-full max-w-[540px]">
-          <div className="mb-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
-            Model is 5'11" wearing a size Large
-          </div>
+        <div className="relative mx-auto mb-4 flex min-h-[260px] w-full max-w-[540px] flex-col overflow-hidden border border-white/10 bg-white/[0.04] p-6">
+          <img
+            src="/ShirtMan.png"
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-80"
+          />
 
-          <div className="overflow-hidden border border-white/10 bg-white/[0.04]">
-            <img
-              src="/model2.webp"
-              alt="Model wearing a Dream 9 shirt"
-              className="h-auto w-full object-cover"
-            />
-          </div>
+          <div className="relative z-10 flex h-full flex-1 flex-col justify-end">
+            <h3 className="text-lg font-black">
+              Get 10% Off Your Dream 9 Shirt
+            </h3>
 
-          <div className="mt-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
-            100+ Orders • Opening Day: July 6, 2026
+            <p className="mt-1 text-sm text-white">
+              {emailSubmitted
+                ? "Success! Use code DREAM9 at checkout."
+                : "Enter your email and we'll display a coupon code."}
+            </p>
+
+            {!emailSubmitted && (
+              <div className="mt-3 flex gap-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email address"
+                  className="min-w-0 flex-1 border border-white bg-white/10 px-4 py-3 text-white placeholder:text-white/70 outline-none"
+                />
+
+                <button
+                  onClick={submitEmail}
+                  disabled={isSubmittingEmail}
+                  className="bg-red-600 px-5 py-3 font-black text-white hover:bg-red-700 disabled:opacity-60"
+                >
+                  {isSubmittingEmail ? "Saving..." : "Get 10% Off"}
+                </button>
+              </div>
+            )}
           </div>
+        </div>
+
+        <div className="mt-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
+          100+ Orders • Opening Day: July 6, 2026
         </div>
         </section>
 
