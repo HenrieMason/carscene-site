@@ -1556,9 +1556,6 @@ export default function Dream9Page() {
           </div>
         </div>
 
-        <div className="mt-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
-          100+ Orders • Opening Day: July 6, 2026
-        </div>
         </section>
 
         <section className="order-2 min-w-0 lg:order-1">
