@@ -1272,21 +1272,20 @@ export default function Dream9Page() {
               className="absolute left-0 top-full w-full pt-[2.5%] font-black leading-none"
               style={{ color: borderColor }}
             >
-              {layoutRows.map((row, rowIndex) => (
-                <div key={`preview-name-row-${rowIndex}`} className="flex justify-center gap-x-[3%]">
-                  {row.map(({ car, realIndex }) => (
-                    <div
-                      key={`preview-name-${realIndex}`}
-                      className={`min-w-0 flex-1 truncate text-center ${
-                        exportMode ? "text-[7.8px]" : "text-[clamp(2px,0.55vw,3.5px)]"
-                      }`}
-                      style={{ maxWidth: `${100 / row.length}%` }}
-                    >
-                      {car ? car.model : "Empty"}
-                    </div>
-                  ))}
-                </div>
-              ))}
+              <div className="grid grid-cols-3 gap-x-[3%] gap-y-[2%]">
+                {slots.slice(0, 9).map((car, index) => (
+                  <div
+                    key={`name-slot-${index}`}
+                    className={`truncate text-center ${
+                      exportMode
+                        ? "text-[7.8px]"
+                        : "text-[clamp(2px,0.55vw,3.5px)]"
+                    }`}
+                  >
+                    {index < carCount && car ? car.model : ""}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -1386,19 +1385,20 @@ export default function Dream9Page() {
           </div>
 
           <div className="mx-auto w-[95%] pt-[2.5%] font-black leading-[1.1]" style={{ color: exportGridColor }}>
-            {layoutRows.map((row, rowIndex) => (
-              <div key={`export-name-row-${rowIndex}`} className="flex justify-center gap-x-[3%]">
-                {row.map(({ car, realIndex }) => (
-                  <div
-                    key={`export-name-${realIndex}`}
-                    className="min-w-0 flex-1 truncate text-center text-[7.8px]"
-                    style={{ maxWidth: `${100 / row.length}%` }}
-                  >
-                    {car ? car.model : "Empty"}
-                  </div>
-                ))}
-              </div>
-            ))}
+            <div className="grid grid-cols-3 gap-x-[3%] gap-y-[2%]">
+              {slots.slice(0, 9).map((car, index) => (
+                <div
+                  key={`name-slot-${index}`}
+                  className={`truncate text-center ${
+                    exportMode
+                      ? "text-[7.8px]"
+                      : "text-[clamp(2px,0.55vw,3.5px)]"
+                  }`}
+                >
+                  {index < carCount && car ? car.model : ""}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -1544,38 +1544,51 @@ export default function Dream9Page() {
         </div>
 
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
-          {displaySlots.map(({ car, realIndex }, index) => (
-            <button
-              key={index}
-              type="button"
-              onClick={() => selectSlot(realIndex)}
-              style={
-                car
-                  ? {
-                      backgroundColor: classTint(classFromPrice(car.price)),
-                      color: "black",
-                    }
-                  : undefined
-              }
-              className={`w-full px-4 py-3 text-left text-sm font-black transition ${
-                car
-                  ? "hover:brightness-95"
-                  : "bg-red-600 text-white hover:bg-red-700"
-              }`}
-            >
-              {car ? (
-                <div className="flex items-center justify-between gap-3">
-                  <span className="min-w-0 truncate">{car.model}</span>
+          {slots.map((car, realIndex) => {
+            const isActive = realIndex < carCount;
 
-                  <span className="shrink-0 bg-black/10 px-3 py-1 text-xs font-black text-black/70">
-                    Replace
-                  </span>
-                </div>
-              ) : (
-                "Select a Car"
-              )}
-            </button>
-          ))}
+            return (
+              <button
+                key={realIndex}
+                type="button"
+                disabled={!isActive}
+                onClick={() => {
+                  if (isActive) {
+                    selectSlot(realIndex);
+                  }
+                }}
+                style={
+                  isActive && car
+                    ? {
+                        backgroundColor: classTint(classFromPrice(car.price)),
+                        color: "black",
+                      }
+                    : undefined
+                }
+                className={`w-full px-4 py-3 text-left text-sm font-black transition ${
+                  !isActive
+                    ? "cursor-not-allowed bg-white/10 text-white opacity-30"
+                    : car
+                    ? "hover:brightness-95"
+                    : "bg-red-600 text-white hover:bg-red-700"
+                }`}
+              >
+                {!isActive ? (
+                  "Select a Car"
+                ) : car ? (
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="min-w-0 truncate">{car.model}</span>
+
+                    <span className="shrink-0 bg-black/10 px-3 py-1 text-xs font-black text-black/70">
+                      Replace
+                    </span>
+                  </div>
+                ) : (
+                  "Select a Car"
+                )}
+              </button>
+            );
+          })}
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px]">
