@@ -1251,7 +1251,7 @@ export default function Dream9Page() {
                             crossOrigin="anonymous"
                             decoding="sync"
                             loading="eager"
-                            className="absolute left-1/2 top-1/2 h-full w-auto -translate-x-1/2 -translate-y-1/2 object-contain"
+                            className="absolute inset-0 h-full w-full object-cover"
                           />
                         </div>
                       ) : (
@@ -1367,7 +1367,7 @@ export default function Dream9Page() {
                             crossOrigin="anonymous"
                             decoding="sync"
                             loading="eager"
-                            className="absolute left-1/2 top-1/2 h-full w-auto -translate-x-1/2 -translate-y-1/2 object-contain"
+                            className="absolute inset-0 h-full w-full object-cover"
                           />
                         </div>
                       ) : (
