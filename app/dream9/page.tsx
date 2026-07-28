@@ -1228,20 +1228,9 @@ export default function Dream9Page() {
         >
           <div className="relative aspect-square w-full">
             <div
-              className="grid h-full w-full origin-center"
+              className="grid h-full w-full"
               style={{
                 gridTemplateRows: `repeat(${layoutRows.length}, minmax(0, 1fr))`,
-                transform: `scale(${{
-                  9: 1.00,
-                  8: 1.08,
-                  7: 1.15,
-                  6: 1.20,
-                  5: 1.28,
-                  4: 1.38,
-                  3: 1.50,
-                  2: 1.70,
-                  1: 2.10,
-                }[carCount]})`,
               }}
             >
               {layoutRows.map((row, rowIndex) => (
@@ -1351,20 +1340,9 @@ export default function Dream9Page() {
 
           <div className="mx-auto mt-0 aspect-square w-[95%]">
             <div
-              className="grid h-full w-full origin-center"
+              className="grid h-full w-full"
               style={{
                 gridTemplateRows: `repeat(${layoutRows.length}, minmax(0, 1fr))`,
-                transform: `scale(${{
-                  9: 1.00,
-                  8: 1.08,
-                  7: 1.15,
-                  6: 1.20,
-                  5: 1.28,
-                  4: 1.38,
-                  3: 1.50,
-                  2: 1.70,
-                  1: 2.10,
-                }[carCount]})`,
               }}
             >
               {layoutRows.map((row, rowIndex) => (
