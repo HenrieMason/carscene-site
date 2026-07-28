@@ -1239,7 +1239,7 @@ export default function Dream9Page() {
                       type="button"
                       onClick={exportMode ? undefined : () => selectSlot(realIndex)}
                       style={{ backgroundColor: "transparent", borderColor }}
-                      className="aspect-square h-full overflow-hidden border-[0.5px] p-0 transition md:border"
+                      className="h-full min-w-0 flex-1 overflow-hidden border-[0.5px] p-0 transition md:border"
                     >
                       {car ? (
                         <div className="relative h-full w-full overflow-hidden">
@@ -1278,7 +1278,7 @@ export default function Dream9Page() {
                       className={`min-w-0 flex-1 truncate text-center ${
                         exportMode ? "text-[7.8px]" : "text-[clamp(2px,0.55vw,3.5px)]"
                       }`}
-                      style={{ maxWidth: `${100 / 3}%` }}
+                      style={{ maxWidth: `${100 / row.length}%` }}
                     >
                       {car ? car.model : "Empty"}
                     </div>
@@ -1347,7 +1347,7 @@ export default function Dream9Page() {
                     <button
                       key={`export-slot-${realIndex}`}
                       type="button"
-                      className="aspect-square h-full overflow-hidden border p-0"
+                      className="h-full min-w-0 flex-1 overflow-hidden border p-0"
                       style={{
                         backgroundColor: isShareTitle
                           ? shareBackgroundColor(shirtColor)
@@ -1388,7 +1388,7 @@ export default function Dream9Page() {
                   <div
                     key={`export-name-${realIndex}`}
                     className="min-w-0 flex-1 truncate text-center text-[7.8px]"
-                    style={{ maxWidth: `${100 / 3}%` }}
+                    style={{ maxWidth: `${100 / row.length}%` }}
                   >
                     {car ? car.model : "Empty"}
                   </div>
