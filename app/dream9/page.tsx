@@ -1228,8 +1228,21 @@ export default function Dream9Page() {
         >
           <div className="relative aspect-square w-full">
             <div
-              className="grid h-full w-full"
-              style={{ gridTemplateRows: `repeat(${layoutRows.length}, minmax(0, 1fr))` }}
+              className="grid h-full w-full origin-center"
+              style={{
+                gridTemplateRows: `repeat(${layoutRows.length}, minmax(0, 1fr))`,
+                transform: `scale(${{
+                  9: 1.00,
+                  8: 1.08,
+                  7: 1.15,
+                  6: 1.20,
+                  5: 1.28,
+                  4: 1.38,
+                  3: 1.50,
+                  2: 1.70,
+                  1: 2.10,
+                }[carCount]})`,
+              }}
             >
               {layoutRows.map((row, rowIndex) => (
                 <div key={`preview-row-${rowIndex}`} className="flex min-h-0 justify-center">
@@ -1249,7 +1262,7 @@ export default function Dream9Page() {
                             crossOrigin="anonymous"
                             decoding="sync"
                             loading="eager"
-                            className="absolute -right-[35%] bottom-0 h-[95%] w-auto max-w-none object-contain"
+                            className="absolute left-1/2 top-1/2 h-[90%] w-[90%] -translate-x-1/2 -translate-y-1/2 object-contain"
                           />
                         </div>
                       ) : (
@@ -1338,8 +1351,21 @@ export default function Dream9Page() {
 
           <div className="mx-auto mt-0 aspect-square w-[95%]">
             <div
-              className="grid h-full w-full"
-              style={{ gridTemplateRows: `repeat(${layoutRows.length}, minmax(0, 1fr))` }}
+              className="grid h-full w-full origin-center"
+              style={{
+                gridTemplateRows: `repeat(${layoutRows.length}, minmax(0, 1fr))`,
+                transform: `scale(${{
+                  9: 1.00,
+                  8: 1.08,
+                  7: 1.15,
+                  6: 1.20,
+                  5: 1.28,
+                  4: 1.38,
+                  3: 1.50,
+                  2: 1.70,
+                  1: 2.10,
+                }[carCount]})`,
+              }}
             >
               {layoutRows.map((row, rowIndex) => (
                 <div key={`export-row-${rowIndex}`} className="flex min-h-0 justify-center">
@@ -1363,7 +1389,7 @@ export default function Dream9Page() {
                             crossOrigin="anonymous"
                             decoding="sync"
                             loading="eager"
-                            className="absolute -right-[35%] bottom-0 h-[95%] w-auto max-w-none object-contain"
+                            className="absolute left-1/2 top-1/2 h-[90%] w-[90%] -translate-x-1/2 -translate-y-1/2 object-contain"
                           />
                         </div>
                       ) : (
