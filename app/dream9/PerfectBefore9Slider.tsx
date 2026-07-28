@@ -283,18 +283,6 @@ const CAR_SEARCH_ALIASES: Record<string, string[]> = {
   "RX-7": ["rx7"],
 };
 
-const CAR_COUNT_LAYOUTS: Record<number, number[]> = {
-  1: [1],
-  2: [1, 1],
-  3: [1, 2],
-  4: [2, 2],
-  5: [1, 2, 2],
-  6: [3, 3],
-  7: [1, 3, 3],
-  8: [2, 2, 2, 2],
-  9: [3, 3, 3],
-};
-
 export default function Dream9Page() {
   const SITE_PAUSED = false;
 
@@ -416,15 +404,11 @@ export default function Dream9Page() {
   const [hasCustomizedDream9, setHasCustomizedDream9] = useState(false);
   const [showShuffleConfirm, setShowShuffleConfirm] = useState(false);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
-  const [carCount, setCarCount] = useState(9);
-
-  function getRandomDream9(count = carCount) {
-    return [
-      ...[...allCars].sort(() => Math.random() - 0.5).slice(0, count),
-      ...Array(9 - count).fill(null),
-    ];
+  function getRandomDream9() {
+    return [...allCars]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 9);
   }
-
   const [slots, setSlots] = useState<(Car | null)[]>(
     Array(9).fill(null)
   );
@@ -473,14 +457,11 @@ export default function Dream9Page() {
 
     let fallbackIndex = 0;
 
-    const categorySlots = selectedCars.map(
-      (car) => car ?? fallbackCars[fallbackIndex++] ?? null
+    setSlots(
+      selectedCars.map(
+        (car) => car ?? fallbackCars[fallbackIndex++] ?? null
+      )
     );
-
-    setSlots([
-      ...categorySlots.slice(0, carCount),
-      ...Array(9 - carCount).fill(null),
-    ]);
 
     setHasCustomizedDream9(false);
     setSelectedSlot(null);
@@ -520,9 +501,7 @@ export default function Dream9Page() {
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
   const [shirtColor, setShirtColor] = useState<ShirtColor>("Black");
   const [shirtSize, setShirtSize] = useState<ShirtSize>("L");
-  const allSlotsFilled = slots
-    .slice(0, carCount)
-    .every((slot) => slot !== null);
+  const allSlotsFilled = slots.every((slot) => slot !== null);
 
   useEffect(() => {
     designGenerationRef.current += 1;
@@ -684,30 +663,8 @@ export default function Dream9Page() {
     );
   }, [featuredSeed]);
 
-  function changeCarCount(nextCount: number) {
-    setCarCount(nextCount);
-    setSelectedSlot(null);
-    setDeleteReadySlot(null);
-    setPreparedDesignBlob(null);
-    setPrepareDesignPromise(null);
-
-    setSlots((current) => {
-      const next = current.slice(0, 9);
-
-      while (next.length < 9) {
-        next.push(null);
-      }
-
-      for (let index = nextCount; index < 9; index += 1) {
-        next[index] = null;
-      }
-
-      return next;
-    });
-  }
-
   function randomizeDream9() {
-    setSlots(getRandomDream9(carCount));
+    setSlots(getRandomDream9());
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
@@ -757,21 +714,18 @@ export default function Dream9Page() {
         next.push(null);
       }
 
-      const activeSlots = next.slice(0, carCount);
       const indexToReplace =
-        selectedSlot !== null &&
-        selectedSlot >= 0 &&
-        selectedSlot < carCount
+        selectedSlot !== null && selectedSlot >= 0 && selectedSlot < 9
           ? selectedSlot
-          : activeSlots.findIndex((slot) => slot === null);
+          : next.findIndex((slot) => slot === null);
 
       if (indexToReplace === -1) {
-        next[carCount - 1] = car;
+        next[8] = car;
       } else {
         next[indexToReplace] = car;
       }
 
-      return next;
+      return next.slice(0, 9);
     });
 
     setSelectedSlot(null);
@@ -887,7 +841,7 @@ export default function Dream9Page() {
 
   async function shareDream9() {
     if (!shareExportRef.current || !allSlotsFilled) {
-      alert(`Fill all ${carCount} slots before sharing.`);
+      alert("Fill all 9 slots before sharing.");
       return;
     }
 
@@ -907,7 +861,7 @@ export default function Dream9Page() {
 
       const blob = await (await fetch(dataUrl)).blob();
 
-      const file = new File([blob], `dream${carCount}-carscene.png`, {
+      const file = new File([blob], "dream9-carscene.png", {
         type: "image/png",
       });
 
@@ -917,14 +871,14 @@ export default function Dream9Page() {
         navigator.share
       ) {
         await navigator.share({
-          title: `My Dream ${carCount} Garage`,
-          text: `Build your own Dream ${carCount} at carsceneapp.com`,
+          title: "My Dream 9 Garage",
+          text: "Build your own Dream 9 at carsceneapp.com",
           files: [file],
         });
       } else {
         const link = document.createElement("a");
         link.href = dataUrl;
-        link.download = `dream${carCount}-carscene.png`;
+        link.download = "dream9-carscene.png";
         link.click();
       }
     } catch (error) {
@@ -1152,9 +1106,9 @@ export default function Dream9Page() {
   }
 
   const displaySlots = useMemo(() => {
-    const safeSlots = slots.slice(0, carCount);
+    const safeSlots = slots.slice(0, 9);
 
-    while (safeSlots.length < carCount) {
+    while (safeSlots.length < 9) {
       safeSlots.push(null);
     }
 
@@ -1170,20 +1124,8 @@ export default function Dream9Page() {
       .map((car, realIndex) => ({ car, realIndex }))
       .filter((slot) => slot.car === null);
 
-    return [...filledSlots, ...emptySlots].slice(0, carCount);
-  }, [slots, carCount]);
-
-  const layoutRows = useMemo(() => {
-    const rowSizes = CAR_COUNT_LAYOUTS[carCount];
-    let slotIndex = 0;
-
-    return rowSizes.map((rowSize) => {
-      const row = displaySlots.slice(slotIndex, slotIndex + rowSize);
-      slotIndex += rowSize;
-      return row;
-    });
-  }, [carCount, displaySlots]);
-
+    return [...filledSlots, ...emptySlots].slice(0, 9);
+  }, [slots]);
 
   function renderDream9Design(exportMode = false) {
     const borderColor = gridColor(shirtColor);
@@ -1196,7 +1138,7 @@ export default function Dream9Page() {
       >
         <img
           src={SHIRT_COLORS[shirtColor].back}
-          alt={`Dream ${carCount} Shirt`}
+          alt="Dream 9 Shirt"
           crossOrigin="anonymous"
           className="absolute inset-0 h-full w-full scale-150 object-contain"
         />
@@ -1215,7 +1157,7 @@ export default function Dream9Page() {
             letterSpacing: "-0.04em",
           }}
         >
-          Dream {carCount}
+          Dream 9
         </div>
 
         <div
@@ -1226,65 +1168,82 @@ export default function Dream9Page() {
             width: "40%",
           }}
         >
-          <div className="relative aspect-square w-full">
-            <div
-              className="grid h-full w-full"
-              style={{ gridTemplateRows: `repeat(${layoutRows.length}, minmax(0, 1fr))` }}
-            >
-              {layoutRows.map((row, rowIndex) => (
-                <div key={`preview-row-${rowIndex}`} className="flex min-h-0 justify-center">
-                  {row.map(({ car, realIndex }) => (
-                    <button
-                      key={`preview-slot-${realIndex}`}
-                      type="button"
-                      onClick={exportMode ? undefined : () => selectSlot(realIndex)}
-                      style={{ backgroundColor: "transparent", borderColor }}
-                      className="aspect-square h-full overflow-hidden border-[0.5px] p-0 transition md:border"
-                    >
-                      {car ? (
-                        <div className="relative h-full w-full overflow-hidden">
-                          <img
-                            src={car.image}
-                            alt={car.model}
-                            crossOrigin="anonymous"
-                            decoding="sync"
-                            loading="eager"
-                            className="absolute -right-[35%] bottom-0 h-[95%] w-auto max-w-none object-contain"
-                          />
-                        </div>
-                      ) : (
-                        <div
-                          className="flex h-full items-center justify-center text-[clamp(7px,1.5vw,12px)] font-black"
-                          style={{ color: borderColor + "66" }}
-                        >
-                          Empty
+          <div className="grid grid-cols-3 gap-0">
+            {displaySlots.map(({ car, realIndex }, index) => {
+              const type = car ? classFromPrice(car.price) : "P";
+
+              return (
+                <button
+                  key={`preview-slot-${realIndex}`}
+                  type="button"
+                  onClick={exportMode ? undefined : () => selectSlot(realIndex)}
+                  style={{
+                    backgroundColor: "transparent",
+                    borderColor,
+                  }}
+                  className="aspect-square overflow-hidden border-[0.5px] md:border p-0 transition"
+                >
+                  {car ? (
+                    <div className="relative h-full w-full overflow-hidden">
+                      <img
+                        src={car.image}
+                        alt={car.model}
+                        crossOrigin="anonymous"
+                        decoding="sync"
+                        loading="eager"
+                        className="absolute -right-[35%] -bottom-[0%] h-[95%] w-auto max-w-none object-contain"
+                      />
+
+                      {!exportMode && deleteReadySlot === index && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/35">
+                          <span className="text-[42px] font-black text-red-500">
+                            ✕
+                          </span>
                         </div>
                       )}
-                    </button>
-                  ))}
-                </div>
-              ))}
-            </div>
-
-            <div
-              className="absolute left-0 top-full w-full pt-[2.5%] font-black leading-none"
-              style={{ color: borderColor }}
-            >
-              {layoutRows.map((row, rowIndex) => (
-                <div key={`preview-name-row-${rowIndex}`} className="flex justify-center gap-x-[3%]">
-                  {row.map(({ car, realIndex }) => (
-                    <div
-                      key={`preview-name-${realIndex}`}
-                      className={`min-w-0 flex-1 truncate text-center ${
-                        exportMode ? "text-[7.8px]" : "text-[clamp(2px,0.55vw,3.5px)]"
-                      }`}
-                      style={{ maxWidth: `${100 / 3}%` }}
-                    >
-                      {car ? car.model : "Empty"}
                     </div>
-                  ))}
-                </div>
-              ))}
+                  ) : (
+                    <div className="flex h-full items-center justify-center text-[clamp(8px,2vw,14px)] font-black"
+                      style={{ color: borderColor + "66" }}>
+                      Empty
+                    </div>
+                  )}
+                </button>
+              );
+            })}
+            <div
+              className="absolute text-center"
+              style={{
+                color: borderColor,
+                top: "100%",
+                left: "0",
+                width: "100%",
+                marginTop: "1px",
+              }}
+            >
+              <div
+                className="grid grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1]"
+                style={{ color: borderColor }}
+              >
+                {displaySlots.map(({ car }, index) => (
+                  <div
+                    key={index}
+                    className={`min-w-0 whitespace-nowrap ${
+                      exportMode
+                        ? "text-[7.8px]"
+                        : "text-[clamp(2px,0.55vw,3.5px)]"
+                    } ${
+                      index % 3 === 0
+                        ? "text-left"
+                        : index % 3 === 1
+                        ? "text-center"
+                        : "text-right"
+                    }`}
+                  >
+                    {car ? car.model : "Empty"}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -1292,32 +1251,41 @@ export default function Dream9Page() {
     );
   }
 
-
   function OldExportDesign({
     exportMode = false,
-    title = `Dream ${carCount}`,
+    title = "Dream 9",
   }: {
     exportMode?: boolean;
     title?: string;
   }) {
     const exportGridColor = gridColor(shirtColor);
-    const isShareTitle = title.startsWith("My Dream");
-
     return (
       <div
         className={`relative w-full ${
           exportMode ? "h-full" : "aspect-[4494/5097]"
         } p-[6%]`}
-        style={{ color: exportGridColor, backgroundColor: "transparent" }}
+        style={{
+          color: exportGridColor,
+          backgroundColor: "transparent",
+        }}
       >
+        {exportMode && title === "Dream 9" && (
+          <>
+            <div className="absolute left-0 top-0 h-[1px] w-[1px] bg-white/5" />
+            <div className="absolute right-0 top-0 h-[1px] w-[1px] bg-white/5" />
+            <div className="absolute bottom-0 left-0 h-[1px] w-[1px] bg-white/5" />
+            <div className="absolute bottom-0 right-0 h-[1px] w-[1px] bg-white/5" />
+          </>
+        )}
         <div className="flex h-full flex-col">
-          <div className="relative text-center">
+          <div className="relative pb-[0%] text-center">
             <div
               className="text-[68px] leading-none"
               style={{
                 fontFamily: "Arial, Helvetica, sans-serif",
                 fontWeight: 700,
                 fontStyle: "italic",
+
                 transform: "skewX(-8deg)",
                 letterSpacing: "-0.04em",
                 color: exportGridColor,
@@ -1325,74 +1293,77 @@ export default function Dream9Page() {
             >
               {title}
             </div>
-
-            {isShareTitle && (
+            {title === "My Dream 9" && (
               <div
-                className="absolute right-3 whitespace-nowrap text-[12px] font-bold text-neutral-400/50"
-                style={{ top: "-18px" }}
+                className="absolute right-3 text-[12px] font-bold text-neutral-400/50 whitespace-nowrap"
+                style={{
+                  top: "-18px",
+                }}
               >
                 Build yours at carsceneapp.com
               </div>
             )}
           </div>
 
-          <div className="mx-auto mt-0 aspect-square w-[95%]">
-            <div
-              className="grid h-full w-full"
-              style={{ gridTemplateRows: `repeat(${layoutRows.length}, minmax(0, 1fr))` }}
-            >
-              {layoutRows.map((row, rowIndex) => (
-                <div key={`export-row-${rowIndex}`} className="flex min-h-0 justify-center">
-                  {row.map(({ car, realIndex }) => (
-                    <button
-                      key={`export-slot-${realIndex}`}
-                      type="button"
-                      className="aspect-square h-full overflow-hidden border p-0"
-                      style={{
-                        backgroundColor: isShareTitle
-                          ? shareBackgroundColor(shirtColor)
-                          : "transparent",
-                        borderColor: exportGridColor,
-                      }}
+          <div className="mx-auto grid w-[95%] grid-cols-3 gap-0">
+            {displaySlots.map(({ car, realIndex }, index) => {
+              const type = car ? classFromPrice(car.price) : "P";
+
+              return (
+                <button
+                  key={`export-slot-${realIndex}`}
+                  type="button"
+                  onClick={exportMode ? undefined : () => selectSlot(realIndex)}
+                  className="aspect-square overflow-hidden border p-0 transition"
+                  style={{
+                    backgroundColor: title === "My Dream 9"
+                      ? shareBackgroundColor(shirtColor)
+                      : "transparent",
+                    borderColor: exportGridColor,
+                  }}
+                >
+                  {car ? (
+                    <div className="relative h-full w-full overflow-hidden">
+                      <img
+                        src={car.image}
+                        alt={car.model}
+                        crossOrigin="anonymous"
+                        decoding="sync"
+                        loading="eager"
+                        className="absolute -right-[35%] -bottom-[0%] h-[95%] w-auto max-w-none object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className="flex h-full items-center justify-center text-[clamp(8px,2vw,14px)] font-black"
+                      style={{ color: exportGridColor + "66" }}
                     >
-                      {car ? (
-                        <div className="relative h-full w-full overflow-hidden">
-                          <img
-                            src={car.image}
-                            alt={car.model}
-                            crossOrigin="anonymous"
-                            decoding="sync"
-                            loading="eager"
-                            className="absolute -right-[35%] bottom-0 h-[95%] w-auto max-w-none object-contain"
-                          />
-                        </div>
-                      ) : (
-                        <div
-                          className="flex h-full items-center justify-center text-[12px] font-black"
-                          style={{ color: exportGridColor + "66" }}
-                        >
-                          Empty
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              ))}
-            </div>
+                      Empty
+                    </div>
+                  )}
+                </button>
+              );
+            })}
           </div>
 
-          <div className="mx-auto w-[95%] pt-[2.5%] font-black leading-[1.1]" style={{ color: exportGridColor }}>
-            {layoutRows.map((row, rowIndex) => (
-              <div key={`export-name-row-${rowIndex}`} className="flex justify-center gap-x-[3%]">
-                {row.map(({ car, realIndex }) => (
-                  <div
-                    key={`export-name-${realIndex}`}
-                    className="min-w-0 flex-1 truncate text-center text-[7.8px]"
-                    style={{ maxWidth: `${100 / 3}%` }}
-                  >
-                    {car ? car.model : "Empty"}
-                  </div>
-                ))}
+          <div className="mx-auto grid w-[95%] grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1.25]"
+            style={{ color: exportGridColor }}>
+            {displaySlots.map(({ car }, index) => (
+              <div
+                key={index}
+                className={`min-w-0 overflow-hidden whitespace-nowrap ${
+                  exportMode
+                    ? "text-[7.8px]"
+                    : "text-[clamp(4.2px,1.25vw,7.8px)] lg:text-[7.8px]"
+                } ${
+                  index % 3 === 0
+                    ? "text-left"
+                    : index % 3 === 1
+                    ? "text-center"
+                    : "text-right"
+                }`}
+              >
+                {car ? car.model : "Empty"}
               </div>
             ))}
           </div>
@@ -1400,7 +1371,6 @@ export default function Dream9Page() {
       </div>
     );
   }
-
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
@@ -1419,29 +1389,6 @@ export default function Dream9Page() {
         <p className="mt-3 text-sm font-bold text-white/55">
           Tap any car to replace it.
         </p>
-
-        <div className="mt-4">
-          <div className="mb-2 flex items-center justify-between text-sm font-black">
-            <span>Cars on your shirt</span>
-            <span className="text-red-500">{carCount}</span>
-          </div>
-
-          <input
-            type="range"
-            min="1"
-            max="9"
-            step="1"
-            value={carCount}
-            onChange={(event) => changeCarCount(Number(event.target.value))}
-            className="w-full accent-red-600"
-            aria-label="Number of cars on shirt"
-          />
-
-          <div className="mt-1 flex justify-between text-[10px] font-bold text-white/35">
-            <span>1</span>
-            <span>9</span>
-          </div>
-        </div>
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
@@ -1519,7 +1466,7 @@ export default function Dream9Page() {
             }`}
           >
             {!allSlotsFilled
-              ? `Fill all ${carCount} slots below`
+              ? "Fill all 9 slots below"
               : isMakingDesign
               ? "Preparing Checkout..."
               : `Checkout • ${shirtSize} • ${
@@ -1879,11 +1826,11 @@ export default function Dream9Page() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
           <div className="w-full max-w-[420px] border border-white/10 bg-[#111] p-5 text-center shadow-2xl">
             <h3 className="text-xl font-black text-white">
-              Replace all {carCount} cars?
+              Replace all 9 cars?
             </h3>
 
             <p className="mt-2 text-sm font-bold text-white/60">
-              This will replace your current Dream {carCount} with random cars.
+              This will replace your current Dream 9 with random cars.
             </p>
 
             <div className="mt-5 grid grid-cols-2 gap-2">
@@ -1914,11 +1861,11 @@ export default function Dream9Page() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
           <div className="w-full max-w-[420px] border border-white/10 bg-[#111] p-5 text-center shadow-2xl">
             <h3 className="text-xl font-black text-white">
-              Clear your Dream {carCount}?
+              Clear your Dream 9?
             </h3>
 
             <p className="mt-2 text-sm font-bold text-white/60">
-              This will remove every car from your current Dream {carCount}.
+              This will remove every car from your current Dream 9.
             </p>
 
             <div className="mt-5 grid grid-cols-2 gap-2">
@@ -1993,7 +1940,7 @@ export default function Dream9Page() {
             height: "612.45px",
           }}
         >
-          <OldExportDesign exportMode title={`Dream ${carCount}`} />
+          <OldExportDesign exportMode title="Dream 9" />
         </div>
 
         <div
@@ -2003,7 +1950,7 @@ export default function Dream9Page() {
             height: "612.45px",
           }}
         >
-          <OldExportDesign exportMode title={`My Dream ${carCount}`} />
+          <OldExportDesign exportMode title="My Dream 9" />
         </div>
       </div>
     </main>
