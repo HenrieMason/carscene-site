@@ -330,10 +330,10 @@ async function createPrintifyOrder({
                     images: [
                       {
                         id: logoImageData!.id,
-                        x: 0.22,
-                        y: 0.08,
-                        scale: 0.21,
-                        angle: 0,
+                        x: 0.12, //.22
+                        y: 0.06, //.08
+                        scale: 0.21, //.21
+                        angle: 0, //0
                       },
                     ],
                   },
