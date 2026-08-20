@@ -283,7 +283,7 @@ const CAR_SEARCH_ALIASES: Record<string, string[]> = {
   "RX-7": ["rx7"],
 };
 
-export default function Dream9Page() {
+export default function Dream6Page() {
   const SITE_PAUSED = false;
 
   if (SITE_PAUSED) {
@@ -291,7 +291,7 @@ export default function Dream9Page() {
       <main className="flex min-h-screen items-center justify-center bg-black px-6 text-center text-white">
         <div className="max-w-md">
           <h1 className="text-4xl font-black text-red-600">
-            Dream 9 is temporarily paused
+            Dream 6 is temporarily paused
           </h1>
 
           <p className="mt-4 text-sm font-bold text-white/60">
@@ -311,7 +311,6 @@ export default function Dream9Page() {
   const searchSectionRef = useRef<HTMLDivElement>(null);
   const searchResultsScrollRef = useRef<HTMLDivElement>(null);
   const instructionsRef = useRef<HTMLDivElement>(null);
-  const [showFront, setShowFront] = useState(false);
   const [previewStep, setPreviewStep] = useState(0);
 
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
@@ -401,24 +400,24 @@ export default function Dream9Page() {
   const [searchView, setSearchView] = useState<"featured" | "brands">("featured");
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
   const [featuredSeed, setFeaturedSeed] = useState(0);
-  const [hasCustomizedDream9, setHasCustomizedDream9] = useState(false);
+  const [hasCustomizedDream6, setHasCustomizedDream6] = useState(false);
   const [showShuffleConfirm, setShowShuffleConfirm] = useState(false);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
-  function getRandomDream9() {
+  function getRandomDream6() {
     return [...allCars]
       .sort(() => Math.random() - 0.5)
-      .slice(0, 9);
+      .slice(0, 6);
   }
   const [slots, setSlots] = useState<(Car | null)[]>(
-    Array(9).fill(null)
+    Array(6).fill(null)
   );
 
   const hasInitializedSlots = useRef(false);
 
-  function getRandomFeaturedDream9() {
+  function getRandomFeaturedDream6() {
     return [...featuredCars]
       .sort(() => Math.random() - 0.5)
-      .slice(0, 9)
+      .slice(0, 6)
       .map((name) => allCars.find((car) => car.model === name) ?? null);
   }
 
@@ -450,7 +449,7 @@ export default function Dream9Page() {
       console.warn(`Missing cars for ${category}:`, missingModels);
     }
 
-    const fallbackCars = getRandomDream9().filter(
+    const fallbackCars = getRandomDream6().filter(
       (car) =>
         !selectedCars.some((selectedCar) => selectedCar?.id === car.id)
     );
@@ -463,7 +462,7 @@ export default function Dream9Page() {
       )
     );
 
-    setHasCustomizedDream9(false);
+    setHasCustomizedDream6(false);
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
@@ -473,7 +472,7 @@ export default function Dream9Page() {
     }
 
     function skipEnthusiastPopup() {
-      setSlots(getRandomFeaturedDream9());
+      setSlots(getRandomFeaturedDream6());
       setShowIntroPopup(false);
     }
 
@@ -481,8 +480,6 @@ export default function Dream9Page() {
       if (hasInitializedSlots.current) return;
 
       hasInitializedSlots.current = true;
-
-      setSlots(getRandomDream9());
       setShowIntroPopup(false);
     }, []);
 
@@ -663,69 +660,69 @@ export default function Dream9Page() {
     );
   }, [featuredSeed]);
 
-  function randomizeDream9() {
-    setSlots(getRandomDream9());
+  function randomizeDream6() {
+    setSlots(getRandomDream6());
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
     setDeleteReadySlot(null);
-    setHasCustomizedDream9(false);
+    setHasCustomizedDream6(false);
     setPreparedDesignBlob(null);
     setPrepareDesignPromise(null);
   }
 
-  function emptyDream9() {
-    setSlots(Array(9).fill(null));
+  function emptyDream6() {
+    setSlots(Array(6).fill(null));
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
     setDeleteReadySlot(null);
-    setHasCustomizedDream9(false);
+    setHasCustomizedDream6(false);
     setPreparedDesignBlob(null);
     setPrepareDesignPromise(null);
   }
 
-  function shuffleDream9() {
-    if (hasCustomizedDream9) {
+  function shuffleDream6() {
+    if (hasCustomizedDream6) {
       setShowShuffleConfirm(true);
       return;
     }
 
-    randomizeDream9();
+    randomizeDream6();
   }
 
-  function clearDream9() {
-    if (hasCustomizedDream9) {
+  function clearDream6() {
+    if (hasCustomizedDream6) {
       setShowClearConfirm(true);
       return;
     }
 
-    emptyDream9();
+    emptyDream6();
   }
   function addCarToTargetSlot(car: Car) {
-    setHasCustomizedDream9(true);
+    setHasCustomizedDream6(true);
     setPreparedDesignBlob(null);
     setPrepareDesignPromise(null);
 
     setSlots((current) => {
-      const next = current.slice(0, 9);
+      const next = current.slice(0, 6);
 
-      while (next.length < 9) {
+      while (next.length < 6) {
         next.push(null);
       }
 
       const indexToReplace =
-        selectedSlot !== null && selectedSlot >= 0 && selectedSlot < 9
+        selectedSlot !== null && selectedSlot >= 0 && selectedSlot < 6
           ? selectedSlot
           : next.findIndex((slot) => slot === null);
 
       if (indexToReplace === -1) {
-        next[8] = car;
+        next[5] = car;
       } else {
         next[indexToReplace] = car;
       }
 
-      return next.slice(0, 9);
+      return next.slice(0, 6);
     });
 
     setSelectedSlot(null);
@@ -786,8 +783,8 @@ export default function Dream9Page() {
         },
         body: JSON.stringify({
           email,
-          source: "Dream 9",
-          coupon: "DREAM9",
+          source: "Dream 6",
+          coupon: "DREAM6",
         }),
       });
 
@@ -821,27 +818,12 @@ export default function Dream9Page() {
 
   function cyclePreview() {
     setHasUsedEye(true);
-    setPreviewStep((currentStep) => {
-      const nextStep = (currentStep + 1) % 3;
-
-      if (nextStep === 0) {
-        // Zoomed in on the back
-        setShowFront(false);
-      } else if (nextStep === 1) {
-        // Zoomed out on the back
-        setShowFront(false);
-      } else {
-        // Zoomed out on the front
-        setShowFront(true);
-      }
-
-      return nextStep;
-    });
+    setPreviewStep((currentStep) => (currentStep === 0 ? 1 : 0));
   }
 
-  async function shareDream9() {
+  async function shareDream6() {
     if (!shareExportRef.current || !allSlotsFilled) {
-      alert("Fill all 9 slots before sharing.");
+      alert("Fill all 6 slots before sharing.");
       return;
     }
 
@@ -861,7 +843,7 @@ export default function Dream9Page() {
 
       const blob = await (await fetch(dataUrl)).blob();
 
-      const file = new File([blob], "dream9-carscene.png", {
+      const file = new File([blob], "dream6-carscene.png", {
         type: "image/png",
       });
 
@@ -871,19 +853,19 @@ export default function Dream9Page() {
         navigator.share
       ) {
         await navigator.share({
-          title: "My Dream 9 Garage",
-          text: "Build your own Dream 9 at carsceneapp.com",
+          title: "My Dream 6 Garage",
+          text: "Build your own Dream 6 at carsceneapp.com",
           files: [file],
         });
       } else {
         const link = document.createElement("a");
         link.href = dataUrl;
-        link.download = "dream9-carscene.png";
+        link.download = "dream6-carscene.png";
         link.click();
       }
     } catch (error) {
       console.error("SHARE DREAM 9 FAILED:", error);
-      alert("Could not share your Dream 9. Try again.");
+      alert("Could not share your Dream 6. Try again.");
     }
   }
   
@@ -911,7 +893,7 @@ export default function Dream9Page() {
 
   async function uploadDesignBlob(blob: Blob) {
     const formData = new FormData();
-    const filename = `dream9-${Date.now()}.png`;
+    const filename = `dream6-${Date.now()}.png`;
 
     formData.append("file", blob, filename);
     formData.append("upload_preset", "dream9_unsigned");
@@ -989,7 +971,7 @@ export default function Dream9Page() {
         window.fbq("track", "InitiateCheckout", {
           value: 34.99,
           currency: "USD",
-          content_name: "Dream 9 Shirt",
+          content_name: "Dream 6 Shirt",
           content_type: "product",
           content_ids: [variantId],
           num_items: 1,
@@ -999,10 +981,10 @@ export default function Dream9Page() {
       const checkoutUrl =
         `${SHOPIFY_STORE_URL}/cart/add?id=${variantId}` +
         `&quantity=1` +
-        `&properties[Dream 9 Design URL]=${encodeURIComponent(designUrl)}` +
-        `&properties[Dream 9 Product]=${encodeURIComponent("Shirt")}` +
-        `&properties[Dream 9 Size]=${encodeURIComponent(size)}` +
-        `&properties[Dream 9 Color]=${encodeURIComponent(shirtColor)}` +
+        `&properties[Dream 6 Design URL]=${encodeURIComponent(designUrl)}` +
+        `&properties[Dream 6 Product]=${encodeURIComponent("Shirt")}` +
+        `&properties[Dream 6 Size]=${encodeURIComponent(size)}` +
+        `&properties[Dream 6 Color]=${encodeURIComponent(shirtColor)}` +
         `&return_to=/checkout`;
 
       window.location.href = checkoutUrl;
@@ -1049,13 +1031,11 @@ export default function Dream9Page() {
 
               // Show the full shirt
               setPreviewStep(1);
-              setShowFront(false);
 
               // Zoom back in 2 seconds after the LAST color selection
               colorZoomTimeoutRef.current = setTimeout(() => {
                 setPreviewStep(0);
-                setShowFront(false);
-                colorZoomTimeoutRef.current = null;
+                  colorZoomTimeoutRef.current = null;
               }, 5000);
             }}
             title={color}
@@ -1106,7 +1086,7 @@ export default function Dream9Page() {
   }
 
   const displaySlots = useMemo(() => {
-    const safeSlots = slots.slice(0, 9);
+    const safeSlots = slots.slice(0, 6);
 
     while (safeSlots.length < 9) {
       safeSlots.push(null);
@@ -1124,10 +1104,10 @@ export default function Dream9Page() {
       .map((car, realIndex) => ({ car, realIndex }))
       .filter((slot) => slot.car === null);
 
-    return [...filledSlots, ...emptySlots].slice(0, 9);
+    return [...filledSlots, ...emptySlots].slice(0, 6);
   }, [slots]);
 
-  function renderDream9Design(exportMode = false) {
+  function renderDream6Design(exportMode = false) {
     const borderColor = gridColor(shirtColor);
 
     return (
@@ -1137,8 +1117,8 @@ export default function Dream9Page() {
         }`}
       >
         <img
-          src={SHIRT_COLORS[shirtColor].back}
-          alt="Dream 9 Shirt"
+          src={SHIRT_COLORS[shirtColor].front}
+          alt="Front of Dream 6 shirt"
           crossOrigin="anonymous"
           className="absolute inset-0 h-full w-full scale-150 object-contain"
         />
@@ -1157,7 +1137,7 @@ export default function Dream9Page() {
             letterSpacing: "-0.04em",
           }}
         >
-          Dream 9
+          Dream 6
         </div>
 
         <div
@@ -1251,9 +1231,9 @@ export default function Dream9Page() {
     );
   }
 
-  function OldExportDesign({
+  function Dream6ExportDesign({
     exportMode = false,
-    title = "Dream 9",
+    title = "Dream 6",
   }: {
     exportMode?: boolean;
     title?: string;
@@ -1269,7 +1249,7 @@ export default function Dream9Page() {
           backgroundColor: "transparent",
         }}
       >
-        {exportMode && title === "Dream 9" && (
+        {exportMode && title === "Dream 6" && (
           <>
             <div className="absolute left-0 top-0 h-[1px] w-[1px] bg-white/5" />
             <div className="absolute right-0 top-0 h-[1px] w-[1px] bg-white/5" />
@@ -1293,7 +1273,7 @@ export default function Dream9Page() {
             >
               {title}
             </div>
-            {title === "My Dream 9" && (
+            {title === "My Dream 6" && (
               <div
                 className="absolute right-3 text-[12px] font-bold text-neutral-400/50 whitespace-nowrap"
                 style={{
@@ -1316,7 +1296,7 @@ export default function Dream9Page() {
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
                   className="aspect-square overflow-hidden border p-0 transition"
                   style={{
-                    backgroundColor: title === "My Dream 9"
+                    backgroundColor: title === "My Dream 6"
                       ? shareBackgroundColor(shirtColor)
                       : "transparent",
                     borderColor: exportGridColor,
@@ -1374,8 +1354,8 @@ export default function Dream9Page() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
-      <div className="mx-auto grid w-full max-w-7xl gap-0 lg:grid-cols-[420px_1fr] lg:gap-8">
-        <section className="order-1 min-w-0 overflow-hidden lg:order-2">
+      <div className="mx-auto grid w-full max-w-[700px] gap-4">
+        <section className="order-2 min-w-0 overflow-hidden">
         <div
           ref={instructionsRef}
           className="mx-auto mb-4 w-full max-w-[540px] text-center"
@@ -1398,17 +1378,7 @@ export default function Dream9Page() {
                 previewStep === 0 ? "scale-[2.1]" : "scale-100"
               }`}
             >
-              {showFront ? (
-                <div className="relative aspect-[4494/5097] w-full overflow-hidden">
-                  <img
-                    src={SHIRT_COLORS[shirtColor].front}
-                    alt="Front of Dream 9 shirt"
-                    className="absolute inset-0 h-full w-full scale-150 object-contain"
-                  />
-                </div>
-              ) : (
-                renderDream9Design(false)
-              )}
+              {renderDream6Design(false)}
             </div>
 
             <button
@@ -1417,7 +1387,7 @@ export default function Dream9Page() {
               className={`absolute right-3 top-1 z-20 flex h-11 w-11 items-center justify-center rounded-full text-xl text-white shadow-lg transition-colors duration-500 active:scale-95 ${
                 pulseEye ? "bg-red-600" : "bg-gray-400 hover:bg-gray-600"
               }`}
-              aria-label="Inspect Dream 9 shirt"
+              aria-label="Inspect Dream 6 shirt"
               title="Inspect shirt"
             >
               👁
@@ -1428,21 +1398,29 @@ export default function Dream9Page() {
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-4">
           <div className="grid grid-cols-3 gap-2">
             <button
-              onClick={shuffleDream9}
-              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
-            >
-              Shuffle
-            </button>
-
-            <button
-              onClick={clearDream9}
+              onClick={clearDream6}
               className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
             >
               Clear
             </button>
 
             <button
-              onClick={shareDream9}
+              onClick={() => {
+                const nextOpenSlot = slots.findIndex((slot) => slot === null);
+                setSelectedSlot(nextOpenSlot === -1 ? 0 : nextOpenSlot);
+                searchSectionRef.current?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+                setTimeout(() => searchInputRef.current?.focus(), 400);
+              }}
+              className="bg-red-600 px-5 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
+            >
+              Add Car
+            </button>
+
+            <button
+              onClick={shareDream6}
               className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
             >
               Share
@@ -1466,7 +1444,7 @@ export default function Dream9Page() {
             }`}
           >
             {!allSlotsFilled
-              ? "Fill all 9 slots below"
+              ? "Fill all 6 slots"
               : isMakingDesign
               ? "Preparing Checkout..."
               : `Checkout • ${shirtSize} • ${
@@ -1532,12 +1510,12 @@ export default function Dream9Page() {
 
             <div className="relative z-10 flex h-full flex-1 flex-col justify-end">
               <h3 className="text-lg font-black">
-                Get 10% Off Your Dream 9 Shirt
+                Get 10% Off Your Dream 6 Shirt
               </h3>
 
               <p className="mt-1 text-sm text-white">
                 {emailSubmitted
-                  ? "Success! Use code DREAM9 at checkout."
+                  ? "Success! Use code DREAM6 at checkout."
                   : "Enter your email and we'll display a coupon code."}
               </p>
 
@@ -1570,18 +1548,18 @@ export default function Dream9Page() {
 
         </section>
 
-        <section className="order-2 min-w-0 lg:order-1">
+        <section className="order-1 min-w-0">
           <div
             ref={searchSectionRef}
             className="min-w-0 overflow-hidden border border-white/10 bg-white/[0.04] p-4"
           >
             <div className="mb-4">
               <h1 className="text-3xl font-black tracking-tight">
-                Search 1,842 Cars
+                Select your favorite cars
               </h1>
 
               <p className="mt-2 text-sm text-white/50">
-                Choose a featured car, search for a car, or browse by brand.
+                Search 1,842 cars or browse by brand
               </p>
             </div>
 
@@ -1822,50 +1800,15 @@ export default function Dream9Page() {
         </section>
       </div>
 
-      {showShuffleConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
-          <div className="w-full max-w-[420px] border border-white/10 bg-[#111] p-5 text-center shadow-2xl">
-            <h3 className="text-xl font-black text-white">
-              Replace all 9 cars?
-            </h3>
-
-            <p className="mt-2 text-sm font-bold text-white/60">
-              This will replace your current Dream 9 with random cars.
-            </p>
-
-            <div className="mt-5 grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => setShowShuffleConfirm(false)}
-                className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
-              >
-                Cancel
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setShowShuffleConfirm(false);
-                  randomizeDream9();
-                }}
-                className="bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
-              >
-                Replace
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {showClearConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
           <div className="w-full max-w-[420px] border border-white/10 bg-[#111] p-5 text-center shadow-2xl">
             <h3 className="text-xl font-black text-white">
-              Clear your Dream 9?
+              Clear your Dream 6?
             </h3>
 
             <p className="mt-2 text-sm font-bold text-white/60">
-              This will remove every car from your current Dream 9.
+              This will remove every car from your current Dream 6.
             </p>
 
             <div className="mt-5 grid grid-cols-2 gap-2">
@@ -1881,7 +1824,7 @@ export default function Dream9Page() {
                 type="button"
                 onClick={() => {
                   setShowClearConfirm(false);
-                  emptyDream9();
+                  emptyDream6();
                 }}
                 className="bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
               >
@@ -1892,46 +1835,6 @@ export default function Dream9Page() {
         </div>
       )}
 
-      {showIntroPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 px-4 py-6">
-          <div className="flex max-h-[90vh] w-full max-w-2xl flex-col border border-white/10 bg-[#111] p-5 shadow-2xl sm:p-6">
-            <div className="text-center">
-              <h2 className="whitespace-nowrap text-[28px] font-black leading-tight text-white sm:text-4xl">
-                  What cars are you into?
-              </h2>
-
-              <p className="mt-2 whitespace-nowrap text-sm font-bold text-white/55">
-                Pick a style to begin your Dream 9.
-              </p>
-            </div>
-
-            <div className="mt-5 grid min-h-0 flex-1 grid-cols-2 gap-2 overflow-y-auto pr-1">
-              {(
-                Object.keys(
-                  ENTHUSIAST_CATEGORIES
-                ) as EnthusiastCategory[]
-              ).map((category) => (
-                <button
-                  key={category}
-                  type="button"
-                  onClick={() => chooseEnthusiastCategory(category)}
-                  className="border border-white/10 bg-white/[0.06] px-4 py-4 text-left text-sm font-black text-white transition hover:border-red-600 hover:bg-red-600 active:scale-[0.98]"
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-
-            <button
-              type="button"
-              onClick={skipEnthusiastPopup}
-              className="mt-3 w-full bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.98]"
-            >
-              Skip — Surprise Me
-            </button>
-          </div>
-        </div>
-      )}
       <div className="pointer-events-none fixed left-0 top-0 opacity-0">
         <div
           ref={exportRef}
@@ -1940,7 +1843,7 @@ export default function Dream9Page() {
             height: "612.45px",
           }}
         >
-          <OldExportDesign exportMode title="Dream 9" />
+          <Dream6ExportDesign exportMode title="Dream 6" />
         </div>
 
         <div
@@ -1950,7 +1853,7 @@ export default function Dream9Page() {
             height: "612.45px",
           }}
         >
-          <OldExportDesign exportMode title="My Dream 9" />
+          <Dream6ExportDesign exportMode title="My Dream 6" />
         </div>
       </div>
     </main>
