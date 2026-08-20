@@ -284,6 +284,7 @@ const CAR_SEARCH_ALIASES: Record<string, string[]> = {
 };
 
 export default function Dream6Page() {
+  // DREAM6 FIXED: 6 slots, front preview, responsive 2-column desktop layout
   const SITE_PAUSED = false;
 
   if (SITE_PAUSED) {
@@ -1088,7 +1089,7 @@ export default function Dream6Page() {
   const displaySlots = useMemo(() => {
     const safeSlots = slots.slice(0, 6);
 
-    while (safeSlots.length < 9) {
+    while (safeSlots.length < 6) {
       safeSlots.push(null);
     }
 
@@ -1124,26 +1125,9 @@ export default function Dream6Page() {
         />
 
         <div
-          className="absolute text-center"
-          style={{
-            fontFamily: "Arial, Helvetica, sans-serif",
-            fontWeight: 700,
-            fontStyle: "italic",
-            color: borderColor,
-            top: "15.5%",
-            left: "50%",
-            transform: "translateX(-50%) skewX(-8deg)",
-            fontSize: "clamp(18px, 4vw, 33px)",
-            letterSpacing: "-0.04em",
-          }}
-        >
-          Dream 6
-        </div>
-
-        <div
           className="absolute"
           style={{
-            top: "22%",
+            top: "19%",
             left: "30%",
             width: "40%",
           }}
@@ -1192,38 +1176,14 @@ export default function Dream6Page() {
               );
             })}
             <div
-              className="absolute text-center"
-              style={{
-                color: borderColor,
-                top: "100%",
-                left: "0",
-                width: "100%",
-                marginTop: "1px",
-              }}
+              className="absolute left-0 top-full flex w-full justify-center pt-[4%]"
             >
-              <div
-                className="grid grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1]"
-                style={{ color: borderColor }}
-              >
-                {displaySlots.map(({ car }, index) => (
-                  <div
-                    key={index}
-                    className={`min-w-0 whitespace-nowrap ${
-                      exportMode
-                        ? "text-[7.8px]"
-                        : "text-[clamp(2px,0.55vw,3.5px)]"
-                    } ${
-                      index % 3 === 0
-                        ? "text-left"
-                        : index % 3 === 1
-                        ? "text-center"
-                        : "text-right"
-                    }`}
-                  >
-                    {car ? car.model : "Empty"}
-                  </div>
-                ))}
-              </div>
+              <img
+                src="/carscene-logo.webp"
+                alt="CarScene"
+                crossOrigin="anonymous"
+                className="h-auto w-[42%] object-contain"
+              />
             </div>
           </div>
         </div>
@@ -1258,33 +1218,6 @@ export default function Dream6Page() {
           </>
         )}
         <div className="flex h-full flex-col">
-          <div className="relative pb-[0%] text-center">
-            <div
-              className="text-[68px] leading-none"
-              style={{
-                fontFamily: "Arial, Helvetica, sans-serif",
-                fontWeight: 700,
-                fontStyle: "italic",
-
-                transform: "skewX(-8deg)",
-                letterSpacing: "-0.04em",
-                color: exportGridColor,
-              }}
-            >
-              {title}
-            </div>
-            {title === "My Dream 6" && (
-              <div
-                className="absolute right-3 text-[12px] font-bold text-neutral-400/50 whitespace-nowrap"
-                style={{
-                  top: "-18px",
-                }}
-              >
-                Build yours at carsceneapp.com
-              </div>
-            )}
-          </div>
-
           <div className="mx-auto grid w-[95%] grid-cols-3 gap-0">
             {displaySlots.map(({ car, realIndex }, index) => {
               const type = car ? classFromPrice(car.price) : "P";
@@ -1326,26 +1259,13 @@ export default function Dream6Page() {
             })}
           </div>
 
-          <div className="mx-auto grid w-[95%] grid-cols-3 gap-x-[3%] gap-y-[5px] pt-[2.5%] font-black leading-[1.25]"
-            style={{ color: exportGridColor }}>
-            {displaySlots.map(({ car }, index) => (
-              <div
-                key={index}
-                className={`min-w-0 overflow-hidden whitespace-nowrap ${
-                  exportMode
-                    ? "text-[7.8px]"
-                    : "text-[clamp(4.2px,1.25vw,7.8px)] lg:text-[7.8px]"
-                } ${
-                  index % 3 === 0
-                    ? "text-left"
-                    : index % 3 === 1
-                    ? "text-center"
-                    : "text-right"
-                }`}
-              >
-                {car ? car.model : "Empty"}
-              </div>
-            ))}
+          <div className="flex w-full justify-center pt-[4%]">
+            <img
+              src="/carscene-logo.webp"
+              alt="CarScene"
+              crossOrigin="anonymous"
+              className="h-auto w-[38%] object-contain"
+            />
           </div>
         </div>
       </div>
@@ -1354,8 +1274,8 @@ export default function Dream6Page() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
-      <div className="mx-auto grid w-full max-w-[700px] gap-4">
-        <section className="order-2 min-w-0 overflow-hidden">
+      <div className="mx-auto grid w-full max-w-7xl gap-0 md:grid-cols-[420px_minmax(0,1fr)] md:gap-8">
+        <section className="order-2 min-w-0 overflow-hidden md:order-2">
         <div
           ref={instructionsRef}
           className="mx-auto mb-4 w-full max-w-[540px] text-center"
@@ -1544,11 +1464,42 @@ export default function Dream6Page() {
           <div className="mt-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
             100+ Orders • Opening Day: July 6, 2026
           </div>
+
+          {/* APP DOWNLOAD */}
+          <div className="mt-4 border border-white/10 bg-white/[0.04] p-4">
+            <h3 className="text-lg font-black">
+              Like cars? Download the app.
+            </h3>
+
+            <p className="mt-1 text-sm text-white/60">
+              Build your dream garage and go car spotting.
+            </p>
+
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <a
+                href="https://apps.apple.com/us/app/carscene-dream-garage/id6760978493"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/10 px-4 py-3 text-center text-sm font-black text-white transition hover:bg-white/15"
+              >
+                iPhone
+              </a>
+
+              <a
+                href="https://play.google.com/store/apps/details?id=com.carscene.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/10 px-4 py-3 text-center text-sm font-black text-white transition hover:bg-white/15"
+              >
+                Android
+              </a>
+            </div>
+          </div>
         </div>
 
         </section>
 
-        <section className="order-1 min-w-0">
+        <section className="order-1 min-w-0 md:order-1">
           <div
             ref={searchSectionRef}
             className="min-w-0 overflow-hidden border border-white/10 bg-white/[0.04] p-4"
@@ -1767,36 +1718,6 @@ export default function Dream6Page() {
              </div>
           </div>
 
-          {/* APP DOWNLOAD */}
-          <div className="mt-4 border border-white/10 bg-white/[0.04] p-4">
-            <h3 className="text-lg font-black">
-              Like cars? Download the app.
-            </h3>
-
-            <p className="mt-1 text-sm text-white/60">
-              Build your dream garage and go car spotting.
-            </p>
-
-            <div className="mt-3 grid grid-cols-2 gap-2">
-              <a
-                href="https://apps.apple.com/us/app/carscene-dream-garage/id6760978493"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white/10 px-4 py-3 text-center text-sm font-black text-white transition hover:bg-white/15"
-              >
-                iPhone
-              </a>
-
-              <a
-                href="https://play.google.com/store/apps/details?id=com.carscene.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white/10 px-4 py-3 text-center text-sm font-black text-white transition hover:bg-white/15"
-              >
-                Android
-              </a>
-            </div>
-          </div>
         </section>
       </div>
 
