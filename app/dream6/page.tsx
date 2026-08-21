@@ -1221,21 +1221,19 @@ export default function Dream6Page() {
           className="absolute"
           style={{
             top: "25%",
-            left: "30%",
-            width: "40%",
+            left: "2.5%",
+            width: "95%",
           }}
         >
-          {/* CarScene logo — exact same placement as preview */}
           <div className="absolute bottom-full left-0 flex w-full justify-center pb-[1%]">
             <img
               src="/carscene-logo.webp"
               alt="CarScene"
               crossOrigin="anonymous"
-              className="h-auto w-[100%] object-contain"
+              className="h-auto w-[42%] object-contain"
             />
           </div>
 
-          {/* Dream 6 grid — exact same placement as preview */}
           <div className="grid grid-cols-3 gap-0">
             {displaySlots.map(({ car, realIndex }) => {
               return (
