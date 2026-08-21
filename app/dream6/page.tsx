@@ -1220,7 +1220,7 @@ export default function Dream6Page() {
         <div
           className="absolute"
           style={{
-            top: "25%",
+            top: "20%",
             left: "2.5%",
             width: "95%",
           }}
@@ -1230,7 +1230,7 @@ export default function Dream6Page() {
               src="/carscene-logo.webp"
               alt="CarScene"
               crossOrigin="anonymous"
-              className="h-auto w-[42%] object-contain"
+              className="h-auto w-full object-contain"
             />
           </div>
 
