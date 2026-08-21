@@ -1188,7 +1188,7 @@ export default function Dream9Page() {
             })}
           </div>
             <img
-              src="/Distressed.png"
+              src="/Distressed.webp"
               alt=""
               aria-hidden="true"
               crossOrigin="anonymous"
@@ -1284,7 +1284,7 @@ export default function Dream9Page() {
             })}
           </div>
             <img
-              src="/Distressed.png"
+              src="/Distressed.webp"
               alt=""
               aria-hidden="true"
               crossOrigin="anonymous"
