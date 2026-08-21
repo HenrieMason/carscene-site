@@ -883,7 +883,7 @@ export default function Dream9Page() {
 
     const dataUrl = await toPng(node, {
       cacheBust: true,
-      pixelRatio: 8.3222222222,
+      pixelRatio: 7,
       backgroundColor: "transparent",
       imagePlaceholder:
         "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
