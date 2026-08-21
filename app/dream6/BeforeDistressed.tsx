@@ -1142,9 +1142,8 @@ export default function Dream9Page() {
             />
           </div>
 
-          <div className="relative">
-            <div className="grid grid-cols-3 gap-0">
-              {displaySlots.map(({ car, realIndex }, index) => {
+          <div className="grid grid-cols-3 gap-0">
+            {displaySlots.map(({ car, realIndex }, index) => {
               const type = car ? classFromPrice(car.price) : "P";
 
               return (
@@ -1186,14 +1185,6 @@ export default function Dream9Page() {
                 </button>
               );
             })}
-          </div>
-            <img
-              src="/Distressed.png"
-              alt=""
-              aria-hidden="true"
-              crossOrigin="anonymous"
-              className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[105%] w-[105%] max-w-none -translate-x-1/2 -translate-y-1/2 object-fill"
-            />
           </div>
         </div>
       </div>
@@ -1243,9 +1234,8 @@ export default function Dream9Page() {
             />
           </div>
 
-          <div className="relative">
-            <div className="grid grid-cols-3 gap-0">
-              {displaySlots.map(({ car, realIndex }) => {
+          <div className="grid grid-cols-3 gap-0">
+            {displaySlots.map(({ car, realIndex }) => {
               return (
                 <button
                   key={`export-slot-${realIndex}`}
@@ -1282,14 +1272,6 @@ export default function Dream9Page() {
                 </button>
               );
             })}
-          </div>
-            <img
-              src="/Distressed.png"
-              alt=""
-              aria-hidden="true"
-              crossOrigin="anonymous"
-              className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[105%] w-[105%] max-w-none -translate-x-1/2 -translate-y-1/2 object-fill"
-            />
           </div>
         </div>
       </div>
