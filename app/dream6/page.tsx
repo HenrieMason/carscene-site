@@ -348,39 +348,39 @@ export default function Dream6Page() {
 
   const SHIRT_VARIANT_IDS: Record<ShirtColor, Partial<Record<ShirtSize, string>>> = {
     White: {
-      S: "53631942623539",
-      M: "53558192668979",
-      L: "53558192701747",
-      XL: "53558192734515",
-      "2XL": "53558192767283",
+      S: "53881600868659",
+      M: "53881600901427",
+      L: "53881600934195",
+      XL: "53881600966963",
+      "2XL": "53881600999731",
     },
     Black: {
-      S: "53631955173683",
-      M: "53631955206451",
-      L: "53631955239219",
-      XL: "53631955271987",
-      "2XL": "53631955304755",
+      S: "53881601360179",
+      M: "53881601392947",
+      L: "53881601425715",
+      XL: "53881601458483",
+      "2XL": "53881601491251",
     },
     "Blue Spruce": {
-      S: "53631963201843",
-      M: "53631963234611",
-      L: "53631963267379",
-      XL: "53631963300147",
-      "2XL": "53631963332915",
+      S: "53881601753395",
+      M: "53881601786163",
+      L: "53881601818931",
+      XL: "53881601851699",
+      "2XL": "53881601884467",
     },
     "True Navy": {
-      S: "53631969329459",
-      M: "53631969362227",
-      L: "53631969394995",
-      XL: "53631969427763",
-      "2XL": "53631969460531",
+      S: "53881602375987",
+      M: "53881602408755",
+      L: "53881602441523",
+      XL: "53881602474291",
+      "2XL": "53881602507059",
     },
     Orchid: {
-      S: "53631977062707",
-      M: "53631977095475",
-      L: "53638299910451",
-      XL: "53631977161011",
-      "2XL": "53631977193779",
+      S: "53881602736435",
+      M: "53881602769203",
+      L: "53881602801971",
+      XL: "53881602834739",
+      "2XL": "53881602867507",
     },
   };
 
@@ -982,6 +982,7 @@ export default function Dream6Page() {
       const checkoutUrl =
         `${SHOPIFY_STORE_URL}/cart/add?id=${variantId}` +
         `&quantity=1` +
+        `&properties[Design Type]=${encodeURIComponent("Dream 6")}` +
         `&properties[Dream 6 Design URL]=${encodeURIComponent(designUrl)}` +
         `&properties[Dream 6 Product]=${encodeURIComponent("Shirt")}` +
         `&properties[Dream 6 Size]=${encodeURIComponent(size)}` +
@@ -1127,11 +1128,20 @@ export default function Dream6Page() {
         <div
           className="absolute"
           style={{
-            top: "19%",
+            top: "25%",
             left: "30%",
             width: "40%",
           }}
         >
+          <div className="absolute bottom-full left-0 flex w-full justify-center pb-[1%]">
+            <img
+              src="/carscene-logo.webp"
+              alt="CarScene"
+              crossOrigin="anonymous"
+              className="h-auto w-[100%] object-contain"
+            />
+          </div>
+
           <div className="grid grid-cols-3 gap-0">
             {displaySlots.map(({ car, realIndex }, index) => {
               const type = car ? classFromPrice(car.price) : "P";
@@ -1175,16 +1185,6 @@ export default function Dream6Page() {
                 </button>
               );
             })}
-            <div
-              className="absolute left-0 top-full flex w-full justify-center pt-[4%]"
-            >
-              <img
-                src="/carscene-logo.webp"
-                alt="CarScene"
-                crossOrigin="anonymous"
-                className="h-auto w-[42%] object-contain"
-              />
-            </div>
           </div>
         </div>
       </div>
@@ -1294,7 +1294,7 @@ export default function Dream6Page() {
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
           <div ref={posterRef} className="relative overflow-visible">
             <div
-              className={`origin-[50%_30%] transition-transform duration-300 ${
+              className={`origin-[50%_25%] transition-transform duration-300 ${
                 previewStep === 0 ? "scale-[2.1]" : "scale-100"
               }`}
             >
