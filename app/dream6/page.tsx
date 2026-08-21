@@ -1192,7 +1192,7 @@ export default function Dream9Page() {
               alt=""
               aria-hidden="true"
               crossOrigin="anonymous"
-              className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[105%] w-[105%] max-w-none -translate-x-1/2 -translate-y-1/2 object-fill"
+              className="pointer-events-none absolute left-1/2 top-[50.7%] z-20 h-[106%] w-[106%] max-w-none -translate-x-1/2 -translate-y-1/2 object-fill"
             />
           </div>
         </div>
@@ -1288,7 +1288,7 @@ export default function Dream9Page() {
               alt=""
               aria-hidden="true"
               crossOrigin="anonymous"
-              className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[105%] w-[105%] max-w-none -translate-x-1/2 -translate-y-1/2 object-fill"
+              className="pointer-events-none absolute left-1/2 top-[50.7%] z-20 h-[106%] w-[106%] max-w-none -translate-x-1/2 -translate-y-1/2 object-fill"
             />
           </div>
         </div>
