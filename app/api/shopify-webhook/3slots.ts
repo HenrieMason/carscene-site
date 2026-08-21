@@ -504,6 +504,47 @@ async function createPrintifyOrder({
    * No logo.
    */
 
+  let logoImageData: {
+    id: string;
+  } | null = null;
+
+  if (isShirt && !isDream6) {
+    const logoResponse = await fetch(
+      "https://api.printify.com/v1/uploads/images.json",
+      {
+        method: "POST",
+
+        headers: {
+          Authorization:
+            `Bearer ${process.env.PRINTIFY_API_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          file_name: "carscene-logo.png",
+
+          url:
+            CARSCENE_LOGO_URLS[
+              shirtColor
+            ] ||
+            CARSCENE_LOGO_URLS.White,
+        }),
+      }
+    );
+
+    logoImageData =
+      await logoResponse.json();
+
+    if (!logoResponse.ok) {
+      return {
+        ok: false,
+        step: "upload-logo",
+        status: logoResponse.status,
+        data: logoImageData,
+      };
+    }
+  }
+
   /*
    * ----------------------------------------------------
    * BUILD PRINTIFY PLACEHOLDERS
@@ -522,22 +563,65 @@ async function createPrintifyOrder({
    * Nothing
    */
 
-  if (isShirt) {
+  if (isShirt && isDream6) {
     placeholders = [
-        {
+      {
         position: "front",
+
         images: [
-            {
+          {
             id: imageData.id,
             x: 0.5,
             y: 0.36,
             scale: 0.82,
             angle: 0,
-            },
+          },
         ],
-        },
+      },
     ];
-    }
+  }
+
+  /*
+   * DREAM 9 SHIRT
+   *
+   * FRONT:
+   * CarScene logo
+   *
+   * BACK:
+   * Dream 9 custom graphic
+   */
+
+  else if (isShirt) {
+    placeholders = [
+      {
+        position: "front",
+
+        images: [
+          {
+            id: logoImageData!.id,
+            x: 0.78,
+            y: 0.05,
+            scale: 0.21,
+            angle: 0,
+          },
+        ],
+      },
+
+      {
+        position: "back",
+
+        images: [
+          {
+            id: imageData.id,
+            x: 0.5,
+            y: 0.36,
+            scale: 0.82,
+            angle: 0,
+          },
+        ],
+      },
+    ];
+  }
 
   /*
    * POSTER
@@ -742,7 +826,9 @@ async function createPrintifyOrder({
     uploaded_image_id:
       imageData.id,
 
-    uploaded_logo_id: null,
+    uploaded_logo_id:
+      logoImageData?.id ||
+      null,
 
     product_id:
       productData.id,
