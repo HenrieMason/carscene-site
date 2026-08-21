@@ -1217,11 +1217,27 @@ export default function Dream6Page() {
             <div className="absolute bottom-0 right-0 h-[1px] w-[1px] bg-white/5" />
           </>
         )}
-        <div className="flex h-full flex-col">
-          <div className="mx-auto grid w-[95%] grid-cols-3 gap-0">
-            {displaySlots.map(({ car, realIndex }, index) => {
-              const type = car ? classFromPrice(car.price) : "P";
+        <div
+          className="absolute"
+          style={{
+            top: "25%",
+            left: "30%",
+            width: "40%",
+          }}
+        >
+          {/* CarScene logo — exact same placement as preview */}
+          <div className="absolute bottom-full left-0 flex w-full justify-center pb-[1%]">
+            <img
+              src="/carscene-logo.webp"
+              alt="CarScene"
+              crossOrigin="anonymous"
+              className="h-auto w-[100%] object-contain"
+            />
+          </div>
 
+          {/* Dream 6 grid — exact same placement as preview */}
+          <div className="grid grid-cols-3 gap-0">
+            {displaySlots.map(({ car, realIndex }) => {
               return (
                 <button
                   key={`export-slot-${realIndex}`}
@@ -1229,9 +1245,10 @@ export default function Dream6Page() {
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
                   className="aspect-square overflow-hidden border p-0 transition"
                   style={{
-                    backgroundColor: title === "My Dream 6"
-                      ? shareBackgroundColor(shirtColor)
-                      : "transparent",
+                    backgroundColor:
+                      title === "My Dream 6"
+                        ? shareBackgroundColor(shirtColor)
+                        : "transparent",
                     borderColor: exportGridColor,
                   }}
                 >
@@ -1257,15 +1274,6 @@ export default function Dream6Page() {
                 </button>
               );
             })}
-          </div>
-
-          <div className="flex w-full justify-center pt-[4%]">
-            <img
-              src="/carscene-logo.webp"
-              alt="CarScene"
-              crossOrigin="anonymous"
-              className="h-auto w-[38%] object-contain"
-            />
           </div>
         </div>
       </div>
