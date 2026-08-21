@@ -1220,9 +1220,9 @@ export default function Dream9Page() {
         <div
           className="absolute"
           style={{
-            top: "20%",
-            left: "2.5%",
-            width: "95%",
+            top: "10%",
+            left: "0%",
+            width: "100%",
           }}
         >
           <div className="absolute bottom-full left-0 flex w-full justify-center pb-[1%]">
