@@ -1305,15 +1305,21 @@ export default function Dream3Page() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
-      <div className="mx-auto grid w-full max-w-7xl gap-6 md:grid-cols-[420px_minmax(0,1fr)] md:gap-8">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6">
         <section className="order-2 min-w-0 overflow-hidden">
         <div
           ref={instructionsRef}
           className="mx-auto mb-4 w-full max-w-[540px] text-center"
         >
-          <p className="text-sm font-bold text-white/55">
-            Tap any car to replace it.
-          </p>
+          <h1 className="text-[34px] font-black leading-[0.95] tracking-tight sm:text-4xl">
+            Your Dream Garage.
+            <br />
+            <span className="text-red-600">On a T-Shirt.</span>
+          </h1>
+
+        <p className="mt-3 text-sm font-bold text-white/55">
+          Tap any car to replace it.
+        </p>
         </div>
 
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
@@ -1524,7 +1530,7 @@ export default function Dream3Page() {
 
         </section>
 
-        <section className="order-1 mx-auto w-full max-w-[700px] min-w-0 md:mx-0 md:max-w-none">
+        <section className="order-1 mx-auto w-full max-w-[700px] min-w-0">
           <div
             ref={searchSectionRef}
             className="min-w-0 overflow-hidden border border-white/10 bg-white/[0.04] p-4"
