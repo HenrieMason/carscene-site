@@ -307,8 +307,6 @@ export default function Dream3Page() {
   const exportRef = useRef<HTMLDivElement>(null);
   const designGenerationRef = useRef(0);
   const colorZoomTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const autoPreviewTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const wasAllSlotsFilledRef = useRef(false);
   const shareExportRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSectionRef = useRef<HTMLDivElement>(null);
@@ -502,45 +500,6 @@ export default function Dream3Page() {
   const [shirtColor, setShirtColor] = useState<ShirtColor>("Black");
   const [shirtSize, setShirtSize] = useState<ShirtSize>("L");
   const allSlotsFilled = slots.every((slot) => slot !== null);
-
-  useEffect(() => {
-    const justFilledAllThree =
-      allSlotsFilled && !wasAllSlotsFilledRef.current;
-
-    wasAllSlotsFilledRef.current = allSlotsFilled;
-
-    if (!justFilledAllThree) return;
-
-    if (autoPreviewTimeoutRef.current) {
-      clearTimeout(autoPreviewTimeoutRef.current);
-    }
-
-    // Show the full shirt as soon as the third car is selected.
-    setPreviewStep(1);
-
-    // Then slide the page down to the shirt preview.
-    const scrollTimer = setTimeout(() => {
-      instructionsRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 100);
-
-    // Keep the full shirt visible for 5 seconds, then zoom into the design.
-    autoPreviewTimeoutRef.current = setTimeout(() => {
-      setPreviewStep(0);
-      autoPreviewTimeoutRef.current = null;
-    }, 5000);
-
-    return () => {
-      clearTimeout(scrollTimer);
-
-      if (autoPreviewTimeoutRef.current) {
-        clearTimeout(autoPreviewTimeoutRef.current);
-        autoPreviewTimeoutRef.current = null;
-      }
-    };
-  }, [allSlotsFilled]);
 
   useEffect(() => {
     designGenerationRef.current += 1;
@@ -773,6 +732,22 @@ export default function Dream3Page() {
     setSearchView("featured");
     setFeaturedSeed((s) => s + 1);
     setDeleteReadySlot(null);
+
+    setTimeout(() => {
+      const instructions = instructionsRef.current;
+
+      if (!instructions) return;
+
+      const y =
+        instructions.getBoundingClientRect().top +
+        window.scrollY -
+        20;
+
+      window.scrollTo({
+        top: y,
+        behavior: "smooth",
+      });
+    }, 100);
   }
 
   function selectSlot(index: number) {
@@ -1305,8 +1280,8 @@ export default function Dream3Page() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6">
-        <section className="order-2 min-w-0 overflow-hidden">
+      <div className="mx-auto grid w-full max-w-7xl gap-0 md:grid-cols-[420px_minmax(0,1fr)] md:gap-8">
+        <section className="order-2 min-w-0 overflow-hidden md:order-2">
         <div
           ref={instructionsRef}
           className="mx-auto mb-4 w-full max-w-[540px] text-center"
@@ -1530,7 +1505,7 @@ export default function Dream3Page() {
 
         </section>
 
-        <section className="order-1 mx-auto w-full max-w-[700px] min-w-0">
+        <section className="order-1 min-w-0 md:order-1">
           <div
             ref={searchSectionRef}
             className="min-w-0 overflow-hidden border border-white/10 bg-white/[0.04] p-4"
