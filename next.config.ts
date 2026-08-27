@@ -1,20 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: "/",
-        has: [
-          {
-            type: "host",
-            value: "dream3.carsceneapparel.com",
-          },
-        ],
-        destination: "/dream3",
-      },
-    ];
-  },
+  /* config options here */
 };
 
 export default nextConfig;
