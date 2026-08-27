@@ -1154,23 +1154,16 @@ export default function Dream3Page() {
           className="absolute"
           style={{
             top: "25%",
-            left: "28%",
-            width: "43%",
+            left: "30%",
+            width: "40%",
           }}
         >
-          <div className="pointer-events-none absolute left-1/2 top-full z-10 flex w-full -translate-x-1/2 -translate-y-[83%] flex-col items-center">
+          <div className="absolute bottom-full left-0 flex w-full justify-center pb-[1%]">
             <img
               src="/carscene-logo.webp"
               alt="CarScene"
               crossOrigin="anonymous"
-              className="relative z-10 h-auto w-[100%] object-contain"
-            />
-
-            <img
-              src="/Dream3t.png"
-              alt="Dream 3"
-              crossOrigin="anonymous"
-              className="relative z-20 -mt-[8%] h-auto w-full scale-[1.2] object-contain"
+              className="h-auto w-[100%] object-contain"
             />
           </div>
 
@@ -1265,13 +1258,6 @@ export default function Dream3Page() {
               className="h-auto w-full object-contain"
             />
           </div>
-
-          <img
-            src="/Dream3T.png"
-            alt="Dream 3"
-            crossOrigin="anonymous"
-            className="pointer-events-none absolute left-1/2 top-full z-10 h-auto w-[45%] -translate-x-1/2 -translate-y-[20%] object-contain"
-          />
 
           <div className="grid grid-cols-3 gap-0">
             {displaySlots.map(({ car, realIndex }) => {
