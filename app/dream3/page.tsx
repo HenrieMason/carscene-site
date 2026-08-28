@@ -1228,7 +1228,7 @@ export default function Dream3Page() {
       <div
         className={`relative w-full ${
           exportMode ? "h-full" : "aspect-[4494/5097]"
-        } p-[6%]`}
+        }`}
         style={{
           color: exportGridColor,
           backgroundColor: "transparent",
