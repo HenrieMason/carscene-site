@@ -1005,14 +1005,14 @@ export default function Dream3Page() {
       }
 
       const checkoutUrl =
-      `${SHOPIFY_STORE_URL}/cart/add?id=${variantId}` +
-      `&quantity=1` +
-      `&properties[Design Type]=${encodeURIComponent("Dream 6")}` +
-      `&properties[Dream 6 Design URL]=${encodeURIComponent(designUrl)}` +
-      `&properties[Dream 6 Product]=${encodeURIComponent("Shirt")}` +
-      `&properties[Dream 6 Size]=${encodeURIComponent(size)}` +
-      `&properties[Dream 6 Color]=${encodeURIComponent(shirtColor)}` +
-      `&return_to=/checkout`;
+        `${SHOPIFY_STORE_URL}/cart/add?id=${variantId}` +
+        `&quantity=1` +
+        `&properties[Design Type]=${encodeURIComponent("Dream 3")}` +
+        `&properties[Dream 3 Design URL]=${encodeURIComponent(designUrl)}` +
+        `&properties[Dream 3 Product]=${encodeURIComponent("Shirt")}` +
+        `&properties[Dream 3 Size]=${encodeURIComponent(size)}` +
+        `&properties[Dream 3 Color]=${encodeURIComponent(shirtColor)}` +
+        `&return_to=/checkout`;
 
       window.location.href = checkoutUrl;
     } catch (error) {
