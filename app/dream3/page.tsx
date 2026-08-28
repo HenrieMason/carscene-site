@@ -1245,7 +1245,7 @@ export default function Dream3Page() {
         <div
           className="absolute"
           style={{
-            top: "10%",
+            top: "35%",
             left: "5%",
             width: "90%",
           }}
