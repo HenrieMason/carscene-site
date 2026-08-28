@@ -1160,7 +1160,7 @@ export default function Dream3Page() {
         >
           <div className="absolute bottom-full left-0 flex w-full justify-center pb-[1%]">
             <img
-              src="/dream3black8.png"
+              src="/dream3black8.webp"
               alt="Dream 3"
               crossOrigin="anonymous"
               className="relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
@@ -1252,7 +1252,7 @@ export default function Dream3Page() {
         >
           <div className="absolute bottom-full left-0 flex w-full justify-center pb-[1%]">
             <img
-              src="/dream3black8.png"
+              src="/dream3black8.webp"
               alt="Dream 3"
               crossOrigin="anonymous"
               className="relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
