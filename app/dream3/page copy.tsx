@@ -1153,17 +1153,24 @@ export default function Dream3Page() {
         <div
           className="absolute"
           style={{
-            top: "32%",
+            top: "25%",
             left: "28%",
             width: "43%",
           }}
         >
-          <div className="absolute bottom-full left-0 flex w-full justify-center pb-[1%]">
+          <div className="pointer-events-none absolute left-1/2 top-full z-10 flex w-full -translate-x-1/2 -translate-y-[83%] flex-col items-center">
             <img
-              src="/dream3black8.png"
+              src={shirtColor === "White" ? "/dream3black.webp" : "/dream3white.webp"}
               alt="Dream 3"
               crossOrigin="anonymous"
-              className="relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
+              className="relative z-10 h-auto w-[100%] translate-y-[27%] object-contain"
+            />
+
+            <img
+              src="/Dream3t.png"
+              alt="Dream 3"
+              crossOrigin="anonymous"
+              className="relative z-20 -mt-[8%] h-auto w-full -translate-y-[10%] scale-[1.2] object-contain"
             />
           </div>
 
@@ -1180,7 +1187,7 @@ export default function Dream3Page() {
                     backgroundColor: "transparent",
                     borderColor,
                   }}
-                  className="aspect-square overflow-hidden p-0 transition"
+                  className="aspect-square overflow-hidden border-[0.5px] md:border p-0 transition"
                 >
                   {car ? (
                     <div className="relative h-full w-full overflow-hidden">
@@ -1252,12 +1259,19 @@ export default function Dream3Page() {
         >
           <div className="absolute bottom-full left-0 flex w-full justify-center pb-[1%]">
             <img
-              src="/dream3black8.png"
+              src={shirtColor === "White" ? "/dream3black.webp" : "/dream3white.webp"}
               alt="Dream 3"
               crossOrigin="anonymous"
-              className="relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
+              className="relative z-10 h-auto w-[100%] object-contain"
             />
           </div>
+
+          <img
+            src="/Dream3T.png"
+            alt="Dream 3"
+            crossOrigin="anonymous"
+            className="pointer-events-none absolute left-1/2 top-full z-10 h-auto w-[45%] -translate-x-1/2 -translate-y-[20%] object-contain"
+          />
 
           <div className="grid grid-cols-3 gap-0">
             {displaySlots.map(({ car, realIndex }) => {
@@ -1266,12 +1280,13 @@ export default function Dream3Page() {
                   key={`export-slot-${realIndex}`}
                   type="button"
                   onClick={exportMode ? undefined : () => selectSlot(realIndex)}
-                  className="aspect-square overflow-hidden p-0 transition"
+                  className="aspect-square overflow-hidden border p-0 transition"
                   style={{
                     backgroundColor:
                       title === "My Dream 3"
                         ? shareBackgroundColor(shirtColor)
                         : "transparent",
+                    borderColor: exportGridColor,
                   }}
                 >
                   {car ? (
