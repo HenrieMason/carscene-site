@@ -197,9 +197,9 @@ export async function POST(req: NextRequest) {
      * DESIGN TYPE
      * ----------------------------------------------------
      *
-     * Dream 3 should send:
+     * Dream 6 should send:
      *
-     * Design Type = Dream 3
+     * Design Type = Dream 6
      *
      * Dream 9 can send:
      *
@@ -215,7 +215,7 @@ export async function POST(req: NextRequest) {
           p.name === "Design Type"
       )?.value || "Dream 9";
 
-    const isDream3 = designType === "Dream 3";
+    const isDream6 = designType === "Dream 6";
 
     /*
      * ----------------------------------------------------
@@ -225,7 +225,7 @@ export async function POST(req: NextRequest) {
      * Supports all three property names:
      *
      * Design URL
-     * Dream 3 Design URL
+     * Dream 6 Design URL
      * Dream 9 Design URL
      */
 
@@ -236,7 +236,7 @@ export async function POST(req: NextRequest) {
       )?.value ||
       properties.find(
         (p: ShopifyLineItemProperty) =>
-          p.name === "Dream 3 Design URL"
+          p.name === "Dream 6 Design URL"
       )?.value ||
       properties.find(
         (p: ShopifyLineItemProperty) =>
@@ -256,7 +256,7 @@ export async function POST(req: NextRequest) {
       )?.value ||
       properties.find(
         (p: ShopifyLineItemProperty) =>
-          p.name === "Dream 3 Product"
+          p.name === "Dream 6 Product"
       )?.value ||
       properties.find(
         (p: ShopifyLineItemProperty) =>
@@ -276,7 +276,7 @@ export async function POST(req: NextRequest) {
       )?.value ||
       properties.find(
         (p: ShopifyLineItemProperty) =>
-          p.name === "Dream 3 Size"
+          p.name === "Dream 6 Size"
       )?.value ||
       properties.find(
         (p: ShopifyLineItemProperty) =>
@@ -296,7 +296,7 @@ export async function POST(req: NextRequest) {
       )?.value ||
       properties.find(
         (p: ShopifyLineItemProperty) =>
-          p.name === "Dream 3 Color"
+          p.name === "Dream 6 Color"
       )?.value ||
       properties.find(
         (p: ShopifyLineItemProperty) =>
@@ -304,7 +304,7 @@ export async function POST(req: NextRequest) {
       )?.value;
 
     console.log("DESIGN TYPE:", designType);
-    console.log("IS DREAM 3:", isDream3);
+    console.log("IS DREAM 6:", isDream6);
     console.log("DESIGN URL:", designUrl);
     console.log("PRODUCT:", product);
     console.log("SIZE:", size);
@@ -312,7 +312,7 @@ export async function POST(req: NextRequest) {
 
     /*
      * Ignore normal Shopify products that aren't
-     * Dream 3 / Dream 9 custom products.
+     * Dream 6 / Dream 9 custom products.
      */
 
     if (!designUrl || !product) {
@@ -391,18 +391,18 @@ async function createPrintifyOrder({
    */
 
   const isShirt = productType === "Shirt";
-  const isDream3 = designType === "Dream 3";
+  const isDream6 = designType === "Dream 6";
 
   console.log("PRINTIFY DESIGN TYPE:", designType);
   console.log("IS SHIRT:", isShirt);
-  console.log("IS DREAM 3:", isDream3);
+  console.log("IS DREAM 6:", isDream6);
 
   /*
-   * Different external IDs for Dream 3 / Dream 9.
+   * Different external IDs for Dream 6 / Dream 9.
    */
 
-  const designSlug = isDream3
-    ? "dream3"
+  const designSlug = isDream6
+    ? "dream6"
     : "dream9";
 
   const externalId =
@@ -497,7 +497,7 @@ async function createPrintifyOrder({
    * DREAM 9 SHIRT:
    * Upload logo because it goes on front.
    *
-   * DREAM 3 SHIRT:
+   * DREAM 6 SHIRT:
    * DO NOT upload logo.
    *
    * POSTER:
@@ -513,10 +513,10 @@ async function createPrintifyOrder({
   let placeholders;
 
   /*
-   * DREAM 3 SHIRT
+   * DREAM 6 SHIRT
    *
    * FRONT:
-   * Dream 3 custom graphic
+   * Dream 6 custom graphic
    *
    * BACK:
    * Nothing
@@ -530,7 +530,7 @@ async function createPrintifyOrder({
             {
             id: imageData.id,
             x: 0.5,
-            y: 0.50,
+            y: 0.43,
             scale: 0.85,
             angle: 0,
             },
