@@ -773,14 +773,6 @@ export default function Dream3Page() {
     setSearchView("featured");
     setFeaturedSeed((s) => s + 1);
     setDeleteReadySlot(null);
-  }
-
-  function selectSlot(index: number) {
-    setSelectedSlot(index);
-    setSelectedBrand(null);
-    setQuery("");
-    setSearchView("featured");
-    setDeleteReadySlot(null);
 
     // After selecting/replacing a car, bring the user back to the preview
     setTimeout(() => {
@@ -789,6 +781,14 @@ export default function Dream3Page() {
         block: "start",
       });
     }, 100);
+  }
+
+  function selectSlot(index: number) {
+    setSelectedSlot(index);
+    setSelectedBrand(null);
+    setQuery("");
+    setSearchView("featured");
+    setDeleteReadySlot(null);
 
     setTimeout(() => {
       const y =
