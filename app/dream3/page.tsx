@@ -782,6 +782,14 @@ export default function Dream3Page() {
     setSearchView("featured");
     setDeleteReadySlot(null);
 
+    // After selecting/replacing a car, bring the user back to the preview
+    setTimeout(() => {
+      instructionsRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
+
     setTimeout(() => {
       const y =
         searchSectionRef.current!.getBoundingClientRect().top +
@@ -1311,7 +1319,7 @@ export default function Dream3Page() {
           className="mx-auto mb-4 w-full max-w-[540px] text-center"
         >
           <p className="text-sm font-bold text-white/55">
-            Tap any car to replace it.
+            To replace a car, scroll down to buttons
           </p>
         </div>
 
