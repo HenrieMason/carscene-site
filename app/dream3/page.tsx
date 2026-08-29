@@ -742,6 +742,9 @@ export default function Dream3Page() {
     emptyDream3();
   }
   function addCarToTargetSlot(car: Car) {
+    const isReplacingExistingCar =
+      selectedSlot !== null && slots[selectedSlot] !== null;
+
     setHasCustomizedDream3(true);
     setPreparedDesignBlob(null);
     setPrepareDesignPromise(null);
@@ -774,13 +777,16 @@ export default function Dream3Page() {
     setFeaturedSeed((s) => s + 1);
     setDeleteReadySlot(null);
 
-    // After selecting/replacing a car, bring the user back to the preview
-    setTimeout(() => {
-      instructionsRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 100);
+    // Only scroll back to the preview when replacing a car
+    // after all 3 slots are already filled.
+    if (isReplacingExistingCar && allSlotsFilled) {
+      setTimeout(() => {
+        instructionsRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    }
   }
 
   function selectSlot(index: number) {
