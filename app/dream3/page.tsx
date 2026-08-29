@@ -1315,7 +1315,7 @@ export default function Dream3Page() {
           </p>
         </div>
 
-        <div className="mx-auto mb-4 w-full max-w-[540px] overflow-visible">
+        <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
           <div ref={posterRef} className="relative overflow-visible">
             <div
               className={`origin-[50%_25%] transition-transform duration-300 ${
