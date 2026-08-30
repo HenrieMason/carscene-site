@@ -1321,7 +1321,7 @@ export default function Dream3Page() {
 
       <header className="mx-auto mb-5 w-full max-w-7xl border-b border-white/10 pb-4">
         <img
-          src="/carscene-logo.webp"
+          src="/Dream3White.webp"
           alt="CarScene"
           className="mx-auto h-auto w-full object-contain"
         />
