@@ -1192,6 +1192,8 @@ export default function Dream3Page() {
             <img
               src="/dream3black9.webp"
               alt="Dream 3"
+              width={1536}
+              height={1024}
               crossOrigin="anonymous"
               className="relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
             />
@@ -1284,6 +1286,8 @@ export default function Dream3Page() {
             <img
               src="/dream3black9.webp"
               alt="Dream 3"
+              width={1536}
+              height={1024}
               crossOrigin="anonymous"
               className="relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
             />
