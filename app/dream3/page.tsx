@@ -389,40 +389,13 @@ export default function Dream3Page() {
   const [today, setToday] = useState("");
 
   useEffect(() => {
-    if ("scrollRestoration" in history) {
-      history.scrollRestoration = "manual";
-    }
-
-    const lockTop = () => {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "instant",
-      });
-    };
-
-    // Immediately start at the top.
-    lockTop();
-
-    // Mobile browsers can restore scroll position AFTER hydration.
-    // Keep overriding them briefly while the page finishes loading.
-    const timers = [
-      setTimeout(lockTop, 50),
-      setTimeout(lockTop, 100),
-      setTimeout(lockTop, 250),
-      setTimeout(lockTop, 500),
-      setTimeout(lockTop, 750),
-      setTimeout(lockTop, 1000),
-      setTimeout(lockTop, 1500),
-    ];
-
-    // Images/fonts finishing can also trigger late scroll restoration.
-    window.addEventListener("load", lockTop);
-
-    return () => {
-      timers.forEach(clearTimeout);
-      window.removeEventListener("load", lockTop);
-    };
+    setToday(
+      new Date().toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
+    );
   }, []);
   const [query, setQuery] = useState("");
   const lastLogged = useRef("");
@@ -1203,8 +1176,6 @@ export default function Dream3Page() {
             <img
               src="/dream3black9.webp"
               alt="Dream 3"
-              width={1536}
-              height={1024}
               crossOrigin="anonymous"
               className="relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
             />
@@ -1297,8 +1268,6 @@ export default function Dream3Page() {
             <img
               src="/dream3black9.webp"
               alt="Dream 3"
-              width={1536}
-              height={1024}
               crossOrigin="anonymous"
               className="relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
             />
@@ -1348,11 +1317,7 @@ export default function Dream3Page() {
   }
 
   return (
-    <main
-      id="top"
-      className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6"
-      style={{ overflowAnchor: "none" }}
-    >
+    <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
       <div className="mx-auto grid w-full max-w-7xl gap-6 md:grid-cols-[420px_minmax(0,1fr)] md:gap-8">
         <section className="order-2 min-w-0 overflow-hidden">
         <div
@@ -1367,7 +1332,7 @@ export default function Dream3Page() {
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
           <div ref={posterRef} className="relative overflow-visible">
             <div
-              className={`origin-[49%_25%] transition-transform duration-300 ${
+              className={`origin-[51%_25%] transition-transform duration-300 ${
                 previewStep === 0 ? "scale-[2.1]" : "scale-100"
               }`}
             >
