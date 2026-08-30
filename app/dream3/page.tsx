@@ -1348,7 +1348,10 @@ export default function Dream3Page() {
   }
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
+    <main
+      className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6"
+      style={{ overflowAnchor: "none" }}
+    >
       <div className="mx-auto grid w-full max-w-7xl gap-6 md:grid-cols-[420px_minmax(0,1fr)] md:gap-8">
         <section className="order-2 min-w-0 overflow-hidden">
         <div
