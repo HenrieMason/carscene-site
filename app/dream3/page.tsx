@@ -389,6 +389,14 @@ export default function Dream3Page() {
   const [today, setToday] = useState("");
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }, []);
+
+  useEffect(() => {
     setToday(
       new Date().toLocaleDateString("en-US", {
         month: "long",
