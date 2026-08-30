@@ -389,21 +389,29 @@ export default function Dream3Page() {
   const [today, setToday] = useState("");
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant",
-    });
-  }, []);
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
 
-  useEffect(() => {
-    setToday(
-      new Date().toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      })
-    );
+    const forceTop = () => {
+      window.scrollTo(0, 0);
+    };
+
+    forceTop();
+
+    requestAnimationFrame(() => {
+      forceTop();
+
+      requestAnimationFrame(() => {
+        forceTop();
+      });
+    });
+
+    const timer = setTimeout(() => {
+      forceTop();
+    }, 300);
+
+    return () => clearTimeout(timer);
   }, []);
   const [query, setQuery] = useState("");
   const lastLogged = useRef("");
