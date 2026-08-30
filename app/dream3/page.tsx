@@ -1349,6 +1349,7 @@ export default function Dream3Page() {
 
   return (
     <main
+      id="top"
       className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6"
       style={{ overflowAnchor: "none" }}
     >
