@@ -1318,6 +1318,15 @@ export default function Dream3Page() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
+
+      <header className="mx-auto mb-5 w-full max-w-7xl border-b border-white/10 pb-4">
+        <img
+          src="/carscene-logo.webp"
+          alt="CarScene"
+          className="mx-auto h-auto w-full object-contain"
+        />
+      </header>
+
       <div className="mx-auto grid w-full max-w-7xl gap-6 md:grid-cols-[420px_minmax(0,1fr)] md:gap-8">
         <section className="order-2 min-w-0 overflow-hidden">
         <div
@@ -1332,7 +1341,7 @@ export default function Dream3Page() {
         <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
           <div ref={posterRef} className="relative overflow-visible">
             <div
-              className={`origin-[53%_25%] transition-transform duration-300 ${
+              className={`origin-[49%_24%] transition-transform duration-300 ${
                 previewStep === 0 ? "scale-[2.1]" : "scale-100"
               }`}
             >
