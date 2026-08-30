@@ -393,25 +393,36 @@ export default function Dream3Page() {
       history.scrollRestoration = "manual";
     }
 
-    const forceTop = () => {
-      window.scrollTo(0, 0);
+    const lockTop = () => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant",
+      });
     };
 
-    forceTop();
+    // Immediately start at the top.
+    lockTop();
 
-    requestAnimationFrame(() => {
-      forceTop();
+    // Mobile browsers can restore scroll position AFTER hydration.
+    // Keep overriding them briefly while the page finishes loading.
+    const timers = [
+      setTimeout(lockTop, 50),
+      setTimeout(lockTop, 100),
+      setTimeout(lockTop, 250),
+      setTimeout(lockTop, 500),
+      setTimeout(lockTop, 750),
+      setTimeout(lockTop, 1000),
+      setTimeout(lockTop, 1500),
+    ];
 
-      requestAnimationFrame(() => {
-        forceTop();
-      });
-    });
+    // Images/fonts finishing can also trigger late scroll restoration.
+    window.addEventListener("load", lockTop);
 
-    const timer = setTimeout(() => {
-      forceTop();
-    }, 300);
-
-    return () => clearTimeout(timer);
+    return () => {
+      timers.forEach(clearTimeout);
+      window.removeEventListener("load", lockTop);
+    };
   }, []);
   const [query, setQuery] = useState("");
   const lastLogged = useRef("");
