@@ -742,7 +742,8 @@ export default function Dream3Page() {
     emptyDream3();
   }
   function addCarToTargetSlot(car: Car) {
-    const shouldReturnToPreview = selectedSlot !== null;
+    const isReplacingExistingCar =
+      selectedSlot !== null && slots[selectedSlot] !== null;
 
     setHasCustomizedDream3(true);
     setPreparedDesignBlob(null);
@@ -776,17 +777,15 @@ export default function Dream3Page() {
     setFeaturedSeed((s) => s + 1);
     setDeleteReadySlot(null);
 
-    // If the user clicked a slot in the preview to choose/replace that car,
-    // return them to the preview after they make their selection.
-    if (shouldReturnToPreview) {
-      setPreviewStep(0);
-
+    // Only scroll back to the preview when replacing a car
+    // after all 3 slots are already filled.
+    if (isReplacingExistingCar && allSlotsFilled) {
       setTimeout(() => {
         instructionsRef.current?.scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
-      }, 150);
+      }, 100);
     }
   }
 
@@ -808,10 +807,6 @@ export default function Dream3Page() {
         behavior: "smooth",
       });
     }, 100);
-
-    setTimeout(() => {
-      searchInputRef.current?.focus();
-    }, 450);
   }
 
   async function submitEmail() {
@@ -1078,7 +1073,7 @@ export default function Dream3Page() {
               // Show the full shirt
               setPreviewStep(1);
 
-              // Zoom back in 5 seconds after the LAST color selection
+              // Zoom back in 2 seconds after the LAST color selection
               colorZoomTimeoutRef.current = setTimeout(() => {
                 setPreviewStep(0);
                   colorZoomTimeoutRef.current = null;
@@ -1166,7 +1161,7 @@ export default function Dream3Page() {
           src={SHIRT_COLORS[shirtColor].front}
           alt="Front of Dream 3 shirt"
           crossOrigin="anonymous"
-          className="pointer-events-none absolute inset-0 h-full w-full scale-150 object-contain"
+          className="absolute inset-0 h-full w-full scale-150 object-contain"
         />
 
         <div
@@ -1177,16 +1172,16 @@ export default function Dream3Page() {
             width: "43%",
           }}
         >
-          <div className="pointer-events-none absolute bottom-full left-0 z-20 flex w-full justify-center pb-[1%]">
+          <div className="absolute bottom-full left-0 flex w-full justify-center pb-[1%]">
             <img
               src="/dream3black9.webp"
               alt="Dream 3"
               crossOrigin="anonymous"
-              className="pointer-events-none relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
+              className="relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
             />
           </div>
 
-          <div className="relative z-10 grid grid-cols-3 gap-0">
+          <div className="grid grid-cols-3 gap-0">
             {displaySlots.map(({ car, realIndex }, index) => {
               const type = car ? classFromPrice(car.price) : "P";
 
@@ -1209,7 +1204,7 @@ export default function Dream3Page() {
                         crossOrigin="anonymous"
                         decoding="sync"
                         loading="eager"
-                        className="pointer-events-none absolute -right-[35%] -bottom-[0%] h-[95%] w-auto max-w-none object-contain"
+                        className="absolute -right-[35%] -bottom-[0%] h-[95%] w-auto max-w-none object-contain"
                       />
 
                       {!exportMode && deleteReadySlot === index && (
@@ -1274,11 +1269,11 @@ export default function Dream3Page() {
               src="/dream3black9.webp"
               alt="Dream 3"
               crossOrigin="anonymous"
-              className="pointer-events-none relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
+              className="relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
             />
           </div>
 
-          <div className="relative z-30 grid grid-cols-3 gap-0">
+          <div className="grid grid-cols-3 gap-0">
             {displaySlots.map(({ car, realIndex }) => {
               return (
                 <button
@@ -1301,7 +1296,7 @@ export default function Dream3Page() {
                         crossOrigin="anonymous"
                         decoding="sync"
                         loading="eager"
-                        className="pointer-events-none absolute -right-[35%] -bottom-[0%] h-[95%] w-auto max-w-none object-contain"
+                        className="absolute -right-[35%] -bottom-[0%] h-[95%] w-auto max-w-none object-contain"
                       />
                     </div>
                   ) : (
@@ -1339,9 +1334,12 @@ export default function Dream3Page() {
           className="mx-auto mb-4 w-full max-w-[540px] text-center"
         >
           <p className="text-sm font-bold text-white/55">
-            Tap any car to replace it
+            To replace a car, scroll down to buttons
           </p>
         </div>
+
+        <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
+          <div ref={posterRef} className="relative overflow-visible">
             <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
               <div ref={posterRef} className="relative overflow-hidden">
                 {previewStep === 0 ? (
@@ -1356,72 +1354,78 @@ export default function Dream3Page() {
                       src={SHIRT_COLORS[shirtColor].front}
                       alt="Front of Dream 3 shirt"
                       crossOrigin="anonymous"
-                      className="pointer-events-none absolute left-1/2 top-[42%] h-[300%] w-[300%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
+                      className="absolute left-1/2 top-[42%] h-[300%] w-[300%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
                     />
 
                     {/* Zoomed-in Dream 3 design */}
                     <div
                       className="absolute"
                       style={{
-                        top: "42%",
+                        top: "43%",
                         left: "50%",
                         width: "90%",
                         transform: "translateX(-50%)",
                       }}
                     >
                       <div className="relative w-full">
-                        <div className="pointer-events-none absolute bottom-full left-0 z-20 flex w-full justify-center pb-[1%]">
+                        {/* Dream 3 logo */}
+                        <div className="absolute bottom-full left-0 flex w-full justify-center pb-[1%]">
                           <img
                             src="/dream3black9.webp"
                             alt="Dream 3"
                             crossOrigin="anonymous"
-                            className="h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
+                            className="relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
                           />
                         </div>
 
-                        <div className="relative z-10 grid grid-cols-3 gap-0">
-                          {displaySlots.map(({ car, realIndex }, index) => (
-                            <button
-                              key={`zoom-preview-slot-${realIndex}`}
-                              type="button"
-                              onClick={() => selectSlot(realIndex)}
-                              style={{
-                                backgroundColor: "transparent",
-                                borderColor: gridColor(shirtColor),
-                              }}
-                              className="aspect-square overflow-hidden p-0 transition"
-                            >
-                              {car ? (
-                                <div className="relative h-full w-full overflow-hidden">
-                                  <img
-                                    src={car.image}
-                                    alt={car.model}
-                                    crossOrigin="anonymous"
-                                    decoding="sync"
-                                    loading="eager"
-                                    className="pointer-events-none absolute -right-[35%] bottom-0 h-[95%] w-auto max-w-none object-contain"
-                                  />
+                        {/* Cars */}
+                        <div className="grid grid-cols-3 gap-0">
+                          {displaySlots.map(({ car, realIndex }, index) => {
+                            const type = car ? classFromPrice(car.price) : "P";
 
-                                  {deleteReadySlot === index && (
-                                    <div className="absolute inset-0 flex items-center justify-center bg-black/35">
-                                      <span className="text-[42px] font-black text-red-500">
-                                        ✕
-                                      </span>
-                                    </div>
-                                  )}
-                                </div>
-                              ) : (
-                                <div
-                                  className="flex h-full items-center justify-center text-[clamp(8px,2vw,14px)] font-black"
-                                  style={{
-                                    color: gridColor(shirtColor) + "66",
-                                  }}
-                                >
-                                  Empty
-                                </div>
-                              )}
-                            </button>
-                          ))}
+                            return (
+                              <button
+                                key={`zoom-preview-slot-${realIndex}`}
+                                type="button"
+                                onClick={() => selectSlot(realIndex)}
+                                style={{
+                                  backgroundColor: "transparent",
+                                  borderColor: gridColor(shirtColor),
+                                }}
+                                className="aspect-square overflow-hidden p-0 transition"
+                              >
+                                {car ? (
+                                  <div className="relative h-full w-full overflow-hidden">
+                                    <img
+                                      src={car.image}
+                                      alt={car.model}
+                                      crossOrigin="anonymous"
+                                      decoding="sync"
+                                      loading="eager"
+                                      className="absolute -right-[35%] bottom-0 h-[95%] w-auto max-w-none object-contain"
+                                    />
+
+                                    {deleteReadySlot === index && (
+                                      <div className="absolute inset-0 flex items-center justify-center bg-black/35">
+                                        <span className="text-[42px] font-black text-red-500">
+                                          ✕
+                                        </span>
+                                      </div>
+                                    )}
+                                  </div>
+                                ) : (
+                                  <div
+                                    className="flex h-full items-center justify-center text-[clamp(8px,2vw,14px)] font-black"
+                                    style={{
+                                      color: gridColor(shirtColor) + "66",
+                                    }}
+                                  >
+                                    Empty
+                                  </div>
+                                )}
+                              </button>
+                            );
+                          })}
                         </div>
                       </div>
                     </div>
@@ -1443,6 +1447,20 @@ export default function Dream3Page() {
                 </button>
               </div>
             </div>
+
+            <button
+              type="button"
+              onClick={cyclePreview}
+              className={`absolute right-3 top-1 z-20 flex h-11 w-11 items-center justify-center rounded-full text-xl text-white shadow-lg transition-colors duration-500 active:scale-95 ${
+                pulseEye ? "bg-red-600" : "bg-gray-400 hover:bg-gray-600"
+              }`}
+              aria-label="Inspect Dream 3 shirt"
+              title="Inspect shirt"
+            >
+              👁
+            </button>
+          </div>
+        </div>
 
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-4">
           <div className="grid grid-cols-3 gap-2">
