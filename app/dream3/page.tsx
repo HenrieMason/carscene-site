@@ -1173,9 +1173,9 @@ export default function Dream3Page() {
         <div
           className="absolute"
           style={{
-            top: "32%",
-            left: "28%",
-            width: "43%",
+            top: "33%", //32
+            left: "27%", //28
+            width: "46%", //43
           }}
         >
           <div className="pointer-events-none absolute bottom-full left-0 z-20 flex w-full justify-center pb-[1%]">
