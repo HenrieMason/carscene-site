@@ -742,7 +742,8 @@ export default function Dream3Page() {
     emptyDream3();
   }
   function addCarToTargetSlot(car: Car) {
-    const shouldReturnToPreview = selectedSlot !== null;
+    const shouldReturnToPreview =
+      selectedSlot !== null || allSlotsFilled;
 
     setHasCustomizedDream3(true);
     setPreparedDesignBlob(null);
