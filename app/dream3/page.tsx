@@ -1510,7 +1510,7 @@ export default function Dream3Page() {
           </div>
 
           <div className="mt-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
-             $34.99 • Free Shipping
+             $39.99 • Free Shipping
           </div>
         </div>
 
