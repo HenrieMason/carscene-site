@@ -1279,7 +1279,7 @@ export default function Dream3Page() {
             />
           </div>
 
-          <div className="relative z-30 grid grid-cols-3 gap-0">
+          <div className="relative z-10 grid grid-cols-3 gap-0">
             {displaySlots.map(({ car, realIndex }) => {
               return (
                 <button
