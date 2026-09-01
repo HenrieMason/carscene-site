@@ -1180,7 +1180,7 @@ export default function Dream3Page() {
         >
           <div className="pointer-events-none absolute bottom-full left-0 z-20 flex w-full justify-center pb-[1%]">
             <img
-              src="/dream3black9.webp"
+              src="/dream3black10.webp"
               alt="Dream 3"
               crossOrigin="anonymous"
               className="pointer-events-none relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
@@ -1272,7 +1272,7 @@ export default function Dream3Page() {
         >
           <div className="absolute bottom-full left-0 flex w-full justify-center pb-[1%]">
             <img
-              src="/dream3black9.webp"
+              src="/dream3black10.webp"
               alt="Dream 3"
               crossOrigin="anonymous"
               className="pointer-events-none relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
@@ -1373,7 +1373,7 @@ export default function Dream3Page() {
                       <div className="relative w-full">
                         <div className="pointer-events-none absolute bottom-full left-0 z-20 flex w-full justify-center pb-[1%]">
                           <img
-                            src="/dream3black9.webp"
+                            src="/dream3black10.webp"
                             alt="Dream 3"
                             crossOrigin="anonymous"
                             className="h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
