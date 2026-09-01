@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CarScene Apparel",
+  title: "CarScene Apparel | Dream 3",
   description:
     "Create a custom Dream 3 shirt with your 3 favorite cars. Search 1,842 cars, build your lineup, and order your shirt.",
 
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "CarScene Apparel",
+    title: "CarScene Apparel | Dream 3",
     description:
       "Create a custom Dream 3 shirt with your 3 favorite cars. Search 1,842 cars, build your lineup, and order your shirt.",
     url: "https://carsceneapparel.com",
