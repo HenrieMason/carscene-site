@@ -847,69 +847,19 @@ export default function Dream3Page() {
     }
   }
 
-  async function waitForPosterImages(node: HTMLElement) {
+  function waitForPosterImages(node: HTMLElement) {
     const images = Array.from(node.querySelectorAll("img"));
 
-    await Promise.all(
-      images.map(async (img) => {
-        if (!img.complete || img.naturalWidth === 0) {
-          await new Promise<void>((resolve, reject) => {
-            const handleLoad = () => {
-              cleanup();
+    return Promise.all(
+      images.map((img) => {
+        if (img.complete && img.naturalWidth > 0) return Promise.resolve();
 
-              if (img.naturalWidth > 0) {
-                resolve();
-              } else {
-                reject(new Error(`Image loaded with no dimensions: ${img.src}`));
-              }
-            };
-
-            const handleError = () => {
-              cleanup();
-              reject(new Error(`Failed to load image: ${img.src}`));
-            };
-
-            const cleanup = () => {
-              img.removeEventListener("load", handleLoad);
-              img.removeEventListener("error", handleError);
-            };
-
-            img.addEventListener("load", handleLoad, { once: true });
-            img.addEventListener("error", handleError, { once: true });
-
-            if (img.complete) {
-              if (img.naturalWidth > 0) {
-                cleanup();
-                resolve();
-              } else {
-                cleanup();
-                reject(new Error(`Failed to load image: ${img.src}`));
-              }
-            }
-          });
-        }
-
-        if (typeof img.decode === "function") {
-          try {
-            await img.decode();
-          } catch {
-            if (img.naturalWidth === 0) {
-              throw new Error(`Failed to decode image: ${img.src}`);
-            }
-          }
-        }
-
-        if (img.naturalWidth === 0) {
-          throw new Error(`Image is not ready: ${img.src}`);
-        }
+        return new Promise<void>((resolve) => {
+          img.onload = () => resolve();
+          img.onerror = () => resolve();
+        });
       })
     );
-
-    await new Promise<void>((resolve) => {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => resolve());
-      });
-    });
   }
 
   function cyclePreview() {
@@ -976,44 +926,15 @@ export default function Dream3Page() {
     await waitForPosterImages(node);
     await new Promise((resolve) => setTimeout(resolve, 500));
 
-    let lastError: unknown = null;
+    const dataUrl = await toPng(node, {
+      cacheBust: true,
+      pixelRatio: 8.3222222222,
+      backgroundColor: "transparent",
+      imagePlaceholder:
+        "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
+    });
 
-    for (let attempt = 1; attempt <= 2; attempt++) {
-      try {
-        if (attempt > 1) {
-          console.warn("Retrying Dream 3 export...");
-          await waitForPosterImages(node);
-          await new Promise((resolve) => setTimeout(resolve, 750));
-        }
-
-        const dataUrl = await toPng(node, {
-          cacheBust: false,
-          pixelRatio: 8.3222222222,
-          backgroundColor: "transparent",
-        });
-
-        const response = await fetch(dataUrl);
-
-        if (!response.ok) {
-          throw new Error("Could not convert design to PNG.");
-        }
-
-        const blob = await response.blob();
-
-        if (!blob || blob.size === 0) {
-          throw new Error("Generated design was empty.");
-        }
-
-        return blob;
-      } catch (error) {
-        lastError = error;
-        console.error(`DESIGN EXPORT ATTEMPT ${attempt} FAILED:`, error);
-      }
-    }
-
-    throw lastError instanceof Error
-      ? lastError
-      : new Error("Could not generate your design. Please try again.");
+    return await (await fetch(dataUrl)).blob();
   }
 
   async function uploadDesignBlob(blob: Blob) {
@@ -1354,8 +1275,6 @@ export default function Dream3Page() {
               src="/dream3black10.webp"
               alt="Dream 3"
               crossOrigin="anonymous"
-              decoding="sync"
-              loading="eager"
               className="pointer-events-none relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
             />
           </div>
