@@ -491,7 +491,6 @@ export default function Dream3Page() {
   const [preparedDesignBlob, setPreparedDesignBlob] = useState<Blob | null>(null);
   const [prepareDesignPromise, setPrepareDesignPromise] =
     useState<Promise<Blob> | null>(null);
-  const [shouldPulseBuyButton, setShouldPulseBuyButton] = useState(false);
   const [pulseEye, setPulseEye] = useState(false);
   const [hasUsedEye, setHasUsedEye] = useState(false);
 
@@ -555,14 +554,6 @@ export default function Dream3Page() {
 
     return () => clearTimeout(timer);
   }, [slots, shirtColor, allSlotsFilled]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShouldPulseBuyButton(true);
-    }, 1 * 60 * 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     if (hasUsedEye) {
@@ -1566,7 +1557,7 @@ export default function Dream3Page() {
               makePoster(shirtSize);
             }}
             disabled={!allSlotsFilled || isMakingDesign}
-            className={`w-full py-4 text-sm font-black transition active:scale-[0.97] ${
+            className={`w-full py-4 text-sm font-black transition animate-pulse active:scale-[0.97] ${
               isMakingDesign
                 ? "bg-red-700 text-white"
                 : allSlotsFilled
