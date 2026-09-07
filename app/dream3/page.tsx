@@ -1633,7 +1633,7 @@ export default function Dream3Page() {
         <div className="mx-auto mb-4 w-full max-w-[540px]">
           <div className="relative flex min-h-[260px] flex-col overflow-hidden border border-white/10 bg-white/[0.04] p-6">
             <img
-              src="/shirtman.jpg"
+              src="/shirtman.png"
               alt=""
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-80"
