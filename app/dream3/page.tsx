@@ -1557,7 +1557,7 @@ export default function Dream3Page() {
               makePoster(shirtSize);
             }}
             disabled={!allSlotsFilled || isMakingDesign}
-            className={`w-full py-4 text-sm font-black transition animate-pulse active:scale-[0.97] ${
+            className={`w-full py-4 text-sm font-black transition active:scale-[0.97] ${
               isMakingDesign
                 ? "bg-red-700 text-white"
                 : allSlotsFilled
