@@ -1675,7 +1675,7 @@ export default function Dream3Page() {
           {/* APP DOWNLOAD */}
           <div className="mt-4 border border-white/10 bg-white/[0.04] p-4">
             <h3 className="text-lg font-black">
-              Car Spotter — We Made an App
+              Car Spotter? We Made an App.
             </h3>
 
             <p className="mt-1 text-sm text-white/60">
