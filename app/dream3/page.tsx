@@ -1563,14 +1563,10 @@ export default function Dream3Page() {
             }}
             disabled={!allSlotsFilled || isMakingDesign}
             className={`w-full py-4 text-sm font-black transition active:scale-[0.97] ${
-              pulseCheckout && allSlotsFilled && !isMakingDesign
-                ? "animate-pulse"
-                : ""
-            } ${
               isMakingDesign
                 ? "bg-red-700 text-white"
                 : allSlotsFilled
-                ? "bg-red-600 text-white hover:bg-red-700"
+                ? "bg-red-600 text-white hover:bg-red-700 animate-pulse"
                 : "cursor-not-allowed bg-white/10 text-white"
             }`}
           >
