@@ -4,8 +4,8 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/dream6",
-        destination: "https://dream3.carsceneapparel.com",
+        source: "/dream9",
+        destination: "/",
         permanent: true,
       },
     ];
