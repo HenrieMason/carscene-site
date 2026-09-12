@@ -499,7 +499,7 @@ export default function Dream3Page() {
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
-  const [shirtColor, setShirtColor] = useState<ShirtColor>("Black");
+  const [shirtColor, setShirtColor] = useState<ShirtColor>("White");
   const [shirtSize, setShirtSize] = useState<ShirtSize>("L");
   const allSlotsFilled = slots.every((slot) => slot !== null);
 
@@ -1162,8 +1162,8 @@ export default function Dream3Page() {
     const COLOR_ORDER: ShirtColor[] = [
       "Black",
       "True Navy",
-      "Blue Spruce",
       "White",
+      "Blue Spruce",
       "Orchid",
     ];
 
