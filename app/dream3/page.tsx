@@ -1209,19 +1209,10 @@ export default function Dream3Page() {
       safeSlots.push(null);
     }
 
-    const filledSlots = safeSlots
-      .map((car, realIndex) => ({ car, realIndex }))
-      .filter(
-        (slot): slot is { car: Car; realIndex: number } =>
-          slot.car !== null
-      )
-      .sort((a, b) => a.car.price - b.car.price);
-
-    const emptySlots = safeSlots
-      .map((car, realIndex) => ({ car, realIndex }))
-      .filter((slot) => slot.car === null);
-
-    return [...filledSlots, ...emptySlots].slice(0, 3);
+    return safeSlots.map((car, realIndex) => ({
+      car,
+      realIndex,
+    }));
   }, [slots]);
 
   function renderDream3Design(exportMode = false) {
