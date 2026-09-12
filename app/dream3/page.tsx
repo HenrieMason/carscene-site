@@ -738,6 +738,29 @@ export default function Dream3Page() {
     randomizeDream3();
   }
 
+  function shuffleCarOrder() {
+    if (!allSlotsFilled) return;
+
+    setSlots((current) => {
+      const next = [...current];
+
+      // Shuffle until the order is actually different
+      let shuffled = [...next];
+
+      do {
+        shuffled = [...next].sort(() => Math.random() - 0.5);
+      } while (
+        shuffled.every((car, index) => car?.id === next[index]?.id)
+      );
+
+      return shuffled;
+    });
+
+    setSelectedSlot(null);
+    setPreparedDesignBlob(null);
+    setPrepareDesignPromise(null);
+  }
+
   function clearDream3() {
     if (hasCustomizedDream3) {
       setShowClearConfirm(true);
@@ -1532,18 +1555,11 @@ export default function Dream3Page() {
             </button>
 
             <button
-              onClick={() => {
-                const nextOpenSlot = slots.findIndex((slot) => slot === null);
-                setSelectedSlot(nextOpenSlot === -1 ? 0 : nextOpenSlot);
-                searchSectionRef.current?.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                });
-                setTimeout(() => searchInputRef.current?.focus(), 400);
-              }}
-              className="bg-red-600 px-5 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
+              onClick={shuffleCarOrder}
+              disabled={!allSlotsFilled}
+              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-40"
             >
-              Add Car
+              Shuffle
             </button>
 
             <button
