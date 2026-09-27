@@ -1181,7 +1181,7 @@ export default function Dream3Page() {
         <div
           className="absolute"
           style={{
-            top: title === "My Dream 3" ? "50%" : "25%",
+            top: title === "My Dream 3" ? "45%" : "25%",
             left: "5%",
             width: "90%",
           }}
