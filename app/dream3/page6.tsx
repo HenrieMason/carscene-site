@@ -1,13 +1,16 @@
 "use client";
+
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toPng } from "html-to-image";
 import cars from "../../data/cars.json";
 import { featuredCars } from "../../data/featuredCars";
+
 declare global {
   interface Window {
     fbq?: (...args: any[]) => void;
   }
 }
+
 type Car = {
   brand: string;
   model: string;
@@ -16,6 +19,7 @@ type Car = {
   class: string;
   image: string;
 };
+
 const ENTHUSIAST_CATEGORIES = {
   "JDM": [
     "NSX MK1",
@@ -28,6 +32,7 @@ const ENTHUSIAST_CATEGORIES = {
     "Lancer MK8 Evo",
     "AE86",
   ],
+
   "Muscle": [
     "Mustang MK7 GT",
     "Barracuda MK3",
@@ -39,6 +44,7 @@ const ENTHUSIAST_CATEGORIES = {
     "Cougar MK1",
     "Chevelle MK2 SS",
   ],
+
   "Euro": [
     "Golf MK8 R",
     "TT RS 8S",
@@ -50,6 +56,7 @@ const ENTHUSIAST_CATEGORIES = {
     "A7 C8 Sportback",
     "S Class W223",
   ],
+
   "Supercars": [
     "R8 Type 4S V10",
     "GT-R MK1.3 Premium",
@@ -61,6 +68,7 @@ const ENTHUSIAST_CATEGORIES = {
     "AMG GT Black Series C190",
     "488 Pista",
   ],
+
   "Classic": [
     "Corvette C1 Early",
     "E-Type Series II",
@@ -72,6 +80,7 @@ const ENTHUSIAST_CATEGORIES = {
     "GT40 MK2",
     "288 GTO",
   ],
+
   "Offroad": [
     "Grenadier",
     "TRX",
@@ -83,6 +92,7 @@ const ENTHUSIAST_CATEGORIES = {
     "K5 Blazer MK2",
     "4Runner MK4",
   ],
+
   "Luxury": [
     "X7 G07 LCI M60i",
     "Urus",
@@ -94,6 +104,7 @@ const ENTHUSIAST_CATEGORIES = {
     "DBX",
     "AMG G 63 W465",
   ],
+
   "Hypercars": [
     "918 Spyder",
     "Valkyrie",
@@ -105,6 +116,7 @@ const ENTHUSIAST_CATEGORIES = {
     "Veyron Grand Sport",
     "Huayra Coupe",
   ],
+
   "Rally": [
     "Impreza Blobeye WRX",
     "Celica MK6",
@@ -116,6 +128,7 @@ const ENTHUSIAST_CATEGORIES = {
     "Quattro",
     "Lancer MK6 Evo",
   ],
+
   "Trucks": [
     "F-150 MK13 Shelby",
     "F-150 MK10 SVT Lightning",
@@ -128,7 +141,9 @@ const ENTHUSIAST_CATEGORIES = {
     "F-150 MK9",
   ],
 } as const;
+
 type EnthusiastCategory = keyof typeof ENTHUSIAST_CATEGORIES;
+
 const kBrandOrder = [
   "Acura",
   "Alfa Romeo",
@@ -179,12 +194,14 @@ const kBrandOrder = [
   "Other Cars",
   "Other SUVs",
 ];
+
 function classFromPrice(price: number) {
   if (price < 50000) return "P";
   if (price < 100000) return "A";
   if (price < 500000) return "S";
   return "X";
 }
+
 function classTint(type: string) {
   switch (type) {
     case "X":
@@ -198,9 +215,11 @@ function classTint(type: string) {
       return "rgb(227, 227, 227)";
   }
 }
+
 function gridColor(color: string) {
   return color === "White" ? "#000000" : "#FFFFFF";
 }
+
 function shareBackgroundColor(color: string) {
   switch (color) {
     case "Black":
@@ -216,36 +235,45 @@ function shareBackgroundColor(color: string) {
       return "#ffffff";
   }
 }
+
 const MANUFACTURER_ALIASES: Record<string, string[]> = {
   apollo: ["Intensa Emozione", "Project Evo"],
+
   plymouth: [
     "Road Runner",
     "Barracuda",
     "Prowler",
   ],
+
   lancia: [
     "037 Stradale",
     "Delta S4 Stradale",
   ],
+
   scion: [
     "xB MK1",
     "tC MK",
     "FR-S",
   ],
+
   kia: [
     "K5",
     "Stinger",
   ],
+
   amc: [
     "AMX",
   ],
+
   oldsmobile: [
     "442",
   ],
+
   evolution: [
     "Lancer",
   ],
 };
+
 const CAR_SEARCH_ALIASES: Record<string, string[]> = {
   "MX-5": ["miata", "mazda miata", "mx5"],
   "GT-R": ["gtr", "godzilla"],
@@ -254,9 +282,11 @@ const CAR_SEARCH_ALIASES: Record<string, string[]> = {
   "Impreza": ["sti", "subie", "subs"],
   "RX-7": ["rx7"],
 };
+
 export default function Dream3Page() {
   // DREAM3 FIXED: 6 slots, front preview, responsive 2-column desktop layout
   const SITE_PAUSED = false;
+
   if (SITE_PAUSED) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-black px-6 text-center text-white">
@@ -264,6 +294,7 @@ export default function Dream3Page() {
           <h1 className="text-4xl font-black text-red-600">
             Dream 3 is temporarily paused
           </h1>
+
           <p className="mt-4 text-sm font-bold text-white/60">
             We’re making a few updates. Check back soon.
           </p>
@@ -284,6 +315,7 @@ export default function Dream3Page() {
   const searchResultsScrollRef = useRef<HTMLDivElement>(null);
   const instructionsRef = useRef<HTMLDivElement>(null);
   const [previewStep, setPreviewStep] = useState(0);
+
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const SHIRT_COLORS = {
     White: {
@@ -312,8 +344,10 @@ export default function Dream3Page() {
       sizes: ["S", "M", "L", "XL", "2XL"],
     },
   } as const;
+
   type ShirtColor = keyof typeof SHIRT_COLORS;
   type ShirtSize = "S" | "M" | "L" | "XL" | "2XL";
+
   const SHIRT_VARIANT_IDS: Record<ShirtColor, Partial<Record<ShirtSize, string>>> = {
     White: {
       S: "53881600868659",
@@ -351,7 +385,9 @@ export default function Dream3Page() {
       "2XL": "53881602867507",
     },
   };
+
   const [today, setToday] = useState("");
+
   useEffect(() => {
     setToday(
       new Date().toLocaleDateString("en-US", {
@@ -369,7 +405,7 @@ export default function Dream3Page() {
   const [featuredSeed, setFeaturedSeed] = useState(0);
   const [hasCustomizedDream3, setHasCustomizedDream3] = useState(false);
   const [showShuffleConfirm, setShowShuffleConfirm] = useState(false);
-  const [showRestartConfirm, setShowRestartConfirm] = useState(false);
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
   function getRandomDream3() {
     return [...allCars]
       .sort(() => Math.random() - 0.5)
@@ -378,22 +414,28 @@ export default function Dream3Page() {
   const [slots, setSlots] = useState<(Car | null)[]>(
     Array(3).fill(null)
   );
+
   const hasInitializedSlots = useRef(false);
+
   function getRandomFeaturedDream3() {
     return [...featuredCars]
       .sort(() => Math.random() - 0.5)
       .slice(0, 3)
       .map((name) => allCars.find((car) => car.model === name) ?? null);
   }
+
   function normalizeModelName(value: string) {
     return value.toLowerCase().replace(/[^a-z0-9]/g, "");
   }
+
   function chooseEnthusiastCategory(category: EnthusiastCategory) {
     const selectedCars = ENTHUSIAST_CATEGORIES[category].slice(0, 3).map((model) => {
       const exactMatch = allCars.find((car) => car.model === model);
+
       if (exactMatch) {
         return exactMatch;
       }
+
       return (
         allCars.find(
           (car) =>
@@ -401,22 +443,28 @@ export default function Dream3Page() {
         ) ?? null
       );
     });
+
     const missingModels = ENTHUSIAST_CATEGORIES[category].slice(0, 3).filter(
       (_, index) => selectedCars[index] === null
     );
+
     if (missingModels.length > 0) {
       console.warn(`Missing cars for ${category}:`, missingModels);
     }
+
     const fallbackCars = getRandomDream3().filter(
       (car) =>
         !selectedCars.some((selectedCar) => selectedCar?.id === car.id)
     );
+
     let fallbackIndex = 0;
+
     setSlots(
       selectedCars.map(
         (car) => car ?? fallbackCars[fallbackIndex++] ?? null
       )
     );
+
     setHasCustomizedDream3(false);
     setSelectedSlot(null);
     setSelectedBrand(null);
@@ -425,15 +473,19 @@ export default function Dream3Page() {
     setPrepareDesignPromise(null);
     setShowIntroPopup(false);
     }
+
     function skipEnthusiastPopup() {
       setSlots(getRandomFeaturedDream3());
       setShowIntroPopup(false);
     }
+
     useEffect(() => {
       if (hasInitializedSlots.current) return;
+
       hasInitializedSlots.current = true;
       setShowIntroPopup(false);
     }, []);
+
   const [deleteReadySlot, setDeleteReadySlot] = useState<number | null>(null);
   const [isMakingDesign, setIsMakingDesign] = useState(false);
   const [preparedDesignBlob, setPreparedDesignBlob] = useState<Blob | null>(null);
@@ -442,6 +494,7 @@ export default function Dream3Page() {
   const [pulseEye, setPulseEye] = useState(false);
   const [hasUsedEye, setHasUsedEye] = useState(false);
   const [pulseCheckout, setPulseCheckout] = useState(false);
+
   const [showIntroPopup, setShowIntroPopup] = useState(false);
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
@@ -449,16 +502,22 @@ export default function Dream3Page() {
   const [shirtColor, setShirtColor] = useState<ShirtColor>("White");
   const [shirtSize, setShirtSize] = useState<ShirtSize>("L");
   const allSlotsFilled = slots.every((slot) => slot !== null);
+
   useEffect(() => {
     const justFilledAllThree =
       allSlotsFilled && !wasAllSlotsFilledRef.current;
+
     wasAllSlotsFilledRef.current = allSlotsFilled;
+
     if (!justFilledAllThree) return;
+
     if (autoPreviewTimeoutRef.current) {
       clearTimeout(autoPreviewTimeoutRef.current);
     }
+
     // Show the full shirt as soon as the third car is selected.
     setPreviewStep(1);
+
     // Then slide the page down to the shirt preview.
     const scrollTimer = setTimeout(() => {
       instructionsRef.current?.scrollIntoView({
@@ -466,78 +525,103 @@ export default function Dream3Page() {
         block: "start",
       });
     }, 100);
+
     // Keep the full shirt visible for 5 seconds, then zoom into the design.
     autoPreviewTimeoutRef.current = setTimeout(() => {
       setPreviewStep(0);
       autoPreviewTimeoutRef.current = null;
     }, 5000);
+
     return () => {
       clearTimeout(scrollTimer);
+
       if (autoPreviewTimeoutRef.current) {
         clearTimeout(autoPreviewTimeoutRef.current);
         autoPreviewTimeoutRef.current = null;
       }
     };
   }, [allSlotsFilled]);
+
   useEffect(() => {
     designGenerationRef.current += 1;
     setPreparedDesignBlob(null);
     setPrepareDesignPromise(null);
+
     if (!allSlotsFilled) return;
+
     const timer = setTimeout(() => {
       startPreparingDesign();
     }, 1500);
+
     return () => clearTimeout(timer);
   }, [slots, shirtColor, allSlotsFilled]);
+
   useEffect(() => {
     if (hasUsedEye) {
       setPulseEye(false);
       return;
     }
+
     const interval = setInterval(() => {
       setPulseEye(true);
+
       setTimeout(() => {
         setPulseEye(false);
       }, 700);
     }, 20000);
+
     return () => clearInterval(interval);
   }, [hasUsedEye]);
+
   // Checkout button pulse every 20 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setPulseCheckout(true);
+
       setTimeout(() => {
         setPulseCheckout(false);
       }, 700);
     }, 20000);
+
     return () => clearInterval(interval);
   }, []);
+
   const brands = useMemo(() => {
     const existingBrands = new Set(allCars.map((car) => car.brand));
+
     const orderedBrands = kBrandOrder.filter((brand) =>
       existingBrands.has(brand)
     );
+
     const extraBrands = Array.from(existingBrands)
       .filter((brand) => !kBrandOrder.includes(brand))
       .sort();
+
     return [...orderedBrands, ...extraBrands];
   }, [allCars]);
+
   const defaultOpenSlot = slots.findIndex((slot) => slot === null);
+
   const targetSlot =
     selectedSlot !== null ? selectedSlot : defaultOpenSlot === -1 ? 0 : defaultOpenSlot;
+
   const searchResults = useMemo(() => {
     const q = query.trim().toLowerCase();
     const normalizedQuery = normalizeModelName(q);
+
     if (!q) return [];
+
     return allCars
       .filter((car) => {
         const searchable = `${car.brand} ${car.model}`.toLowerCase();
         const normalizedSearchable = normalizeModelName(searchable);
+
         const acronym = car.model
           .split(/[\s-]+/)
           .map((word) => word[0])
           .join("")
           .toLowerCase();
+
         const carAliases = Object.entries(CAR_SEARCH_ALIASES)
           .filter(([modelName]) =>
             normalizeModelName(car.model).includes(
@@ -545,6 +629,7 @@ export default function Dream3Page() {
             )
           )
           .flatMap(([, aliases]) => aliases);
+
         const manufacturerAliases = Object.entries(MANUFACTURER_ALIASES)
           .filter(([, models]) =>
             models.some((model) =>
@@ -554,9 +639,11 @@ export default function Dream3Page() {
             )
           )
           .map(([manufacturer]) => manufacturer);
+
         const aliases = [...carAliases, ...manufacturerAliases].map(
           normalizeModelName
         );
+
         return (
           searchable.includes(q) ||
           normalizedSearchable.includes(normalizedQuery) ||
@@ -566,12 +653,17 @@ export default function Dream3Page() {
       })
       .slice(0, 36);
   }, [query, allCars]);
+
   useEffect(() => {
     const q = query.trim().toLowerCase();
+
     if (q.length < 3) return;
+
     const timer = setTimeout(() => {
       if (lastLogged.current === q) return;
+
       lastLogged.current = q;
+
       fetch("/api/search-log", {
         method: "POST",
         headers: {
@@ -585,14 +677,18 @@ export default function Dream3Page() {
         console.error("Could not log search:", error);
       });
     }, 900);
+
     return () => clearTimeout(timer);
   }, [query, searchResults.length]);
+
   const brandCars = useMemo(() => {
     if (!selectedBrand) return [];
     return allCars.filter((car) => car.brand === selectedBrand);
   }, [selectedBrand, allCars]);
+
   useEffect(() => {
     if (!selectedBrand) return;
+
     requestAnimationFrame(() => {
       searchResultsScrollRef.current?.scrollTo({
         top: 0,
@@ -600,7 +696,9 @@ export default function Dream3Page() {
       });
     });
   }, [selectedBrand]);
+
   const [featuredCarsList, setFeaturedCarsList] = useState<Car[]>([]);
+
   useEffect(() => {
     setFeaturedCarsList(
       [...allCars]
@@ -608,6 +706,7 @@ export default function Dream3Page() {
         .slice(0, 100)
     );
   }, [featuredSeed]);
+
   function randomizeDream3() {
     setSlots(getRandomDream3());
     setSelectedSlot(null);
@@ -618,6 +717,7 @@ export default function Dream3Page() {
     setPreparedDesignBlob(null);
     setPrepareDesignPromise(null);
   }
+
   function emptyDream3() {
     setSlots(Array(3).fill(null));
     setSelectedSlot(null);
@@ -628,87 +728,88 @@ export default function Dream3Page() {
     setPreparedDesignBlob(null);
     setPrepareDesignPromise(null);
   }
+
   function shuffleDream3() {
     if (hasCustomizedDream3) {
       setShowShuffleConfirm(true);
       return;
     }
+
     randomizeDream3();
   }
+
   function shuffleCarOrder() {
     if (!allSlotsFilled) return;
+
     setSlots((current) => {
       const next = [...current];
+
       // Shuffle until the order is actually different
       let shuffled = [...next];
+
       do {
         shuffled = [...next].sort(() => Math.random() - 0.5);
       } while (
         shuffled.every((car, index) => car?.id === next[index]?.id)
       );
+
       return shuffled;
     });
+
     setSelectedSlot(null);
     setPreparedDesignBlob(null);
     setPrepareDesignPromise(null);
   }
-  function restartDream3() {
-    if (hasCustomizedDream3 || slots.some((slot) => slot !== null)) {
-      setShowRestartConfirm(true);
+
+  function clearDream3() {
+    if (hasCustomizedDream3) {
+      setShowClearConfirm(true);
       return;
     }
-    performRestartDream3();
-  }
-  function performRestartDream3() {
-    if (autoPreviewTimeoutRef.current) {
-      clearTimeout(autoPreviewTimeoutRef.current);
-      autoPreviewTimeoutRef.current = null;
-    }
-    if (colorZoomTimeoutRef.current) {
-      clearTimeout(colorZoomTimeoutRef.current);
-      colorZoomTimeoutRef.current = null;
-    }
+
     emptyDream3();
-    setSearchView("featured");
-    setFeaturedSeed((seed) => seed + 1);
-    setPreviewStep(0);
-    wasAllSlotsFilledRef.current = false;
-    requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
   }
   function addCarToTargetSlot(car: Car) {
     const shouldReturnToPreview =
       selectedSlot !== null || allSlotsFilled;
+
     setHasCustomizedDream3(true);
     setPreparedDesignBlob(null);
     setPrepareDesignPromise(null);
+
     setSlots((current) => {
       const next = current.slice(0, 3);
+
       while (next.length < 3) {
         next.push(null);
       }
+
       const indexToReplace =
         selectedSlot !== null && selectedSlot >= 0 && selectedSlot < 3
           ? selectedSlot
           : next.findIndex((slot) => slot === null);
+
       if (indexToReplace === -1) {
         next[2] = car;
       } else {
         next[indexToReplace] = car;
       }
+
       return next.slice(0, 3);
     });
+
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
     setSearchView("featured");
     setFeaturedSeed((s) => s + 1);
     setDeleteReadySlot(null);
+
     // If the user clicked a slot in the preview to choose/replace that car,
     // return them to the preview after they make their selection.
     if (shouldReturnToPreview) {
       setPreviewStep(0);
+
       setTimeout(() => {
         instructionsRef.current?.scrollIntoView({
           behavior: "smooth",
@@ -717,30 +818,37 @@ export default function Dream3Page() {
       }, 150);
     }
   }
+
   function selectSlot(index: number) {
     setSelectedSlot(index);
     setSelectedBrand(null);
     setQuery("");
     setSearchView("featured");
     setDeleteReadySlot(null);
+
     setTimeout(() => {
       const y =
         searchSectionRef.current!.getBoundingClientRect().top +
         window.scrollY -
         8;
+
       window.scrollTo({
         top: y,
         behavior: "smooth",
       });
     }, 100);
+
     setTimeout(() => {
       searchInputRef.current?.focus();
     }, 450);
   }
+
   async function submitEmail() {
     if (!email.includes("@") || isSubmittingEmail) return;
+
     try {
       setIsSubmittingEmail(true);
+
       const response = await fetch("https://formspree.io/f/xvzjpogb", {
         method: "POST",
         headers: {
@@ -753,9 +861,11 @@ export default function Dream3Page() {
           coupon: "DREAM3",
         }),
       });
+
       if (!response.ok) {
         throw new Error("Formspree submission failed.");
       }
+
       setEmailSubmitted(true);
     } catch (error) {
       console.error(error);
@@ -764,30 +874,37 @@ export default function Dream3Page() {
       setIsSubmittingEmail(false);
     }
   }
+
   async function waitForPosterImages(node: HTMLElement) {
     const images = Array.from(node.querySelectorAll("img"));
+
     await Promise.all(
       images.map(async (img) => {
         if (!img.complete || img.naturalWidth === 0) {
           await new Promise<void>((resolve, reject) => {
             const handleLoad = () => {
               cleanup();
+
               if (img.naturalWidth > 0) {
                 resolve();
               } else {
                 reject(new Error(`Image loaded with no dimensions: ${img.src}`));
               }
             };
+
             const handleError = () => {
               cleanup();
               reject(new Error(`Failed to load image: ${img.src}`));
             };
+
             const cleanup = () => {
               img.removeEventListener("load", handleLoad);
               img.removeEventListener("error", handleError);
             };
+
             img.addEventListener("load", handleLoad, { once: true });
             img.addEventListener("error", handleError, { once: true });
+
             if (img.complete) {
               if (img.naturalWidth > 0) {
                 cleanup();
@@ -799,6 +916,7 @@ export default function Dream3Page() {
             }
           });
         }
+
         if (typeof img.decode === "function") {
           try {
             await img.decode();
@@ -808,30 +926,37 @@ export default function Dream3Page() {
             }
           }
         }
+
         if (img.naturalWidth === 0) {
           throw new Error(`Image is not ready: ${img.src}`);
         }
       })
     );
+
     await new Promise<void>((resolve) => {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => resolve());
       });
     });
   }
+
   function cyclePreview() {
     setHasUsedEye(true);
     setPreviewStep((currentStep) => (currentStep === 0 ? 1 : 0));
   }
+
   async function shareDream3() {
     if (!shareExportRef.current || !allSlotsFilled) {
       alert("Fill all 3 slots before sharing.");
       return;
     }
+
     const node = shareExportRef.current;
+
     try {
       await waitForPosterImages(node);
       await new Promise((resolve) => setTimeout(resolve, 500));
+
       const dataUrl = await toPng(node, {
         cacheBust: true,
         pixelRatio: 4,
@@ -839,10 +964,13 @@ export default function Dream3Page() {
         imagePlaceholder:
           "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
       });
+
       const blob = await (await fetch(dataUrl)).blob();
+
       const file = new File([blob], "dream3-carscene.png", {
         type: "image/png",
       });
+
       if (
         navigator.canShare &&
         navigator.canShare({ files: [file] }) &&
@@ -864,15 +992,20 @@ export default function Dream3Page() {
       alert("Could not share your Dream 3. Try again.");
     }
   }
+  
   async function prepareDesignBlob() {
     if (!exportRef.current || !allSlotsFilled) {
       throw new Error("Design is not ready yet.");
     }
+
     const node = exportRef.current;
+
     await document.fonts.ready;
     await waitForPosterImages(node);
     await new Promise((resolve) => setTimeout(resolve, 500));
+
     let lastError: unknown = null;
+
     for (let attempt = 1; attempt <= 2; attempt++) {
       try {
         if (attempt > 1) {
@@ -880,34 +1013,44 @@ export default function Dream3Page() {
           await waitForPosterImages(node);
           await new Promise((resolve) => setTimeout(resolve, 750));
         }
+
         const dataUrl = await toPng(node, {
           cacheBust: false,
           pixelRatio: 8.3222222222,
           backgroundColor: "transparent",
         });
+
         const response = await fetch(dataUrl);
+
         if (!response.ok) {
           throw new Error("Could not convert design to PNG.");
         }
+
         const blob = await response.blob();
+
         if (!blob || blob.size === 0) {
           throw new Error("Generated design was empty.");
         }
+
         return blob;
       } catch (error) {
         lastError = error;
         console.error(`DESIGN EXPORT ATTEMPT ${attempt} FAILED:`, error);
       }
     }
+
     throw lastError instanceof Error
       ? lastError
       : new Error("Could not generate your design. Please try again.");
   }
+
   async function uploadDesignBlob(blob: Blob) {
     const formData = new FormData();
     const filename = `dream3-${Date.now()}.png`;
+
     formData.append("file", blob, filename);
     formData.append("upload_preset", "dream9_unsigned");
+
     const cloudinaryResponse = await fetch(
       "https://api.cloudinary.com/v1_1/dvcxnicew/image/upload",
       {
@@ -915,18 +1058,27 @@ export default function Dream3Page() {
         body: formData,
       }
     );
+
     const cloudinaryData = await cloudinaryResponse.json();
+
     if (!cloudinaryData.secure_url) {
       throw new Error("Cloudinary upload failed.");
     }
+
     return cloudinaryData.secure_url as string;
   }
+
   function startPreparingDesign() {
     if (!allSlotsFilled) return;
+
     const generation = designGenerationRef.current;
+
     setPreparedDesignBlob(null);
+
     const promise = prepareDesignBlob();
+
     setPrepareDesignPromise(promise);
+
     promise
       .then((blob) => {
         // Only keep the PNG if the design has not changed.
@@ -937,28 +1089,37 @@ export default function Dream3Page() {
       })
       .catch((error) => {
         console.error("BACKGROUND DESIGN PREP FAILED:", error);
+
         if (generation === designGenerationRef.current) {
           setPrepareDesignPromise(null);
           setPreparedDesignBlob(null);
         }
       });
   }
+
   async function makePoster(size: ShirtSize) {
     if (!allSlotsFilled || isMakingDesign) return;
+
     try {
       setIsMakingDesign(true);
+
       let designBlob = preparedDesignBlob;
+
       if (!designBlob) {
         designBlob = prepareDesignPromise
           ? await prepareDesignPromise
           : await prepareDesignBlob();
       }
+
       const designUrl = await uploadDesignBlob(designBlob);
+
       const variantId = SHIRT_VARIANT_IDS[shirtColor][size];
+
       if (!variantId) {
         alert(`${shirtColor} is not available in ${size}.`);
         return;
       }
+
       if (typeof window !== "undefined" && window.fbq) {
         window.fbq("track", "InitiateCheckout", {
           value: 34.99,
@@ -969,6 +1130,7 @@ export default function Dream3Page() {
           num_items: 1,
         });
       }
+
       const checkoutUrl =
         `${SHOPIFY_STORE_URL}/cart/add?id=${variantId}` +
         `&quantity=1` +
@@ -978,6 +1140,7 @@ export default function Dream3Page() {
         `&properties[Dream 3 Size]=${encodeURIComponent(size)}` +
         `&properties[Dream 3 Color]=${encodeURIComponent(shirtColor)}` +
         `&return_to=/checkout`;
+
       window.location.href = checkoutUrl;
     } catch (error) {
       console.error("MAKE POSTER FAILED:", error);
@@ -986,6 +1149,7 @@ export default function Dream3Page() {
       setIsMakingDesign(false);
     }
   }
+
   function ColorPicker() {
     const COLOR_SWATCHES: Record<ShirtColor, string> = {
       White: "#f5f5f0",
@@ -994,6 +1158,7 @@ export default function Dream3Page() {
       "True Navy": "#3d5774ff",
       Orchid: "#D8BFD8",
     };
+
     const COLOR_ORDER: ShirtColor[] = [
       "Black",
       "True Navy",
@@ -1001,6 +1166,7 @@ export default function Dream3Page() {
       "Blue Spruce",
       "Orchid",
     ];
+
     return (
       <div className="grid grid-cols-5 gap-2">
         {COLOR_ORDER.map((color) => (
@@ -1011,12 +1177,15 @@ export default function Dream3Page() {
               setShirtColor(color);
               setPreparedDesignBlob(null);
               setPrepareDesignPromise(null);
+
               // Cancel the previous timer
               if (colorZoomTimeoutRef.current) {
                 clearTimeout(colorZoomTimeoutRef.current);
               }
+
               // Show the full shirt
               setPreviewStep(1);
+
               // Zoom back in 5 seconds after the LAST color selection
               colorZoomTimeoutRef.current = setTimeout(() => {
                 setPreviewStep(0);
@@ -1035,14 +1204,17 @@ export default function Dream3Page() {
       </div>
     );
   }
+
   function SizePicker() {
     const SIZE_ORDER: ShirtSize[] = ["S", "M", "L", "XL", "2XL"];
+
     return (
       <div className="grid grid-cols-5 gap-2">
         {SIZE_ORDER.map((size) => {
           const isAvailable = SHIRT_COLORS[shirtColor].sizes.includes(
             size as never
           );
+
           return (
             <button
               key={size}
@@ -1066,18 +1238,23 @@ export default function Dream3Page() {
       </div>
     );
   }
+
   const displaySlots = useMemo(() => {
     const safeSlots = slots.slice(0, 3);
+
     while (safeSlots.length < 3) {
       safeSlots.push(null);
     }
+
     return safeSlots.map((car, realIndex) => ({
       car,
       realIndex,
     }));
   }, [slots]);
+
   function renderDream3Design(exportMode = false) {
     const borderColor = gridColor(shirtColor);
+
     return (
       <div
         className={`relative w-full overflow-hidden transition-transform duration-300 ${
@@ -1090,6 +1267,7 @@ export default function Dream3Page() {
           crossOrigin="anonymous"
           className="pointer-events-none absolute inset-0 h-full w-full scale-150 object-contain"
         />
+
         <div
           className="absolute"
           style={{
@@ -1106,9 +1284,11 @@ export default function Dream3Page() {
               className="pointer-events-none relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
             />
           </div>
+
           <div className="relative z-10 grid grid-cols-3 gap-0">
             {displaySlots.map(({ car, realIndex }, index) => {
               const type = car ? classFromPrice(car.price) : "P";
+
               return (
                 <button
                   key={`preview-slot-${realIndex}`}
@@ -1130,6 +1310,7 @@ export default function Dream3Page() {
                         loading="eager"
                         className="pointer-events-none absolute -right-[35%] -bottom-[0%] h-[95%] w-auto max-w-none object-contain"
                       />
+
                       {!exportMode && deleteReadySlot === index && (
                         <div className="absolute inset-0 flex items-center justify-center bg-black/35">
                           <span className="text-[42px] font-black text-red-500">
@@ -1152,6 +1333,7 @@ export default function Dream3Page() {
       </div>
     );
   }
+
   function Dream3ExportDesign({
     exportMode = false,
     title = "Dream 3",
@@ -1196,6 +1378,7 @@ export default function Dream3Page() {
               className="pointer-events-none relative z-20 h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
             />
           </div>
+
           <div className="relative z-10 grid grid-cols-3 gap-0">
             {displaySlots.map(({ car, realIndex }) => {
               return (
@@ -1238,8 +1421,10 @@ export default function Dream3Page() {
       </div>
     );
   }
+
   return (
     <main className="min-h-screen overflow-x-hidden bg-black px-4 py-5 text-white md:p-6">
+
       <header className="mx-auto mb-5 w-full max-w-7xl border-b border-white/10 pb-4">
         <img
           src="/carsceneapparel.webp"
@@ -1247,6 +1432,7 @@ export default function Dream3Page() {
           className="mx-auto h-auto w-full object-contain"
         />
       </header>
+
       <div className="mx-auto grid w-full max-w-7xl gap-6 md:grid-cols-[420px_minmax(0,1fr)] md:gap-8">
         <section className="order-2 min-w-0 overflow-hidden">
         <div
@@ -1273,6 +1459,7 @@ export default function Dream3Page() {
                       crossOrigin="anonymous"
                       className="pointer-events-none absolute left-1/2 top-[42%] h-[300%] w-[300%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
                     />
+
                     {/* Zoomed-in Dream 3 design */}
                     <div
                       className="absolute"
@@ -1292,6 +1479,7 @@ export default function Dream3Page() {
                             className="h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
                           />
                         </div>
+
                         <div className="relative z-10 grid grid-cols-3 gap-0">
                           {displaySlots.map(({ car, realIndex }, index) => (
                             <button
@@ -1314,6 +1502,7 @@ export default function Dream3Page() {
                                     loading="eager"
                                     className="pointer-events-none absolute -right-[35%] bottom-0 h-[95%] w-auto max-w-none object-contain"
                                   />
+
                                   {deleteReadySlot === index && (
                                     <div className="absolute inset-0 flex items-center justify-center bg-black/35">
                                       <span className="text-[42px] font-black text-red-500">
@@ -1341,6 +1530,7 @@ export default function Dream3Page() {
                 ) : (
                   renderDream3Design(false)
                 )}
+
                 <button
                   type="button"
                   onClick={cyclePreview}
@@ -1354,8 +1544,16 @@ export default function Dream3Page() {
                 </button>
               </div>
             </div>
+
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-4">
           <div className="grid grid-cols-3 gap-2">
+            <button
+              onClick={clearDream3}
+              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+            >
+              Clear
+            </button>
+
             <button
               onClick={shuffleCarOrder}
               disabled={!allSlotsFilled}
@@ -1363,12 +1561,7 @@ export default function Dream3Page() {
             >
               Shuffle
             </button>
-            <button
-              onClick={restartDream3}
-              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
-            >
-              Restart
-            </button>
+
             <button
               onClick={shareDream3}
               className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
@@ -1377,6 +1570,7 @@ export default function Dream3Page() {
             </button>
           </div>
         </div>
+
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-4">
           <button
             onClick={() => {
@@ -1401,15 +1595,18 @@ export default function Dream3Page() {
                 }`}
           </button>
         </div>
+
         <div className="mx-auto mb-4 w-full max-w-[540px]">
           <div className="grid gap-2">
             <SizePicker />
             <ColorPicker />
           </div>
+
           <div className="mt-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
              $34.99 • Free Shipping
           </div>
         </div>
+
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
           {displaySlots.map(({ car, realIndex }, index) => (
             <button
@@ -1433,6 +1630,7 @@ export default function Dream3Page() {
               {car ? (
                 <div className="flex items-center justify-between gap-3">
                   <span className="min-w-0 truncate">{car.model}</span>
+
                   <span className="shrink-0 bg-black/10 px-3 py-1 text-xs font-black text-black/70">
                     Replace
                   </span>
@@ -1443,6 +1641,7 @@ export default function Dream3Page() {
             </button>
           ))}
         </div>
+
         <div className="mx-auto mb-4 w-full max-w-[540px]">
           <div className="relative flex min-h-[260px] flex-col overflow-hidden border border-white/10 bg-white/[0.04] p-6">
             <img
@@ -1451,15 +1650,18 @@ export default function Dream3Page() {
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-80"
             />
+
             <div className="relative z-10 flex h-full flex-1 flex-col justify-end">
               <h3 className="text-lg font-black">
                 Get 10% Off Your Dream 3 Shirt
               </h3>
+
               <p className="mt-1 text-sm text-white">
                 {emailSubmitted
                   ? "Success! Use code DREAM3 at checkout."
                   : "Enter your email and we'll display a coupon code."}
               </p>
+
               {!emailSubmitted && (
                 <div className="mt-3 flex gap-2">
                   <input
@@ -1469,6 +1671,7 @@ export default function Dream3Page() {
                     placeholder="Email address"
                     className="min-w-0 flex-1 border border-white bg-white/10 px-4 py-3 text-white placeholder:text-white/70 outline-none"
                   />
+
                   <button
                     onClick={submitEmail}
                     disabled={isSubmittingEmail}
@@ -1480,17 +1683,21 @@ export default function Dream3Page() {
               )}
             </div>
           </div>
+
           <div className="mt-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
             100+ Orders • Opening Day: July 6, 2026
           </div>
+
           {/* APP DOWNLOAD */}
           <div className="mt-4 border border-white/10 bg-white/[0.04] p-4">
             <h3 className="text-lg font-black">
               Car Spotter? We Made an App.
             </h3>
+
             <p className="mt-1 text-sm text-white/60">
               Build your dream garage and go car spotting.
             </p>
+
             <div className="mt-3 grid grid-cols-2 gap-2">
               <a
                 href="https://apps.apple.com/us/app/carscene-dream-garage/id6760978493"
@@ -1500,6 +1707,7 @@ export default function Dream3Page() {
               >
                 iPhone
               </a>
+
               <a
                 href="https://play.google.com/store/apps/details?id=com.carscene.app"
                 target="_blank"
@@ -1511,7 +1719,9 @@ export default function Dream3Page() {
             </div>
           </div>
         </div>
+
         </section>
+
         <section className="order-1 mx-auto w-full max-w-[700px] min-w-0 md:mx-0 md:max-w-none">
           <div
             ref={searchSectionRef}
@@ -1521,10 +1731,12 @@ export default function Dream3Page() {
               <h1 className="text-2xl sm:text-3xl font-black tracking-tight whitespace-nowrap">
                 Select Your 3 Dream Cars
               </h1>
+
               <p className="mt-2 text-sm text-white/50">
                 Search 1,842 cars or browse by brand
               </p>
             </div>
+
             <input
               ref={searchInputRef}
               value={query}
@@ -1535,6 +1747,7 @@ export default function Dream3Page() {
               placeholder="Search all cars..."
               className="w-full border border-white/10 bg-white/10 px-4 py-3 text-white outline-none placeholder:text-white/40"
             />
+
             <div className="mt-3 grid grid-cols-2 gap-2">
               <button
                 onClick={() => {
@@ -1550,6 +1763,7 @@ export default function Dream3Page() {
               >
                 Featured
               </button>
+
               <button
                 onClick={() => {
                   setQuery("");
@@ -1565,6 +1779,7 @@ export default function Dream3Page() {
                 Brands
               </button>
             </div>
+
             <div
               ref={searchResultsScrollRef}
               className="mt-4 h-[360px] overflow-y-auto pr-1 sm:h-[60vh]"
@@ -1593,10 +1808,12 @@ export default function Dream3Page() {
                         loading="eager"
                         className="h-14 w-24 shrink-0 object-contain"
                       />
+
                       <div className="min-w-0 flex-1 overflow-hidden">
                         <div className="line-clamp-2 font-black leading-tight">
                           {car.model}
                         </div>
+
                         <div className="text-sm text-black/60">
                           ♠{car.price.toLocaleString()}
                         </div>
@@ -1613,7 +1830,9 @@ export default function Dream3Page() {
                   >
                     ← Back to Brands
                   </button>
+
                   <h2 className="mb-3 text-xl font-black">{selectedBrand}</h2>
+
                   <div className="space-y-2">
                     {brandCars.map((car) => (
                       <button
@@ -1632,8 +1851,10 @@ export default function Dream3Page() {
                           loading="eager"
                           className="h-14 w-24 shrink-0 object-contain"
                         />
+
                         <div className="min-w-0 flex-1 overflow-hidden">
                           <div className="line-clamp-2 font-black leading-tight">{car.model}</div>
+
                           <div className="text-sm text-black/60">
                             ♠{car.price.toLocaleString()}
                           </div>
@@ -1645,6 +1866,7 @@ export default function Dream3Page() {
               ) : searchView === "featured" ? (
                 <div>
                   <h2 className="mb-3 text-xl font-black">Featured Cars</h2>
+
                   <div className="space-y-2">
                     {featuredCarsList.map((car) => (
                       <button
@@ -1663,10 +1885,12 @@ export default function Dream3Page() {
                           loading="eager"
                           className="h-14 w-24 shrink-0 object-contain"
                         />
+
                         <div className="min-w-0 flex-1 overflow-hidden">
                           <div className="line-clamp-2 font-black leading-tight">
                             {car.model}
                           </div>
+
                           <div className="text-sm text-black/60">
                             ♠{car.price.toLocaleString()}
                           </div>
@@ -1674,9 +1898,11 @@ export default function Dream3Page() {
                       </button>
                         ))}
                       </div>
+
                       <button
                         onClick={() => {
                           setFeaturedSeed((s) => s + 1);
+
                           requestAnimationFrame(() => {
                             requestAnimationFrame(() => {
                               (
@@ -1698,6 +1924,7 @@ export default function Dream3Page() {
               ) : (
                 <div>
                   <h2 className="mb-3 text-xl font-black">Choose a Brand</h2>
+
                   <div className="grid grid-cols-2 gap-1.5">
                     {brands.map((brand) => (
                       <button
@@ -1713,39 +1940,45 @@ export default function Dream3Page() {
               )}
              </div>
           </div>
+
         </section>
       </div>
-      {showRestartConfirm && (
+
+      {showClearConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
           <div className="w-full max-w-[420px] border border-white/10 bg-[#111] p-5 text-center shadow-2xl">
             <h3 className="text-xl font-black text-white">
-              Restart your Dream 3?
+              Clear your Dream 3?
             </h3>
+
             <p className="mt-2 text-sm font-bold text-white/60">
-              This will remove your 3 chosen cars and take you back to the top to select 3 cars again.
+              This will remove every car from your current Dream 3.
             </p>
+
             <div className="mt-5 grid grid-cols-2 gap-2">
               <button
                 type="button"
-                onClick={() => setShowRestartConfirm(false)}
+                onClick={() => setShowClearConfirm(false)}
                 className="bg-white/10 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
               >
                 Cancel
               </button>
+
               <button
                 type="button"
                 onClick={() => {
-                  setShowRestartConfirm(false);
-                  performRestartDream3();
+                  setShowClearConfirm(false);
+                  emptyDream3();
                 }}
                 className="bg-red-600 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
               >
-                Restart
+                Clear
               </button>
             </div>
           </div>
         </div>
       )}
+
       <div className="pointer-events-none fixed left-0 top-0 opacity-0">
         <div
           ref={exportRef}
@@ -1756,6 +1989,7 @@ export default function Dream3Page() {
         >
           <Dream3ExportDesign exportMode title="Dream 3" />
         </div>
+
         <div
           ref={shareExportRef}
           style={{
