@@ -961,7 +961,7 @@ export default function Dream3Page() {
       }
       if (typeof window !== "undefined" && window.fbq) {
         window.fbq("track", "InitiateCheckout", {
-          value: 34.99,
+          value: 39.99,
           currency: "USD",
           content_name: "Dream 3 Shirt",
           content_type: "product",
@@ -1407,7 +1407,7 @@ export default function Dream3Page() {
             <ColorPicker />
           </div>
           <div className="mt-4 rounded-sm bg-white/5 py-2 text-center text-xs font-bold text-white/45">
-             $34.99 • Free Shipping
+             $39.99 • Free Shipping
           </div>
         </div>
         <div className="mx-auto mb-4 grid w-full max-w-[540px] gap-2">
