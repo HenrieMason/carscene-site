@@ -530,8 +530,8 @@ async function createPrintifyOrder({
             {
             id: imageData.id,
             x: 0.5,
-            y: 0.50,//46
-            scale: 0.100, //92
+            y: 0.49,//46
+            scale: 0.99, //92
             angle: 0,
             },
         ],
