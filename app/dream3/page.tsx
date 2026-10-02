@@ -1188,7 +1188,7 @@ export default function Dream3Page() {
         >
           <div className="absolute bottom-full left-0 flex w-full justify-center pb-[1%]">
             <img
-              src="/dream3black10.webp"
+              src="/dream3black11.webp"
               alt="Dream 3"
               crossOrigin="anonymous"
               decoding="sync"
