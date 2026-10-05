@@ -1536,36 +1536,38 @@ export default function Dream3Page() {
               className="w-full border border-white/10 bg-white/10 px-4 py-3 text-white outline-none placeholder:text-white/40"
             />
             <div className="mt-3 grid grid-cols-2 gap-2">
-              <button
-                onClick={() => {
-                  setQuery("");
-                  setSelectedBrand(null);
-                  setSearchView("featured");
-                }}
-                className={`py-3 text-sm font-black transition ${
-                  searchView === "featured"
-                    ? "bg-red-600 text-white"
-                    : "bg-white/10 text-white hover:bg-white/15"
-                }`}
-              >
-                Featured
-              </button>
+                {/* LEFT — BRANDS */}
+                <button
+                  onClick={() => {
+                    setQuery("");
+                    setSelectedBrand(null);
+                    setSearchView("brands");
+                  }}
+                  className={`py-3 text-sm font-black transition ${
+                    searchView === "brands"
+                      ? "bg-red-600 text-white"
+                      : "bg-white/10 text-white hover:bg-white/15"
+                  }`}
+                >
+                  Brands
+                </button>
 
-              <button
-                onClick={() => {
-                  setQuery("");
-                  setSelectedBrand(null);
-                  setSearchView("brands");
-                }}
-                className={`py-3 text-sm font-black transition ${
-                  searchView === "brands"
-                    ? "bg-red-600 text-white"
-                    : "bg-white/10 text-white hover:bg-white/15"
-                }`}
-              >
-                Brands
-              </button>
-            </div>
+                {/* RIGHT — FEATURED */}
+                <button
+                  onClick={() => {
+                    setQuery("");
+                    setSelectedBrand(null);
+                    setSearchView("featured");
+                  }}
+                  className={`py-3 text-sm font-black transition ${
+                    searchView === "featured"
+                      ? "bg-red-600 text-white"
+                      : "bg-white/10 text-white hover:bg-white/15"
+                  }`}
+                >
+                  Featured
+                </button>
+              </div>
             <div
               ref={searchResultsScrollRef}
               className="mt-4 h-[360px] overflow-y-auto pr-1 sm:h-[60vh]"
