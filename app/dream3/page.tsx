@@ -1522,7 +1522,7 @@ export default function Dream3Page() {
                 Select Your 3 Dream Cars
               </h1>
               <p className="mt-2 text-sm text-white/50">
-                Search 1,842 cars or browse by brand
+                Search 1,852 cars or browse by brand
               </p>
             </div>
             <input
