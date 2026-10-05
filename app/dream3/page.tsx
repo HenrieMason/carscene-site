@@ -364,7 +364,7 @@ export default function Dream3Page() {
   const [query, setQuery] = useState("");
   const lastLogged = useRef("");
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
-  const [searchView, setSearchView] = useState<"featured" | "brands">("featured");
+  const [searchView, setSearchView] = useState<"featured" | "brands">("brands");
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
   const [featuredSeed, setFeaturedSeed] = useState(0);
   const [hasCustomizedDream3, setHasCustomizedDream3] = useState(false);
@@ -669,7 +669,7 @@ export default function Dream3Page() {
       colorZoomTimeoutRef.current = null;
     }
     emptyDream3();
-    setSearchView("featured");
+    setSearchView("brands");
     setFeaturedSeed((seed) => seed + 1);
     setPreviewStep(0);
     wasAllSlotsFilledRef.current = false;
@@ -702,7 +702,7 @@ export default function Dream3Page() {
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
-    setSearchView("featured");
+    setSearchView("brands");
     setFeaturedSeed((s) => s + 1);
     setDeleteReadySlot(null);
     // If the user clicked a slot in the preview to choose/replace that car,
@@ -721,7 +721,7 @@ export default function Dream3Page() {
     setSelectedSlot(index);
     setSelectedBrand(null);
     setQuery("");
-    setSearchView("featured");
+    setSearchView("brands");
     setDeleteReadySlot(null);
     setTimeout(() => {
       const y =
@@ -1540,7 +1540,7 @@ export default function Dream3Page() {
                 onClick={() => {
                   setQuery("");
                   setSelectedBrand(null);
-                  setSearchView("featured");
+                  setSearchView("brands");
                 }}
                 className={`py-3 text-sm font-black transition ${
                   searchView === "featured"
