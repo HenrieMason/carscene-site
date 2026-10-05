@@ -1540,7 +1540,7 @@ export default function Dream3Page() {
                 onClick={() => {
                   setQuery("");
                   setSelectedBrand(null);
-                  setSearchView("brands");
+                  setSearchView("featured");
                 }}
                 className={`py-3 text-sm font-black transition ${
                   searchView === "featured"
@@ -1550,11 +1550,12 @@ export default function Dream3Page() {
               >
                 Featured
               </button>
+
               <button
                 onClick={() => {
                   setQuery("");
                   setSelectedBrand(null);
-                  setSearchView("featured");
+                  setSearchView("brands");
                 }}
                 className={`py-3 text-sm font-black transition ${
                   searchView === "brands"
