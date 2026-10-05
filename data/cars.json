@@ -13,7 +13,7 @@
     "price": 20000,
     "id": "AC002",
     "class": "P",
-    "image": "/WebPCars/ILX_MK1_3.webp"
+    "image": "/WebPCars/ILX_MK1.3.webp"
   },
   {
     "brand": "Acura",
@@ -37,7 +37,7 @@
     "price": 15000,
     "id": "AC005",
     "class": "P",
-    "image": "/WebPCars/Integra_MK3_GS_R_USDM.webp"
+    "image": "/WebPCars/Integra_MK3_GS-R_(USDM).webp"
   },
   {
     "brand": "Acura",
@@ -45,7 +45,7 @@
     "price": 50000,
     "id": "AC006",
     "class": "A",
-    "image": "/WebPCars/Integra_MK3_Type_R_USDM.webp"
+    "image": "/WebPCars/Integra_MK3_Type_R_(USDM).webp"
   },
   {
     "brand": "Acura",
@@ -85,7 +85,7 @@
     "price": 10000,
     "id": "AC011",
     "class": "P",
-    "image": "/WebPCars/MDX_MK3_1.webp"
+    "image": "/WebPCars/MDX_MK3.1.webp"
   },
   {
     "brand": "Acura",
@@ -93,7 +93,7 @@
     "price": 20000,
     "id": "AC012",
     "class": "P",
-    "image": "/WebPCars/MDX_MK3_2.webp"
+    "image": "/WebPCars/MDX_MK3.2.webp"
   },
   {
     "brand": "Acura",
@@ -133,7 +133,7 @@
     "price": 15000,
     "id": "AC017",
     "class": "P",
-    "image": "/WebPCars/RDX_MK2_1.webp"
+    "image": "/WebPCars/RDX_MK2.1.webp"
   },
   {
     "brand": "Acura",
@@ -141,7 +141,7 @@
     "price": 15000,
     "id": "AC018",
     "class": "P",
-    "image": "/WebPCars/RDX_MK2_2.webp"
+    "image": "/WebPCars/RDX_MK2.2.webp"
   },
   {
     "brand": "Acura",
@@ -149,7 +149,7 @@
     "price": 25000,
     "id": "AC019",
     "class": "P",
-    "image": "/WebPCars/RDX_MK3_1.webp"
+    "image": "/WebPCars/RDX_MK3.1.webp"
   },
   {
     "brand": "Acura",
@@ -157,7 +157,7 @@
     "price": 50000,
     "id": "AC020",
     "class": "A",
-    "image": "/WebPCars/RDX_MK3_2.webp"
+    "image": "/WebPCars/RDX_MK3.2.webp"
   },
   {
     "brand": "Acura",
@@ -181,7 +181,7 @@
     "price": 25000,
     "id": "AC023",
     "class": "P",
-    "image": "/WebPCars/RLX_MK1_2.webp"
+    "image": "/WebPCars/RLX_MK1.2.webp"
   },
   {
     "brand": "Acura",
@@ -285,7 +285,7 @@
     "price": 20000,
     "id": "AR005",
     "class": "P",
-    "image": "/WebPCars/GTV_6.webp"
+    "image": "/WebPCars/GTV-6.webp"
   },
   {
     "brand": "Alfa Romeo",
@@ -477,7 +477,7 @@
     "price": 1500000,
     "id": "AM014",
     "class": "X",
-    "image": "/WebPCars/One_77.webp"
+    "image": "/WebPCars/One-77.webp"
   },
   {
     "brand": "Aston Martin",
@@ -733,7 +733,7 @@
     "price": 10000,
     "id": "AU015",
     "class": "P",
-    "image": "/WebPCars/A5_B8_5_Coupe.webp"
+    "image": "/WebPCars/A5_B8.5_Coupe.webp"
   },
   {
     "brand": "Audi",
@@ -741,7 +741,7 @@
     "price": 10000,
     "id": "AU016",
     "class": "P",
-    "image": "/WebPCars/A5_B8_5_Sportback.webp"
+    "image": "/WebPCars/A5_B8.5_Sportback.webp"
   },
   {
     "brand": "Audi",
@@ -813,7 +813,7 @@
     "price": 30000,
     "id": "AU025",
     "class": "P",
-    "image": "/WebPCars/A6_C7_5_Sedan.webp"
+    "image": "/WebPCars/A6_C7.5_Sedan.webp"
   },
   {
     "brand": "Audi",
@@ -845,7 +845,7 @@
     "price": 75000,
     "id": "AU114",
     "class": "A",
-    "image": "/WebPCars/A6_e_tron.webp"
+    "image": "/WebPCars/A6_e-tron.webp"
   },
   {
     "brand": "Audi",
@@ -885,7 +885,7 @@
     "price": 15000,
     "id": "AU033",
     "class": "P",
-    "image": "/WebPCars/A8_D3_5_Sedan.webp"
+    "image": "/WebPCars/A8_D3.5_Sedan.webp"
   },
   {
     "brand": "Audi",
@@ -901,7 +901,7 @@
     "price": 30000,
     "id": "AU035",
     "class": "P",
-    "image": "/WebPCars/A8_D4_5_Sedan.webp"
+    "image": "/WebPCars/A8_D4.5_Sedan.webp"
   },
   {
     "brand": "Audi",
@@ -917,7 +917,7 @@
     "price": 100000,
     "id": "AU037",
     "class": "S",
-    "image": "/WebPCars/A8_D5_5_Sedan.webp"
+    "image": "/WebPCars/A8_D5.5_Sedan.webp"
   },
   {
     "brand": "Audi",
@@ -957,7 +957,7 @@
     "price": 65000,
     "id": "AU116",
     "class": "A",
-    "image": "/WebPCars/Q4_e_tron.webp"
+    "image": "/WebPCars/Q4_e-tron.webp"
   },
   {
     "brand": "Audi",
@@ -1005,7 +1005,7 @@
     "price": 80000,
     "id": "AU117",
     "class": "A",
-    "image": "/WebPCars/Q6_e_tron.webp"
+    "image": "/WebPCars/Q6_e-tron.webp"
   },
   {
     "brand": "Audi",
@@ -1029,7 +1029,7 @@
     "price": 70000,
     "id": "AU048",
     "class": "A",
-    "image": "/WebPCars/Q7_4M_5_SUV.webp"
+    "image": "/WebPCars/Q7_4M.5_SUV.webp"
   },
   {
     "brand": "Audi",
@@ -1045,7 +1045,7 @@
     "price": 45000,
     "id": "AU118",
     "class": "P",
-    "image": "/WebPCars/Q8_e_tron.webp"
+    "image": "/WebPCars/Q8_e-tron.webp"
   },
   {
     "brand": "Audi",
@@ -1053,7 +1053,7 @@
     "price": 180000,
     "id": "AU119",
     "class": "S",
-    "image": "/WebPCars/RS_e_tron_GT.webp"
+    "image": "/WebPCars/RS_e-tron_GT.webp"
   },
   {
     "brand": "Audi",
@@ -1077,7 +1077,7 @@
     "price": 40000,
     "id": "AU052",
     "class": "P",
-    "image": "/WebPCars/RS3_8V_5_Sedan.webp"
+    "image": "/WebPCars/RS3_8V.5_Sedan.webp"
   },
   {
     "brand": "Audi",
@@ -1141,7 +1141,7 @@
     "price": 40000,
     "id": "AU060",
     "class": "P",
-    "image": "/WebPCars/RS7_C7_5_Sportback.webp"
+    "image": "/WebPCars/RS7_C7.5_Sportback.webp"
   },
   {
     "brand": "Audi",
@@ -1237,7 +1237,7 @@
     "price": 40000,
     "id": "AU068",
     "class": "P",
-    "image": "/WebPCars/SQ5_FY_5_SUV.webp"
+    "image": "/WebPCars/SQ5_FY.5_SUV.webp"
   },
   {
     "brand": "Audi",
@@ -1245,7 +1245,7 @@
     "price": 40000,
     "id": "AU069",
     "class": "P",
-    "image": "/WebPCars/SQ5_FY_5_Sportback.webp"
+    "image": "/WebPCars/SQ5_FY.5_Sportback.webp"
   },
   {
     "brand": "Audi",
@@ -1269,7 +1269,7 @@
     "price": 85000,
     "id": "AU120",
     "class": "A",
-    "image": "/WebPCars/SQ6_e_tron.webp"
+    "image": "/WebPCars/SQ6_e-tron.webp"
   },
   {
     "brand": "Audi",
@@ -1285,7 +1285,7 @@
     "price": 110000,
     "id": "AU073",
     "class": "S",
-    "image": "/WebPCars/SQ7_4M_5_SUV.webp"
+    "image": "/WebPCars/SQ7_4M.5_SUV.webp"
   },
   {
     "brand": "Audi",
@@ -1309,7 +1309,7 @@
     "price": 15000,
     "id": "AU076",
     "class": "P",
-    "image": "/WebPCars/S3_8V_5_Sedan.webp"
+    "image": "/WebPCars/S3_8V.5_Sedan.webp"
   },
   {
     "brand": "Audi",
@@ -1389,7 +1389,7 @@
     "price": 65000,
     "id": "AU086",
     "class": "A",
-    "image": "/WebPCars/S4_B9_5_Sedan.webp"
+    "image": "/WebPCars/S4_B9.5_Sedan.webp"
   },
   {
     "brand": "Audi",
@@ -1405,7 +1405,7 @@
     "price": 25000,
     "id": "AU088",
     "class": "P",
-    "image": "/WebPCars/S5_B8_5_Coupe.webp"
+    "image": "/WebPCars/S5_B8.5_Coupe.webp"
   },
   {
     "brand": "Audi",
@@ -1413,7 +1413,7 @@
     "price": 25000,
     "id": "AU089",
     "class": "P",
-    "image": "/WebPCars/S5_B8_5_Sportback.webp"
+    "image": "/WebPCars/S5_B8.5_Sportback.webp"
   },
   {
     "brand": "Audi",
@@ -1477,7 +1477,7 @@
     "price": 90000,
     "id": "AU121",
     "class": "A",
-    "image": "/WebPCars/S6_e_tron.webp"
+    "image": "/WebPCars/S6_e-tron.webp"
   },
   {
     "brand": "Audi",
@@ -1525,7 +1525,7 @@
     "price": 35000,
     "id": "AU102",
     "class": "P",
-    "image": "/WebPCars/S8_D4_5_Sedan.webp"
+    "image": "/WebPCars/S8_D4.5_Sedan.webp"
   },
   {
     "brand": "Audi",
@@ -1541,7 +1541,7 @@
     "price": 140000,
     "id": "AU104",
     "class": "S",
-    "image": "/WebPCars/S8_D5_5_Sedan.webp"
+    "image": "/WebPCars/S8_D5.5_Sedan.webp"
   },
   {
     "brand": "Audi",
@@ -1629,7 +1629,7 @@
     "price": 70000,
     "id": "BE006",
     "class": "A",
-    "image": "/WebPCars/Bentayga_MK1_1.webp"
+    "image": "/WebPCars/Bentayga_MK1.1.webp"
   },
   {
     "brand": "Bentley",
@@ -1637,7 +1637,7 @@
     "price": 400000,
     "id": "BE007",
     "class": "S",
-    "image": "/WebPCars/Bentayga_MK1_2.webp"
+    "image": "/WebPCars/Bentayga_MK1.2.webp"
   },
   {
     "brand": "Bentley",
@@ -3053,7 +3053,7 @@
     "price": 2000000,
     "id": "BU010",
     "class": "X",
-    "image": "/WebPCars/Veyron_16_4.webp"
+    "image": "/WebPCars/Veyron_16.4.webp"
   },
   {
     "brand": "Bugatti",
@@ -3101,7 +3101,7 @@
     "price": 35000,
     "id": "BK002",
     "class": "P",
-    "image": "/WebPCars/Envision_MK2_2.webp"
+    "image": "/WebPCars/Envision_MK2.2.webp"
   },
   {
     "brand": "Buick",
@@ -3317,7 +3317,7 @@
     "price": 35000,
     "id": "CA051",
     "class": "P",
-    "image": "/WebPCars/ATS_V.webp"
+    "image": "/WebPCars/ATS-V.webp"
   },
   {
     "brand": "Cadillac",
@@ -3397,7 +3397,7 @@
     "price": 65000,
     "id": "CA010",
     "class": "A",
-    "image": "/WebPCars/CT4_V.webp"
+    "image": "/WebPCars/CT4-V.webp"
   },
   {
     "brand": "Cadillac",
@@ -3405,7 +3405,7 @@
     "price": 75000,
     "id": "CA011",
     "class": "A",
-    "image": "/WebPCars/CT4_V_Blackwing.webp"
+    "image": "/WebPCars/CT4-V_Blackwing.webp"
   },
   {
     "brand": "Cadillac",
@@ -3413,7 +3413,7 @@
     "price": 25000,
     "id": "CA012",
     "class": "P",
-    "image": "/WebPCars/CT5_MK1_1.webp"
+    "image": "/WebPCars/CT5_MK1.1.webp"
   },
   {
     "brand": "Cadillac",
@@ -3421,7 +3421,7 @@
     "price": 50000,
     "id": "CA013",
     "class": "A",
-    "image": "/WebPCars/CT5_MK1_1_V.webp"
+    "image": "/WebPCars/CT5_MK1.1_V.webp"
   },
   {
     "brand": "Cadillac",
@@ -3429,7 +3429,7 @@
     "price": 90000,
     "id": "CA014",
     "class": "A",
-    "image": "/WebPCars/CT5_MK1_1_V_Blackwing.webp"
+    "image": "/WebPCars/CT5_MK1.1_V_Blackwing.webp"
   },
   {
     "brand": "Cadillac",
@@ -3437,7 +3437,7 @@
     "price": 55000,
     "id": "CA015",
     "class": "A",
-    "image": "/WebPCars/CT5_MK1_2.webp"
+    "image": "/WebPCars/CT5_MK1.2.webp"
   },
   {
     "brand": "Cadillac",
@@ -3445,7 +3445,7 @@
     "price": 75000,
     "id": "CA016",
     "class": "A",
-    "image": "/WebPCars/CT5_MK1_2_V.webp"
+    "image": "/WebPCars/CT5_MK1.2_V.webp"
   },
   {
     "brand": "Cadillac",
@@ -3453,7 +3453,7 @@
     "price": 130000,
     "id": "CA017",
     "class": "S",
-    "image": "/WebPCars/CT5_MK1_2_V_Blackwing.webp"
+    "image": "/WebPCars/CT5_MK1.2_V_Blackwing.webp"
   },
   {
     "brand": "Cadillac",
@@ -3621,7 +3621,7 @@
     "price": 60000,
     "id": "CA038",
     "class": "A",
-    "image": "/WebPCars/Escalade_MK5_1.webp"
+    "image": "/WebPCars/Escalade_MK5.1.webp"
   },
   {
     "brand": "Cadillac",
@@ -3629,7 +3629,7 @@
     "price": 60000,
     "id": "CA039",
     "class": "A",
-    "image": "/WebPCars/Escalade_MK5_1_ESV.webp"
+    "image": "/WebPCars/Escalade_MK5.1_ESV.webp"
   },
   {
     "brand": "Cadillac",
@@ -3637,7 +3637,7 @@
     "price": 120000,
     "id": "CA040",
     "class": "S",
-    "image": "/WebPCars/Escalade_MK5_1_V.webp"
+    "image": "/WebPCars/Escalade_MK5.1_V.webp"
   },
   {
     "brand": "Cadillac",
@@ -3645,7 +3645,7 @@
     "price": 120000,
     "id": "CA041",
     "class": "S",
-    "image": "/WebPCars/Escalade_MK5_1_V_ESV.webp"
+    "image": "/WebPCars/Escalade_MK5.1_V_ESV.webp"
   },
   {
     "brand": "Cadillac",
@@ -3653,7 +3653,7 @@
     "price": 120000,
     "id": "CA042",
     "class": "S",
-    "image": "/WebPCars/Escalade_MK5_2.webp"
+    "image": "/WebPCars/Escalade_MK5.2.webp"
   },
   {
     "brand": "Cadillac",
@@ -3661,7 +3661,7 @@
     "price": 120000,
     "id": "CA043",
     "class": "S",
-    "image": "/WebPCars/Escalade_MK5_2_ESV.webp"
+    "image": "/WebPCars/Escalade_MK5.2_ESV.webp"
   },
   {
     "brand": "Cadillac",
@@ -3669,7 +3669,7 @@
     "price": 180000,
     "id": "CA044",
     "class": "S",
-    "image": "/WebPCars/Escalade_MK5_2_V.webp"
+    "image": "/WebPCars/Escalade_MK5.2_V.webp"
   },
   {
     "brand": "Cadillac",
@@ -3677,7 +3677,7 @@
     "price": 180000,
     "id": "CA045",
     "class": "S",
-    "image": "/WebPCars/Escalade_MK5_2_V_ESV.webp"
+    "image": "/WebPCars/Escalade_MK5.2_V_ESV.webp"
   },
   {
     "brand": "Cadillac",
@@ -3749,7 +3749,7 @@
     "price": 35000,
     "id": "CA058",
     "class": "P",
-    "image": "/WebPCars/XT4_MK1_2.webp"
+    "image": "/WebPCars/XT4_MK1.2.webp"
   },
   {
     "brand": "Cadillac",
@@ -3989,7 +3989,7 @@
     "price": 20000,
     "id": "CH025",
     "class": "P",
-    "image": "/WebPCars/C_K_1500_MK4.webp"
+    "image": "/WebPCars/CIIK_1500_MK4.webp"
   },
   {
     "brand": "Chevrolet",
@@ -4173,7 +4173,7 @@
     "price": 120000,
     "id": "CH043",
     "class": "S",
-    "image": "/WebPCars/Corvette_C8_E_Ray.webp"
+    "image": "/WebPCars/Corvette_C8_E-Ray.webp"
   },
   {
     "brand": "Chevrolet",
@@ -4469,7 +4469,7 @@
     "price": 50000,
     "id": "CH075",
     "class": "A",
-    "image": "/WebPCars/Suburban_MK12_1.webp"
+    "image": "/WebPCars/Suburban_MK12.1.webp"
   },
   {
     "brand": "Chevrolet",
@@ -4477,7 +4477,7 @@
     "price": 70000,
     "id": "CH076",
     "class": "A",
-    "image": "/WebPCars/Suburban_MK12_2.webp"
+    "image": "/WebPCars/Suburban_MK12.2.webp"
   },
   {
     "brand": "Chevrolet",
@@ -4493,7 +4493,7 @@
     "price": 50000,
     "id": "CH078",
     "class": "A",
-    "image": "/WebPCars/Tahoe_MK5_1.webp"
+    "image": "/WebPCars/Tahoe_MK5.1.webp"
   },
   {
     "brand": "Chevrolet",
@@ -4501,7 +4501,7 @@
     "price": 70000,
     "id": "CH079",
     "class": "A",
-    "image": "/WebPCars/Tahoe_MK5_2.webp"
+    "image": "/WebPCars/Tahoe_MK5.2.webp"
   },
   {
     "brand": "Chevrolet",
@@ -4573,7 +4573,7 @@
     "price": 25000,
     "id": "DO002",
     "class": "P",
-    "image": "/WebPCars/Challenger_MK3_2_SXT.webp"
+    "image": "/WebPCars/Challenger_MK3.2_SXT.webp"
   },
   {
     "brand": "Dodge",
@@ -4581,7 +4581,7 @@
     "price": 25000,
     "id": "DO003",
     "class": "P",
-    "image": "/WebPCars/Challenger_MK3_1_SRT_8.webp"
+    "image": "/WebPCars/Challenger_MK3.1_SRT-8.webp"
   },
   {
     "brand": "Dodge",
@@ -4589,7 +4589,7 @@
     "price": 35000,
     "id": "DO004",
     "class": "P",
-    "image": "/WebPCars/Challenger_MK3_2_RT.webp"
+    "image": "/WebPCars/Challenger_MK3.2_RT.webp"
   },
   {
     "brand": "Dodge",
@@ -4597,7 +4597,7 @@
     "price": 40000,
     "id": "DO005",
     "class": "P",
-    "image": "/WebPCars/Challenger_MK3_2_Scat_Pack.webp"
+    "image": "/WebPCars/Challenger_MK3.2_Scat_Pack.webp"
   },
   {
     "brand": "Dodge",
@@ -4605,7 +4605,7 @@
     "price": 50000,
     "id": "DO006",
     "class": "A",
-    "image": "/WebPCars/Challenger_MK3_2_SRT_Hellcat.webp"
+    "image": "/WebPCars/Challenger_MK3.2_SRT_Hellcat.webp"
   },
   {
     "brand": "Dodge",
@@ -4613,7 +4613,7 @@
     "price": 75000,
     "id": "DO007",
     "class": "A",
-    "image": "/WebPCars/Challenger_MK3_2_SRT_Hellcat_Redeye.webp"
+    "image": "/WebPCars/Challenger_MK3.2_SRT_Hellcat_Redeye.webp"
   },
   {
     "brand": "Dodge",
@@ -4621,7 +4621,7 @@
     "price": 85000,
     "id": "DO008",
     "class": "A",
-    "image": "/WebPCars/Challenger_MK3_2_SRT_Super_Stock.webp"
+    "image": "/WebPCars/Challenger_MK3.2_SRT_Super_Stock.webp"
   },
   {
     "brand": "Dodge",
@@ -4629,7 +4629,7 @@
     "price": 85000,
     "id": "DO009",
     "class": "A",
-    "image": "/WebPCars/Challenger_MK3_2_SRT_Jailbreak.webp"
+    "image": "/WebPCars/Challenger_MK3.2_SRT_Jailbreak.webp"
   },
   {
     "brand": "Dodge",
@@ -4637,7 +4637,7 @@
     "price": 110000,
     "id": "DO010",
     "class": "S",
-    "image": "/WebPCars/Challenger_MK3_2_SRT_Demon.webp"
+    "image": "/WebPCars/Challenger_MK3.2_SRT_Demon.webp"
   },
   {
     "brand": "Dodge",
@@ -4645,7 +4645,7 @@
     "price": 140000,
     "id": "DO011",
     "class": "S",
-    "image": "/WebPCars/Challenger_MK3_2_Demon_170.webp"
+    "image": "/WebPCars/Challenger_MK3.2_Demon_170.webp"
   },
   {
     "brand": "Dodge",
@@ -4717,7 +4717,7 @@
     "price": 20000,
     "id": "DO020",
     "class": "P",
-    "image": "/WebPCars/Charger_MK7_1_V6.webp"
+    "image": "/WebPCars/Charger_MK7.1_V6.webp"
   },
   {
     "brand": "Dodge",
@@ -4725,7 +4725,7 @@
     "price": 25000,
     "id": "DO021",
     "class": "P",
-    "image": "/WebPCars/Charger_MK7_2_SXT.webp"
+    "image": "/WebPCars/Charger_MK7.2_SXT.webp"
   },
   {
     "brand": "Dodge",
@@ -4733,7 +4733,7 @@
     "price": 25000,
     "id": "DO022",
     "class": "P",
-    "image": "/WebPCars/Charger_MK7_2_GT.webp"
+    "image": "/WebPCars/Charger_MK7.2_GT.webp"
   },
   {
     "brand": "Dodge",
@@ -4741,7 +4741,7 @@
     "price": 25000,
     "id": "DO023",
     "class": "P",
-    "image": "/WebPCars/Charger_MK7_2_RT.webp"
+    "image": "/WebPCars/Charger_MK7.2_RT.webp"
   },
   {
     "brand": "Dodge",
@@ -4749,7 +4749,7 @@
     "price": 25000,
     "id": "DO024",
     "class": "P",
-    "image": "/WebPCars/Charger_MK7_3_RT.webp"
+    "image": "/WebPCars/Charger_MK7.3_RT.webp"
   },
   {
     "brand": "Dodge",
@@ -4757,7 +4757,7 @@
     "price": 25000,
     "id": "DO025",
     "class": "P",
-    "image": "/WebPCars/Charger_MK7_2_Scat_Pack.webp"
+    "image": "/WebPCars/Charger_MK7.2_Scat_Pack.webp"
   },
   {
     "brand": "Dodge",
@@ -4765,7 +4765,7 @@
     "price": 65000,
     "id": "DO026",
     "class": "A",
-    "image": "/WebPCars/Charger_MK7_2_SRT_Hellcat.webp"
+    "image": "/WebPCars/Charger_MK7.2_SRT_Hellcat.webp"
   },
   {
     "brand": "Dodge",
@@ -4773,7 +4773,7 @@
     "price": 60000,
     "id": "DO027",
     "class": "A",
-    "image": "/WebPCars/Charger_MK8_Scat_Pack_2_Door.webp"
+    "image": "/WebPCars/Charger_MK8_Scat_Pack_2-Door.webp"
   },
   {
     "brand": "Dodge",
@@ -4781,7 +4781,7 @@
     "price": 60000,
     "id": "DO028",
     "class": "A",
-    "image": "/WebPCars/Charger_MK8_Scat_Pack_4_Door.webp"
+    "image": "/WebPCars/Charger_MK8_Scat_Pack_4-Door.webp"
   },
   {
     "brand": "Dodge",
@@ -4821,7 +4821,7 @@
     "price": 30000,
     "id": "DO032",
     "class": "P",
-    "image": "/WebPCars/Durango_MK3_2_R_T.webp"
+    "image": "/WebPCars/Durango_MK3.2_RIIT.webp"
   },
   {
     "brand": "Dodge",
@@ -4829,7 +4829,7 @@
     "price": 55000,
     "id": "DO048",
     "class": "A",
-    "image": "/WebPCars/Durango_MK3_2_GT.webp"
+    "image": "/WebPCars/Durango_MK3.2_GT.webp"
   },
   {
     "brand": "Dodge",
@@ -4837,7 +4837,7 @@
     "price": 85000,
     "id": "DO033",
     "class": "A",
-    "image": "/WebPCars/Durango_MK3_2_SRT_Hellcat.webp"
+    "image": "/WebPCars/Durango_MK3.2_SRT_Hellcat.webp"
   },
   {
     "brand": "Dodge",
@@ -4853,7 +4853,7 @@
     "price": 35000,
     "id": "DO035",
     "class": "P",
-    "image": "/WebPCars/Magnum_SRT_8.webp"
+    "image": "/WebPCars/Magnum_SRT-8.webp"
   },
   {
     "brand": "Dodge",
@@ -4869,7 +4869,7 @@
     "price": 50000,
     "id": "DO037",
     "class": "A",
-    "image": "/WebPCars/Viper_SR_I_RT_10.webp"
+    "image": "/WebPCars/Viper_SR_I_RTII10.webp"
   },
   {
     "brand": "Dodge",
@@ -4877,7 +4877,7 @@
     "price": 50000,
     "id": "DO038",
     "class": "A",
-    "image": "/WebPCars/Viper_SR_II_RT_10.webp"
+    "image": "/WebPCars/Viper_SR_II_RTII10.webp"
   },
   {
     "brand": "Dodge",
@@ -5261,7 +5261,7 @@
     "price": 350000,
     "id": "FE037",
     "class": "S",
-    "image": "/WebPCars/250_GT_E_Series_III.webp"
+    "image": "/WebPCars/250_GTIIE_Series_III.webp"
   },
   {
     "brand": "Ferrari",
@@ -5357,7 +5357,7 @@
     "price": 575000,
     "id": "FE049",
     "class": "X",
-    "image": "/WebPCars/330_2_2_Series_II.webp"
+    "image": "/WebPCars/330_2+2_Series_II.webp"
   },
   {
     "brand": "Ferrari",
@@ -5405,7 +5405,7 @@
     "price": 150000,
     "id": "FE055",
     "class": "S",
-    "image": "/WebPCars/365_GTC_4_Daytona.webp"
+    "image": "/WebPCars/365_GTCII4_Daytona.webp"
   },
   {
     "brand": "Ferrari",
@@ -5701,7 +5701,7 @@
     "price": 30000,
     "id": "FO091",
     "class": "P",
-    "image": "/WebPCars/Edge_MK2_2_ST.webp"
+    "image": "/WebPCars/Edge_MK2.2_ST.webp"
   },
   {
     "brand": "Ford",
@@ -5757,7 +5757,7 @@
     "price": 30000,
     "id": "FO013",
     "class": "P",
-    "image": "/WebPCars/Explorer_MK6_1_ST.webp"
+    "image": "/WebPCars/Explorer_MK6.1_ST.webp"
   },
   {
     "brand": "Ford",
@@ -5765,7 +5765,7 @@
     "price": 45000,
     "id": "FO115",
     "class": "P",
-    "image": "/WebPCars/Explorer_MK6_2.webp"
+    "image": "/WebPCars/Explorer_MK6.2.webp"
   },
   {
     "brand": "Ford",
@@ -5773,7 +5773,7 @@
     "price": 50000,
     "id": "FO014",
     "class": "A",
-    "image": "/WebPCars/Explorer_MK6_2_ST.webp"
+    "image": "/WebPCars/Explorer_MK6.2_ST.webp"
   },
   {
     "brand": "Ford",
@@ -5845,7 +5845,7 @@
     "price": 35000,
     "id": "FO021",
     "class": "P",
-    "image": "/WebPCars/F_Series_MK1.webp"
+    "image": "/WebPCars/F-Series_MK1.webp"
   },
   {
     "brand": "Ford",
@@ -5853,7 +5853,7 @@
     "price": 50000,
     "id": "FO022",
     "class": "A",
-    "image": "/WebPCars/F_Series_MK2.webp"
+    "image": "/WebPCars/F-Series_MK2.webp"
   },
   {
     "brand": "Ford",
@@ -5861,7 +5861,7 @@
     "price": 20000,
     "id": "FO023",
     "class": "P",
-    "image": "/WebPCars/F_Series_MK3.webp"
+    "image": "/WebPCars/F-Series_MK3.webp"
   },
   {
     "brand": "Ford",
@@ -5869,7 +5869,7 @@
     "price": 25000,
     "id": "FO024",
     "class": "P",
-    "image": "/WebPCars/F_Series_MK4.webp"
+    "image": "/WebPCars/F-Series_MK4.webp"
   },
   {
     "brand": "Ford",
@@ -5877,7 +5877,7 @@
     "price": 30000,
     "id": "FO025",
     "class": "P",
-    "image": "/WebPCars/F_Series_MK5.webp"
+    "image": "/WebPCars/F-Series_MK5.webp"
   },
   {
     "brand": "Ford",
@@ -5885,7 +5885,7 @@
     "price": 25000,
     "id": "FO026",
     "class": "P",
-    "image": "/WebPCars/F_Series_MK6.webp"
+    "image": "/WebPCars/F-Series_MK6.webp"
   },
   {
     "brand": "Ford",
@@ -5893,7 +5893,7 @@
     "price": 15000,
     "id": "FO027",
     "class": "P",
-    "image": "/WebPCars/F_150_MK7.webp"
+    "image": "/WebPCars/F-150_MK7.webp"
   },
   {
     "brand": "Ford",
@@ -5901,7 +5901,7 @@
     "price": 15000,
     "id": "FO028",
     "class": "P",
-    "image": "/WebPCars/F_150_MK9.webp"
+    "image": "/WebPCars/F-150_MK9.webp"
   },
   {
     "brand": "Ford",
@@ -5909,7 +5909,7 @@
     "price": 30000,
     "id": "FO029",
     "class": "P",
-    "image": "/WebPCars/F_150_MK10_SVT_Lightning.webp"
+    "image": "/WebPCars/F-150_MK10_SVT_Lightning.webp"
   },
   {
     "brand": "Ford",
@@ -5917,7 +5917,7 @@
     "price": 15000,
     "id": "FO097",
     "class": "P",
-    "image": "/WebPCars/F_150_MK12.webp"
+    "image": "/WebPCars/F-150_MK12.webp"
   },
   {
     "brand": "Ford",
@@ -5925,7 +5925,7 @@
     "price": 35000,
     "id": "FO030",
     "class": "P",
-    "image": "/WebPCars/F_150_MK12_Raptor.webp"
+    "image": "/WebPCars/F-150_MK12_Raptor.webp"
   },
   {
     "brand": "Ford",
@@ -5933,7 +5933,7 @@
     "price": 25000,
     "id": "FO098",
     "class": "P",
-    "image": "/WebPCars/F_150_MK13.webp"
+    "image": "/WebPCars/F-150_MK13.webp"
   },
   {
     "brand": "Ford",
@@ -5941,7 +5941,7 @@
     "price": 45000,
     "id": "FO031",
     "class": "P",
-    "image": "/WebPCars/F_150_MK13_Raptor.webp"
+    "image": "/WebPCars/F-150_MK13_Raptor.webp"
   },
   {
     "brand": "Ford",
@@ -5949,7 +5949,7 @@
     "price": 65000,
     "id": "FO032",
     "class": "A",
-    "image": "/WebPCars/F_150_MK13_Shelby.webp"
+    "image": "/WebPCars/F-150_MK13_Shelby.webp"
   },
   {
     "brand": "Ford",
@@ -5957,7 +5957,7 @@
     "price": 60000,
     "id": "FO099",
     "class": "A",
-    "image": "/WebPCars/F_150_MK14.webp"
+    "image": "/WebPCars/F-150_MK14.webp"
   },
   {
     "brand": "Ford",
@@ -5965,7 +5965,7 @@
     "price": 70000,
     "id": "FO033",
     "class": "A",
-    "image": "/WebPCars/F_150_MK14_Raptor.webp"
+    "image": "/WebPCars/F-150_MK14_Raptor.webp"
   },
   {
     "brand": "Ford",
@@ -5973,7 +5973,7 @@
     "price": 125000,
     "id": "FO034",
     "class": "S",
-    "image": "/WebPCars/F_150_MK14_Raptor_R.webp"
+    "image": "/WebPCars/F-150_MK14_Raptor_R.webp"
   },
   {
     "brand": "Ford",
@@ -5981,7 +5981,7 @@
     "price": 85000,
     "id": "FO035",
     "class": "A",
-    "image": "/WebPCars/F_150_MK14_Shelby.webp"
+    "image": "/WebPCars/F-150_MK14_Shelby.webp"
   },
   {
     "brand": "Ford",
@@ -5989,7 +5989,7 @@
     "price": 70000,
     "id": "FO100",
     "class": "A",
-    "image": "/WebPCars/F_150_Lightning.webp"
+    "image": "/WebPCars/F-150_Lightning.webp"
   },
   {
     "brand": "Ford",
@@ -6037,7 +6037,7 @@
     "price": 50000,
     "id": "FO101",
     "class": "A",
-    "image": "/WebPCars/Mach_E.webp"
+    "image": "/WebPCars/Mach-E.webp"
   },
   {
     "brand": "Ford",
@@ -6077,7 +6077,7 @@
     "price": 30000,
     "id": "FO041",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK1_1.webp"
+    "image": "/WebPCars/Mustang_MK1.1.webp"
   },
   {
     "brand": "Ford",
@@ -6085,7 +6085,7 @@
     "price": 40000,
     "id": "FO042",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK1_2.webp"
+    "image": "/WebPCars/Mustang_MK1.2.webp"
   },
   {
     "brand": "Ford",
@@ -6093,7 +6093,7 @@
     "price": 75000,
     "id": "FO043",
     "class": "A",
-    "image": "/WebPCars/Mustang_MK1_2_GT.webp"
+    "image": "/WebPCars/Mustang_MK1.2_GT.webp"
   },
   {
     "brand": "Ford",
@@ -6101,7 +6101,7 @@
     "price": 40000,
     "id": "FO044",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK1_3.webp"
+    "image": "/WebPCars/Mustang_MK1.3.webp"
   },
   {
     "brand": "Ford",
@@ -6109,7 +6109,7 @@
     "price": 70000,
     "id": "FO045",
     "class": "A",
-    "image": "/WebPCars/Mustang_MK1_3_Mach_1.webp"
+    "image": "/WebPCars/Mustang_MK1.3_Mach_1.webp"
   },
   {
     "brand": "Ford",
@@ -6117,7 +6117,7 @@
     "price": 20000,
     "id": "FO046",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK1_4.webp"
+    "image": "/WebPCars/Mustang_MK1.4.webp"
   },
   {
     "brand": "Ford",
@@ -6125,7 +6125,7 @@
     "price": 30000,
     "id": "FO047",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK1_4_Mach_1.webp"
+    "image": "/WebPCars/Mustang_MK1.4_Mach_1.webp"
   },
   {
     "brand": "Ford",
@@ -6141,7 +6141,7 @@
     "price": 15000,
     "id": "FO049",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK3_1_GT.webp"
+    "image": "/WebPCars/Mustang_MK3.1_GT.webp"
   },
   {
     "brand": "Ford",
@@ -6149,7 +6149,7 @@
     "price": 25000,
     "id": "FO050",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK3_2_LX.webp"
+    "image": "/WebPCars/Mustang_MK3.2_LX.webp"
   },
   {
     "brand": "Ford",
@@ -6157,7 +6157,7 @@
     "price": 20000,
     "id": "FO051",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK3_2_GT.webp"
+    "image": "/WebPCars/Mustang_MK3.2_GT.webp"
   },
   {
     "brand": "Ford",
@@ -6165,7 +6165,7 @@
     "price": 10000,
     "id": "FO052",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK4_1_GT.webp"
+    "image": "/WebPCars/Mustang_MK4.1_GT.webp"
   },
   {
     "brand": "Ford",
@@ -6173,7 +6173,7 @@
     "price": 15000,
     "id": "FO053",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK4_1_SVT_Cobra.webp"
+    "image": "/WebPCars/Mustang_MK4.1_SVT_Cobra.webp"
   },
   {
     "brand": "Ford",
@@ -6181,7 +6181,7 @@
     "price": 15000,
     "id": "FO054",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK4_2_GT.webp"
+    "image": "/WebPCars/Mustang_MK4.2_GT.webp"
   },
   {
     "brand": "Ford",
@@ -6189,7 +6189,7 @@
     "price": 25000,
     "id": "FO055",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK4_2_SVT_Cobra.webp"
+    "image": "/WebPCars/Mustang_MK4.2_SVT_Cobra.webp"
   },
   {
     "brand": "Ford",
@@ -6197,7 +6197,7 @@
     "price": 15000,
     "id": "FO056",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK5_1.webp"
+    "image": "/WebPCars/Mustang_MK5.1.webp"
   },
   {
     "brand": "Ford",
@@ -6205,7 +6205,7 @@
     "price": 20000,
     "id": "FO057",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK5_1_GT.webp"
+    "image": "/WebPCars/Mustang_MK5.1_GT.webp"
   },
   {
     "brand": "Ford",
@@ -6213,7 +6213,7 @@
     "price": 15000,
     "id": "FO058",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK5_2.webp"
+    "image": "/WebPCars/Mustang_MK5.2.webp"
   },
   {
     "brand": "Ford",
@@ -6221,7 +6221,7 @@
     "price": 20000,
     "id": "FO059",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK5_2_GT.webp"
+    "image": "/WebPCars/Mustang_MK5.2_GT.webp"
   },
   {
     "brand": "Ford",
@@ -6229,7 +6229,7 @@
     "price": 30000,
     "id": "FO060",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK5_2_Boss_302.webp"
+    "image": "/WebPCars/Mustang_MK5.2_Boss_302.webp"
   },
   {
     "brand": "Ford",
@@ -6237,7 +6237,7 @@
     "price": 20000,
     "id": "FO061",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK6_1.webp"
+    "image": "/WebPCars/Mustang_MK6.1.webp"
   },
   {
     "brand": "Ford",
@@ -6245,7 +6245,7 @@
     "price": 30000,
     "id": "FO062",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK6_1_GT.webp"
+    "image": "/WebPCars/Mustang_MK6.1_GT.webp"
   },
   {
     "brand": "Ford",
@@ -6253,7 +6253,7 @@
     "price": 20000,
     "id": "FO063",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK6_2.webp"
+    "image": "/WebPCars/Mustang_MK6.2.webp"
   },
   {
     "brand": "Ford",
@@ -6261,7 +6261,7 @@
     "price": 35000,
     "id": "FO064",
     "class": "P",
-    "image": "/WebPCars/Mustang_MK6_2_GT.webp"
+    "image": "/WebPCars/Mustang_MK6.2_GT.webp"
   },
   {
     "brand": "Ford",
@@ -6349,7 +6349,7 @@
     "price": 350000,
     "id": "FO071",
     "class": "S",
-    "image": "/WebPCars/Shelby_GT350_MK1_1.webp"
+    "image": "/WebPCars/Shelby_GT350_MK1.1.webp"
   },
   {
     "brand": "Ford",
@@ -6357,7 +6357,7 @@
     "price": 130000,
     "id": "FO072",
     "class": "S",
-    "image": "/WebPCars/Shelby_GT350_MK1_2.webp"
+    "image": "/WebPCars/Shelby_GT350_MK1.2.webp"
   },
   {
     "brand": "Ford",
@@ -6365,7 +6365,7 @@
     "price": 200000,
     "id": "FO073",
     "class": "S",
-    "image": "/WebPCars/Shelby_GT500_MK1_2.webp"
+    "image": "/WebPCars/Shelby_GT500_MK1.2.webp"
   },
   {
     "brand": "Ford",
@@ -6373,7 +6373,7 @@
     "price": 80000,
     "id": "FO074",
     "class": "A",
-    "image": "/WebPCars/Shelby_GT350_MK1_3.webp"
+    "image": "/WebPCars/Shelby_GT350_MK1.3.webp"
   },
   {
     "brand": "Ford",
@@ -6381,7 +6381,7 @@
     "price": 125000,
     "id": "FO075",
     "class": "S",
-    "image": "/WebPCars/Shelby_GT500_MK1_3.webp"
+    "image": "/WebPCars/Shelby_GT500_MK1.3.webp"
   },
   {
     "brand": "Ford",
@@ -6389,7 +6389,7 @@
     "price": 30000,
     "id": "FO076",
     "class": "P",
-    "image": "/WebPCars/Shelby_GT500_S_197_I.webp"
+    "image": "/WebPCars/Shelby_GT500_S-197_I.webp"
   },
   {
     "brand": "Ford",
@@ -6397,7 +6397,7 @@
     "price": 50000,
     "id": "FO077",
     "class": "A",
-    "image": "/WebPCars/Shelby_GT500_S_197_II.webp"
+    "image": "/WebPCars/Shelby_GT500_S-197_II.webp"
   },
   {
     "brand": "Ford",
@@ -6533,7 +6533,7 @@
     "price": 20000,
     "id": "GE004",
     "class": "P",
-    "image": "/WebPCars/G70_MK1_1.webp"
+    "image": "/WebPCars/G70_MK1.1.webp"
   },
   {
     "brand": "Genesis",
@@ -6541,7 +6541,7 @@
     "price": 50000,
     "id": "GE005",
     "class": "A",
-    "image": "/WebPCars/G70_MK1_2.webp"
+    "image": "/WebPCars/G70_MK1.2.webp"
   },
   {
     "brand": "Genesis",
@@ -6629,7 +6629,7 @@
     "price": 65000,
     "id": "GM007",
     "class": "A",
-    "image": "/WebPCars/Sierra_1500_MK5_2.webp"
+    "image": "/WebPCars/Sierra_1500_MK5.2.webp"
   },
   {
     "brand": "GMC",
@@ -6677,7 +6677,7 @@
     "price": 90000,
     "id": "OS012",
     "class": "A",
-    "image": "/WebPCars/Yukon_MK5_1.webp"
+    "image": "/WebPCars/Yukon_MK5.1.webp"
   },
   {
     "brand": "GMC",
@@ -6685,7 +6685,7 @@
     "price": 90000,
     "id": "OS013",
     "class": "A",
-    "image": "/WebPCars/Yukon_MK5_1_XL.webp"
+    "image": "/WebPCars/Yukon_MK5.1_XL.webp"
   },
   {
     "brand": "GMC",
@@ -6693,7 +6693,7 @@
     "price": 90000,
     "id": "OS014",
     "class": "A",
-    "image": "/WebPCars/Yukon_MK5_2.webp"
+    "image": "/WebPCars/Yukon_MK5.2.webp"
   },
   {
     "brand": "GMC",
@@ -6701,7 +6701,7 @@
     "price": 90000,
     "id": "OS015",
     "class": "A",
-    "image": "/WebPCars/Yukon_MK5_2_XL.webp"
+    "image": "/WebPCars/Yukon_MK5.2_XL.webp"
   },
   {
     "brand": "Honda",
@@ -6821,7 +6821,7 @@
     "price": 40000,
     "id": "HO027",
     "class": "P",
-    "image": "/WebPCars/CR_V_MK6.webp"
+    "image": "/WebPCars/CR-V_MK6.webp"
   },
   {
     "brand": "Honda",
@@ -6861,7 +6861,7 @@
     "price": 35000,
     "id": "HO029",
     "class": "P",
-    "image": "/WebPCars/HR_V_MK6.webp"
+    "image": "/WebPCars/HR-V_MK6.webp"
   },
   {
     "brand": "Honda",
@@ -6869,7 +6869,7 @@
     "price": 15000,
     "id": "HO015",
     "class": "P",
-    "image": "/WebPCars/Integra_MK3_JDM.webp"
+    "image": "/WebPCars/Integra_MK3_(JDM).webp"
   },
   {
     "brand": "Honda",
@@ -6877,7 +6877,7 @@
     "price": 25000,
     "id": "HO016",
     "class": "P",
-    "image": "/WebPCars/Integra_MK3_Type_R_JDM.webp"
+    "image": "/WebPCars/Integra_MK3_Type_R_(JDM).webp"
   },
   {
     "brand": "Honda",
@@ -6989,7 +6989,7 @@
     "price": 15000,
     "id": "HY002",
     "class": "P",
-    "image": "/WebPCars/Genesis_Coupe_MK1_1.webp"
+    "image": "/WebPCars/Genesis_Coupe_MK1.1.webp"
   },
   {
     "brand": "Hyundai",
@@ -6997,7 +6997,7 @@
     "price": 20000,
     "id": "HY003",
     "class": "P",
-    "image": "/WebPCars/Genesis_Coupe_MK1_2.webp"
+    "image": "/WebPCars/Genesis_Coupe_MK1.2.webp"
   },
   {
     "brand": "Hyundai",
@@ -7077,7 +7077,7 @@
     "price": 30000,
     "id": "HY005",
     "class": "P",
-    "image": "/WebPCars/Sonata_MK8_2.webp"
+    "image": "/WebPCars/Sonata_MK8.2.webp"
   },
   {
     "brand": "Hyundai",
@@ -7133,7 +7133,7 @@
     "price": 10000,
     "id": "IN002",
     "class": "P",
-    "image": "/WebPCars/G35_MK3_1_Sedan.webp"
+    "image": "/WebPCars/G35_MK3.1_Sedan.webp"
   },
   {
     "brand": "Infiniti",
@@ -7141,7 +7141,7 @@
     "price": 10000,
     "id": "IN003",
     "class": "P",
-    "image": "/WebPCars/G35_MK3_2_Sedan.webp"
+    "image": "/WebPCars/G35_MK3.2_Sedan.webp"
   },
   {
     "brand": "Infiniti",
@@ -7213,7 +7213,7 @@
     "price": 25000,
     "id": "IN012",
     "class": "P",
-    "image": "/WebPCars/QX80_MK2_2.webp"
+    "image": "/WebPCars/QX80_MK2.2.webp"
   },
   {
     "brand": "Infiniti",
@@ -7253,7 +7253,7 @@
     "price": 1000000,
     "id": "JA001",
     "class": "X",
-    "image": "/WebPCars/C_Type.webp"
+    "image": "/WebPCars/C-Type.webp"
   },
   {
     "brand": "Jaguar",
@@ -7261,7 +7261,7 @@
     "price": 4000000,
     "id": "JA002",
     "class": "X",
-    "image": "/WebPCars/D_Type.webp"
+    "image": "/WebPCars/D-Type.webp"
   },
   {
     "brand": "Jaguar",
@@ -7269,7 +7269,7 @@
     "price": 50000,
     "id": "JA003",
     "class": "A",
-    "image": "/WebPCars/E_Pace.webp"
+    "image": "/WebPCars/E-Pace.webp"
   },
   {
     "brand": "Jaguar",
@@ -7277,7 +7277,7 @@
     "price": 75000,
     "id": "JA004",
     "class": "A",
-    "image": "/WebPCars/E_Type_Series_I_Coupe.webp"
+    "image": "/WebPCars/E-Type_Series_I_Coupe.webp"
   },
   {
     "brand": "Jaguar",
@@ -7285,7 +7285,7 @@
     "price": 105000,
     "id": "JA029",
     "class": "S",
-    "image": "/WebPCars/E_Type_Series_I_Roadster.webp"
+    "image": "/WebPCars/E-Type_Series_I_Roadster.webp"
   },
   {
     "brand": "Jaguar",
@@ -7293,7 +7293,7 @@
     "price": 40000,
     "id": "JA005",
     "class": "P",
-    "image": "/WebPCars/E_Type_Series_II_Coupe.webp"
+    "image": "/WebPCars/E-Type_Series_II_Coupe.webp"
   },
   {
     "brand": "Jaguar",
@@ -7301,7 +7301,7 @@
     "price": 65000,
     "id": "JA030",
     "class": "A",
-    "image": "/WebPCars/E_Type_Series_II_Roadster.webp"
+    "image": "/WebPCars/E-Type_Series_II_Roadster.webp"
   },
   {
     "brand": "Jaguar",
@@ -7309,7 +7309,7 @@
     "price": 40000,
     "id": "JA031",
     "class": "P",
-    "image": "/WebPCars/E_Type_Series_III_Coupe.webp"
+    "image": "/WebPCars/E-Type_Series_III_Coupe.webp"
   },
   {
     "brand": "Jaguar",
@@ -7317,7 +7317,7 @@
     "price": 65000,
     "id": "JA032",
     "class": "A",
-    "image": "/WebPCars/E_Type_Series_III_Roadster.webp"
+    "image": "/WebPCars/E-Type_Series_III_Roadster.webp"
   },
   {
     "brand": "Jaguar",
@@ -7325,7 +7325,7 @@
     "price": 65000,
     "id": "JA006",
     "class": "A",
-    "image": "/WebPCars/F_Pace.webp"
+    "image": "/WebPCars/F-Pace.webp"
   },
   {
     "brand": "Jaguar",
@@ -7333,7 +7333,7 @@
     "price": 100000,
     "id": "JA007",
     "class": "S",
-    "image": "/WebPCars/F_Pace_SVR.webp"
+    "image": "/WebPCars/F-Pace_SVR.webp"
   },
   {
     "brand": "Jaguar",
@@ -7341,7 +7341,7 @@
     "price": 25000,
     "id": "JA008",
     "class": "P",
-    "image": "/WebPCars/F_Type_MK1_1.webp"
+    "image": "/WebPCars/F-Type_MK1.1.webp"
   },
   {
     "brand": "Jaguar",
@@ -7349,7 +7349,7 @@
     "price": 30000,
     "id": "JA025",
     "class": "P",
-    "image": "/WebPCars/F_Type_MK1_1_Convertible.webp"
+    "image": "/WebPCars/F-Type_MK1.1_Convertible.webp"
   },
   {
     "brand": "Jaguar",
@@ -7357,7 +7357,7 @@
     "price": 55000,
     "id": "JA026",
     "class": "A",
-    "image": "/WebPCars/F_Type_MK1_1_R.webp"
+    "image": "/WebPCars/F-Type_MK1.1_R.webp"
   },
   {
     "brand": "Jaguar",
@@ -7365,7 +7365,7 @@
     "price": 90000,
     "id": "JA010",
     "class": "A",
-    "image": "/WebPCars/F_Type_MK1_2.webp"
+    "image": "/WebPCars/F-Type_MK1.2.webp"
   },
   {
     "brand": "Jaguar",
@@ -7373,7 +7373,7 @@
     "price": 90000,
     "id": "JA009",
     "class": "A",
-    "image": "/WebPCars/F_Type_MK1_2_Convertible.webp"
+    "image": "/WebPCars/F-Type_MK1.2_Convertible.webp"
   },
   {
     "brand": "Jaguar",
@@ -7381,7 +7381,7 @@
     "price": 120000,
     "id": "JA027",
     "class": "S",
-    "image": "/WebPCars/F_Type_MK1_2_R75.webp"
+    "image": "/WebPCars/F-Type_MK1.2_R75.webp"
   },
   {
     "brand": "Jaguar",
@@ -7389,7 +7389,7 @@
     "price": 115000,
     "id": "JA028",
     "class": "S",
-    "image": "/WebPCars/F_Type_MK1_2_R75_Convertible.webp"
+    "image": "/WebPCars/F-Type_MK1.2_R75_Convertible.webp"
   },
   {
     "brand": "Jaguar",
@@ -7581,7 +7581,7 @@
     "price": 50000,
     "id": "JE009",
     "class": "A",
-    "image": "/WebPCars/Grand_Wagoneer_MK4_1.webp"
+    "image": "/WebPCars/Grand_Wagoneer_MK4.1.webp"
   },
   {
     "brand": "Jeep",
@@ -7589,7 +7589,7 @@
     "price": 75000,
     "id": "JE010",
     "class": "A",
-    "image": "/WebPCars/Grand_Wagoneer_MK4_2.webp"
+    "image": "/WebPCars/Grand_Wagoneer_MK4.2.webp"
   },
   {
     "brand": "Jeep",
@@ -7653,7 +7653,7 @@
     "price": 45000,
     "id": "KA001",
     "class": "P",
-    "image": "/WebPCars/Carnival_MK4_2.webp"
+    "image": "/WebPCars/Carnival_MK4.2.webp"
   },
   {
     "brand": "Kia",
@@ -7685,7 +7685,7 @@
     "price": 10000,
     "id": "KA005",
     "class": "P",
-    "image": "/WebPCars/K5_TF_Optima.webp"
+    "image": "/WebPCars/K5_TF_(Optima).webp"
   },
   {
     "brand": "Kia",
@@ -7693,7 +7693,7 @@
     "price": 20000,
     "id": "OC017",
     "class": "P",
-    "image": "/WebPCars/K5_DL3_1.webp"
+    "image": "/WebPCars/K5_DL3.1.webp"
   },
   {
     "brand": "Kia",
@@ -7701,7 +7701,7 @@
     "price": 30000,
     "id": "OC018",
     "class": "P",
-    "image": "/WebPCars/K5_DL3_2.webp"
+    "image": "/WebPCars/K5_DL3.2.webp"
   },
   {
     "brand": "Kia",
@@ -7725,7 +7725,7 @@
     "price": 40000,
     "id": "KA008",
     "class": "P",
-    "image": "/WebPCars/Sorento_MK4_2.webp"
+    "image": "/WebPCars/Sorento_MK4.2.webp"
   },
   {
     "brand": "Kia",
@@ -7925,7 +7925,7 @@
     "price": 2000000,
     "id": "LA012",
     "class": "X",
-    "image": "/WebPCars/Countach_LPI_800_4.webp"
+    "image": "/WebPCars/Countach_LPI_800-4.webp"
   },
   {
     "brand": "Lamborghini",
@@ -7949,7 +7949,7 @@
     "price": 700000,
     "id": "LA048",
     "class": "X",
-    "image": "/WebPCars/Diablo_VT_6_0.webp"
+    "image": "/WebPCars/Diablo_VT_6.0.webp"
   },
   {
     "brand": "Lamborghini",
@@ -7981,7 +7981,7 @@
     "price": 95000,
     "id": "LA018",
     "class": "A",
-    "image": "/WebPCars/Gallardo_LP560_4.webp"
+    "image": "/WebPCars/Gallardo_LP560-4.webp"
   },
   {
     "brand": "Lamborghini",
@@ -7989,7 +7989,7 @@
     "price": 95000,
     "id": "LA019",
     "class": "A",
-    "image": "/WebPCars/Gallardo_LP560_4_Spyder.webp"
+    "image": "/WebPCars/Gallardo_LP560-4_Spyder.webp"
   },
   {
     "brand": "Lamborghini",
@@ -7997,7 +7997,7 @@
     "price": 225000,
     "id": "LA021",
     "class": "S",
-    "image": "/WebPCars/Huracan_LP580_2.webp"
+    "image": "/WebPCars/Huracan_LP580-2.webp"
   },
   {
     "brand": "Lamborghini",
@@ -8005,7 +8005,7 @@
     "price": 225000,
     "id": "LA050",
     "class": "S",
-    "image": "/WebPCars/Huracan_LP580_2_Spyder.webp"
+    "image": "/WebPCars/Huracan_LP580-2_Spyder.webp"
   },
   {
     "brand": "Lamborghini",
@@ -8013,7 +8013,7 @@
     "price": 225000,
     "id": "LA020",
     "class": "S",
-    "image": "/WebPCars/Huracan_LP610_4.webp"
+    "image": "/WebPCars/Huracan_LP610-4.webp"
   },
   {
     "brand": "Lamborghini",
@@ -8021,7 +8021,7 @@
     "price": 230000,
     "id": "LA049",
     "class": "S",
-    "image": "/WebPCars/Huracan_LP610_4_Spyder.webp"
+    "image": "/WebPCars/Huracan_LP610-4_Spyder.webp"
   },
   {
     "brand": "Lamborghini",
@@ -8029,7 +8029,7 @@
     "price": 300000,
     "id": "LA022",
     "class": "S",
-    "image": "/WebPCars/Huracan_LP640_4_Performante.webp"
+    "image": "/WebPCars/Huracan_LP640-4_Performante.webp"
   },
   {
     "brand": "Lamborghini",
@@ -8037,7 +8037,7 @@
     "price": 300000,
     "id": "LA051",
     "class": "S",
-    "image": "/WebPCars/Huracan_LP640_4_Performante_Spyder.webp"
+    "image": "/WebPCars/Huracan_LP640-4_Performante_Spyder.webp"
   },
   {
     "brand": "Lamborghini",
@@ -8269,7 +8269,7 @@
     "price": 50000,
     "id": "LR001",
     "class": "A",
-    "image": "/WebPCars/Defender_Classic.webp"
+    "image": "/WebPCars/Defender_(Classic).webp"
   },
   {
     "brand": "Land Rover",
@@ -8277,7 +8277,7 @@
     "price": 115000,
     "id": "LR002",
     "class": "S",
-    "image": "/WebPCars/Defender_Modern.webp"
+    "image": "/WebPCars/Defender_(Modern).webp"
   },
   {
     "brand": "Land Rover",
@@ -8285,7 +8285,7 @@
     "price": 50000,
     "id": "LR003",
     "class": "A",
-    "image": "/WebPCars/Defender_Series.webp"
+    "image": "/WebPCars/Defender_(Series).webp"
   },
   {
     "brand": "Land Rover",
@@ -8333,7 +8333,7 @@
     "price": 15000,
     "id": "LR009",
     "class": "P",
-    "image": "/WebPCars/Discovery_Sport_MK1_1.webp"
+    "image": "/WebPCars/Discovery_Sport_MK1.1.webp"
   },
   {
     "brand": "Land Rover",
@@ -8341,7 +8341,7 @@
     "price": 55000,
     "id": "LR010",
     "class": "A",
-    "image": "/WebPCars/Discovery_Sport_MK1_2.webp"
+    "image": "/WebPCars/Discovery_Sport_MK1.2.webp"
   },
   {
     "brand": "Land Rover",
@@ -8477,7 +8477,7 @@
     "price": 10000,
     "id": "LE002",
     "class": "P",
-    "image": "/WebPCars/GS_MK2_300_430.webp"
+    "image": "/WebPCars/GS_MK2_300II430.webp"
   },
   {
     "brand": "Lexus",
@@ -8485,7 +8485,7 @@
     "price": 15000,
     "id": "LE003",
     "class": "P",
-    "image": "/WebPCars/GS_MK3_300_350.webp"
+    "image": "/WebPCars/GS_MK3_300II350.webp"
   },
   {
     "brand": "Lexus",
@@ -8493,7 +8493,7 @@
     "price": 15000,
     "id": "LE004",
     "class": "P",
-    "image": "/WebPCars/GS_MK4_1_350.webp"
+    "image": "/WebPCars/GS_MK4.1_350.webp"
   },
   {
     "brand": "Lexus",
@@ -8501,7 +8501,7 @@
     "price": 25000,
     "id": "LE005",
     "class": "P",
-    "image": "/WebPCars/GS_MK4_2_350.webp"
+    "image": "/WebPCars/GS_MK4.2_350.webp"
   },
   {
     "brand": "Lexus",
@@ -8517,7 +8517,7 @@
     "price": 15000,
     "id": "LE007",
     "class": "P",
-    "image": "/WebPCars/GX_MK2_1_460.webp"
+    "image": "/WebPCars/GX_MK2.1_460.webp"
   },
   {
     "brand": "Lexus",
@@ -8525,7 +8525,7 @@
     "price": 20000,
     "id": "LE008",
     "class": "P",
-    "image": "/WebPCars/GX_MK2_2_460.webp"
+    "image": "/WebPCars/GX_MK2.2_460.webp"
   },
   {
     "brand": "Lexus",
@@ -8557,7 +8557,7 @@
     "price": 20000,
     "id": "LE012",
     "class": "P",
-    "image": "/WebPCars/IS_MK3_1_200t_250_350.webp"
+    "image": "/WebPCars/IS_MK3.1_200tII250II350.webp"
   },
   {
     "brand": "Lexus",
@@ -8565,7 +8565,7 @@
     "price": 50000,
     "id": "LE013",
     "class": "A",
-    "image": "/WebPCars/IS_MK3_2_350.webp"
+    "image": "/WebPCars/IS_MK3.2_350.webp"
   },
   {
     "brand": "Lexus",
@@ -8573,7 +8573,7 @@
     "price": 70000,
     "id": "LE014",
     "class": "A",
-    "image": "/WebPCars/IS_MK3_2_500.webp"
+    "image": "/WebPCars/IS_MK3.2_500.webp"
   },
   {
     "brand": "Lexus",
@@ -8605,7 +8605,7 @@
     "price": 10000,
     "id": "LE018",
     "class": "P",
-    "image": "/WebPCars/LS_MK4_1_460.webp"
+    "image": "/WebPCars/LS_MK4.1_460.webp"
   },
   {
     "brand": "Lexus",
@@ -8613,7 +8613,7 @@
     "price": 20000,
     "id": "LE019",
     "class": "P",
-    "image": "/WebPCars/LS_MK4_2_460.webp"
+    "image": "/WebPCars/LS_MK4.2_460.webp"
   },
   {
     "brand": "Lexus",
@@ -8621,7 +8621,7 @@
     "price": 35000,
     "id": "LE020",
     "class": "P",
-    "image": "/WebPCars/LS_MK5_1_500.webp"
+    "image": "/WebPCars/LS_MK5.1_500.webp"
   },
   {
     "brand": "Lexus",
@@ -8629,7 +8629,7 @@
     "price": 60000,
     "id": "LE021",
     "class": "A",
-    "image": "/WebPCars/LS_MK5_2_500.webp"
+    "image": "/WebPCars/LS_MK5.2_500.webp"
   },
   {
     "brand": "Lexus",
@@ -8661,7 +8661,7 @@
     "price": 20000,
     "id": "LE025",
     "class": "P",
-    "image": "/WebPCars/NX_MK1_200t_300.webp"
+    "image": "/WebPCars/NX_MK1_200tII300.webp"
   },
   {
     "brand": "Lexus",
@@ -8677,7 +8677,7 @@
     "price": 20000,
     "id": "LE027",
     "class": "P",
-    "image": "/WebPCars/RC_MK1_1_350.webp"
+    "image": "/WebPCars/RC_MK1.1_350.webp"
   },
   {
     "brand": "Lexus",
@@ -8685,7 +8685,7 @@
     "price": 60000,
     "id": "LE028",
     "class": "A",
-    "image": "/WebPCars/RC_MK1_2_350.webp"
+    "image": "/WebPCars/RC_MK1.2_350.webp"
   },
   {
     "brand": "Lexus",
@@ -8693,7 +8693,7 @@
     "price": 45000,
     "id": "LE029",
     "class": "P",
-    "image": "/WebPCars/RC_MK1_1_F.webp"
+    "image": "/WebPCars/RC_MK1.1_F.webp"
   },
   {
     "brand": "Lexus",
@@ -8701,7 +8701,7 @@
     "price": 70000,
     "id": "LE030",
     "class": "A",
-    "image": "/WebPCars/RC_MK1_2_F.webp"
+    "image": "/WebPCars/RC_MK1.2_F.webp"
   },
   {
     "brand": "Lexus",
@@ -8845,7 +8845,7 @@
     "price": 10000,
     "id": "LI013",
     "class": "P",
-    "image": "/WebPCars/MKZ_MK1_1.webp"
+    "image": "/WebPCars/MKZ_MK1.1.webp"
   },
   {
     "brand": "Lincoln",
@@ -8853,7 +8853,7 @@
     "price": 15000,
     "id": "LI014",
     "class": "P",
-    "image": "/WebPCars/MKZ_MK1_2.webp"
+    "image": "/WebPCars/MKZ_MK1.2.webp"
   },
   {
     "brand": "Lincoln",
@@ -9133,7 +9133,7 @@
     "price": 35000,
     "id": "MZ013",
     "class": "P",
-    "image": "/WebPCars/CX_30.webp"
+    "image": "/WebPCars/CX-30.webp"
   },
   {
     "brand": "Mazda",
@@ -9141,7 +9141,7 @@
     "price": 40000,
     "id": "MZ014",
     "class": "P",
-    "image": "/WebPCars/CX_5_KM.webp"
+    "image": "/WebPCars/CX-5_KM.webp"
   },
   {
     "brand": "Mazda",
@@ -9149,7 +9149,7 @@
     "price": 40000,
     "id": "MZ015",
     "class": "P",
-    "image": "/WebPCars/CX_50.webp"
+    "image": "/WebPCars/CX-50.webp"
   },
   {
     "brand": "Mazda",
@@ -9157,7 +9157,7 @@
     "price": 45000,
     "id": "MZ016",
     "class": "P",
-    "image": "/WebPCars/CX_70.webp"
+    "image": "/WebPCars/CX-70.webp"
   },
   {
     "brand": "Mazda",
@@ -9165,7 +9165,7 @@
     "price": 55000,
     "id": "MZ017",
     "class": "A",
-    "image": "/WebPCars/CX_90.webp"
+    "image": "/WebPCars/CX-90.webp"
   },
   {
     "brand": "Mazda",
@@ -9197,7 +9197,7 @@
     "price": 10000,
     "id": "MZ004",
     "class": "P",
-    "image": "/WebPCars/MX_5_NA.webp"
+    "image": "/WebPCars/MX-5_NA.webp"
   },
   {
     "brand": "Mazda",
@@ -9205,7 +9205,7 @@
     "price": 10000,
     "id": "MZ005",
     "class": "P",
-    "image": "/WebPCars/MX_5_NB.webp"
+    "image": "/WebPCars/MX-5_NB.webp"
   },
   {
     "brand": "Mazda",
@@ -9213,7 +9213,7 @@
     "price": 15000,
     "id": "MZ006",
     "class": "P",
-    "image": "/WebPCars/MX_5_NC.webp"
+    "image": "/WebPCars/MX-5_NC.webp"
   },
   {
     "brand": "Mazda",
@@ -9221,7 +9221,7 @@
     "price": 40000,
     "id": "MZ007",
     "class": "P",
-    "image": "/WebPCars/MX_5_ND.webp"
+    "image": "/WebPCars/MX-5_ND.webp"
   },
   {
     "brand": "Mazda",
@@ -9229,7 +9229,7 @@
     "price": 15000,
     "id": "MZ008",
     "class": "P",
-    "image": "/WebPCars/RX_7_SA_FB.webp"
+    "image": "/WebPCars/RX-7_SAIIFB.webp"
   },
   {
     "brand": "Mazda",
@@ -9237,7 +9237,7 @@
     "price": 15000,
     "id": "MZ009",
     "class": "P",
-    "image": "/WebPCars/RX_7_FC.webp"
+    "image": "/WebPCars/RX-7_FC.webp"
   },
   {
     "brand": "Mazda",
@@ -9245,7 +9245,7 @@
     "price": 50000,
     "id": "MZ010",
     "class": "A",
-    "image": "/WebPCars/RX_7_FD.webp"
+    "image": "/WebPCars/RX-7_FD.webp"
   },
   {
     "brand": "Mazda",
@@ -9253,7 +9253,7 @@
     "price": 10000,
     "id": "MZ011",
     "class": "P",
-    "image": "/WebPCars/RX_8_MK1_1.webp"
+    "image": "/WebPCars/RX-8_MK1.1.webp"
   },
   {
     "brand": "Mazda",
@@ -9261,7 +9261,7 @@
     "price": 10000,
     "id": "MZ012",
     "class": "P",
-    "image": "/WebPCars/RX_8_MK1_2.webp"
+    "image": "/WebPCars/RX-8_MK1.2.webp"
   },
   {
     "brand": "McLaren",
@@ -9309,7 +9309,7 @@
     "price": 115000,
     "id": "MC006",
     "class": "S",
-    "image": "/WebPCars/MP4_12C.webp"
+    "image": "/WebPCars/MP4-12C.webp"
   },
   {
     "brand": "McLaren",
@@ -9325,7 +9325,7 @@
     "price": 3500000,
     "id": "MC028",
     "class": "X",
-    "image": "/WebPCars/P1_GTR.webp"
+    "image": "/WebPCars/P1-GTR.webp"
   },
   {
     "brand": "McLaren",
@@ -9677,7 +9677,7 @@
     "price": 50000,
     "id": "ME024",
     "class": "A",
-    "image": "/WebPCars/AMG_G_55_W463_1.webp"
+    "image": "/WebPCars/AMG_G_55_W463.1.webp"
   },
   {
     "brand": "Mercedes",
@@ -9685,7 +9685,7 @@
     "price": 65000,
     "id": "ME025",
     "class": "A",
-    "image": "/WebPCars/AMG_G_63_W463_1.webp"
+    "image": "/WebPCars/AMG_G_63_W463.1.webp"
   },
   {
     "brand": "Mercedes",
@@ -9693,7 +9693,7 @@
     "price": 120000,
     "id": "ME026",
     "class": "S",
-    "image": "/WebPCars/AMG_G_65_W463_1.webp"
+    "image": "/WebPCars/AMG_G_65_W463.1.webp"
   },
   {
     "brand": "Mercedes",
@@ -9701,7 +9701,7 @@
     "price": 150000,
     "id": "ME027",
     "class": "S",
-    "image": "/WebPCars/AMG_G_63_W463_2.webp"
+    "image": "/WebPCars/AMG_G_63_W463.2.webp"
   },
   {
     "brand": "Mercedes",
@@ -10197,7 +10197,7 @@
     "price": 35000,
     "id": "ME081",
     "class": "P",
-    "image": "/WebPCars/G_Class_W463_1.webp"
+    "image": "/WebPCars/G_Class_W463.1.webp"
   },
   {
     "brand": "Mercedes",
@@ -10205,7 +10205,7 @@
     "price": 130000,
     "id": "ME082",
     "class": "S",
-    "image": "/WebPCars/G_Class_W463_2.webp"
+    "image": "/WebPCars/G_Class_W463.2.webp"
   },
   {
     "brand": "Mercedes",
@@ -10917,7 +10917,7 @@
     "price": 60000,
     "id": "NI002",
     "class": "A",
-    "image": "/WebPCars/GT_R_MK1_1.webp"
+    "image": "/WebPCars/GT-R_MK1.1.webp"
   },
   {
     "brand": "Nissan",
@@ -10925,7 +10925,7 @@
     "price": 75000,
     "id": "NI003",
     "class": "A",
-    "image": "/WebPCars/GT_R_MK1_2_Premium.webp"
+    "image": "/WebPCars/GT-R_MK1.2_Premium.webp"
   },
   {
     "brand": "Nissan",
@@ -10933,7 +10933,7 @@
     "price": 200000,
     "id": "NI004",
     "class": "S",
-    "image": "/WebPCars/GT_R_MK1_2_Nismo.webp"
+    "image": "/WebPCars/GT-R_MK1.2_Nismo.webp"
   },
   {
     "brand": "Nissan",
@@ -10941,7 +10941,7 @@
     "price": 130000,
     "id": "NI005",
     "class": "S",
-    "image": "/WebPCars/GT_R_MK1_3_Premium.webp"
+    "image": "/WebPCars/GT-R_MK1.3_Premium.webp"
   },
   {
     "brand": "Nissan",
@@ -10949,7 +10949,7 @@
     "price": 230000,
     "id": "NI006",
     "class": "S",
-    "image": "/WebPCars/GT_R_MK1_3_Nismo.webp"
+    "image": "/WebPCars/GT-R_MK1.3_Nismo.webp"
   },
   {
     "brand": "Nissan",
@@ -10997,7 +10997,7 @@
     "price": 35000,
     "id": "NI033",
     "class": "P",
-    "image": "/WebPCars/Rogue_MK3_2.webp"
+    "image": "/WebPCars/Rogue_MK3.2.webp"
   },
   {
     "brand": "Nissan",
@@ -11021,7 +11021,7 @@
     "price": 70000,
     "id": "NI008",
     "class": "A",
-    "image": "/WebPCars/Skyline_C10_GT_R.webp"
+    "image": "/WebPCars/Skyline_C10_GT-R.webp"
   },
   {
     "brand": "Nissan",
@@ -11029,7 +11029,7 @@
     "price": 40000,
     "id": "NI009",
     "class": "P",
-    "image": "/WebPCars/Skyline_R32_GT_R.webp"
+    "image": "/WebPCars/Skyline_R32_GT-R.webp"
   },
   {
     "brand": "Nissan",
@@ -11037,7 +11037,7 @@
     "price": 55000,
     "id": "NI010",
     "class": "A",
-    "image": "/WebPCars/Skyline_R33_GT_R.webp"
+    "image": "/WebPCars/Skyline_R33_GT-R.webp"
   },
   {
     "brand": "Nissan",
@@ -11045,7 +11045,7 @@
     "price": 180000,
     "id": "NI011",
     "class": "S",
-    "image": "/WebPCars/Skyline_R34_GT_R.webp"
+    "image": "/WebPCars/Skyline_R34_GT-R.webp"
   },
   {
     "brand": "Nissan",
@@ -11053,7 +11053,7 @@
     "price": 40000,
     "id": "NI035",
     "class": "P",
-    "image": "/WebPCars/Titan_MK2_2.webp"
+    "image": "/WebPCars/Titan_MK2.2.webp"
   },
   {
     "brand": "Nissan",
@@ -11061,7 +11061,7 @@
     "price": 15000,
     "id": "NI012",
     "class": "P",
-    "image": "/WebPCars/240SX_S13.webp"
+    "image": "/WebPCars/240SX_(S13).webp"
   },
   {
     "brand": "Nissan",
@@ -11069,7 +11069,7 @@
     "price": 20000,
     "id": "NI013",
     "class": "P",
-    "image": "/WebPCars/240SX_S14_1.webp"
+    "image": "/WebPCars/240SX_(S14.1).webp"
   },
   {
     "brand": "Nissan",
@@ -11077,7 +11077,7 @@
     "price": 20000,
     "id": "NI014",
     "class": "P",
-    "image": "/WebPCars/240SX_S14_2.webp"
+    "image": "/WebPCars/240SX_(S14.2).webp"
   },
   {
     "brand": "Nissan",
@@ -11085,7 +11085,7 @@
     "price": 25000,
     "id": "NI015",
     "class": "P",
-    "image": "/WebPCars/Silvia_S15.webp"
+    "image": "/WebPCars/Silvia_(S15).webp"
   },
   {
     "brand": "Nissan",
@@ -11541,7 +11541,7 @@
     "price": 30000,
     "id": "PO004",
     "class": "P",
-    "image": "/WebPCars/Firebird_MK2_1.webp"
+    "image": "/WebPCars/Firebird_MK2.1.webp"
   },
   {
     "brand": "Pontiac",
@@ -11549,7 +11549,7 @@
     "price": 50000,
     "id": "PO023",
     "class": "A",
-    "image": "/WebPCars/Firebird_MK2_1_Trans_Am.webp"
+    "image": "/WebPCars/Firebird_MK2.1_Trans_Am.webp"
   },
   {
     "brand": "Pontiac",
@@ -11557,7 +11557,7 @@
     "price": 30000,
     "id": "PO024",
     "class": "P",
-    "image": "/WebPCars/Firebird_MK2_2.webp"
+    "image": "/WebPCars/Firebird_MK2.2.webp"
   },
   {
     "brand": "Pontiac",
@@ -11565,7 +11565,7 @@
     "price": 50000,
     "id": "PO025",
     "class": "A",
-    "image": "/WebPCars/Firebird_MK2_2_Trans_Am.webp"
+    "image": "/WebPCars/Firebird_MK2.2_Trans_Am.webp"
   },
   {
     "brand": "Pontiac",
@@ -11573,7 +11573,7 @@
     "price": 30000,
     "id": "PO026",
     "class": "P",
-    "image": "/WebPCars/Firebird_MK2_3.webp"
+    "image": "/WebPCars/Firebird_MK2.3.webp"
   },
   {
     "brand": "Pontiac",
@@ -11581,7 +11581,7 @@
     "price": 50000,
     "id": "PO027",
     "class": "A",
-    "image": "/WebPCars/Firebird_MK2_3_Trans_Am.webp"
+    "image": "/WebPCars/Firebird_MK2.3_Trans_Am.webp"
   },
   {
     "brand": "Pontiac",
@@ -11589,7 +11589,7 @@
     "price": 30000,
     "id": "PO028",
     "class": "P",
-    "image": "/WebPCars/Firebird_MK2_4.webp"
+    "image": "/WebPCars/Firebird_MK2.4.webp"
   },
   {
     "brand": "Pontiac",
@@ -11597,7 +11597,7 @@
     "price": 50000,
     "id": "PO005",
     "class": "A",
-    "image": "/WebPCars/Firebird_MK2_4_Trans_Am.webp"
+    "image": "/WebPCars/Firebird_MK2.4_Trans_Am.webp"
   },
   {
     "brand": "Pontiac",
@@ -11605,7 +11605,7 @@
     "price": 10000,
     "id": "PO006",
     "class": "P",
-    "image": "/WebPCars/Firebird_MK3_1.webp"
+    "image": "/WebPCars/Firebird_MK3.1.webp"
   },
   {
     "brand": "Pontiac",
@@ -11613,7 +11613,7 @@
     "price": 25000,
     "id": "PO007",
     "class": "P",
-    "image": "/WebPCars/Firebird_MK3_1_Trans_Am.webp"
+    "image": "/WebPCars/Firebird_MK3.1_Trans_Am.webp"
   },
   {
     "brand": "Pontiac",
@@ -11621,7 +11621,7 @@
     "price": 10000,
     "id": "PO029",
     "class": "P",
-    "image": "/WebPCars/Firebird_MK3_2.webp"
+    "image": "/WebPCars/Firebird_MK3.2.webp"
   },
   {
     "brand": "Pontiac",
@@ -11629,7 +11629,7 @@
     "price": 25000,
     "id": "PO030",
     "class": "P",
-    "image": "/WebPCars/Firebird_MK3_2_Trans_Am.webp"
+    "image": "/WebPCars/Firebird_MK3.2_Trans_Am.webp"
   },
   {
     "brand": "Pontiac",
@@ -11637,7 +11637,7 @@
     "price": 15000,
     "id": "PO008",
     "class": "P",
-    "image": "/WebPCars/Firebird_MK4_1.webp"
+    "image": "/WebPCars/Firebird_MK4.1.webp"
   },
   {
     "brand": "Pontiac",
@@ -11645,7 +11645,7 @@
     "price": 25000,
     "id": "PO009",
     "class": "P",
-    "image": "/WebPCars/Firebird_MK4_1_Trans_Am.webp"
+    "image": "/WebPCars/Firebird_MK4.1_Trans_Am.webp"
   },
   {
     "brand": "Pontiac",
@@ -11653,7 +11653,7 @@
     "price": 15000,
     "id": "PO010",
     "class": "P",
-    "image": "/WebPCars/Firebird_MK4_2.webp"
+    "image": "/WebPCars/Firebird_MK4.2.webp"
   },
   {
     "brand": "Pontiac",
@@ -11661,7 +11661,7 @@
     "price": 25000,
     "id": "PO011",
     "class": "P",
-    "image": "/WebPCars/Firebird_MK4_2_Trans_Am.webp"
+    "image": "/WebPCars/Firebird_MK4.2_Trans_Am.webp"
   },
   {
     "brand": "Pontiac",
@@ -11773,7 +11773,7 @@
     "price": 25000,
     "id": "PS018",
     "class": "P",
-    "image": "/WebPCars/Boxster_987_1.webp"
+    "image": "/WebPCars/Boxster_987.1.webp"
   },
   {
     "brand": "Porsche",
@@ -11781,7 +11781,7 @@
     "price": 25000,
     "id": "PS019",
     "class": "P",
-    "image": "/WebPCars/Boxster_987_2.webp"
+    "image": "/WebPCars/Boxster_987.2.webp"
   },
   {
     "brand": "Porsche",
@@ -11789,7 +11789,7 @@
     "price": 80000,
     "id": "PS020",
     "class": "A",
-    "image": "/WebPCars/Boxster_987_2_Spyder.webp"
+    "image": "/WebPCars/Boxster_987.2_Spyder.webp"
   },
   {
     "brand": "Porsche",
@@ -11837,7 +11837,7 @@
     "price": 25000,
     "id": "PS004",
     "class": "P",
-    "image": "/WebPCars/Cayenne_958_1.webp"
+    "image": "/WebPCars/Cayenne_958.1.webp"
   },
   {
     "brand": "Porsche",
@@ -11845,7 +11845,7 @@
     "price": 30000,
     "id": "PS095",
     "class": "P",
-    "image": "/WebPCars/Cayenne_958_2.webp"
+    "image": "/WebPCars/Cayenne_958.2.webp"
   },
   {
     "brand": "Porsche",
@@ -11853,7 +11853,7 @@
     "price": 30000,
     "id": "PS096",
     "class": "P",
-    "image": "/WebPCars/Cayenne_958_2_GTS.webp"
+    "image": "/WebPCars/Cayenne_958.2_GTS.webp"
   },
   {
     "brand": "Porsche",
@@ -11861,7 +11861,7 @@
     "price": 30000,
     "id": "PS005",
     "class": "P",
-    "image": "/WebPCars/Cayenne_958_2_Turbo.webp"
+    "image": "/WebPCars/Cayenne_958.2_Turbo.webp"
   },
   {
     "brand": "Porsche",
@@ -11869,7 +11869,7 @@
     "price": 60000,
     "id": "PS097",
     "class": "A",
-    "image": "/WebPCars/Cayenne_9Y3_1.webp"
+    "image": "/WebPCars/Cayenne_9Y3.1.webp"
   },
   {
     "brand": "Porsche",
@@ -11877,7 +11877,7 @@
     "price": 100000,
     "id": "PS007",
     "class": "S",
-    "image": "/WebPCars/Cayenne_9Y3_1_GTS.webp"
+    "image": "/WebPCars/Cayenne_9Y3.1_GTS.webp"
   },
   {
     "brand": "Porsche",
@@ -11885,7 +11885,7 @@
     "price": 110000,
     "id": "PS098",
     "class": "S",
-    "image": "/WebPCars/Cayenne_9Y3_1_Turbo.webp"
+    "image": "/WebPCars/Cayenne_9Y3.1_Turbo.webp"
   },
   {
     "brand": "Porsche",
@@ -11893,7 +11893,7 @@
     "price": 65000,
     "id": "PS006",
     "class": "A",
-    "image": "/WebPCars/Cayenne_9Y0_1.webp"
+    "image": "/WebPCars/Cayenne_9Y0.1.webp"
   },
   {
     "brand": "Porsche",
@@ -11901,7 +11901,7 @@
     "price": 100000,
     "id": "PS099",
     "class": "S",
-    "image": "/WebPCars/Cayenne_9Y0_1_GTS.webp"
+    "image": "/WebPCars/Cayenne_9Y0.1_GTS.webp"
   },
   {
     "brand": "Porsche",
@@ -11909,7 +11909,7 @@
     "price": 110000,
     "id": "PS100",
     "class": "S",
-    "image": "/WebPCars/Cayenne_9Y0_1_Turbo.webp"
+    "image": "/WebPCars/Cayenne_9Y0.1_Turbo.webp"
   },
   {
     "brand": "Porsche",
@@ -11917,7 +11917,7 @@
     "price": 60000,
     "id": "PS101",
     "class": "A",
-    "image": "/WebPCars/Cayenne_9Y3_2.webp"
+    "image": "/WebPCars/Cayenne_9Y3.2.webp"
   },
   {
     "brand": "Porsche",
@@ -11925,7 +11925,7 @@
     "price": 180000,
     "id": "PS008",
     "class": "S",
-    "image": "/WebPCars/Cayenne_9Y3_2_Turbo_GT.webp"
+    "image": "/WebPCars/Cayenne_9Y3.2_Turbo_GT.webp"
   },
   {
     "brand": "Porsche",
@@ -11933,7 +11933,7 @@
     "price": 130000,
     "id": "PS102",
     "class": "S",
-    "image": "/WebPCars/Cayenne_9Y0_2.webp"
+    "image": "/WebPCars/Cayenne_9Y0.2.webp"
   },
   {
     "brand": "Porsche",
@@ -11941,7 +11941,7 @@
     "price": 160000,
     "id": "PS103",
     "class": "S",
-    "image": "/WebPCars/Cayenne_9Y0_2_GTS.webp"
+    "image": "/WebPCars/Cayenne_9Y0.2_GTS.webp"
   },
   {
     "brand": "Porsche",
@@ -11949,7 +11949,7 @@
     "price": 25000,
     "id": "PS023",
     "class": "P",
-    "image": "/WebPCars/Cayman_987_1.webp"
+    "image": "/WebPCars/Cayman_987.1.webp"
   },
   {
     "brand": "Porsche",
@@ -11957,7 +11957,7 @@
     "price": 30000,
     "id": "PS024",
     "class": "P",
-    "image": "/WebPCars/Cayman_987_2.webp"
+    "image": "/WebPCars/Cayman_987.2.webp"
   },
   {
     "brand": "Porsche",
@@ -11965,7 +11965,7 @@
     "price": 80000,
     "id": "PS025",
     "class": "A",
-    "image": "/WebPCars/Cayman_987_2_R.webp"
+    "image": "/WebPCars/Cayman_987.2_R.webp"
   },
   {
     "brand": "Porsche",
@@ -11989,7 +11989,7 @@
     "price": 15000,
     "id": "PS009",
     "class": "P",
-    "image": "/WebPCars/Macan_95B_1.webp"
+    "image": "/WebPCars/Macan_95B.1.webp"
   },
   {
     "brand": "Porsche",
@@ -11997,7 +11997,7 @@
     "price": 25000,
     "id": "PS104",
     "class": "P",
-    "image": "/WebPCars/Macan_95B_1_GTS.webp"
+    "image": "/WebPCars/Macan_95B.1_GTS.webp"
   },
   {
     "brand": "Porsche",
@@ -12005,7 +12005,7 @@
     "price": 30000,
     "id": "PS105",
     "class": "P",
-    "image": "/WebPCars/Macan_95B_1_Turbo.webp"
+    "image": "/WebPCars/Macan_95B.1_Turbo.webp"
   },
   {
     "brand": "Porsche",
@@ -12013,7 +12013,7 @@
     "price": 35000,
     "id": "PS010",
     "class": "P",
-    "image": "/WebPCars/Macan_95B_2.webp"
+    "image": "/WebPCars/Macan_95B.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12021,7 +12021,7 @@
     "price": 50000,
     "id": "PS106",
     "class": "A",
-    "image": "/WebPCars/Macan_95B_2_GTS.webp"
+    "image": "/WebPCars/Macan_95B.2_GTS.webp"
   },
   {
     "brand": "Porsche",
@@ -12029,7 +12029,7 @@
     "price": 50000,
     "id": "PS107",
     "class": "A",
-    "image": "/WebPCars/Macan_95B_2_Turbo.webp"
+    "image": "/WebPCars/Macan_95B.2_Turbo.webp"
   },
   {
     "brand": "Porsche",
@@ -12037,7 +12037,7 @@
     "price": 90000,
     "id": "PS108",
     "class": "A",
-    "image": "/WebPCars/Macan_95B_3.webp"
+    "image": "/WebPCars/Macan_95B.3.webp"
   },
   {
     "brand": "Porsche",
@@ -12045,7 +12045,7 @@
     "price": 115000,
     "id": "PS109",
     "class": "S",
-    "image": "/WebPCars/Macan_95B_3_GTS.webp"
+    "image": "/WebPCars/Macan_95B.3_GTS.webp"
   },
   {
     "brand": "Porsche",
@@ -12213,7 +12213,7 @@
     "price": 500000,
     "id": "PS036",
     "class": "X",
-    "image": "/WebPCars/911_Carrera_RS_2_7.webp"
+    "image": "/WebPCars/911_Carrera_RS_2.7.webp"
   },
   {
     "brand": "Porsche",
@@ -12221,7 +12221,7 @@
     "price": 100000,
     "id": "PS037",
     "class": "S",
-    "image": "/WebPCars/911_F_Body_SWB.webp"
+    "image": "/WebPCars/911_F-Body_SWB.webp"
   },
   {
     "brand": "Porsche",
@@ -12229,7 +12229,7 @@
     "price": 180000,
     "id": "PS038",
     "class": "S",
-    "image": "/WebPCars/911S_F_Body_SWB.webp"
+    "image": "/WebPCars/911S_F-Body_SWB.webp"
   },
   {
     "brand": "Porsche",
@@ -12237,7 +12237,7 @@
     "price": 55000,
     "id": "PS039",
     "class": "A",
-    "image": "/WebPCars/912_F_Body_SWB.webp"
+    "image": "/WebPCars/912_F-Body_SWB.webp"
   },
   {
     "brand": "Porsche",
@@ -12245,7 +12245,7 @@
     "price": 80000,
     "id": "PS040",
     "class": "A",
-    "image": "/WebPCars/911T_F_Body_LWB.webp"
+    "image": "/WebPCars/911T_F-Body_LWB.webp"
   },
   {
     "brand": "Porsche",
@@ -12253,7 +12253,7 @@
     "price": 100000,
     "id": "PS041",
     "class": "S",
-    "image": "/WebPCars/911E_F_Body_LWB.webp"
+    "image": "/WebPCars/911E_F-Body_LWB.webp"
   },
   {
     "brand": "Porsche",
@@ -12261,7 +12261,7 @@
     "price": 150000,
     "id": "PS042",
     "class": "S",
-    "image": "/WebPCars/911S_F_Body_LWB.webp"
+    "image": "/WebPCars/911S_F-Body_LWB.webp"
   },
   {
     "brand": "Porsche",
@@ -12269,7 +12269,7 @@
     "price": 65000,
     "id": "PS044",
     "class": "A",
-    "image": "/WebPCars/911_SC_G_Body.webp"
+    "image": "/WebPCars/911_SC_G-Body.webp"
   },
   {
     "brand": "Porsche",
@@ -12277,7 +12277,7 @@
     "price": 75000,
     "id": "PS043",
     "class": "A",
-    "image": "/WebPCars/911S_2_7L_G_Body.webp"
+    "image": "/WebPCars/911S_2.7L_G-Body.webp"
   },
   {
     "brand": "Porsche",
@@ -12285,7 +12285,7 @@
     "price": 90000,
     "id": "PS046",
     "class": "A",
-    "image": "/WebPCars/911_Carrera_3_2L_G_Body.webp"
+    "image": "/WebPCars/911_Carrera_3.2L_G-Body.webp"
   },
   {
     "brand": "Porsche",
@@ -12293,7 +12293,7 @@
     "price": 190000,
     "id": "PS045",
     "class": "S",
-    "image": "/WebPCars/911_Turbo_G_Body.webp"
+    "image": "/WebPCars/911_Turbo_G-Body.webp"
   },
   {
     "brand": "Porsche",
@@ -12309,7 +12309,7 @@
     "price": 280000,
     "id": "PS048",
     "class": "S",
-    "image": "/WebPCars/911_Turbo_3_3_964.webp"
+    "image": "/WebPCars/911_Turbo_3.3_964.webp"
   },
   {
     "brand": "Porsche",
@@ -12341,7 +12341,7 @@
     "price": 30000,
     "id": "PS052",
     "class": "P",
-    "image": "/WebPCars/911_Carrera_996_1.webp"
+    "image": "/WebPCars/911_Carrera_996.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12349,7 +12349,7 @@
     "price": 100000,
     "id": "PS053",
     "class": "S",
-    "image": "/WebPCars/911_GT3_996_1.webp"
+    "image": "/WebPCars/911_GT3_996.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12357,7 +12357,7 @@
     "price": 40000,
     "id": "PS054",
     "class": "P",
-    "image": "/WebPCars/911_Carrera_996_2.webp"
+    "image": "/WebPCars/911_Carrera_996.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12365,7 +12365,7 @@
     "price": 60000,
     "id": "PS055",
     "class": "A",
-    "image": "/WebPCars/911_Turbo_996_2.webp"
+    "image": "/WebPCars/911_Turbo_996.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12373,7 +12373,7 @@
     "price": 75000,
     "id": "PS056",
     "class": "A",
-    "image": "/WebPCars/911_Turbo_S_996_2.webp"
+    "image": "/WebPCars/911_Turbo_S_996.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12381,7 +12381,7 @@
     "price": 100000,
     "id": "PS057",
     "class": "S",
-    "image": "/WebPCars/911_GT3_996_2.webp"
+    "image": "/WebPCars/911_GT3_996.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12389,7 +12389,7 @@
     "price": 160000,
     "id": "PS058",
     "class": "S",
-    "image": "/WebPCars/911_GT2_996_2.webp"
+    "image": "/WebPCars/911_GT2_996.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12397,7 +12397,7 @@
     "price": 170000,
     "id": "PS059",
     "class": "S",
-    "image": "/WebPCars/911_GT3_RS_996_2.webp"
+    "image": "/WebPCars/911_GT3_RS_996.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12405,7 +12405,7 @@
     "price": 50000,
     "id": "PS060",
     "class": "A",
-    "image": "/WebPCars/911_Carrera_997_1.webp"
+    "image": "/WebPCars/911_Carrera_997.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12413,7 +12413,7 @@
     "price": 100000,
     "id": "PS061",
     "class": "S",
-    "image": "/WebPCars/911_Turbo_997_1.webp"
+    "image": "/WebPCars/911_Turbo_997.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12421,7 +12421,7 @@
     "price": 145000,
     "id": "PS062",
     "class": "S",
-    "image": "/WebPCars/911_GT3_997_1.webp"
+    "image": "/WebPCars/911_GT3_997.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12429,7 +12429,7 @@
     "price": 275000,
     "id": "PS063",
     "class": "S",
-    "image": "/WebPCars/911_GT3_RS_997_1.webp"
+    "image": "/WebPCars/911_GT3_RS_997.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12437,7 +12437,7 @@
     "price": 60000,
     "id": "PS064",
     "class": "A",
-    "image": "/WebPCars/911_Carrera_997_2.webp"
+    "image": "/WebPCars/911_Carrera_997.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12445,7 +12445,7 @@
     "price": 100000,
     "id": "PS065",
     "class": "S",
-    "image": "/WebPCars/911_Turbo_997_2.webp"
+    "image": "/WebPCars/911_Turbo_997.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12453,7 +12453,7 @@
     "price": 100000,
     "id": "PS066",
     "class": "S",
-    "image": "/WebPCars/911_Turbo_S_997_2.webp"
+    "image": "/WebPCars/911_Turbo_S_997.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12461,7 +12461,7 @@
     "price": 150000,
     "id": "PS067",
     "class": "S",
-    "image": "/WebPCars/911_GT3_997_2.webp"
+    "image": "/WebPCars/911_GT3_997.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12469,7 +12469,7 @@
     "price": 350000,
     "id": "PS068",
     "class": "S",
-    "image": "/WebPCars/911_GT3_RS_997_2.webp"
+    "image": "/WebPCars/911_GT3_RS_997.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12477,7 +12477,7 @@
     "price": 80000,
     "id": "PS069",
     "class": "A",
-    "image": "/WebPCars/911_Carrera_991_1.webp"
+    "image": "/WebPCars/911_Carrera_991.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12485,7 +12485,7 @@
     "price": 100000,
     "id": "PS070",
     "class": "S",
-    "image": "/WebPCars/911_Turbo_991_1.webp"
+    "image": "/WebPCars/911_Turbo_991.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12493,7 +12493,7 @@
     "price": 120000,
     "id": "PS071",
     "class": "S",
-    "image": "/WebPCars/911_Turbo_S_991_1.webp"
+    "image": "/WebPCars/911_Turbo_S_991.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12501,7 +12501,7 @@
     "price": 125000,
     "id": "PS072",
     "class": "S",
-    "image": "/WebPCars/911_GT3_991_1.webp"
+    "image": "/WebPCars/911_GT3_991.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12509,7 +12509,7 @@
     "price": 185000,
     "id": "PS073",
     "class": "S",
-    "image": "/WebPCars/911_GT3_RS_991_1.webp"
+    "image": "/WebPCars/911_GT3_RS_991.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12517,7 +12517,7 @@
     "price": 85000,
     "id": "PS074",
     "class": "A",
-    "image": "/WebPCars/911_Carrera_991_2.webp"
+    "image": "/WebPCars/911_Carrera_991.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12525,7 +12525,7 @@
     "price": 130000,
     "id": "PS075",
     "class": "S",
-    "image": "/WebPCars/911_Turbo_991_2.webp"
+    "image": "/WebPCars/911_Turbo_991.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12533,7 +12533,7 @@
     "price": 180000,
     "id": "PS076",
     "class": "S",
-    "image": "/WebPCars/911_Turbo_S_991_2.webp"
+    "image": "/WebPCars/911_Turbo_S_991.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12541,7 +12541,7 @@
     "price": 215000,
     "id": "PS077",
     "class": "S",
-    "image": "/WebPCars/911_GT3_991_2.webp"
+    "image": "/WebPCars/911_GT3_991.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12549,7 +12549,7 @@
     "price": 230000,
     "id": "PS078",
     "class": "S",
-    "image": "/WebPCars/911_GT3_RS_991_2.webp"
+    "image": "/WebPCars/911_GT3_RS_991.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12557,7 +12557,7 @@
     "price": 500000,
     "id": "PS079",
     "class": "X",
-    "image": "/WebPCars/911_GT2_RS_991_2.webp"
+    "image": "/WebPCars/911_GT2_RS_991.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12565,7 +12565,7 @@
     "price": 130000,
     "id": "PS080",
     "class": "S",
-    "image": "/WebPCars/911_Carrera_992_1.webp"
+    "image": "/WebPCars/911_Carrera_992.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12573,7 +12573,7 @@
     "price": 250000,
     "id": "PS081",
     "class": "S",
-    "image": "/WebPCars/911_Turbo_992_1.webp"
+    "image": "/WebPCars/911_Turbo_992.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12581,7 +12581,7 @@
     "price": 250000,
     "id": "PS082",
     "class": "S",
-    "image": "/WebPCars/911_Turbo_S_992_1.webp"
+    "image": "/WebPCars/911_Turbo_S_992.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12589,7 +12589,7 @@
     "price": 320000,
     "id": "PS083",
     "class": "S",
-    "image": "/WebPCars/911_Dakar_992_1.webp"
+    "image": "/WebPCars/911_Dakar_992.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12597,7 +12597,7 @@
     "price": 260000,
     "id": "PS084",
     "class": "S",
-    "image": "/WebPCars/911_GT3_992_1.webp"
+    "image": "/WebPCars/911_GT3_992.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12605,7 +12605,7 @@
     "price": 400000,
     "id": "PS085",
     "class": "S",
-    "image": "/WebPCars/911_GT3_RS_992_1.webp"
+    "image": "/WebPCars/911_GT3_RS_992.1.webp"
   },
   {
     "brand": "Porsche",
@@ -12613,7 +12613,7 @@
     "price": 200000,
     "id": "PS086",
     "class": "S",
-    "image": "/WebPCars/911_Carrera_992_2.webp"
+    "image": "/WebPCars/911_Carrera_992.2.webp"
   },
   {
     "brand": "Porsche",
@@ -12621,7 +12621,7 @@
     "price": 350000,
     "id": "PS087",
     "class": "S",
-    "image": "/WebPCars/911_GT3_992_2.webp"
+    "image": "/WebPCars/911_GT3_992.2.webp"
   },
   {
     "brand": "Porsche",
@@ -13101,7 +13101,7 @@
     "price": 20000,
     "id": "TS003",
     "class": "P",
-    "image": "/WebPCars/Model_S_MK1_1.webp"
+    "image": "/WebPCars/Model_S_MK1.1.webp"
   },
   {
     "brand": "Tesla",
@@ -13109,7 +13109,7 @@
     "price": 110000,
     "id": "TS004",
     "class": "S",
-    "image": "/WebPCars/Model_S_MK1_2.webp"
+    "image": "/WebPCars/Model_S_MK1.2.webp"
   },
   {
     "brand": "Tesla",
@@ -13117,7 +13117,7 @@
     "price": 140000,
     "id": "TS005",
     "class": "S",
-    "image": "/WebPCars/Model_S_MK1_2_Plaid.webp"
+    "image": "/WebPCars/Model_S_MK1.2_Plaid.webp"
   },
   {
     "brand": "Tesla",
@@ -13125,7 +13125,7 @@
     "price": 35000,
     "id": "TS006",
     "class": "P",
-    "image": "/WebPCars/Model_Y_MK1_1.webp"
+    "image": "/WebPCars/Model_Y_MK1.1.webp"
   },
   {
     "brand": "Tesla",
@@ -13133,7 +13133,7 @@
     "price": 35000,
     "id": "TS007",
     "class": "P",
-    "image": "/WebPCars/Model_Y_MK1_1_Performance.webp"
+    "image": "/WebPCars/Model_Y_MK1.1_Performance.webp"
   },
   {
     "brand": "Tesla",
@@ -13141,7 +13141,7 @@
     "price": 50000,
     "id": "TS008",
     "class": "A",
-    "image": "/WebPCars/Model_Y_MK1_2.webp"
+    "image": "/WebPCars/Model_Y_MK1.2.webp"
   },
   {
     "brand": "Tesla",
@@ -13149,7 +13149,7 @@
     "price": 65000,
     "id": "TS009",
     "class": "A",
-    "image": "/WebPCars/Model_Y_MK1_2_Performance.webp"
+    "image": "/WebPCars/Model_Y_MK1.2_Performance.webp"
   },
   {
     "brand": "Tesla",
@@ -13157,7 +13157,7 @@
     "price": 25000,
     "id": "TS010",
     "class": "P",
-    "image": "/WebPCars/Model_3_MK1_1.webp"
+    "image": "/WebPCars/Model_3_MK1.1.webp"
   },
   {
     "brand": "Tesla",
@@ -13165,7 +13165,7 @@
     "price": 45000,
     "id": "TS011",
     "class": "P",
-    "image": "/WebPCars/Model_3_MK1_2.webp"
+    "image": "/WebPCars/Model_3_MK1.2.webp"
   },
   {
     "brand": "Tesla",
@@ -13173,7 +13173,7 @@
     "price": 55000,
     "id": "TS012",
     "class": "A",
-    "image": "/WebPCars/Model_3_MK1_2_Performance.webp"
+    "image": "/WebPCars/Model_3_MK1.2_Performance.webp"
   },
   {
     "brand": "Toyota",
@@ -13293,7 +13293,7 @@
     "price": 45000,
     "id": "TO042",
     "class": "P",
-    "image": "/WebPCars/C_HR.webp"
+    "image": "/WebPCars/C-HR.webp"
   },
   {
     "brand": "Toyota",
@@ -13773,7 +13773,7 @@
     "price": 65000,
     "id": "VW029",
     "class": "A",
-    "image": "/WebPCars/ID_Buzz.webp"
+    "image": "/WebPCars/ID.Buzz.webp"
   },
   {
     "brand": "Volkswagen",
@@ -13781,7 +13781,7 @@
     "price": 45000,
     "id": "VW030",
     "class": "P",
-    "image": "/WebPCars/ID_4.webp"
+    "image": "/WebPCars/ID.4.webp"
   },
   {
     "brand": "Volkswagen",
@@ -13877,7 +13877,7 @@
     "price": 30000,
     "id": "VW034",
     "class": "P",
-    "image": "/WebPCars/Taos_MK1_2.webp"
+    "image": "/WebPCars/Taos_MK1.2.webp"
   },
   {
     "brand": "Volkswagen",
@@ -14077,7 +14077,7 @@
     "price": 70000,
     "id": "VO018",
     "class": "A",
-    "image": "/WebPCars/XC90_MK2_1.webp"
+    "image": "/WebPCars/XC90_MK2.1.webp"
   },
   {
     "brand": "Volvo",
@@ -14085,7 +14085,7 @@
     "price": 70000,
     "id": "VO019",
     "class": "A",
-    "image": "/WebPCars/XC90_MK2_2.webp"
+    "image": "/WebPCars/XC90_MK2.2.webp"
   },
   {
     "brand": "Volvo",
@@ -14093,7 +14093,7 @@
     "price": 70000,
     "id": "VO020",
     "class": "A",
-    "image": "/WebPCars/XC90_MK2_3.webp"
+    "image": "/WebPCars/XC90_MK2.3.webp"
   },
   {
     "brand": "Volvo",
@@ -14133,7 +14133,7 @@
     "price": 7000000,
     "id": "US003",
     "class": "X",
-    "image": "/WebPCars/FXX_K_Evo.webp"
+    "image": "/WebPCars/FXX-K_Evo.webp"
   },
   {
     "brand": "U.S. Restricted",
@@ -14341,7 +14341,7 @@
     "price": 60000,
     "id": "OC010",
     "class": "A",
-    "image": "/WebPCars/DMC_12.webp"
+    "image": "/WebPCars/DMC-12.webp"
   },
   {
     "brand": "Other Cars",
@@ -14397,7 +14397,7 @@
     "price": 15000,
     "id": "OC012",
     "class": "P",
-    "image": "/WebPCars/FR_S.webp"
+    "image": "/WebPCars/FR-S.webp"
   },
   {
     "brand": "Other Cars",
@@ -14549,7 +14549,7 @@
     "price": 10000,
     "id": "OC030",
     "class": "P",
-    "image": "/WebPCars/tC_MK2_1.webp"
+    "image": "/WebPCars/tC_MK2.1.webp"
   },
   {
     "brand": "Other Cars",
@@ -14557,7 +14557,7 @@
     "price": 10000,
     "id": "OC031",
     "class": "P",
-    "image": "/WebPCars/tC_MK2_2.webp"
+    "image": "/WebPCars/tC_MK2.2.webp"
   },
   {
     "brand": "Other Cars",
@@ -14685,7 +14685,7 @@
     "price": 10000,
     "id": "OC071",
     "class": "P",
-    "image": "/WebPCars/9_3_MK1.webp"
+    "image": "/WebPCars/9-3_MK1.webp"
   },
   {
     "brand": "Other Cars",
@@ -14693,7 +14693,7 @@
     "price": 10000,
     "id": "OC072",
     "class": "P",
-    "image": "/WebPCars/9_3_MK2.webp"
+    "image": "/WebPCars/9-3_MK2.webp"
   },
   {
     "brand": "Other SUVs",
