@@ -275,15 +275,11 @@ export default function Dream3Page() {
   const posterRef = useRef<HTMLDivElement>(null);
   const exportRef = useRef<HTMLDivElement>(null);
   const designGenerationRef = useRef(0);
-  const colorZoomTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const autoPreviewTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const wasAllSlotsFilledRef = useRef(false);
   const shareExportRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSectionRef = useRef<HTMLDivElement>(null);
   const searchResultsScrollRef = useRef<HTMLDivElement>(null);
   const instructionsRef = useRef<HTMLDivElement>(null);
-  const [previewStep, setPreviewStep] = useState(0);
   const SHOPIFY_STORE_URL = "https://carscenebrand.com";
   const SHIRT_COLORS = {
     White: {
@@ -439,8 +435,6 @@ export default function Dream3Page() {
   const [preparedDesignBlob, setPreparedDesignBlob] = useState<Blob | null>(null);
   const [prepareDesignPromise, setPrepareDesignPromise] =
     useState<Promise<Blob> | null>(null);
-  const [pulseEye, setPulseEye] = useState(false);
-  const [hasUsedEye, setHasUsedEye] = useState(false);
   const [pulseCheckout, setPulseCheckout] = useState(false);
   const [showIntroPopup, setShowIntroPopup] = useState(false);
   const [email, setEmail] = useState("");
@@ -449,28 +443,6 @@ export default function Dream3Page() {
   const [shirtColor, setShirtColor] = useState<ShirtColor>("Black");
   const [shirtSize, setShirtSize] = useState<ShirtSize>("L");
   const allSlotsFilled = slots.every((slot) => slot !== null);
-  useEffect(() => {
-    const justFilledAllThree =
-      allSlotsFilled && !wasAllSlotsFilledRef.current;
-    wasAllSlotsFilledRef.current = allSlotsFilled;
-    if (!justFilledAllThree) return;
-    if (autoPreviewTimeoutRef.current) {
-      clearTimeout(autoPreviewTimeoutRef.current);
-    }
-    // Show the full shirt as soon as the third car is selected.
-    setPreviewStep(1);
-    // Keep the full shirt visible for 5 seconds, then zoom into the design.
-    autoPreviewTimeoutRef.current = setTimeout(() => {
-      setPreviewStep(0);
-      autoPreviewTimeoutRef.current = null;
-    }, 5000);
-    return () => {
-      if (autoPreviewTimeoutRef.current) {
-        clearTimeout(autoPreviewTimeoutRef.current);
-        autoPreviewTimeoutRef.current = null;
-      }
-    };
-  }, [allSlotsFilled]);
   useEffect(() => {
     designGenerationRef.current += 1;
     setPreparedDesignBlob(null);
@@ -481,19 +453,6 @@ export default function Dream3Page() {
     }, 1500);
     return () => clearTimeout(timer);
   }, [slots, shirtColor, allSlotsFilled]);
-  useEffect(() => {
-    if (hasUsedEye) {
-      setPulseEye(false);
-      return;
-    }
-    const interval = setInterval(() => {
-      setPulseEye(true);
-      setTimeout(() => {
-        setPulseEye(false);
-      }, 700);
-    }, 20000);
-    return () => clearInterval(interval);
-  }, [hasUsedEye]);
   // Checkout button pulse every 20 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -652,19 +611,9 @@ export default function Dream3Page() {
     performRestartDream3();
   }
   function performRestartDream3() {
-    if (autoPreviewTimeoutRef.current) {
-      clearTimeout(autoPreviewTimeoutRef.current);
-      autoPreviewTimeoutRef.current = null;
-    }
-    if (colorZoomTimeoutRef.current) {
-      clearTimeout(colorZoomTimeoutRef.current);
-      colorZoomTimeoutRef.current = null;
-    }
     emptyDream3();
     setSearchView("featured");
     setFeaturedSeed((seed) => seed + 1);
-    setPreviewStep(0);
-    wasAllSlotsFilledRef.current = false;
     requestAnimationFrame(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
@@ -696,7 +645,6 @@ export default function Dream3Page() {
     setFeaturedSeed((s) => s + 1);
     setDeleteReadySlot(null);
     // Every car selection returns the visitor to the shirt preview.
-    setPreviewStep(0);
     setTimeout(() => {
       instructionsRef.current?.scrollIntoView({
         behavior: "smooth",
@@ -805,10 +753,6 @@ export default function Dream3Page() {
         requestAnimationFrame(() => resolve());
       });
     });
-  }
-  function cyclePreview() {
-    setHasUsedEye(true);
-    setPreviewStep((currentStep) => (currentStep === 0 ? 1 : 0));
   }
   async function shareDream3() {
     if (!shareExportRef.current || !allSlotsFilled) {
@@ -998,17 +942,6 @@ export default function Dream3Page() {
               setShirtColor(color);
               setPreparedDesignBlob(null);
               setPrepareDesignPromise(null);
-              // Cancel the previous timer
-              if (colorZoomTimeoutRef.current) {
-                clearTimeout(colorZoomTimeoutRef.current);
-              }
-              // Show the full shirt
-              setPreviewStep(1);
-              // Zoom back in 5 seconds after the LAST color selection
-              colorZoomTimeoutRef.current = setTimeout(() => {
-                setPreviewStep(0);
-                  colorZoomTimeoutRef.current = null;
-              }, 5000);
             }}
             title={color}
             style={{ backgroundColor: COLOR_SWATCHES[color] }}
@@ -1246,99 +1179,7 @@ export default function Dream3Page() {
         </div>
             <div className="mx-auto mb-4 w-full max-w-[540px] overflow-hidden">
               <div ref={posterRef} className="relative overflow-hidden">
-                {previewStep === 0 ? (
-                  <div
-                    className="relative w-full overflow-hidden"
-                    style={{
-                      aspectRatio: "4494 / 5097",
-                    }}
-                  >
-                    {/* Zoomed-in shirt fabric/background */}
-                    <img
-                      src={SHIRT_COLORS[shirtColor].front}
-                      alt="Front of Dream 3 shirt"
-                      crossOrigin="anonymous"
-                      className="pointer-events-none absolute left-1/2 top-[42%] h-[300%] w-[300%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
-                    />
-                    {/* Zoomed-in Dream 3 design */}
-                    <div
-                      className="absolute"
-                      style={{
-                        top: "42%",
-                        left: "50%",
-                        width: "90%",
-                        transform: "translateX(-50%)",
-                      }}
-                    >
-                      <div className="relative w-full">
-                        <div className="pointer-events-none absolute bottom-full left-0 z-20 flex w-full justify-center pb-[1%]">
-                          <img
-                            src="/dream3black11.webp"
-                            alt="Dream 3"
-                            crossOrigin="anonymous"
-                            className="h-auto w-full translate-y-[66%] scale-[1.22] object-contain"
-                          />
-                        </div>
-                        <div className="relative z-10 grid grid-cols-3 gap-0">
-                          {displaySlots.map(({ car, realIndex }, index) => (
-                            <button
-                              key={`zoom-preview-slot-${realIndex}`}
-                              type="button"
-                              onClick={() => selectSlot(realIndex)}
-                              style={{
-                                backgroundColor: "transparent",
-                                borderColor: gridColor(shirtColor),
-                              }}
-                              className="aspect-square overflow-hidden p-0 transition"
-                            >
-                              {car ? (
-                                <div className="relative h-full w-full overflow-hidden">
-                                  <img
-                                    src={car.image}
-                                    alt={car.model}
-                                    crossOrigin="anonymous"
-                                    decoding="sync"
-                                    loading="eager"
-                                    className="pointer-events-none absolute -right-[35%] bottom-0 h-[95%] w-auto max-w-none object-contain"
-                                  />
-                                  {deleteReadySlot === index && (
-                                    <div className="absolute inset-0 flex items-center justify-center bg-black/35">
-                                      <span className="text-[42px] font-black text-red-500">
-                                        ✕
-                                      </span>
-                                    </div>
-                                  )}
-                                </div>
-                              ) : (
-                                <div
-                                  className="flex h-full items-center justify-center text-[clamp(8px,2vw,14px)] font-black"
-                                  style={{
-                                    color: gridColor(shirtColor) + "66",
-                                  }}
-                                >
-                                  Empty
-                                </div>
-                              )}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  renderDream3Design(false)
-                )}
-                <button
-                  type="button"
-                  onClick={cyclePreview}
-                  className={`absolute right-3 top-1 z-20 flex h-11 w-11 items-center justify-center rounded-full text-xl text-white shadow-lg transition-colors duration-500 active:scale-95 ${
-                    pulseEye ? "bg-red-600" : "bg-gray-400 hover:bg-gray-600"
-                  }`}
-                  aria-label="Inspect Dream 3 shirt"
-                  title="Inspect shirt"
-                >
-                  👁
-                </button>
+                {renderDream3Design(false)}
               </div>
             </div>
         <div className="mx-auto mb-2 grid w-full max-w-[540px] gap-4">
