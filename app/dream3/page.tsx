@@ -364,7 +364,7 @@ export default function Dream3Page() {
   const [query, setQuery] = useState("");
   const lastLogged = useRef("");
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
-  const [searchView, setSearchView] = useState<"featured" | "brands">("brands");
+  const [searchView, setSearchView] = useState<"featured" | "brands">("featured");
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
   const [featuredSeed, setFeaturedSeed] = useState(0);
   const [hasCustomizedDream3, setHasCustomizedDream3] = useState(false);
@@ -669,7 +669,7 @@ export default function Dream3Page() {
       colorZoomTimeoutRef.current = null;
     }
     emptyDream3();
-    setSearchView("brands");
+    setSearchView("featured");
     setFeaturedSeed((seed) => seed + 1);
     setPreviewStep(0);
     wasAllSlotsFilledRef.current = false;
@@ -702,7 +702,7 @@ export default function Dream3Page() {
     setSelectedSlot(null);
     setSelectedBrand(null);
     setQuery("");
-    setSearchView("brands");
+    setSearchView("featured");
     setFeaturedSeed((s) => s + 1);
     setDeleteReadySlot(null);
     // If the user clicked a slot in the preview to choose/replace that car,
@@ -721,7 +721,7 @@ export default function Dream3Page() {
     setSelectedSlot(index);
     setSelectedBrand(null);
     setQuery("");
-    setSearchView("brands");
+    setSearchView("featured");
     setDeleteReadySlot(null);
     setTimeout(() => {
       const y =
@@ -1364,16 +1364,22 @@ export default function Dream3Page() {
               Shuffle
             </button>
             <button
+              onClick={() => {
+                setSelectedSlot(null);
+                setSelectedBrand(null);
+                setQuery("");
+                setSearchView("featured");
+                searchSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+            >
+              Add Car
+            </button>
+            <button
               onClick={restartDream3}
               className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
             >
               Restart
-            </button>
-            <button
-              onClick={shareDream3}
-              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
-            >
-              Share
             </button>
           </div>
         </div>
@@ -1536,23 +1542,7 @@ export default function Dream3Page() {
               className="w-full border border-white/10 bg-white/10 px-4 py-3 text-white outline-none placeholder:text-white/40"
             />
             <div className="mt-3 grid grid-cols-2 gap-2">
-                {/* LEFT — BRANDS */}
-                <button
-                  onClick={() => {
-                    setQuery("");
-                    setSelectedBrand(null);
-                    setSearchView("brands");
-                  }}
-                  className={`py-3 text-sm font-black transition ${
-                    searchView === "brands"
-                      ? "bg-red-600 text-white"
-                      : "bg-white/10 text-white hover:bg-white/15"
-                  }`}
-                >
-                  Brands
-                </button>
-
-                {/* RIGHT — FEATURED */}
+                {/* LEFT — FEATURED */}
                 <button
                   onClick={() => {
                     setQuery("");
@@ -1566,6 +1556,22 @@ export default function Dream3Page() {
                   }`}
                 >
                   Featured
+                </button>
+
+                {/* RIGHT — BRANDS */}
+                <button
+                  onClick={() => {
+                    setQuery("");
+                    setSelectedBrand(null);
+                    setSearchView("brands");
+                  }}
+                  className={`py-3 text-sm font-black transition ${
+                    searchView === "brands"
+                      ? "bg-red-600 text-white"
+                      : "bg-white/10 text-white hover:bg-white/15"
+                  }`}
+                >
+                  Brands
                 </button>
               </div>
             <div
