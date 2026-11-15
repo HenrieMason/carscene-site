@@ -459,20 +459,12 @@ export default function Dream3Page() {
     }
     // Show the full shirt as soon as the third car is selected.
     setPreviewStep(1);
-    // Then slide the page down to the shirt preview.
-    const scrollTimer = setTimeout(() => {
-      instructionsRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 100);
     // Keep the full shirt visible for 5 seconds, then zoom into the design.
     autoPreviewTimeoutRef.current = setTimeout(() => {
       setPreviewStep(0);
       autoPreviewTimeoutRef.current = null;
     }, 5000);
     return () => {
-      clearTimeout(scrollTimer);
       if (autoPreviewTimeoutRef.current) {
         clearTimeout(autoPreviewTimeoutRef.current);
         autoPreviewTimeoutRef.current = null;
@@ -678,8 +670,6 @@ export default function Dream3Page() {
     });
   }
   function addCarToTargetSlot(car: Car) {
-    const shouldReturnToPreview =
-      selectedSlot !== null || allSlotsFilled;
     setHasCustomizedDream3(true);
     setPreparedDesignBlob(null);
     setPrepareDesignPromise(null);
@@ -705,17 +695,14 @@ export default function Dream3Page() {
     setSearchView("featured");
     setFeaturedSeed((s) => s + 1);
     setDeleteReadySlot(null);
-    // If the user clicked a slot in the preview to choose/replace that car,
-    // return them to the preview after they make their selection.
-    if (shouldReturnToPreview) {
-      setPreviewStep(0);
-      setTimeout(() => {
-        instructionsRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 150);
-    }
+    // Every car selection returns the visitor to the shirt preview.
+    setPreviewStep(0);
+    setTimeout(() => {
+      instructionsRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 150);
   }
   function selectSlot(index: number) {
     setSelectedSlot(index);
@@ -1365,13 +1352,17 @@ export default function Dream3Page() {
             </button>
             <button
               onClick={() => {
+                if (allSlotsFilled) {
+                  setShowRestartConfirm(true);
+                  return;
+                }
                 setSelectedSlot(null);
                 setSelectedBrand(null);
                 setQuery("");
                 setSearchView("featured");
                 searchSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className="bg-white/10 px-5 py-4 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.97]"
+              className="bg-red-600 px-5 py-4 text-sm font-black text-white transition hover:bg-red-700 active:scale-[0.97]"
             >
               Add Car
             </button>
